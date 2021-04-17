@@ -55,47 +55,11 @@ else ()
     add_compile_options(-Og -g)
 endif ()
 
-include_directories(
-        Radio
-
-        Core/Inc
-
-        FATFS/App
-        FATFS/Target
-        LWIP/App
-        LWIP/Target
-
-        Drivers/CMSIS/Device/ST/STM32F7xx/Include
-        Drivers/CMSIS/Include
-        Drivers/STM32F7xx_HAL_Driver/Inc
-        Drivers/STM32F7xx_HAL_Driver/Inc/Legacy
-
-        Middlewares/Third_Party/LwIP/src/include
-        Middlewares/Third_Party/LwIP/src/include/lwip/apps
-        Middlewares/Third_Party/LwIP/src/include/lwip/priv
-        Middlewares/Third_Party/LwIP/src/include/lwip/prot
-        Middlewares/Third_Party/LwIP/src/include/netif
-        Middlewares/Third_Party/LwIP/src/include/netif/ppp
-        Middlewares/Third_Party/LwIP/system
-        Middlewares/Third_Party/LwIP/system/arch
-
-        Middlewares/Third_Party/FreeRTOS/Source/include
-        Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2
-        Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1
-
-        Middlewares/Third_Party/FatFs/src
-)
+include_directories(Core/Inc Drivers/STM32F7xx_HAL_Driver/Inc Drivers/STM32F7xx_HAL_Driver/Inc/Legacy Middlewares/Third_Party/FreeRTOS/Source/include Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 Drivers/CMSIS/Device/ST/STM32F7xx/Include Drivers/CMSIS/Include FATFS/Target FATFS/App Middlewares/Third_Party/FatFs/src Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 Radio Drivers/BSP/STM32746G-Discovery)
 
 add_definitions(-DDEBUG -DUSE_HAL_DRIVER -DSTM32F746xx)
 
-file(GLOB_RECURSE SOURCES
-        "Core/*.*"
-        "Radio/*.*"
-        "FATFS/*.*"
-        "Middlewares/*.*"
-        "LWIP/*.*"
-        "Drivers/*.*"
-)
+file(GLOB_RECURSE SOURCES "Core/*.*" "FATFS/*.*" "Middlewares/*.*" "Drivers/*.*" "Radio/*.*")
 
 set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F746NGHX_FLASH.ld)
 

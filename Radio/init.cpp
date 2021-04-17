@@ -1,11 +1,13 @@
 #include <iostream>
 #include <filesystem/DirectoryListing.hpp>
+#include <audio/AudioPlayer.hpp>
 
 extern "C" {
 void init() {
-    filesystem::DirectoryListing listing("0:/");
-    filesystem::DirectoryListing listing2("0:/");
-    std::cout << listing.getFileCount() << '\n';
+    audio::AudioPlayer *player = new audio::AudioPlayer;
+    player->setVolume(50);
+    player->setSource("0:/audio8.wav");
+    player->play();
 }
 }
 

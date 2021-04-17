@@ -15,7 +15,8 @@ namespace filesystem {
             throw std::runtime_error("Failed to open directory '" + directory + "'");
 
         for(;;) {
-            if (f_readdir(&dir, &fileInfo) != FR_OK) {
+            FRESULT result;
+            if ((result = f_readdir(&dir, &fileInfo)) != FR_OK) {
                 f_closedir(&dir);
                 throw std::runtime_error("Failed to read directory contents of '" + directory + "'");
             }
