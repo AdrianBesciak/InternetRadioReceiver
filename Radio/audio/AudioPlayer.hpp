@@ -19,7 +19,7 @@ namespace audio {
 
         AudioPlayer();
         ~AudioPlayer() override;
-        void setSource(const std::string& sourcePath);
+        void setSource(WavAudioReader* reader);
         void unloadSource();
         void play();
         void pause();

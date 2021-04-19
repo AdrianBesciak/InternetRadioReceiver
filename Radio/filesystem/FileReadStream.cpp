@@ -32,8 +32,8 @@ namespace filesystem {
         if (bytesRead != count)
             throw std::runtime_error(
                     "Read " + std::to_string(bytesRead) +
-                    "bytes instead of " + std::to_string(count) +
-                    "from '" + filePath + "'");
+                    " bytes instead of " + std::to_string(count) +
+                    " from '" + filePath + "'");
     }
 
     std::vector<std::byte> FileReadStream::read(std::size_t count) {

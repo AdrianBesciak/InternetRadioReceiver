@@ -3,6 +3,7 @@
 #include <string>
 #include <stm32f7xx_hal.h>
 #include <iostream>
+#include <cstring>
 
 namespace audio {
     namespace headers {
@@ -54,16 +55,17 @@ namespace audio {
     }
 
     void WavAudioReader::readNext(std::vector<std::uint16_t>& data, std::size_t count) {
-        std::size_t readSize = remainingDataSize < count ? remainingDataSize : count;
-        data.resize(readSize);
-        readStream.read(data.data(), readSize * sizeof(*data.data()));
+        std::size_t readSize = (remainingDataSize / 2) < count ? (remainingDataSize / 2) : count;
+        data.resize(readSize * 2);
+        readStream.read(data.data(), readSize * 2);
         remainingDataSize -= readSize;
     }
 
     std::size_t WavAudioReader::readNext(std::uint16_t *data, std::size_t count) {
-        std::size_t readSize = remainingDataSize < count ? remainingDataSize : count;
-        readStream.read(data, readSize * sizeof(*data));
-        remainingDataSize -= readSize;
+        std::size_t readSize = (remainingDataSize / 2) < count ? (remainingDataSize / 2) : count;
+        readStream.read(data, readSize * 2);
+        remainingDataSize -= readSize * 2;
+        std::cout << "Remaining: " << remainingDataSize << '\n';
         return readSize;
     }
 

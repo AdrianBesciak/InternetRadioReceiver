@@ -63,17 +63,17 @@ namespace audio {
         instance = nullptr;
     }
 
-    void AudioPlayer::setSource(const std::string &sourcePath) {
-        if (reader != nullptr && sourcePath == reader->getFilePath())
+    void AudioPlayer::setSource(WavAudioReader* reader) {
+        if (this->reader != nullptr && reader->getFilePath() == this->reader->getFilePath())
             return;
         bool wasPlaying = isPlaying();
         if (isPlaying() || isPaused())
             playerDeinitialize();
-        reader = std::make_unique<WavAudioReader>(sourcePath);
+        this->reader = std::unique_ptr<WavAudioReader>(reader);
         updateState(State::STOPPED);
 
         if (onMediumChanged != nullptr)
-            onMediumChanged(sourcePath);
+            onMediumChanged(this->reader->getFilePath());
         if (onProgressChanged != nullptr)
             onProgressChanged(getCurrentTime(), getEndTime());
         if (wasPlaying)
@@ -247,7 +247,7 @@ namespace audio {
 
     void AudioPlayer::playerInitialize() {
         if (BSP_AUDIO_OUT_Init(OUTPUT_DEVICE_HEADPHONE, static_cast<std::uint8_t>(normalizedVolume(volume)),
-                               reader->getMetadata().getSamplingRate()) != AUDIO_OK)
+                               reader->getMetadata().getSamplingRate() / 2) != AUDIO_OK)
             throw std::runtime_error("Failed to playerInitialize audio player for '" + reader->getFilePath() + "'");
     }
 
@@ -258,7 +258,7 @@ namespace audio {
     }
 
     void AudioPlayer::playerPlayBuffer() {
-        if (BSP_AUDIO_OUT_Play(playingBuffer.data(), playingBuffer.size()) != AUDIO_OK)
+        if (BSP_AUDIO_OUT_Play(playingBuffer.data(), playingBuffer.size() * 2) != AUDIO_OK)
             throw std::runtime_error("Failed to play audio from '" + reader->getFilePath() + "'");
     }
 
