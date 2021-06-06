@@ -2,7 +2,7 @@
 #include <functional>
 #include <memory>
 #include <string>
-#include <audio/WavAudioReader.hpp>
+#include <audio/reader/AudioReader.hpp>
 #include <sys/task/DelayTask.hpp>
 
 namespace audio {
@@ -19,14 +19,14 @@ namespace audio {
 
         AudioPlayer();
         ~AudioPlayer() override;
-        void setSource(WavAudioReader* reader);
+        void setSource(const std::shared_ptr<AudioReader> &reader);
         void unloadSource();
         void play();
         void pause();
         void stop();
         void seek(float time);
 
-        [[nodiscard]] unsigned getVolume() const; // TODO: make std::uint32_t
+        [[nodiscard]] unsigned getVolume() const;
         void setVolume(unsigned volume);
 
         [[nodiscard]] bool isEmpty() const;
@@ -71,7 +71,7 @@ namespace audio {
         State state;
         BufferState bufferState;
         unsigned volume;
-        std::unique_ptr<WavAudioReader> reader;
+        std::shared_ptr<AudioReader> reader;
         std::vector<std::uint16_t> playingBuffer;
 
         std::function<void(State)> onStateChanged;

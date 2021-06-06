@@ -1,7 +1,7 @@
 #include "AudioPlayer.hpp"
 #include <cmath>
 #include <stm32746g_discovery_audio.h>
-#include <iostream>
+#include <stdexcept>
 
 // DMA handlers
 extern "C" {
@@ -39,7 +39,7 @@ extern "C" {
 }
 
 namespace audio {
-    const std::size_t BUFFER_SIZE = 32768;
+    const std::size_t BUFFER_SIZE = 2048;
 
     std::uint32_t normalizedVolume(std::uint32_t volume) {
         return static_cast<std::uint32_t>(std::round(0.8F * static_cast<float>(volume))) + 10;
@@ -63,17 +63,17 @@ namespace audio {
         instance = nullptr;
     }
 
-    void AudioPlayer::setSource(WavAudioReader* reader) {
-        if (this->reader != nullptr && reader->getFilePath() == this->reader->getFilePath())
+    void AudioPlayer::setSource(const std::shared_ptr<AudioReader> &reader) {
+        if (reader == this->reader)
             return;
         bool wasPlaying = isPlaying();
         if (isPlaying() || isPaused())
             playerDeinitialize();
-        this->reader = std::unique_ptr<WavAudioReader>(reader);
+        this->reader = reader;
         updateState(State::STOPPED);
 
         if (onMediumChanged != nullptr)
-            onMediumChanged(this->reader->getFilePath());
+            onMediumChanged(this->reader->getName());
         if (onProgressChanged != nullptr)
             onProgressChanged(getCurrentTime(), getEndTime());
         if (wasPlaying)
@@ -86,7 +86,7 @@ namespace audio {
         stop();
         updateState(State::NO_SOURCE);
         if (onMediumChanged != nullptr)
-            onMediumChanged("");
+            onMediumChanged(reader->getName());
     }
 
     void AudioPlayer::play() {
@@ -128,13 +128,13 @@ namespace audio {
     }
 
     void AudioPlayer::seek(float time) {
-        if (time > getEndTime())
+        /*if (time > getEndTime())
             throw std::runtime_error("Invalid time value - greater than maximal time : (" + std::to_string(time) + "/" + std::to_string(getEndTime()) + ")");
         float progressRatio = time / getEndTime();
         auto position = static_cast<std::size_t>(progressRatio * reader->getTotalDataSize());
         reader->seek(position);
         if (onProgressChanged != nullptr)
-            onProgressChanged(getCurrentTime(), getEndTime());
+            onProgressChanged(getCurrentTime(), getEndTime());*/
     }
 
     unsigned AudioPlayer::getVolume() const {
@@ -176,17 +176,11 @@ namespace audio {
     }
 
     float AudioPlayer::getCurrentTime() const {
-        return static_cast<float>(reader->getReadDataSize())
-               / static_cast<float>(reader->getMetadata().getChannelsNumber())
-               / static_cast<float>(reader->getMetadata().getSamplingRate())
-               / std::round(static_cast<float>(reader->getMetadata().getBitsPerSample()) / 8.0F);
+        return reader->getCurrentTime();
     }
 
     float AudioPlayer::getEndTime() const {
-        return static_cast<float>(reader->getTotalDataSize())
-               / static_cast<float>(reader->getMetadata().getChannelsNumber())
-               / static_cast<float>(reader->getMetadata().getSamplingRate())
-               / std::round(static_cast<float>(reader->getMetadata().getBitsPerSample()) / 8.0F);
+        return reader->getEndTime();
     }
 
     void AudioPlayer::setOnStateChanged(const std::function<void(State)> &onStateChanged) {
@@ -209,7 +203,7 @@ namespace audio {
         if (!isPlaying())
             return;
         if (bufferState == BufferState::Error)
-            throw std::runtime_error("Error occurred while playing '" + reader->getFilePath() + "'");
+            throw std::runtime_error("Error occurred while playing '" + reader->getName() + "'");
         if (bufferState == BufferState::None) {
             return;
         }
@@ -221,60 +215,56 @@ namespace audio {
             if (onProgressChanged != nullptr)
                 onProgressChanged(getCurrentTime(), getEndTime());
             bufferState = BufferState::None;
-            std::cout << "started\n";
         }
         else if (bufferState == BufferState::HalfWayThrough) {
             count = reader->readNext(playingBuffer.data(), BUFFER_SIZE / 2);
             if (onProgressChanged != nullptr)
                 onProgressChanged(getCurrentTime(), getEndTime());
             bufferState = BufferState::None;
-            std::cout << "halfway\n";
         }
         else if (bufferState == BufferState::Done) {
             count = reader->readNext(playingBuffer.data() + BUFFER_SIZE / 2, BUFFER_SIZE / 2);
             if (onProgressChanged != nullptr)
                 onProgressChanged(getCurrentTime(), getEndTime());
             bufferState = BufferState::None;
-            std::cout << "full\n";
         }
 
         if (count == 0) {
             bufferState = BufferState::None;
             stop();
-            std::cout << "done\n";
         }
     }
 
     void AudioPlayer::playerInitialize() {
         if (BSP_AUDIO_OUT_Init(OUTPUT_DEVICE_HEADPHONE, static_cast<std::uint8_t>(normalizedVolume(volume)),
                                reader->getMetadata().getSamplingRate() / 2) != AUDIO_OK)
-            throw std::runtime_error("Failed to playerInitialize audio player for '" + reader->getFilePath() + "'");
+            throw std::runtime_error("Failed to playerInitialize audio player for '" + reader->getName() + "'");
     }
 
     void AudioPlayer::playerDeinitialize() {
         if (BSP_AUDIO_OUT_Stop(CODEC_PDWN_HW) != AUDIO_OK)
-            throw std::runtime_error("Failed to stop audio player for '" + reader->getFilePath() + "'");
+            throw std::runtime_error("Failed to stop audio player for '" + reader->getName() + "'");
         bufferState = BufferState::Done;
     }
 
     void AudioPlayer::playerPlayBuffer() {
         if (BSP_AUDIO_OUT_Play(playingBuffer.data(), playingBuffer.size() * 2) != AUDIO_OK)
-            throw std::runtime_error("Failed to play audio from '" + reader->getFilePath() + "'");
+            throw std::runtime_error("Failed to play audio from '" + reader->getName() + "'");
     }
 
     void AudioPlayer::playerSetVolume() {
         if (BSP_AUDIO_OUT_SetVolume(static_cast<std::uint8_t>(normalizedVolume(volume))) != AUDIO_OK)
-            throw std::runtime_error("Failed to play volume from '" + reader->getFilePath() + "'");
+            throw std::runtime_error("Failed to play volume from '" + reader->getName() + "'");
     }
 
     void AudioPlayer::playerPause() {
         if (BSP_AUDIO_OUT_Pause() != AUDIO_OK)
-            throw std::runtime_error("Failed to pause playing for '" + reader->getFilePath() + "'");
+            throw std::runtime_error("Failed to pause playing for '" + reader->getName() + "'");
     }
 
     void AudioPlayer::playerUnpause() {
         if (BSP_AUDIO_OUT_Resume() != AUDIO_OK)
-            throw std::runtime_error("Failed to unpause playing for '" + reader->getFilePath() + "'");
+            throw std::runtime_error("Failed to unpause playing for '" + reader->getName() + "'");
     }
 
     void AudioPlayer::handleError() {

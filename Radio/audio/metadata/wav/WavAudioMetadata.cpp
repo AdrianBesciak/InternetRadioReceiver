@@ -2,26 +2,26 @@
 
 namespace audio {
     WavFormatTag WavAudioMetadata::getFormatTag() const noexcept {
-        return formatTag;
+        return internal.formatTag;
     }
 
     std::uint16_t WavAudioMetadata::getChannelsNumber() const noexcept {
-        return channelsNumber;
+        return internal.channelsNumber;
     }
 
     std::uint32_t WavAudioMetadata::getSamplingRate() const noexcept {
-        return samplingRate;
+        return internal.samplingRate;
     }
 
     std::uint32_t WavAudioMetadata::getDataRate() const noexcept {
-        return dataRate;
+        return internal.dataRate;
     }
 
     std::uint16_t WavAudioMetadata::getDataBlockSize() const noexcept {
-        return dataBlockSize;
+        return internal.dataBlockSize;
     }
 
     std::uint16_t WavAudioMetadata::getBitsPerSample() const noexcept {
-        return bitsPerSample;
+        return internal.bitsPerSample;
     }
 }
