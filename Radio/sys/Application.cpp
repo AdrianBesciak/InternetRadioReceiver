@@ -30,11 +30,11 @@ namespace sys {
         taskMap.insert({task->getName(), task});
         osThreadAttr_t attributes = {};
         attributes.name = task->getName().c_str();
-        attributes.stack_size = 1024 * 4;
+        attributes.stack_size = 4096;
         attributes.priority = osPriorityNormal;
         osThreadId_t id = osThreadNew(&taskEntrypoint, (void*)&task->getName(), &attributes);
         if (id == nullptr) {
-            throw new std::runtime_error("Failed to create task '" + task->getName() + "'");
+            throw std::runtime_error("Failed to create task '" + task->getName() + "'");
         }
     }
 

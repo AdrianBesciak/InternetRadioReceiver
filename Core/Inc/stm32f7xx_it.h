@@ -55,7 +55,6 @@ void UsageFault_Handler(void);
 void DebugMon_Handler(void);
 void SysTick_Handler(void);
 void RCC_IRQHandler(void);
-void SDMMC1_IRQHandler(void);
 void DMA2_Stream3_IRQHandler(void);
 void ETH_IRQHandler(void);
 void DMA2_Stream6_IRQHandler(void);

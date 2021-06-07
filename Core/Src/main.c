@@ -25,8 +25,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "../../Radio/init.hpp"
-#include "../../InternetConnection/include/network_task.h"
+#include "init.hpp"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -58,7 +57,7 @@ UART_HandleTypeDef huart1;
 osThreadId_t defaultTaskHandle;
 const osThreadAttr_t defaultTask_attributes = {
   .name = "defaultTask",
-  .stack_size = 1024 * 4,
+  .stack_size = 2048,
   .priority = (osPriority_t) osPriorityNormal,
 };
 /* USER CODE BEGIN PV */
@@ -835,7 +834,6 @@ void StartDefaultTask(void *argument)
   MX_LWIP_Init();
   /* USER CODE BEGIN 5 */
 
-  //Network_Task_Init();
   init();
   osThreadExit();
   /* USER CODE END 5 */
