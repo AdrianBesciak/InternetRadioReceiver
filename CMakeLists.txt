@@ -11,6 +11,8 @@ file(GLOB_RECURSE PROJECT_SOURCES
         FATFS/*.c
         LWIP/*.c
         Radio/*.cpp
+        InternetConnection/*.c
+        InternetConnection/*.cpp
         )
 file(GLOB_RECURSE PROJECT_HEADERS
         Core/*.h
@@ -19,6 +21,8 @@ file(GLOB_RECURSE PROJECT_HEADERS
         FATFS/*.h
         LWIP/*.h
         Radio/*.hpp
+        InternetConnection/*.h
+        InternetConnection/*.hpp
         )
 set(PROJECT_LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F746NGHX_FLASH.ld)
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES} ${PROJECT_HEADERS} ${PROJECT_LINKER_SCRIPT})
@@ -44,9 +48,11 @@ target_include_directories(${PROJECT_NAME} PRIVATE
         Middlewares/Third_Party/LwIP/src/apps
         Middlewares/Third_Party/LwIP/src/core
         Middlewares/Third_Party/LwIP/src/include
+        Middlewares/Third_Party/LwIP/src/include/lwip
         Middlewares/Third_Party/LwIP/src/netif
         Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2
         Radio
+        InternetConnection
         )
 
 # Definitions
