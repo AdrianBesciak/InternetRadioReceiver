@@ -35,8 +35,19 @@ namespace audio {
 
     std::size_t WavAudioReader::readNext(std::uint16_t *data, std::size_t count) {
         std::size_t readSize = (remainingDataSize / 2) < count ? (remainingDataSize / 2) : count;
-        readStream->readExact(data, readSize * 2);
-        remainingDataSize -= readSize * 2;
+        if (metadata.getChannelsNumber() == 1) {
+            std::vector<std::uint16_t> buffer(readSize / 2);
+            readStream->readExact(buffer.data(), buffer.size() * 2);
+            remainingDataSize -= readSize;
+            for (std::size_t i = 0; i < buffer.size(); ++i) {
+                data[2 * i] = buffer[i];
+                data[2 * i + 1] = buffer[i];
+            }
+        }
+        else {
+            readStream->readExact(data, readSize * 2);
+            remainingDataSize -= readSize * 2;
+        }
         return readSize;
     }
 

@@ -1,5 +1,5 @@
 #pragma once
 
-namespace filesystem {
+namespace init {
     void initializeSD();
 }

@@ -5,16 +5,13 @@
 #include <audio/reader/wav/WavAudioReader.hpp>
 #include <filesystem/DirectoryListing.hpp>
 #include <io/stream/file/FileReadStream.hpp>
+#include <io/stream/network/HttpStream.hpp>
 
 extern "C" {
 void init() {
     try {
-        filesystem::DirectoryListing listing("0:/");
-        for (auto &file : listing.getFilePaths()) {
-            std::cout << file << '\n';
-        }
         audio::AudioPlayer *player = new audio::AudioPlayer;
-        std::shared_ptr<io::ReadStream> readStream = std::make_shared<io::FileReadStream>("0:/audio44.wav");
+        std::shared_ptr<io::ReadStream> readStream = std::make_shared<io::HttpStream>("http://www2.cs.uic.edu/~i101/SoundFiles/StarWars60.wav");
         std::shared_ptr<audio::AudioReader> audioReader = std::make_shared<audio::WavAudioReader>(readStream);
         player->setOnMediumChanged([](const std::string &medium) {
             std::cout << "[PLAYER] New medium: " << medium << '\n';

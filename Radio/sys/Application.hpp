@@ -12,6 +12,7 @@ namespace sys {
     public:
         Application();
         static Application& getInstance();
+        static void wait(std::uint32_t ticks);
 
     private:
         void addTask(task::Task *task);

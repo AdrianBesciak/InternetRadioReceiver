@@ -1,5 +1,5 @@
 #include "FileReadStream.hpp"
-#include <filesystem/sdinit.hpp>
+#include <init/sdinit.hpp>
 #include <stdexcept>
 #include <ff.h>
 
@@ -7,7 +7,7 @@ namespace io {
     FileReadStream::FileReadStream(const std::string &filePath)
         : handle(nullptr)
         , filePath(filePath) {
-        filesystem::initializeSD();
+        init::initializeSD();
 
         handle = new FIL;
         FIL* fileHandle = reinterpret_cast<FIL*>(handle);

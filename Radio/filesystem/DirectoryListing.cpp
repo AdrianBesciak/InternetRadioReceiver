@@ -1,5 +1,5 @@
 #include "DirectoryListing.hpp"
-#include <filesystem/sdinit.hpp>
+#include <init/sdinit.hpp>
 #include <stdexcept>
 #include <ff.h>
 
@@ -7,7 +7,7 @@ namespace filesystem {
     DirectoryListing::DirectoryListing(const std::string &directory)
         : fileNames()
         , filePaths() {
-        initializeSD();
+        init::initializeSD();
         static DIR dir;
         static FILINFO fileInfo;
 

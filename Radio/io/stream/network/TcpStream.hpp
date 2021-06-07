@@ -1,13 +1,22 @@
 #pragma once
-#include <io/stream/ReadStream.hpp>
+#include <string>
 
 namespace io {
-    class TCPStream : public ReadStream {
+    class TCPStream {
     public:
-        ~TCPStream() override;
-        [[nodiscard]] std::size_t read(void *buffer, std::size_t count) override;
-        [[nodiscard]] std::size_t pos() const override;
+        explicit TCPStream(const std::string &host);
 
-        void seek(std::size_t position) override;
+        ~TCPStream();
+        void writeData(const std::string &data);
+
+        [[nodiscard]] std::size_t readData(void *buffer, std::size_t count);
+        [[nodiscard]] std::size_t pos() const;
+
+        void seek(std::size_t position);
+
+    private:
+        std::string host;
+        int descriptor;
+        std::size_t position;
     };
 }

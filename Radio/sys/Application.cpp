@@ -1,4 +1,5 @@
 #include "Application.hpp"
+#include <stdexcept>
 #include <cmsis_os.h>
 #include <sys/task/Task.hpp>
 
@@ -21,13 +22,20 @@ namespace sys {
         return *application;
     }
 
+    void Application::wait(std::uint32_t ticks) {
+        vTaskDelay(ticks);
+    }
+
     void Application::addTask(sys::task::Task *task) {
         taskMap.insert({task->getName(), task});
         osThreadAttr_t attributes = {};
         attributes.name = task->getName().c_str();
-        attributes.stack_size = 2048 * 4;
+        attributes.stack_size = 1024 * 4;
         attributes.priority = osPriorityNormal;
-        osThreadNew(&taskEntrypoint, (void*)&task->getName(), &attributes);
+        osThreadId_t id = osThreadNew(&taskEntrypoint, (void*)&task->getName(), &attributes);
+        if (id == nullptr) {
+            throw new std::runtime_error("Failed to create task '" + task->getName() + "'");
+        }
     }
 
     void Application::removeTask(task::Task *task) {

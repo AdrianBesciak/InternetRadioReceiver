@@ -2,6 +2,7 @@
 #include <cmath>
 #include <stm32746g_discovery_audio.h>
 #include <stdexcept>
+#include <iostream>
 
 // DMA handlers
 extern "C" {
