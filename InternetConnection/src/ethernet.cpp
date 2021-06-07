@@ -4,7 +4,6 @@
 
 extern struct netif gnetif;
 constexpr uint32_t CITY_NAME_BUFFEL_LEN = 0x20;
-static char cityNameBuffer[CITY_NAME_BUFFEL_LEN] = {};
 static char cityNameBufferEscaped[CITY_NAME_BUFFEL_LEN * 3 + 1];
 extern TaskHandle_t internetTask;
 
@@ -23,10 +22,8 @@ void cleanup_socket(int sock) {
     close(sock);
 }
 
-int getData(const char *location) {
-    if(strlen(location) == 0){
-        return 1;
-    }
+int getData() {
+    const char * location = "Krakow";
 
     constexpr int RECV_BUFFER_SIZE = 1'600;
     static char recv_buffer[RECV_BUFFER_SIZE];
@@ -96,7 +93,7 @@ void internetConnectionThread(void *arguments) {
     dhcp_get_address();
 
     while (true) {
-        getData(cityNameBuffer);
+        getData();
 
         vTaskDelay(15'000);
     }

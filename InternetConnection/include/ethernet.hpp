@@ -4,9 +4,9 @@
 extern "C" {
 #endif
 
-#include <api.h>
+#include <lwip/api.h>
 #include <string.h>
-#include <sockets.h>
+#include <lwip/sockets.h>
 #include "FreeRTOS.h"
 #include "task.h"
 #include <stdint.h>

@@ -48,7 +48,6 @@ target_include_directories(${PROJECT_NAME} PRIVATE
         Middlewares/Third_Party/LwIP/src/apps
         Middlewares/Third_Party/LwIP/src/core
         Middlewares/Third_Party/LwIP/src/include
-        Middlewares/Third_Party/LwIP/src/include/lwip
         Middlewares/Third_Party/LwIP/src/netif
         Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2
         Radio
