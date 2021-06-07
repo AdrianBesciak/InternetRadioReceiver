@@ -36,33 +36,33 @@ static TouchGFXHAL hal(dma, display, tc, 480, 272);
 
 void touchgfx_init()
 {
-    Bitmap::registerBitmapDatabase(BitmapDatabase::getInstance(), BitmapDatabase::getInstanceSize());
-    TypedText::registerTexts(&texts);
-    Texts::setLanguage(0);
+  Bitmap::registerBitmapDatabase(BitmapDatabase::getInstance(), BitmapDatabase::getInstanceSize());
+  TypedText::registerTexts(&texts);
+  Texts::setLanguage(0);
 
-    FontManager::setFontProvider(&fontProvider);
+  FontManager::setFontProvider(&fontProvider);
 
-    FrontendHeap& heap = FrontendHeap::getInstance();
-    /*
-     * we need to obtain the reference above to initialize the frontend heap.
-     */
-    (void)heap;
+  FrontendHeap& heap = FrontendHeap::getInstance();
+  /*
+   * we need to obtain the reference above to initialize the frontend heap.
+   */
+  (void)heap;
 
-    /*
-     * Initialize TouchGFX
-     */
-    hal.initialize();
+  /*
+   * Initialize TouchGFX
+   */
+  hal.initialize();
 }
 
 void touchgfx_taskEntry()
 {
-    /*
-     * Main event loop. Will wait for VSYNC signal, and then process next frame. Call
-     * this function from your GUI task.
-     *
-     * Note This function never returns
-     */
-    hal.taskEntry();
+ /*
+  * Main event loop. Will wait for VSYNC signal, and then process next frame. Call
+  * this function from your GUI task.
+  *
+  * Note This function never returns
+  */
+  hal.taskEntry();
 }
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

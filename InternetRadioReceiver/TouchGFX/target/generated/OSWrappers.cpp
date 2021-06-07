@@ -98,7 +98,7 @@ void OSWrappers::signalVSync()
   */
 void OSWrappers::signalRenderingDone()
 {
-    // Empty implementation for CMSIS V2
+  // Empty implementation for CMSIS V2
 }
 
 /*

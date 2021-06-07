@@ -38,11 +38,11 @@ typedef struct
 extern "C" DMA2D_HandleTypeDef hdma2d;
 
 extern "C" {
-    static void DMA2D_XferCpltCallback(DMA2D_HandleTypeDef* handle)
-    {
-        (void)handle; // Unused argument
-        HAL::getInstance()->signalDMAInterrupt();
-    }
+static void DMA2D_XferCpltCallback(DMA2D_HandleTypeDef* handle)
+{
+    (void)handle; // Unused argument
+    HAL::getInstance()->signalDMAInterrupt();
+}
 }
 
 STM32F7DMA::STM32F7DMA()
