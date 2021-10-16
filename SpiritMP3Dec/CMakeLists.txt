@@ -1,0 +1,7 @@
+project(SpiritMP3Dec)
+
+add_library(${PROJECT_NAME} STATIC IMPORTED GLOBAL)
+set_target_properties(${PROJECT_NAME} PROPERTIES IMPORTED_LOCATION ${PROJECT_SOURCE_DIR}/lib/libmp3decoder.a)
+#target_include_directories(${PROJECT_NAME} INTERFACE ${PROJECT_SOURCE_DIR}/include)
+#set_target_properties(${PROJECT_NAME} PROPERTIES INCLUDE_DIRECTORIES ${PROJECT_SOURCE_DIR}/include)
+set_target_properties(${PROJECT_NAME} PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${PROJECT_SOURCE_DIR}/include)

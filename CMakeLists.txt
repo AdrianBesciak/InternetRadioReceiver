@@ -2,8 +2,10 @@ cmake_minimum_required(VERSION 3.19)
 include(cmake/CrossCompile.cmake)
 project(InternetRadioReceiver C CXX ASM)
 
+add_subdirectory(SpiritMP3Dec)
+
 # Executable
-file(GLOB_RECURSE PROJECT_SOURCES
+file(GLOB_RECURSE PROJECT_SOURCES CONFIGURE_DEPENDS
         Core/*.c
         Core/*.s
         Drivers/*.c
@@ -14,7 +16,7 @@ file(GLOB_RECURSE PROJECT_SOURCES
         InternetConnection/*.c
         InternetConnection/*.cpp
         )
-file(GLOB_RECURSE PROJECT_HEADERS
+file(GLOB_RECURSE PROJECT_HEADERS CONFIGURE_DEPENDS
         Core/*.h
         Drivers/*.h
         Middlewares/*.h
@@ -51,7 +53,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
         Middlewares/Third_Party/LwIP/src/netif
         Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2
         Radio
-        InternetConnection
+        SpiritMP3Dec/include
         )
 
 # Definitions
@@ -82,6 +84,7 @@ target_compile_options(${PROJECT_NAME} PRIVATE
         )
 
 # Link options
+target_link_libraries(${PROJECT_NAME} PUBLIC SpiritMP3Dec)
 target_link_options(${PROJECT_NAME} PRIVATE -Wl,-Map=${PROJECT_BINARY_DIR}/${PROJECT_NAME}.map)
 target_link_options(${PROJECT_NAME} PRIVATE -T ${PROJECT_LINKER_SCRIPT})
 

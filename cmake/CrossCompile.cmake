@@ -26,10 +26,10 @@ add_compile_options(
 )
 add_link_options(-Wl,-gc-sections,--print-memory-usage)
 add_link_options(-mcpu=cortex-m7 -mthumb -mthumb-interwork)
-## Hardware floating point
+## Software floating point
 add_compile_definitions(ARM_MATH_CM4;ARM_MATH_MATRIX_CHECK;ARM_MATH_ROUNDING)
-add_compile_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
-add_link_options(-mfloat-abi=hard -mfpu=fpv4-sp-d16)
+add_compile_options(-mfloat-abi=softfp -mfpu=fpv4-sp-d16)
+add_link_options(-mfloat-abi=softfp -mfpu=fpv4-sp-d16)
 
 # Optimisations
 if ("${CMAKE_BUILD_TYPE}" STREQUAL "Release")

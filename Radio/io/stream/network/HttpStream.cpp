@@ -56,6 +56,10 @@ namespace io {
         return stream.pos() - startOffset;
     }
 
+    std::size_t HttpStream::size() const {
+        return -1;
+    }
+
     void HttpStream::seek(std::size_t position) {
         stream.seek(position + startOffset);
     }

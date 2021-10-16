@@ -28,6 +28,8 @@ namespace io {
 
         [[nodiscard]] std::size_t read(void *buffer, std::size_t count) override;
         [[nodiscard]] std::size_t pos() const override;
+        [[nodiscard]] std::size_t size() const override;
+
         void seek(std::size_t position) override;
 
     private:

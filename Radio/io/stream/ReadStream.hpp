@@ -16,6 +16,7 @@ namespace io {
         [[nodiscard]] std::vector<std::byte> readExact(std::size_t count);
 
         [[nodiscard]] virtual std::size_t pos() const = 0;
+        [[nodiscard]] virtual std::size_t size() const = 0;
         virtual void seek(std::size_t position) = 0;
     };
 }

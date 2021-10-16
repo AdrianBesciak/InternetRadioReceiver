@@ -72,7 +72,7 @@ namespace audio {
         BufferState bufferState;
         unsigned volume;
         std::shared_ptr<AudioReader> reader;
-        std::vector<std::uint16_t> playingBuffer;
+        std::vector<std::int16_t> playingBuffer;
 
         std::function<void(State)> onStateChanged;
         std::function<void(float,float)> onProgressChanged;

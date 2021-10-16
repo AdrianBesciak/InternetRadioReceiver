@@ -249,7 +249,7 @@ namespace audio {
     }
 
     void AudioPlayer::playerPlayBuffer() {
-        if (BSP_AUDIO_OUT_Play(playingBuffer.data(), playingBuffer.size() * 2) != AUDIO_OK)
+        if (BSP_AUDIO_OUT_Play(reinterpret_cast<std::uint16_t*>(playingBuffer.data()), playingBuffer.size() * 2) != AUDIO_OK)
             throw std::runtime_error("Failed to play audio from '" + reader->getName() + "'");
     }
 

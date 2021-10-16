@@ -33,7 +33,7 @@ namespace audio {
         return remainingDataSize != 0;
     }
 
-    std::size_t WavAudioReader::readNext(std::uint16_t *data, std::size_t count) {
+    std::size_t WavAudioReader::readNext(std::int16_t *data, std::size_t count) {
         std::size_t readSize = (remainingDataSize / 2) < count ? (remainingDataSize / 2) : count;
         if (metadata.getChannelsNumber() == 1) {
             std::vector<std::uint16_t> buffer(readSize / 2);
@@ -93,11 +93,12 @@ namespace audio {
     }
 
     void WavAudioReader::seek(std::size_t pos) {
-        if (pos > getTotalDataSize())
+        throw std::runtime_error("unimplemented yet");
+        /*if (pos > getTotalDataSize())
             throw std::invalid_argument("Invalid position: " + std::to_string(pos));
         std::size_t dataStartPos = readStream->pos() - getReadDataSize();
         readStream->seek(dataStartPos + pos);
-        remainingDataSize = totalDataSize - pos;
+        remainingDataSize = totalDataSize - pos;*/
     }
 
 
@@ -115,7 +116,7 @@ namespace audio {
         / std::round(static_cast<float>(metadata.getBitsPerSample()) / 8.0F);
     }
 
-    const AudioMetadata &WavAudioReader::getMetadata() const {
+    const WavAudioMetadata &WavAudioReader::getMetadata() const {
         return metadata;
     }
 
