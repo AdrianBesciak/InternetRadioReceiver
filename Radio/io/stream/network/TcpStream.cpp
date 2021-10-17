@@ -1,9 +1,9 @@
 #include "TcpStream.hpp"
 #include <stdexcept>
 #include <vector>
+#include <init/dhcpinit.hpp>
 #include <lwip/api.h>
 #include <lwip/sockets.h>
-#include <init/dhcpinit.hpp>
 
 namespace io {
     namespace internal {

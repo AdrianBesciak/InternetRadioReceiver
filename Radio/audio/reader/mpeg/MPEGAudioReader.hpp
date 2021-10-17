@@ -8,7 +8,6 @@ namespace audio {
     public:
         explicit MPEGAudioReader(const std::shared_ptr<io::ReadStream> &readStream);
 
-        [[nodiscard]] bool hasNext() const noexcept override;
         std::size_t readNext(std::int16_t *data, std::size_t count) override;
         void seek(std::size_t position) override;
         [[nodiscard]] float getCurrentTime() const override;

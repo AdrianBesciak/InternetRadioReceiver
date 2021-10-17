@@ -7,4 +7,8 @@ namespace audio {
     const std::string &AudioReader::getName() const {
         return readStream->getName();
     }
+
+    bool AudioReader::hasNext() const noexcept {
+        return readStream->pos() != readStream->size();
+    }
 }

@@ -6,15 +6,10 @@ namespace audio {
     class WavAudioMetadata : public AudioMetadata {
     public:
         [[nodiscard]] std::uint16_t getChannelsNumber() const noexcept override;
-
         [[nodiscard]] std::uint32_t getSamplingRate() const noexcept override;
-
         [[nodiscard]] std::uint16_t getBitsPerSample() const noexcept override;
-
         [[nodiscard]] WavFormatTag getFormatTag() const noexcept;
-
         [[nodiscard]] std::uint32_t getDataRate() const noexcept;
-
         [[nodiscard]] std::uint16_t getDataBlockSize() const noexcept;
 
         struct Internal {

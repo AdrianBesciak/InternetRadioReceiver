@@ -93,6 +93,7 @@ namespace audio {
     }
 
     void WavAudioReader::seek(std::size_t pos) {
+        std::ignore = pos;
         throw std::runtime_error("unimplemented yet");
         /*if (pos > getTotalDataSize())
             throw std::invalid_argument("Invalid position: " + std::to_string(pos));

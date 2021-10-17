@@ -20,10 +20,6 @@ namespace audio {
         audioMetadata = MPEGAudioMetadata(&frameInfo);
     }
 
-    bool MPEGAudioReader::hasNext() const noexcept {
-        return readStream->pos() != readStream->size();
-    }
-
     std::size_t MPEGAudioReader::readNext(std::int16_t *data, std::size_t count) {
         return SpiritMP3Decode(decoder.get(), data, count / 2, nullptr);
     }

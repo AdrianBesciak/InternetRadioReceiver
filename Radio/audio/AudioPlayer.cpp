@@ -129,6 +129,8 @@ namespace audio {
     }
 
     void AudioPlayer::seek(float time) {
+        std::ignore = time;
+        throw std::runtime_error("unimplemented yet");
         /*if (time > getEndTime())
             throw std::runtime_error("Invalid time value - greater than maximal time : (" + std::to_string(time) + "/" + std::to_string(getEndTime()) + ")");
         float progressRatio = time / getEndTime();

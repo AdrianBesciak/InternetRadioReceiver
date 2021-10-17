@@ -3,6 +3,7 @@ include(cmake/CrossCompile.cmake)
 project(InternetRadioReceiver C CXX ASM)
 
 add_subdirectory(SpiritMP3Dec)
+add_subdirectory(StdVorbisDec)
 
 # Executable
 file(GLOB_RECURSE PROJECT_SOURCES CONFIGURE_DEPENDS
@@ -53,7 +54,6 @@ target_include_directories(${PROJECT_NAME} PRIVATE
         Middlewares/Third_Party/LwIP/src/netif
         Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2
         Radio
-        SpiritMP3Dec/include
         )
 
 # Definitions
@@ -84,7 +84,7 @@ target_compile_options(${PROJECT_NAME} PRIVATE
         )
 
 # Link options
-target_link_libraries(${PROJECT_NAME} PUBLIC SpiritMP3Dec)
+target_link_libraries(${PROJECT_NAME} PUBLIC SpiritMP3Dec StdVorbisDec)
 target_link_options(${PROJECT_NAME} PRIVATE -Wl,-Map=${PROJECT_BINARY_DIR}/${PROJECT_NAME}.map)
 target_link_options(${PROJECT_NAME} PRIVATE -T ${PROJECT_LINKER_SCRIPT})
 
