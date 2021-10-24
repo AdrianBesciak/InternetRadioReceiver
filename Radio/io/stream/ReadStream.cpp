@@ -23,4 +23,25 @@ namespace io {
         readExact(result.data(), count);
         return result;
     }
+
+    std::string ReadStream::readLine() {
+        char current;
+        std::string result;
+        while (true) {
+            std::size_t count = read(&current, 1);
+            if (count == 0 || current == '\n') {
+                break;
+            }
+            result.push_back(current);
+        }
+        return result;
+    }
+
+    bool ReadStream::hasNext() const {
+        return pos() != size();
+    }
+
+    bool ReadStream::hasEnded() const {
+        return !hasNext();
+    }
 }

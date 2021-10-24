@@ -1,17 +1,16 @@
 #pragma once
-#include <io/stream/ReadStream.hpp>
-#include <string>
-#include <vector>
+#include <io/stream/WriteStream.hpp>
 
 namespace io {
-    class FileReadStream : public ReadStream {
+    class FileWriteStream : public WriteStream {
     public:
-        explicit FileReadStream(const std::string& filePath, bool createIfNotExists = false);
-        ~FileReadStream() override;
+        explicit FileWriteStream(const std::string& filePath);
+        ~FileWriteStream();
         [[nodiscard]] const std::string &getName() const override;
         [[nodiscard]] const std::string& getFilePath() const;
 
-        [[nodiscard]] std::size_t read(void* buffer, std::size_t count) override;
+        [[nodiscard]] std::size_t write(const void *buffer, std::size_t count) override;
+        
         [[nodiscard]] std::size_t pos() const override;
         [[nodiscard]] std::size_t size() const override;
 
@@ -22,4 +21,3 @@ namespace io {
         std::string filePath;
     };
 }
-

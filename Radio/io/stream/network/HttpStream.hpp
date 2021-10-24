@@ -23,8 +23,8 @@ namespace io {
     public:
         explicit HttpStream(const std::string &url);
         ~HttpStream() override;
-        const std::string& getName() const override;
-        const std::string& getUrl() const;
+        [[nodiscard]] const std::string& getName() const override;
+        [[nodiscard]] const std::string& getUrl() const;
 
         [[nodiscard]] std::size_t read(void *buffer, std::size_t count) override;
         [[nodiscard]] std::size_t pos() const override;
