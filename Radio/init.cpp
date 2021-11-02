@@ -10,18 +10,12 @@
 #include <audio/reader/vorbis/VorbisAudioReader.hpp>
 #include <audio/playlist/FavouritesRadioPlaylist.hpp>
 
-void test() {
-    audio::FavouritesRadioPlaylist playlist;
-    playlist.addEntry(0);
-}
-
 extern "C" {
 void init() {
     try {
-        test();
         audio::AudioPlayer *player = new audio::AudioPlayer;
-        std::shared_ptr<io::ReadStream> readStream = std::make_shared<io::FileReadStream>("0:/sample3.ogg");
-        std::shared_ptr<audio::AudioReader> audioReader = std::make_shared<audio::VorbisAudioReader>(readStream);
+        std::shared_ptr<io::ReadStream> readStream = std::make_shared<io::HttpStream>("http://195.150.20.4/rmf_fm");
+        std::shared_ptr<audio::AudioReader> audioReader = std::make_shared<audio::MPEGAudioReader>(readStream);
 
         player->setOnMediumChanged([](const std::string &medium) {
             std::cout << "[PLAYER] New medium: " << medium << '\n';

@@ -60,9 +60,9 @@ namespace io {
     std::size_t TCPStream::readData(void *buffer, std::size_t count) {
         std::size_t totalRead = 0;
         while (totalRead != count) {
-            ssize_t readCount = lwip_read(descriptor, reinterpret_cast<char*>(buffer) + totalRead, count - totalRead);
+            ssize_t readCount = lwip_recv(descriptor, reinterpret_cast<char*>(buffer) + totalRead, count - totalRead, MSG_MORE);
             if (readCount < 0) {
-                throw std::runtime_error("Failed to read data from '" + host + "'");
+                throw std::runtime_error("Failed to read data from '" + host + "' - " + std::to_string(errno));
             }
             totalRead += readCount;
         }

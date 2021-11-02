@@ -35,7 +35,10 @@ namespace io {
         : url(url)
         , stream(this->url.getHost())
         , startOffset(0) {
-        stream.writeData("GET " + url + "\r\n\r\n");
+        stream.writeData("GET " + this->url.getPath() + "\r\n\r\n");
+        std::vector<char> data(169);
+        stream.readData(data.data(), data.size());
+        std::size(data);
     }
 
     HttpStream::~HttpStream() = default;

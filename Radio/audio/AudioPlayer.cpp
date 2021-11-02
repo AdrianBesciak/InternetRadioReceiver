@@ -40,7 +40,7 @@ extern "C" {
 }
 
 namespace audio {
-    const std::size_t BUFFER_SIZE = 1024;
+    const std::size_t BUFFER_SIZE = 512;
 
     std::uint32_t normalizedVolume(std::uint32_t volume) {
         return static_cast<std::uint32_t>(std::round(0.8F * static_cast<float>(volume))) + 10;
@@ -51,7 +51,7 @@ namespace audio {
         , state(State::NO_SOURCE)
         , bufferState(BufferState::None)
         , volume(100)
-        , reader()
+        , reader() 
         , playingBuffer(BUFFER_SIZE) {
         if (instance != nullptr)
             throw std::runtime_error("Audio player instance already exists");

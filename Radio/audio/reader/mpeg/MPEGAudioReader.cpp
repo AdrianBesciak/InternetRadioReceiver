@@ -4,7 +4,7 @@
 namespace audio {
     unsigned int mp3ReadCallback(void * pMP3CompressedData, unsigned int nMP3DataSizeInChars, void * token) {
         auto *stream = (io::ReadStream*)(token);
-        return stream->read(pMP3CompressedData, std::min(10u, nMP3DataSizeInChars));
+        return stream->read(pMP3CompressedData, nMP3DataSizeInChars);
     }
 
     MPEGAudioReader::MPEGAudioReader(const std::shared_ptr<io::ReadStream> &readStream)
