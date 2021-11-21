@@ -4,7 +4,7 @@
 #include <sys/Application.hpp>
 
 
-namespace sys::task {
+namespace sys {
     class Task {
     public:
         explicit Task(const std::string &name);

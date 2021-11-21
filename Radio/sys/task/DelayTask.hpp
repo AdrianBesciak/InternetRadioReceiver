@@ -1,6 +1,6 @@
 #include <sys/task/Task.hpp>
 
-namespace sys::task {
+namespace sys {
     class DelayTask : public Task {
     public:
         DelayTask(const std::string &name, std::uint32_t delay);

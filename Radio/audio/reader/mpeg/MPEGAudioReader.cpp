@@ -25,6 +25,7 @@ namespace audio {
     }
 
     void MPEGAudioReader::seek(std::size_t position) {
+        std::ignore = position;
         throw std::runtime_error("unimplemented yet");
     }
 

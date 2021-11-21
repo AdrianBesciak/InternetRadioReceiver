@@ -3,10 +3,10 @@
   "Application": {
     "Name": "InternetRadioReceiver",
     "TouchGfxPath": "../Middlewares/ST/touchgfx",
-    "AvailableColorDepths": [ 16 ],
+    "AvailableColorDepths": [ 24 ],
     "AvailableLCDs":
     {
-      "16": "LCD16bpp"
+      "24": "LCD24bpp"
     },
     "AvailableResolutions" : [
       {

@@ -6,7 +6,7 @@
 #include <sys/task/DelayTask.hpp>
 
 namespace audio {
-    class AudioPlayer : public sys::task::DelayTask {
+    class AudioPlayer : public sys::DelayTask {
         friend class Handlers;
     public:
         enum class State {

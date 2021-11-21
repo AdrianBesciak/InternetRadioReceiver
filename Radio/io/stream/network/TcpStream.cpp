@@ -48,7 +48,7 @@ namespace io {
 
     TCPStream::~TCPStream() {
         internal::closeSocket(descriptor);
-    };
+    }
 
     void TCPStream::writeData(const std::string &data) {
         ssize_t count = lwip_write(descriptor, data.c_str(), data.size());

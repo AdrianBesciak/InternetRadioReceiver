@@ -2,7 +2,7 @@
 #include <sys/Application.hpp>
 #include <iostream>
 
-namespace sys::task {
+namespace sys {
     Task::Task(const std::string &name)
         : name(name) {
         sys::Application::getInstance().addTask(this);

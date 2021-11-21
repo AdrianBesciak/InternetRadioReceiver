@@ -26,7 +26,7 @@ namespace sys {
         vTaskDelay(ticks);
     }
 
-    void Application::addTask(sys::task::Task *task) {
+    void Application::addTask(Task *task) {
         taskMap.insert({task->getName(), task});
         osThreadAttr_t attributes = {};
         attributes.name = task->getName().c_str();
@@ -38,7 +38,7 @@ namespace sys {
         }
     }
 
-    void Application::removeTask(task::Task *task) {
+    void Application::removeTask(Task *task) {
         taskMap.erase(task->getName());
     }
 }

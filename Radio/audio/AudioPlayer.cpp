@@ -47,14 +47,14 @@ namespace audio {
     }
 
     AudioPlayer::AudioPlayer()
-        : DelayTask("audioPlayer", 1)
+        : DelayTask("IRR_AudioPlayer", 1)
         , state(State::NO_SOURCE)
         , bufferState(BufferState::None)
         , volume(100)
         , reader() 
         , playingBuffer(BUFFER_SIZE) {
         if (instance != nullptr)
-            throw std::runtime_error("Audio player instance already exists");
+            throw std::runtime_error("AudioPlayer instance already exists");
         instance = this;
     }
 

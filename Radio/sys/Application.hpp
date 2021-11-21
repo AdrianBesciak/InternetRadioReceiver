@@ -3,11 +3,9 @@
 #include <unordered_map>
 
 namespace sys {
-    namespace task {
-        class Task;
-    }
+    class Task;
     class Application {
-        friend class task::Task;
+        friend class Task;
         friend void taskEntrypoint(void *arg);
     public:
         Application();
@@ -15,10 +13,10 @@ namespace sys {
         static void wait(std::uint32_t ticks);
 
     private:
-        void addTask(task::Task *task);
-        void removeTask(task::Task *task);
+        void addTask(Task *task);
+        void removeTask(Task *task);
 
         static Application *application;
-        std::unordered_map<std::string, sys::task::Task*> taskMap;
+        std::unordered_map<std::string, Task*> taskMap;
     };
 }

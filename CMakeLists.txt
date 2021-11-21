@@ -11,11 +11,29 @@ file(GLOB_RECURSE PROJECT_SOURCES CONFIGURE_DEPENDS
         Core/*.s
         Drivers/*.c
         Middlewares/*.c
+        Middlewares/ST/touchgfx/framework/source/touchgfx/*.cpp
+        #Middlewares/ST/touchgfx/os/*.cpp
         FATFS/*.c
         LWIP/*.c
         Radio/*.cpp
         InternetConnection/*.c
         InternetConnection/*.cpp
+        TouchGFX/App/*.c
+        TouchGFX/App/*.cpp
+        TouchGFX/generated/fonts/*.c
+        TouchGFX/generated/fonts/*.cpp
+        TouchGFX/generated/gui_generated/*.c
+        TouchGFX/generated/gui_generated/*.cpp
+        TouchGFX/generated/images/*.c
+        TouchGFX/generated/images/*.cpp
+        TouchGFX/generated/texts/*.c
+        TouchGFX/generated/texts/*.cpp
+        TouchGFX/generated/videos/*.c
+        TouchGFX/generated/videos/*.cpp
+        TouchGFX/gui/*.c
+        TouchGFX/gui/*.cpp
+        TouchGFX/target/*.c
+        TouchGFX/target/*.cpp
         )
 file(GLOB_RECURSE PROJECT_HEADERS CONFIGURE_DEPENDS
         Core/*.h
@@ -24,8 +42,8 @@ file(GLOB_RECURSE PROJECT_HEADERS CONFIGURE_DEPENDS
         FATFS/*.h
         LWIP/*.h
         Radio/*.hpp
-        InternetConnection/*.h
-        InternetConnection/*.hpp
+        TouchGFX/*.h
+        TouchGFX/*.hpp
         )
 set(PROJECT_LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F746NGHX_FLASH.ld)
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES} ${PROJECT_HEADERS} ${PROJECT_LINKER_SCRIPT})
@@ -37,6 +55,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
         Drivers/BSP/STM32746G-Discovery
         Drivers/CMSIS/Include
         Drivers/CMSIS/Device/ST/STM32F7xx/Include
+        Drivers/ft5336
         Drivers/STM32F7xx_HAL_Driver/Inc
         Drivers/STM32F7xx_HAL_Driver/Inc/Legacy
         Middlewares/Third_Party/FreeRTOS/Source/include
@@ -53,7 +72,18 @@ target_include_directories(${PROJECT_NAME} PRIVATE
         Middlewares/Third_Party/LwIP/src/include
         Middlewares/Third_Party/LwIP/src/netif
         Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2
+        Middlewares/ST/touchgfx/3rdparty/libjpeg/include
+        Middlewares/ST/touchgfx/framework/include
         Radio
+        TouchGFX/App
+        TouchGFX/generated/fonts/include
+        TouchGFX/generated/gui_generated/include
+        TouchGFX/generated/images/include
+        TouchGFX/generated/texts/include
+        TouchGFX/generated/videos/include
+        TouchGFX/gui/include
+        TouchGFX/target
+        TouchGFX/target/generated
         )
 
 # Definitions
@@ -75,8 +105,10 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 
 # Warnings
 target_compile_options(${PROJECT_NAME} PRIVATE
+        -fno-rtti
         -Wall
         -Wextra
+        -Wno-unused-parameter
         $<$<COMPILE_LANGUAGE:CXX>:-pedantic>
         $<$<COMPILE_LANGUAGE:C>:-Wno-unused-variable>
         $<$<COMPILE_LANGUAGE:C>:-Wno-unused-parameter>
@@ -84,7 +116,10 @@ target_compile_options(${PROJECT_NAME} PRIVATE
         )
 
 # Link options
-target_link_libraries(${PROJECT_NAME} PUBLIC SpiritMP3Dec StdVorbisDec)
+target_link_libraries(${PROJECT_NAME} PUBLIC
+        SpiritMP3Dec
+        StdVorbisDec
+        ${PROJECT_SOURCE_DIR}/TouchGFX/libtouchgfx.a)
 target_link_options(${PROJECT_NAME} PRIVATE -Wl,-Map=${PROJECT_BINARY_DIR}/${PROJECT_NAME}.map)
 target_link_options(${PROJECT_NAME} PRIVATE -T ${PROJECT_LINKER_SCRIPT})
 

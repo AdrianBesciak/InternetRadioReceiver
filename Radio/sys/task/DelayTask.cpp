@@ -1,7 +1,7 @@
 #include "DelayTask.hpp"
 #include <cmsis_os.h>
 
-namespace sys::task {
+namespace sys {
     DelayTask::DelayTask(const std::string &name, std::uint32_t delay)
     : Task(name)
     , delay(delay) {}

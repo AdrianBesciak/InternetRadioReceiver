@@ -60,6 +60,8 @@ public:
     * @return True if a touch has been detected, otherwise false.
     */
     virtual bool sampleTouch(int32_t& x, int32_t& y);
+private:
+    static const uint16_t TS_I2C_ADDRESS = ((uint16_t)0x70);
 };
 
 #endif // STM32TOUCHCONTROLLER_HPP
