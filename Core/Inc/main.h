@@ -58,6 +58,7 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define LWIP_ERRNO_STDINCLUDE 1
 #define OTG_HS_OverCurrent_Pin GPIO_PIN_3
 #define OTG_HS_OverCurrent_GPIO_Port GPIOE
 #define RMII_TXD1_Pin GPIO_PIN_14

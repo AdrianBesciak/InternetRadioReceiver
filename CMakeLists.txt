@@ -12,7 +12,6 @@ file(GLOB_RECURSE PROJECT_SOURCES CONFIGURE_DEPENDS
         Drivers/*.c
         Middlewares/*.c
         Middlewares/ST/touchgfx/framework/source/touchgfx/*.cpp
-        #Middlewares/ST/touchgfx/os/*.cpp
         FATFS/*.c
         LWIP/*.c
         Radio/*.cpp
@@ -52,6 +51,9 @@ set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME "${PROJECT_NAME}.el
 # Include directories
 target_include_directories(${PROJECT_NAME} PRIVATE
         Core/Inc
+        Drivers/BSP/Components
+        Drivers/BSP/Components/ft5336
+        Drivers/BSP/Components/wm8994
         Drivers/BSP/STM32746G-Discovery
         Drivers/CMSIS/Include
         Drivers/CMSIS/Device/ST/STM32F7xx/Include
@@ -105,13 +107,12 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 
 # Warnings
 target_compile_options(${PROJECT_NAME} PRIVATE
-        -fno-rtti
         -Wall
         -Wextra
         -Wno-unused-parameter
         $<$<COMPILE_LANGUAGE:CXX>:-pedantic>
+        $<$<COMPILE_LANGUAGE:CXX>:-fno-rtti>
         $<$<COMPILE_LANGUAGE:C>:-Wno-unused-variable>
-        $<$<COMPILE_LANGUAGE:C>:-Wno-unused-parameter>
         $<$<COMPILE_LANGUAGE:C>:-Wno-int-conversion>
         )
 

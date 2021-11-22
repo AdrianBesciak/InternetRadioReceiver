@@ -898,7 +898,7 @@ __attribute__((noreturn))
 void StartDefaultTask(void *argument)
 {
   /* init code for LWIP */
-  //MX_LWIP_Init();
+  MX_LWIP_Init();
   /* USER CODE BEGIN 5 */
   init();
   osThreadExit();
