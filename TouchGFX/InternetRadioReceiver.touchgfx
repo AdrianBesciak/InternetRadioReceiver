@@ -2,42 +2,524 @@
   "Application": {
     "Screens": [
       {
-        "Name": "screen",
+        "Name": "Main",
         "Components": [
           {
-            "Type": "Button",
-            "Name": "button1",
-            "X": 253,
-            "Y": 106,
-            "Width": 170,
-            "Height": 60,
-            "Pressed": "__designer\\Blue_Buttons_Round_Edge_small_pressed.png",
-            "Released": "__designer\\Blue_Buttons_Round_Edge_small.png",
-            "Style": "Style4"
+            "Type": "Image",
+            "Name": "backgroundImage",
+            "Width": 480,
+            "Height": 272,
+            "RelativeFilename": "background.png"
+          },
+          {
+            "Type": "CustomContainerInstance",
+            "Name": "controls1",
+            "X": 370,
+            "Y": 10,
+            "Width": 100,
+            "Height": 50,
+            "CustomContainerDefinitionName": "controls"
           },
           {
             "Type": "Button",
-            "Name": "button2",
-            "X": 44,
-            "Y": 106,
-            "Width": 170,
-            "Height": 60,
-            "Pressed": "__designer\\Blue_Buttons_Round_Edge_small_pressed.png",
-            "Released": "__designer\\Blue_Buttons_Round_Edge_small.png",
-            "Style": "Style4"
+            "Name": "radioIcon",
+            "X": 100,
+            "Y": 72,
+            "Width": 128,
+            "Height": 128,
+            "Pressed": "radio_large.png",
+            "Released": "radio_large.png"
+          },
+          {
+            "Type": "Button",
+            "Name": "SDIcon",
+            "X": 252,
+            "Y": 72,
+            "Width": 128,
+            "Height": 128,
+            "Pressed": "micro-sd_large.png",
+            "Released": "micro-sd_large.png"
+          },
+          {
+            "Type": "SlideMenu",
+            "Name": "slideMenuLeft",
+            "Width": 74,
+            "Height": 272,
+            "FileNameBackground": "left_slide_menu_background.png",
+            "UseButton": true,
+            "FileNameButtonPressed": "left_slide_menu_button.png",
+            "FileNameButtonReleased": "left_slide_menu_button.png",
+            "ButtonX": 50,
+            "ButtonY": 110,
+            "State": "Collapsed",
+            "ExpandDirection": "East",
+            "Easing": "Cubic",
+            "EasingOption": "InOut",
+            "AnimationDuration": 300,
+            "VisiblePixelsWhenCollapsed": 25,
+            "ExpandedStateTimeout": 3000,
+            "Components": [
+              {
+                "Type": "Button",
+                "Name": "SDCardMenu",
+                "Y": 50,
+                "Width": 50,
+                "Height": 50,
+                "Pressed": "sdcard_button_pressed.png",
+                "Released": "sdcard_button.png"
+              },
+              {
+                "Type": "Button",
+                "Name": "radioMenu",
+                "Width": 50,
+                "Height": 50,
+                "Pressed": "radio_button_pressed.png",
+                "Released": "radio_button_01.png"
+              }
+            ]
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "radioIconOnClick",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "radioIcon"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "RadioScreen"
+            }
+          },
+          {
+            "InteractionName": "sdIconOnClick",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "SDIcon"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "MemoryScreen"
+            }
+          },
+          {
+            "InteractionName": "radioMenuOnClick",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "radioMenu"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "RadioScreen"
+            }
+          },
+          {
+            "InteractionName": "sdCardMenuOnClick",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "SDCardMenu"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "MemoryScreen"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "RadioScreen",
+        "Components": [
+          {
+            "Type": "Image",
+            "Name": "backgroundImage",
+            "Width": 480,
+            "Height": 272,
+            "RelativeFilename": "background.png"
+          },
+          {
+            "Type": "Image",
+            "Name": "RadioIcon",
+            "X": 20,
+            "Y": 20,
+            "Width": 64,
+            "Height": 64,
+            "RelativeFilename": "radio.png"
+          },
+          {
+            "Type": "CustomContainerInstance",
+            "Name": "controls1",
+            "X": 370,
+            "Y": 10,
+            "Width": 100,
+            "Height": 50,
+            "CustomContainerDefinitionName": "controls"
+          },
+          {
+            "Type": "CustomContainerInstance",
+            "Name": "radioControlPanel1",
+            "X": 190,
+            "Y": 200,
+            "Width": 100,
+            "Height": 55,
+            "CustomContainerDefinitionName": "radioControlPanel"
+          },
+          {
+            "Type": "TextArea",
+            "Name": "radioStationNameBox",
+            "X": 37,
+            "Y": 124,
+            "Width": 404,
+            "Height": 25,
+            "TextId": "__SingleUse_QX2T",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 129,
+              "Green": 133,
+              "Blue": 255
+            }
+          },
+          {
+            "Type": "SlideMenu",
+            "Name": "slideMenuLeft",
+            "Width": 74,
+            "Height": 272,
+            "FileNameBackground": "left_slide_menu_background.png",
+            "UseButton": true,
+            "FileNameButtonPressed": "left_slide_menu_button.png",
+            "FileNameButtonReleased": "left_slide_menu_button.png",
+            "ButtonX": 50,
+            "ButtonY": 110,
+            "State": "Collapsed",
+            "ExpandDirection": "East",
+            "Easing": "Cubic",
+            "EasingOption": "InOut",
+            "AnimationDuration": 300,
+            "VisiblePixelsWhenCollapsed": 25,
+            "ExpandedStateTimeout": 3000,
+            "Components": [
+              {
+                "Type": "Button",
+                "Name": "SDCardMenu",
+                "Y": 50,
+                "Width": 50,
+                "Height": 50,
+                "Pressed": "sdcard_button_pressed.png",
+                "Released": "sdcard_button.png"
+              },
+              {
+                "Type": "Button",
+                "Name": "radioMenu",
+                "Width": 50,
+                "Height": 50,
+                "Pressed": "radio_button_pressed.png",
+                "Released": "radio_button_pressed.png"
+              }
+            ]
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "sdCardMenuOnClick",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "SDCardMenu"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "MemoryScreen"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "MemoryScreen",
+        "Components": [
+          {
+            "Type": "Image",
+            "Name": "backgroundImage",
+            "Width": 480,
+            "Height": 272,
+            "RelativeFilename": "background.png"
+          },
+          {
+            "Type": "Image",
+            "Name": "MemoryIcon",
+            "X": 20,
+            "Y": 20,
+            "Width": 64,
+            "Height": 64,
+            "RelativeFilename": "raw_micro-sd.png"
+          },
+          {
+            "Type": "CustomContainerInstance",
+            "Name": "controls1",
+            "X": 370,
+            "Y": 10,
+            "Width": 100,
+            "Height": 50,
+            "CustomContainerDefinitionName": "controls"
+          },
+          {
+            "Type": "CustomContainerInstance",
+            "Name": "musicControlPanel1",
+            "X": 65,
+            "Y": 200,
+            "Width": 350,
+            "Height": 55,
+            "CustomContainerDefinitionName": "musicControlPanel"
+          },
+          {
+            "Type": "ImageProgress",
+            "Name": "songProgressBar",
+            "X": 37,
+            "Y": 158,
+            "Width": 404,
+            "Height": 34,
+            "FileNameProgress": "__designer\\Blue_ProgressIndicators_fill_tiling_progress_indicator_fill_striped_wide_horizontal.png",
+            "Direction": "Right",
+            "Style": "Style5",
+            "FileNameBackground": "__designer\\Blue_ProgressIndicators_bg_large_progress_indicator_bg_square_0_degrees.png",
+            "IndicatorPositionX": 2,
+            "IndicatorPositionY": 2,
+            "IndicatorPositionWidth": 400,
+            "IndicatorPositionHeight": 30,
+            "ProgressRangeMax": 100,
+            "ProgressInitialValue": 60
+          },
+          {
+            "Type": "TextArea",
+            "Name": "filenameTextBox",
+            "X": 37,
+            "Y": 124,
+            "Width": 404,
+            "Height": 25,
+            "TextId": "__SingleUse_085C",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 129,
+              "Green": 133,
+              "Blue": 255
+            }
+          },
+          {
+            "Type": "SlideMenu",
+            "Name": "slideMenuLeft",
+            "Width": 74,
+            "Height": 272,
+            "FileNameBackground": "left_slide_menu_background.png",
+            "UseButton": true,
+            "FileNameButtonPressed": "left_slide_menu_button.png",
+            "FileNameButtonReleased": "left_slide_menu_button.png",
+            "ButtonX": 50,
+            "ButtonY": 110,
+            "State": "Collapsed",
+            "ExpandDirection": "East",
+            "Easing": "Cubic",
+            "EasingOption": "InOut",
+            "AnimationDuration": 300,
+            "VisiblePixelsWhenCollapsed": 25,
+            "ExpandedStateTimeout": 3000,
+            "Components": [
+              {
+                "Type": "Button",
+                "Name": "SDCardMenu",
+                "Y": 50,
+                "Width": 50,
+                "Height": 50,
+                "Pressed": "sdcard_button_pressed.png",
+                "Released": "sdcard_button_pressed.png"
+              },
+              {
+                "Type": "Button",
+                "Name": "radioMenu",
+                "Width": 50,
+                "Height": 50,
+                "Pressed": "radio_button_pressed.png",
+                "Released": "radio_button_01.png"
+              }
+            ]
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "radioScreenOnClick",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "radioMenu"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "RadioScreen"
+            }
+          }
+        ]
+      }
+    ],
+    "CustomContainerDefinitions": [
+      {
+        "Name": "radioControlPanel",
+        "X": 190,
+        "Y": 200,
+        "Width": 100,
+        "Height": 55,
+        "Components": [
+          {
+            "Type": "Button",
+            "Name": "play",
+            "Width": 50,
+            "Height": 50,
+            "Pressed": "play-button_inactive.png",
+            "Released": "play-button_active.png",
+            "Clickable": true
+          },
+          {
+            "Type": "Button",
+            "Name": "stop",
+            "X": 50,
+            "Width": 50,
+            "Height": 50,
+            "Pressed": "stop_inactive.png",
+            "Released": "stop_active.png",
+            "Clickable": true
+          }
+        ],
+        "Interactions": []
+      },
+      {
+        "Name": "musicControlPanel",
+        "X": 65,
+        "Y": 200,
+        "Width": 350,
+        "Height": 55,
+        "Components": [
+          {
+            "Type": "Button",
+            "Name": "play",
+            "X": 100,
+            "Width": 50,
+            "Height": 50,
+            "Pressed": "play-button_inactive.png",
+            "Released": "play-button_active.png",
+            "Clickable": true
+          },
+          {
+            "Type": "Button",
+            "Name": "stop",
+            "X": 193,
+            "Width": 50,
+            "Height": 50,
+            "Pressed": "stop_inactive.png",
+            "Released": "stop_active.png",
+            "Clickable": true
+          },
+          {
+            "Type": "Button",
+            "Name": "pause",
+            "X": 145,
+            "Width": 50,
+            "Height": 50,
+            "Pressed": "pause_inactive.png",
+            "Released": "pause_active.png",
+            "Clickable": true
+          },
+          {
+            "Type": "Button",
+            "Name": "backward",
+            "X": 50,
+            "Width": 50,
+            "Height": 50,
+            "Pressed": "backward_inactive.png",
+            "Released": "backward_active.png",
+            "Clickable": true
+          },
+          {
+            "Type": "Button",
+            "Name": "previousSong",
+            "Width": 50,
+            "Height": 50,
+            "Pressed": "previous_song_inactive.png",
+            "Released": "previous_song_active.png",
+            "Clickable": true
+          },
+          {
+            "Type": "Button",
+            "Name": "forward",
+            "X": 250,
+            "Width": 50,
+            "Height": 50,
+            "Pressed": "forward-button_inactive.png",
+            "Released": "forward-button_active.png",
+            "Clickable": true
+          },
+          {
+            "Type": "Button",
+            "Name": "nextSong",
+            "X": 300,
+            "Width": 50,
+            "Height": 50,
+            "Pressed": "next_song_inactive.png",
+            "Released": "next_song_active.png",
+            "Clickable": true
+          }
+        ],
+        "Interactions": []
+      },
+      {
+        "Name": "controls",
+        "X": 370,
+        "Y": 10,
+        "Width": 100,
+        "Height": 50,
+        "Components": [
+          {
+            "Type": "Image",
+            "Name": "sdUnmountedInd",
+            "Width": 50,
+            "Height": 50,
+            "RelativeFilename": "sdcardUnmountedInd.png"
+          },
+          {
+            "Type": "Image",
+            "Name": "sdMountedInd",
+            "Width": 50,
+            "Height": 50,
+            "Visible": false,
+            "RelativeFilename": "sdcardMountedInd.png"
+          },
+          {
+            "Type": "Image",
+            "Name": "ethernetConnectedInd",
+            "X": 50,
+            "Width": 50,
+            "Height": 50,
+            "Visible": false,
+            "RelativeFilename": "lan_on_ind.png"
+          },
+          {
+            "Type": "Image",
+            "Name": "ethernetDisconnectedInd",
+            "X": 50,
+            "Width": 50,
+            "Height": 50,
+            "RelativeFilename": "lan_off_ind.png"
           }
         ],
         "Interactions": []
       }
     ],
-    "CustomContainerDefinitions": [],
     "Name": "MyApplication",
     "Resolution": {
       "Width": 480,
       "Height": 272
     },
     "SelectedColorDepth": 24,
-    "StartupScreenName": "screen",
+    "StartupScreenName": "Main",
     "SelectedStartupLanguage": "GB",
     "Skin": "Blue",
     "TouchGfxPath": "../Middlewares/ST/touchgfx",

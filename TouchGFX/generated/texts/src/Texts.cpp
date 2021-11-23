@@ -60,8 +60,11 @@ extern const touchgfx::TypedText::TypedTextData* const typedTextDatabaseArray[];
 
 TEXT_LOCATION_FLASH_PRAGMA
 KEEP extern const touchgfx::Unicode::UnicodeChar texts_all_languages[] TEXT_LOCATION_FLASH_ATTRIBUTE = {
-    0 // No characters in application
+    0x46, 0x69, 0x6c, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x46, 0x69, 0x6c, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x46, 0x69, 0x6c, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x46, 0x69, 0x6c, 0x65, 0x6e, 0x61, 0x6d, 0x65, 0x0, // @0 "FilenameFilenameFilenameFilename"
+    0x52, 0x61, 0x64, 0x69, 0x6f, 0x53, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x0 // @33 "RadioStation"
 };
+TEXT_LOCATION_FLASH_PRAGMA
+KEEP extern uint32_t const indicesGb[] TEXT_LOCATION_FLASH_ATTRIBUTE;
 
 //array holding dynamically installed languages
 struct TranslationHeader
@@ -74,7 +77,7 @@ static const TranslationHeader* languagesArray[1] = { 0 };
 
 //Compiled and linked in languages
 static const uint32_t* const staticLanguageIndices[] = {
-    0
+    indicesGb
 };
 
 touchgfx::LanguageId touchgfx::Texts::currentLanguage = static_cast<touchgfx::LanguageId>(0);

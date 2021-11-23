@@ -20,10 +20,22 @@
     <ClCompile Include="..\..\gui\src\common\FrontendApplication.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\common\FrontendApplicationBase.cpp"/>
     <ClCompile Include="..\..\gui\src\model\Model.cpp"/>
-    <ClCompile Include="..\..\gui\src\screen_screen\screenPresenter.cpp"/>
-    <ClCompile Include="..\..\gui\src\screen_screen\screenView.cpp"/>
-    <ClCompile Include="..\..\generated\gui_generated\src\screen_screen\screenViewBase.cpp"/>
     <ClCompile Include="..\..\generated\simulator\src\video\SoftwareMJPEGDecoder.cpp"/>
+    <ClCompile Include="..\..\gui\src\main_screen\MainPresenter.cpp"/>
+    <ClCompile Include="..\..\gui\src\main_screen\MainView.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\main_screen\MainViewBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\memoryscreen_screen\MemoryScreenPresenter.cpp"/>
+    <ClCompile Include="..\..\gui\src\memoryscreen_screen\MemoryScreenView.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\memoryscreen_screen\MemoryScreenViewBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\containers\musicControlPanel.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\musicControlPanelBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\containers\radioControlPanel.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\radioControlPanelBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\radioscreen_screen\RadioScreenPresenter.cpp"/>
+    <ClCompile Include="..\..\gui\src\radioscreen_screen\RadioScreenView.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\radioscreen_screen\RadioScreenViewBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\containers\controls.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\controlsBase.cpp"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ApplicationRoot)\assets\texts\texts.xml"/>
@@ -172,11 +184,23 @@
     <ClInclude Include="..\..\generated\simulator\include\simulator\video\MJPEGDecoder.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\model\Model.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\model\ModelListener.hpp"/>
-    <ClInclude Include="..\..\gui\include\gui\screen_screen\screenPresenter.hpp"/>
-    <ClInclude Include="..\..\gui\include\gui\screen_screen\screenView.hpp"/>
-    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\screen_screen\screenViewBase.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\common\SimConstants.hpp"/>
     <ClInclude Include="..\..\generated\simulator\include\simulator\video\SoftwareMJPEGDecoder.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\main_screen\MainPresenter.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\main_screen\MainView.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\main_screen\MainViewBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\memoryscreen_screen\MemoryScreenPresenter.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\memoryscreen_screen\MemoryScreenView.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\memoryscreen_screen\MemoryScreenViewBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\containers\musicControlPanel.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\musicControlPanelBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\containers\radioControlPanel.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\radioControlPanelBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\radioscreen_screen\RadioScreenPresenter.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\radioscreen_screen\RadioScreenView.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\radioscreen_screen\RadioScreenViewBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\containers\controls.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\controlsBase.hpp"/>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(ApplicationRoot)\generated\simulator\touchgfx.rc"/>
