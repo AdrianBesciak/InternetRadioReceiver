@@ -12,9 +12,6 @@ MainViewBase::MainViewBase() :
     __background.setPosition(0, 0, 480, 272);
     __background.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
 
-    backgroundImage.setXY(0, 0);
-    backgroundImage.setBitmap(touchgfx::Bitmap(BITMAP_BACKGROUND_ID));
-
     controls1.setXY(370, 10);
 
     radioIcon.setXY(100, 72);
@@ -49,7 +46,6 @@ MainViewBase::MainViewBase() :
     slideMenuLeft.add(radioMenu);
 
     add(__background);
-    add(backgroundImage);
     add(controls1);
     add(radioIcon);
     add(SDIcon);

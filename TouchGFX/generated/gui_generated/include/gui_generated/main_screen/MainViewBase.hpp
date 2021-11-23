@@ -8,7 +8,6 @@
 #include <mvp/View.hpp>
 #include <gui/main_screen/MainPresenter.hpp>
 #include <touchgfx/widgets/Box.hpp>
-#include <touchgfx/widgets/Image.hpp>
 #include <gui/containers/controls.hpp>
 #include <touchgfx/widgets/Button.hpp>
 #include <touchgfx/containers/SlideMenu.hpp>
@@ -29,7 +28,6 @@ protected:
      * Member Declarations
      */
     touchgfx::Box __background;
-    touchgfx::Image backgroundImage;
     controls controls1;
     touchgfx::Button radioIcon;
     touchgfx::Button SDIcon;

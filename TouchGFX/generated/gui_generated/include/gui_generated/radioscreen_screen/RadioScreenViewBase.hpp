@@ -31,7 +31,6 @@ protected:
      * Member Declarations
      */
     touchgfx::Box __background;
-    touchgfx::Image backgroundImage;
     touchgfx::Image RadioIcon;
     controls controls1;
     radioControlPanel radioControlPanel1;

@@ -5,13 +5,6 @@
         "Name": "Main",
         "Components": [
           {
-            "Type": "Image",
-            "Name": "backgroundImage",
-            "Width": 480,
-            "Height": 272,
-            "RelativeFilename": "background.png"
-          },
-          {
             "Type": "CustomContainerInstance",
             "Name": "controls1",
             "X": 370,
@@ -135,13 +128,6 @@
         "Components": [
           {
             "Type": "Image",
-            "Name": "backgroundImage",
-            "Width": 480,
-            "Height": 272,
-            "RelativeFilename": "background.png"
-          },
-          {
-            "Type": "Image",
             "Name": "RadioIcon",
             "X": 20,
             "Y": 20,
@@ -239,13 +225,6 @@
       {
         "Name": "MemoryScreen",
         "Components": [
-          {
-            "Type": "Image",
-            "Name": "backgroundImage",
-            "Width": 480,
-            "Height": 272,
-            "RelativeFilename": "background.png"
-          },
           {
             "Type": "Image",
             "Name": "MemoryIcon",

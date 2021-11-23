@@ -13,9 +13,6 @@ RadioScreenViewBase::RadioScreenViewBase() :
     __background.setPosition(0, 0, 480, 272);
     __background.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
 
-    backgroundImage.setXY(0, 0);
-    backgroundImage.setBitmap(touchgfx::Bitmap(BITMAP_BACKGROUND_ID));
-
     RadioIcon.setXY(20, 20);
     RadioIcon.setBitmap(touchgfx::Bitmap(BITMAP_RADIO_ID));
 
@@ -51,7 +48,6 @@ RadioScreenViewBase::RadioScreenViewBase() :
     slideMenuLeft.add(radioMenu);
 
     add(__background);
-    add(backgroundImage);
     add(RadioIcon);
     add(controls1);
     add(radioControlPanel1);

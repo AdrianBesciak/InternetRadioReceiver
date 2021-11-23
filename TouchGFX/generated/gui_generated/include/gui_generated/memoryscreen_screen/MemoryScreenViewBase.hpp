@@ -32,7 +32,6 @@ protected:
      * Member Declarations
      */
     touchgfx::Box __background;
-    touchgfx::Image backgroundImage;
     touchgfx::Image MemoryIcon;
     controls controls1;
     musicControlPanel musicControlPanel1;

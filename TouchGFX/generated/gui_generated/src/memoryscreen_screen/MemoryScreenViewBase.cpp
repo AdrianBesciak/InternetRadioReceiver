@@ -13,9 +13,6 @@ MemoryScreenViewBase::MemoryScreenViewBase() :
     __background.setPosition(0, 0, 480, 272);
     __background.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
 
-    backgroundImage.setXY(0, 0);
-    backgroundImage.setBitmap(touchgfx::Bitmap(BITMAP_BACKGROUND_ID));
-
     MemoryIcon.setXY(20, 20);
     MemoryIcon.setBitmap(touchgfx::Bitmap(BITMAP_RAW_MICRO_SD_ID));
 
@@ -60,7 +57,6 @@ MemoryScreenViewBase::MemoryScreenViewBase() :
     slideMenuLeft.add(radioMenu);
 
     add(__background);
-    add(backgroundImage);
     add(MemoryIcon);
     add(controls1);
     add(musicControlPanel1);
