@@ -7,7 +7,7 @@ class ApplicationModule {
 public:
     ApplicationModule();
 private:
-    //audio::AudioPlayer audioPlayer;
+    audio::AudioPlayer audioPlayer;
     view::MainDisplay mainDisplay;
 };
 

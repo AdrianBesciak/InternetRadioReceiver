@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.19)
 include(cmake/CrossCompile.cmake)
 project(InternetRadioReceiver C CXX ASM)
 
-#add_subdirectory(SpiritMP3Dec)
+add_subdirectory(SpiritMP3Dec)
 add_subdirectory(StdVorbisDec)
 
 # Executable
@@ -86,7 +86,6 @@ target_include_directories(${PROJECT_NAME} PRIVATE
         TouchGFX/gui/include
         TouchGFX/target
         TouchGFX/target/generated
-        SpiritMP3Dec/include
         )
 
 # Definitions
@@ -119,7 +118,7 @@ target_compile_options(${PROJECT_NAME} PRIVATE
 
 # Link options
 target_link_libraries(${PROJECT_NAME} PUBLIC
-        #SpiritMP3Dec
+        SpiritMP3Dec
         StdVorbisDec
         ${PROJECT_SOURCE_DIR}/TouchGFX/libtouchgfx.a)
 target_link_options(${PROJECT_NAME} PRIVATE -Wl,-Map=${PROJECT_BINARY_DIR}/${PROJECT_NAME}.map)
