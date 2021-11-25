@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <unordered_map>
+#include <sys/task/TaskPriority.hpp>
 
 namespace sys {
     class Task;
@@ -13,7 +14,7 @@ namespace sys {
         static void wait(std::uint32_t ticks);
 
     private:
-        void addTask(Task *task);
+        void addTask(Task *task, TaskPriority priority);
         void removeTask(Task *task);
 
         static Application *application;

@@ -9,7 +9,6 @@ namespace init {
 
         if (!initialized) {
             std::cout << "[INIT] Initializing SD Card\n";
-
             if (f_mount(&SDFatFS, SDPath, 1) != FR_OK) {
                 throw std::runtime_error("Failed to initialize SD card");
             }

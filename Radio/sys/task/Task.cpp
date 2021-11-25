@@ -5,13 +5,18 @@
 namespace sys {
     Task::Task(const std::string &name)
         : name(name) {
-        sys::Application::getInstance().addTask(this);
     }
 
     Task::~Task() = default;
 
+
+
     const std::string &Task::getName() const {
         return name;
+    }
+
+    void Task::startTask(TaskPriority priority) {
+        sys::Application::getInstance().addTask(this, priority);
     }
 
     void Task::execute() {
@@ -19,6 +24,7 @@ namespace sys {
             executeImpl();
         }
         catch (std::exception &exc) {
+            printf("%s\r\n", exc.what());
             std::cout << "CRITICAL ERROR: " << exc.what() << '\n';
         }
         sys::Application::getInstance().removeTask(this);

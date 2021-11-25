@@ -50,7 +50,7 @@ namespace audio {
     public:
         explicit VorbisOutputBuffer(VorbisInputBuffer& inputBuffer, std::size_t bufferSize)
                 : inputBuffer(inputBuffer)
-                , decoderBuffer(bufferSize)
+                , bufferSize(bufferSize)
                 , decoder(nullptr)
                 , samples(nullptr)
                 , sampleStartOffset(0)
@@ -87,7 +87,7 @@ namespace audio {
 
     private:
         void openDecoder() {
-            stb_vorbis_alloc alloc{decoderBuffer.data(), static_cast<int>(decoderBuffer.size())};
+            stb_vorbis_alloc alloc{reinterpret_cast<char*>(0xC00D7400), static_cast<int>(bufferSize)};
             int dataUsed = 0;
             int error = 0;
 
@@ -146,7 +146,7 @@ namespace audio {
         }
 
         VorbisInputBuffer &inputBuffer;
-        std::vector<char> decoderBuffer;
+        std::size_t bufferSize;
         stb_vorbis* decoder;
         float** samples;
         std::size_t sampleStartOffset;
@@ -157,7 +157,7 @@ namespace audio {
     VorbisAudioReader::VorbisAudioReader(const std::shared_ptr<io::ReadStream> &readStream)
         : AudioReader(readStream)
         , inputBuffer(std::make_shared<VorbisInputBuffer>(readStream, 8192))
-        , outputBuffer(std::make_shared<VorbisOutputBuffer>(*inputBuffer, 240000))
+        , outputBuffer(std::make_shared<VorbisOutputBuffer>(*inputBuffer, 512000))
         , audioMetadata(){
         stb_vorbis_info info = outputBuffer->getStreamInfo();
         audioMetadata = VorbisAudioMetadata(&info);

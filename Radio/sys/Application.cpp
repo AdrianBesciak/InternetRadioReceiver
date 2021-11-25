@@ -26,12 +26,12 @@ namespace sys {
         vTaskDelay(ticks);
     }
 
-    void Application::addTask(Task *task) {
+    void Application::addTask(Task *task, TaskPriority priority) {
         taskMap.insert({task->getName(), task});
         osThreadAttr_t attributes = {};
         attributes.name = task->getName().c_str();
         attributes.stack_size = 4096;
-        attributes.priority = osPriorityNormal;
+        attributes.priority = static_cast<osPriority_t>(priority);
         osThreadId_t id = osThreadNew(&taskEntrypoint, (void*)&task->getName(), &attributes);
         if (id == nullptr) {
             throw std::runtime_error("Failed to create task '" + task->getName() + "'");

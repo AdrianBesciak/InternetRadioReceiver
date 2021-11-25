@@ -40,19 +40,19 @@ extern "C" {
 }
 
 namespace audio {
-    const std::size_t BUFFER_SIZE = 4096;
+    const std::size_t BUFFER_SIZE = 8192;
 
     std::uint32_t normalizedVolume(std::uint32_t volume) {
         return static_cast<std::uint32_t>(std::round(0.8F * static_cast<float>(volume))) + 10;
     }
 
     AudioPlayer::AudioPlayer()
-        : DelayTask("IRR_AudioPlayer", 1)
+        : DelayTask("IRR_AudioPlayer", 2)
         , state(State::NO_SOURCE)
         , bufferState(BufferState::None)
         , volume(100)
-        , reader() 
-        , playingBuffer((int16_t*)0xC00CF400) {
+        , reader()
+        , playingBuffer(BUFFER_SIZE) {
         if (instance != nullptr)
             throw std::runtime_error("AudioPlayer instance already exists");
         instance = this;
@@ -130,7 +130,7 @@ namespace audio {
 
     void AudioPlayer::seek(float time) {
         std::ignore = time;
-        throw std::runtime_error("unimplemented yet");
+        //throw std::runtime_error("unimplemented yet");
         /*if (time > getEndTime())
             throw std::runtime_error("Invalid time value - greater than maximal time : (" + std::to_string(time) + "/" + std::to_string(getEndTime()) + ")");
         float progressRatio = time / getEndTime();
@@ -210,29 +210,34 @@ namespace audio {
         if (bufferState == BufferState::None) {
             return;
         }
+        printf("state %d\r\n", bufferState);
 
         std::size_t count = 0;
         if (bufferState == BufferState::Started) {
-            count = reader->readNext(playingBuffer, BUFFER_SIZE);
+            count = reader->readNext(playingBuffer.data(), BUFFER_SIZE);
             playerPlayBuffer();
             if (onProgressChanged != nullptr)
                 onProgressChanged(getCurrentTime(), getEndTime());
             bufferState = BufferState::None;
+            puts("state to zero\r");
         }
         else if (bufferState == BufferState::HalfWayThrough) {
-            count = reader->readNext(playingBuffer, BUFFER_SIZE / 2);
+            count = reader->readNext(playingBuffer.data(), BUFFER_SIZE / 2);
             if (onProgressChanged != nullptr)
                 onProgressChanged(getCurrentTime(), getEndTime());
             bufferState = BufferState::None;
+            puts("state to zero\r");
         }
         else if (bufferState == BufferState::Done) {
-            count = reader->readNext(playingBuffer + BUFFER_SIZE / 2, BUFFER_SIZE / 2);
+            count = reader->readNext(playingBuffer.data() + BUFFER_SIZE / 2, BUFFER_SIZE / 2);
             if (onProgressChanged != nullptr)
                 onProgressChanged(getCurrentTime(), getEndTime());
             bufferState = BufferState::None;
+            puts("state to zero\r");
         }
-
+        printf("count %d\r\n", count);
         if (count == 0) {
+            printf("stopped\r\n");
             bufferState = BufferState::None;
             stop();
         }
@@ -251,7 +256,7 @@ namespace audio {
     }
 
     void AudioPlayer::playerPlayBuffer() {
-        if (BSP_AUDIO_OUT_Play(reinterpret_cast<std::uint16_t*>(playingBuffer), BUFFER_SIZE * 2) != AUDIO_OK)
+        if (BSP_AUDIO_OUT_Play(reinterpret_cast<std::uint16_t*>(playingBuffer.data()), BUFFER_SIZE * 2) != AUDIO_OK)
             throw std::runtime_error("Failed to play audio from '" + reader->getName() + "'");
     }
 

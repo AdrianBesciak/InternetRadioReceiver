@@ -1,10 +1,12 @@
 #include "MPEGAudioReader.hpp"
 #include <stdexcept>
+#include <iostream>
 
 namespace audio {
     unsigned int mp3ReadCallback(void * pMP3CompressedData, unsigned int nMP3DataSizeInChars, void * token) {
         auto *stream = (io::ReadStream*)(token);
-        return stream->read(pMP3CompressedData, nMP3DataSizeInChars);
+        auto count = stream->read(pMP3CompressedData, nMP3DataSizeInChars);
+        return count;
     }
 
     MPEGAudioReader::MPEGAudioReader(const std::shared_ptr<io::ReadStream> &readStream)
@@ -21,7 +23,7 @@ namespace audio {
     }
 
     std::size_t MPEGAudioReader::readNext(std::int16_t *data, std::size_t count) {
-        return SpiritMP3Decode(decoder.get(), data, count / 2, nullptr);
+        return 2 * SpiritMP3Decode(decoder.get(), data, count / 2, nullptr);
     }
 
     void MPEGAudioReader::seek(std::size_t position) {

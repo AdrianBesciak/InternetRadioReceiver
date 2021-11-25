@@ -32,8 +32,13 @@ namespace io {
     std::size_t FileReadStream::read(void *buffer, std::size_t count) {
         FIL* fileHandle = reinterpret_cast<FIL*>(handle);
         UINT bytesRead = 0;
-        if (f_read(fileHandle, buffer, static_cast<UINT>(count), &bytesRead) != FR_OK)
+        //__disable_irq();
+        if (f_read(fileHandle, buffer, static_cast<UINT>(count), &bytesRead) != FR_OK) {
+            __enable_irq();
             throw std::runtime_error("Failed to read from file '" + filePath + "'");
+        }
+        //__enable_irq();
+
         return static_cast<std::size_t>(bytesRead);
     }
 
