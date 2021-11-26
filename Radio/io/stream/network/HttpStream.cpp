@@ -36,6 +36,7 @@ namespace io {
         , stream(this->url.getHost())
         , startOffset(0) {
         stream.writeData("GET " + this->url.getPath() + "\r\n\r\n");
+        readHeader();
     }
 
     HttpStream::~HttpStream() = default;
@@ -46,6 +47,10 @@ namespace io {
 
     const std::string& HttpStream::getUrl() const {
         return url.getUrl();
+    }
+
+    const std::unordered_map<std::string, std::string> &HttpStream::getHeaders() const {
+        return headers;
     }
 
     std::size_t HttpStream::read(void *buffer, std::size_t count) {
@@ -62,5 +67,18 @@ namespace io {
 
     void HttpStream::seek(std::size_t position) {
         stream.seek(position + startOffset);
+    }
+
+    void HttpStream::readHeader() {
+        for (std::string line = readLine(); line != "\r"; line = readLine()) {
+            line.pop_back();
+            auto split = line.find(": ");
+            if (split == std::string::npos) {
+                continue;
+            }
+            std::string key = line.substr(0, split);
+            std::string value = line.substr(split + 2);
+            headers.insert({key, value});
+        }
     }
 }

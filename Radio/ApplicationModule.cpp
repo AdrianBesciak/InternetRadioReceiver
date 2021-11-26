@@ -13,6 +13,12 @@ ApplicationModule::ApplicationModule()
     , mainDisplay() {
     ethernetWatchdog.setOnStateChanged([&](bool state) {
         std::printf("Ethernet state changed to: %d\n", state);
+        if (state) {
+            std::shared_ptr<io::ReadStream> readStream = std::make_shared<io::HttpStream>("http://195.150.20.4/rmf_fm");
+            std::shared_ptr<audio::AudioReader> audioReader = std::make_shared<audio::MPEGAudioReader>(readStream);
+            audioPlayer.setSource(audioReader);
+            audioPlayer.play();
+        }
     });
     sdCardWatchdog.setOnStateChanged([&](bool state) {
         std::printf("SDCard state changed to: %d\n", state);

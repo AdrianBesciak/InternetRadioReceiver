@@ -1,4 +1,5 @@
 #pragma once
+#include <unordered_map>
 #include <io/stream/ReadStream.hpp>
 #include <io/stream/network/TcpStream.hpp>
 
@@ -25,6 +26,7 @@ namespace io {
         ~HttpStream() override;
         [[nodiscard]] const std::string& getName() const override;
         [[nodiscard]] const std::string& getUrl() const;
+        [[nodiscard]] const std::unordered_map<std::string, std::string> &getHeaders() const;
 
         [[nodiscard]] std::size_t read(void *buffer, std::size_t count) override;
         [[nodiscard]] std::size_t pos() const override;
@@ -33,6 +35,8 @@ namespace io {
         void seek(std::size_t position) override;
 
     private:
+        void readHeader();
+        std::unordered_map<std::string, std::string> headers;
         internal::Url url;
         TCPStream stream;
         std::size_t startOffset;
