@@ -7,6 +7,7 @@ namespace io {
     public:
         virtual ~ReadStream();
         [[nodiscard]] virtual const std::string& getName() const = 0;
+        [[nodiscard]] virtual std::string getMimeType() const = 0;
 
         [[nodiscard]] virtual std::size_t read(void* buffer, std::size_t count) = 0;
         void readExact(void* buffer, std::size_t count);
@@ -19,7 +20,7 @@ namespace io {
         [[nodiscard]] virtual std::size_t size() const = 0;
         [[nodiscard]] bool hasNext() const;
         [[nodiscard]] bool hasEnded() const;
-        
+
         virtual void seek(std::size_t position) = 0;
     };
 }

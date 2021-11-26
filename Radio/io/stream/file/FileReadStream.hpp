@@ -9,6 +9,8 @@ namespace io {
         explicit FileReadStream(const std::string& filePath, bool createIfNotExists = false);
         ~FileReadStream() override;
         [[nodiscard]] const std::string &getName() const override;
+        [[nodiscard]] std::string getMimeType() const override;
+
         [[nodiscard]] const std::string& getFilePath() const;
 
         [[nodiscard]] std::size_t read(void* buffer, std::size_t count) override;

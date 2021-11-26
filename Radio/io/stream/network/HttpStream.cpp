@@ -45,6 +45,14 @@ namespace io {
         return getUrl();
     }
 
+    std::string HttpStream::getMimeType() const {
+        auto it = headers.find("Content-Type");
+        if (it == headers.end()) {
+            return "application/octet-stream";
+        }
+        return it->second;
+    }
+
     const std::string& HttpStream::getUrl() const {
         return url.getUrl();
     }

@@ -23,6 +23,23 @@ namespace io {
         return getFilePath();
     }
 
+    std::string FileReadStream::getMimeType() const {
+        auto extensionStartPosition = filePath.find_last_of('.');
+        if (extensionStartPosition == std::string::npos) {
+            return "application/octet-stream";
+        }
+        std::string extension = filePath.substr(extensionStartPosition);
+        if (extension == ".wav") {
+            return "audio/wav";
+        }
+        if (extension == ".mp3") {
+            return "audio/mpeg";
+        }
+        if (extension == ".ogg") {
+            return "audio/ogg";
+        }
+    }
+
     const std::string &FileReadStream::getFilePath() const {
         return filePath;
     }
