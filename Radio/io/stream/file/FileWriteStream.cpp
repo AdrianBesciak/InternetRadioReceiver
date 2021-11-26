@@ -1,5 +1,4 @@
 #include "FileWriteStream.hpp"
-#include <init/sdinit.hpp>
 #include <stdexcept>
 #include <ff.h>
 
@@ -7,7 +6,6 @@ namespace io {
     FileWriteStream::FileWriteStream(const std::string &filePath)
         : handle(nullptr)
         , filePath(filePath) {
-        init::initializeSD();
 
         handle = new FIL;
         FIL* fileHandle = reinterpret_cast<FIL*>(handle);
@@ -47,7 +45,7 @@ namespace io {
         FIL* fileHandle = reinterpret_cast<FIL*>(handle);
         return static_cast<std::size_t>(f_size(fileHandle));
     }
-    
+
     void FileWriteStream::seek(std::size_t position) {
         if (f_lseek(reinterpret_cast<FIL*>(handle), static_cast<FSIZE_t>(position)) != FR_OK)
             throw std::runtime_error("Failed to seek to " + std::to_string(position));

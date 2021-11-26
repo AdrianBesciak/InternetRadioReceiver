@@ -4,24 +4,23 @@
 #include <audio/reader/mpeg/MPEGAudioReader.hpp>
 #include <audio/reader/wav//WavAudioReader.hpp>
 #include <audio/playlist/FavouritesRadioPlaylist.hpp>
-#include <filesystem/DirectoryListing.hpp>
 #include <io/stream/file/FileReadStream.hpp>
 
 ApplicationModule::ApplicationModule()
     : ethernetWatchdog()
+    , sdCardWatchdog()
     , audioPlayer()
     , mainDisplay() {
     ethernetWatchdog.setOnStateChanged([&](bool state) {
         std::printf("Ethernet state changed to: %d\n", state);
     });
+    sdCardWatchdog.setOnStateChanged([&](bool state) {
+        std::printf("SDCard state changed to: %d\n", state);
+    });
     ethernetWatchdog.startTask(sys::TaskPriority::LOW);
+    sdCardWatchdog.startTask(sys::TaskPriority::LOW);
     audioPlayer.startTask(sys::TaskPriority::REALTIME);
     mainDisplay.startTask(sys::TaskPriority::LOW);
-    auto listing = filesystem::DirectoryListing("0:/audio");
-    audio::FavouritesRadioPlaylist playlist;
-    playlist.addEntry(0);
-    playlist.removeEntry(0);
-    playlist.addEntry(0);
 
     audioPlayer.setOnMediumChanged([](const std::string &medium) {
         std::cout << "[PLAYER] New medium: " << medium << '\n';

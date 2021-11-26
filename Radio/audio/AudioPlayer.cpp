@@ -40,7 +40,7 @@ extern "C" {
 }
 
 namespace audio {
-    const std::size_t BUFFER_SIZE = 8192;
+    const std::size_t BUFFER_SIZE = 4096;
 
     std::uint32_t normalizedVolume(std::uint32_t volume) {
         return static_cast<std::uint32_t>(std::round(0.8F * static_cast<float>(volume))) + 10;

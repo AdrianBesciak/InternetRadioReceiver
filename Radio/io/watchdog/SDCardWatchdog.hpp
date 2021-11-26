@@ -1,11 +1,10 @@
 #pragma once
-#include <functional>
 #include <io/watchdog/Watchdog.hpp>
 
 namespace io {
-    class EthernetWatchdog : public Watchdog {
+    class SDCardWatchdog : public Watchdog {
     public:
-        EthernetWatchdog();
+        SDCardWatchdog();
     protected:
         void executeIteration() override;
     };

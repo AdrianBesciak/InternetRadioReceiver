@@ -1,7 +1,6 @@
 #include "TcpStream.hpp"
 #include <stdexcept>
 #include <vector>
-#include <init/dhcpinit.hpp>
 #include <lwip/api.h>
 #include <lwip/sockets.h>
 
@@ -42,7 +41,6 @@ namespace io {
         : host(host)
         , descriptor(-1)
         , position(0) {
-        init::initializeDHCP();
         descriptor = internal::openSocket(host);
     }
 
