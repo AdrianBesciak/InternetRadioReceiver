@@ -101,13 +101,14 @@ void MX_LWIP_Init(void)
   attributes.stack_size = INTERFACE_THREAD_STACK_SIZE;
   attributes.priority = osPriorityBelowNormal;
   osThreadNew(ethernetif_set_link, &link_arg, &attributes);
+  if (netif_is_up(&gnetif)) {
 /* USER CODE END OS_THREAD_NEW_CMSIS_RTOS_V2 */
 
   /* Start DHCP negotiation for a network interface (IPv4) */
   dhcp_start(&gnetif);
 
 /* USER CODE BEGIN 3 */
-
+  }
 /* USER CODE END 3 */
 }
 

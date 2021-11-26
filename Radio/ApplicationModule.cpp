@@ -8,8 +8,13 @@
 #include <io/stream/file/FileReadStream.hpp>
 
 ApplicationModule::ApplicationModule()
-    : audioPlayer()
+    : ethernetWatchdog()
+    , audioPlayer()
     , mainDisplay() {
+    ethernetWatchdog.setOnStateChanged([&](bool state) {
+        std::printf("Ethernet state changed to: %d\n", state);
+    });
+    ethernetWatchdog.startTask(sys::TaskPriority::LOW);
     audioPlayer.startTask(sys::TaskPriority::REALTIME);
     mainDisplay.startTask(sys::TaskPriority::LOW);
     auto listing = filesystem::DirectoryListing("0:/audio");
@@ -34,11 +39,11 @@ ApplicationModule::ApplicationModule()
 
     try {
         //std::shared_ptr<io::ReadStream> readStream = std::make_shared<io::FileReadStream>("0:/audio/mp3-44-320-2.mp3");
-        std::shared_ptr<io::ReadStream> readStream = std::make_shared<io::FileReadStream>("0:/audio/wav-44.wav");
+        //std::shared_ptr<io::ReadStream> readStream = std::make_shared<io::FileReadStream>("0:/audio/wav-44.wav");
         //std::shared_ptr<io::ReadStream> readStream = std::make_shared<io::HttpStream>("http://195.150.20.4/rmf_fm");
-        std::shared_ptr<audio::AudioReader> audioReader = std::make_shared<audio::WavAudioReader>(readStream);
-        audioPlayer.setSource(audioReader);
-        audioPlayer.play();
+        //std::shared_ptr<audio::AudioReader> audioReader = std::make_shared<audio::WavAudioReader>(readStream);
+        //audioPlayer.setSource(audioReader);
+        //audioPlayer.play();
     }
     catch (std::exception &exc) {
         printf("%s\r\n", exc.what());
