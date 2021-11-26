@@ -13,7 +13,7 @@ ApplicationModule::ApplicationModule()
     ethernetWatchdog.setOnStateChanged([&](bool state) {
         std::printf("Ethernet state changed to: %d\n", state);
         if (state) {
-            std::shared_ptr<io::ReadStream> readStream = std::make_shared<io::HttpStream>("http://195.150.20.4/rmf_fm");
+            std::shared_ptr<io::ReadStream> readStream = std::make_shared<io::HttpStream>("http://stream4.nadaje.com:15476/radiobialystok");
             std::shared_ptr<audio::AudioReader> audioReader = audio::AudioReaderFactory::createReader(readStream);
             audioPlayer.setSource(audioReader);
             audioPlayer.play();

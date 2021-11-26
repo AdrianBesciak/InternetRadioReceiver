@@ -4,7 +4,7 @@
 namespace io {
     class TCPStream {
     public:
-        explicit TCPStream(const std::string &host);
+        explicit TCPStream(const std::string &host, std::uint16_t port);
 
         ~TCPStream();
         void writeData(const std::string &data);

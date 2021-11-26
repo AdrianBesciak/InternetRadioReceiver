@@ -10,12 +10,14 @@ namespace io {
             explicit Url(const std::string &url);
             [[nodiscard]] const std::string &getUrl() const;
             [[nodiscard]] const std::string &getHost() const;
+            [[nodiscard]] std::uint16_t getPort() const;
             [[nodiscard]] const std::string &getProtocol() const;
             [[nodiscard]] const std::string &getPath() const;
         private:
             std::string url;
             std::string protocol;
             std::string host;
+            std::uint16_t port;
             std::string path;
         };
     }

@@ -4,13 +4,23 @@
 namespace io {
     namespace internal {
         Url::Url(const std::string &url)
-            : url(url),
-            protocol(),
-            host(),
-            path() {
-            protocol = url.substr(0, url.find('/'));
-            host = url.substr(protocol.size() + 2, url.find('/', protocol.size() + 2) - (protocol.size() + 2));
-            path = url.substr(protocol.size() + host.size() + 2);
+            : url(url)
+            , protocol()
+            , host()
+            , port()
+            , path() {
+            protocol = url.substr(0, url.find('/') - 1);
+            std::string hostWithPort = url.substr(protocol.size() + 3, url.find('/', protocol.size() + 3) - (protocol.size() + 3));
+            auto pos = hostWithPort.find(':');
+            if (pos != std::string::npos) {
+                host = hostWithPort.substr(0, pos);
+                port = static_cast<std::uint16_t>(std::stoi(hostWithPort.substr(pos + 1)));
+            }
+            else {
+                host = hostWithPort;
+                port = 80;
+            }
+            path = url.substr(protocol.size() + hostWithPort.size() + 3);
         }
 
         const std::string &Url::getUrl() const {
@@ -19,6 +29,10 @@ namespace io {
 
         const std::string &Url::getHost() const {
             return host;
+        }
+
+        std::uint16_t Url::getPort() const {
+            return port;
         }
 
         const std::string &Url::getProtocol() const {
@@ -33,9 +47,11 @@ namespace io {
 
     HttpStream::HttpStream(const std::string &url)
         : url(url)
-        , stream(this->url.getHost())
+        , stream(this->url.getHost(), this->url.getPort())
         , startOffset(0) {
-        stream.writeData("GET " + this->url.getPath() + "\r\n\r\n");
+        stream.writeData("GET " + this->url.getPath() + " HTTP/1.1\r\n");
+        stream.writeData("Accept: audio/*\r\n");
+        stream.writeData("\r\n");
         readHeader();
     }
 

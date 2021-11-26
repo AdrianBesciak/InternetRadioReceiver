@@ -14,14 +14,14 @@ namespace io {
             return hostAddress;
         }
 
-        int openSocket(const std::string &host) {
+        int openSocket(const std::string &host, std::uint16_t port) {
             ip4_addr_t hostAddress = getAddressFromHost(host);
             char addressString[16];
             strcpy(addressString, ip4addr_ntoa(&hostAddress));
 
             sockaddr_in socket = {};
             socket.sin_family = AF_INET;
-            socket.sin_port = lwip_htons(80);
+            socket.sin_port = lwip_htons(port);
             lwip_inet_pton(socket.sin_family, addressString, &(socket.sin_addr));
 
             int descriptor = lwip_socket(socket.sin_family, SOCK_STREAM, 0);
@@ -37,11 +37,11 @@ namespace io {
         }
     }
 
-    TCPStream::TCPStream(const std::string &host)
+    TCPStream::TCPStream(const std::string &host, std::uint16_t port)
         : host(host)
         , descriptor(-1)
         , position(0) {
-        descriptor = internal::openSocket(host);
+        descriptor = internal::openSocket(host, port);
     }
 
     TCPStream::~TCPStream() {
