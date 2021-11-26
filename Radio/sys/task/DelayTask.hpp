@@ -1,3 +1,4 @@
+#pragma once
 #include <sys/task/Task.hpp>
 
 namespace sys {

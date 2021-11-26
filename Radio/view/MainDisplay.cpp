@@ -7,7 +7,7 @@ extern "C" {
 
 namespace view {
     MainDisplay::MainDisplay()
-        : sys::Task("IRR_ScreenDis") {
+        : sys::Task("IRR_MainDisplay") {
         if (instance != nullptr)
             throw std::runtime_error("ScreenDisplay instance already exists");
         instance = this;

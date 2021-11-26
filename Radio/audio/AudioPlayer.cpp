@@ -210,7 +210,6 @@ namespace audio {
         if (bufferState == BufferState::None) {
             return;
         }
-        printf("state %d\r\n", bufferState);
 
         std::size_t count = 0;
         if (bufferState == BufferState::Started) {
@@ -219,25 +218,20 @@ namespace audio {
             if (onProgressChanged != nullptr)
                 onProgressChanged(getCurrentTime(), getEndTime());
             bufferState = BufferState::None;
-            puts("state to zero\r");
         }
         else if (bufferState == BufferState::HalfWayThrough) {
             count = reader->readNext(playingBuffer.data(), BUFFER_SIZE / 2);
             if (onProgressChanged != nullptr)
                 onProgressChanged(getCurrentTime(), getEndTime());
             bufferState = BufferState::None;
-            puts("state to zero\r");
         }
         else if (bufferState == BufferState::Done) {
             count = reader->readNext(playingBuffer.data() + BUFFER_SIZE / 2, BUFFER_SIZE / 2);
             if (onProgressChanged != nullptr)
                 onProgressChanged(getCurrentTime(), getEndTime());
             bufferState = BufferState::None;
-            puts("state to zero\r");
         }
-        printf("count %d\r\n", count);
         if (count == 0) {
-            printf("stopped\r\n");
             bufferState = BufferState::None;
             stop();
         }
