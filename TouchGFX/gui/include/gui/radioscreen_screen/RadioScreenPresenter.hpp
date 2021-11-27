@@ -27,6 +27,9 @@ public:
 
     virtual ~RadioScreenPresenter() {};
 
+    void changeSdCardIndicator(bool sdState) {}
+    void changeEthernetIndicator(bool ethernetState) {}
+
 private:
     RadioScreenPresenter();
 

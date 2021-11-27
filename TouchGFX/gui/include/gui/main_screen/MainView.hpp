@@ -11,7 +11,11 @@ public:
     virtual ~MainView() {}
     virtual void setupScreen();
     virtual void tearDownScreen();
+
+    void changeSdCardIndicator(bool sdState);
+    void changeEthernetIndicator(bool ethernetState);
 protected:
+    //void handleTickEvent();
 };
 
 #endif // MAINVIEW_HPP

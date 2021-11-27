@@ -27,6 +27,9 @@ public:
 
     virtual ~MemoryScreenPresenter() {};
 
+    void changeSdCardIndicator(bool sdState){}
+    void changeEthernetIndicator(bool ethernetState){}
+
 private:
     MemoryScreenPresenter();
 

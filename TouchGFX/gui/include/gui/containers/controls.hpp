@@ -10,7 +10,11 @@ public:
     virtual ~controls() {}
 
     virtual void initialize();
+
+    void ethernetStateChanged(bool connected);
+    void sdCardStateChanged(bool mounted);
 protected:
+    //void handleTickEvent();
 };
 
 #endif // CONTROLS_HPP

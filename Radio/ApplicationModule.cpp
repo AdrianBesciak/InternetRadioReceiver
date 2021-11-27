@@ -5,13 +5,19 @@
 #include <audio/reader/AudioReaderFactory.hpp>
 #include <filesystem/DirectoryListing.hpp>
 
+ApplicationModule* applicationModuleInstance;
+
 ApplicationModule::ApplicationModule()
     : ethernetWatchdog()
     , sdCardWatchdog()
     , audioPlayer()
     , mainDisplay() {
+    applicationModuleInstance = this;
     ethernetWatchdog.setOnStateChanged([&](bool state) {
         std::printf("Ethernet state changed to: %d\n", state);
+        /*if (stateIndicators) {
+            stateIndicators->ethernetStateChanged(state);
+        }*/
         if (state) {
             std::shared_ptr<io::ReadStream> readStream = std::make_shared<io::HttpStream>("http://stream4.nadaje.com:15476/radiobialystok");
             std::shared_ptr<audio::AudioReader> audioReader = audio::AudioReaderFactory::createReader(readStream);
@@ -21,6 +27,9 @@ ApplicationModule::ApplicationModule()
     });
     sdCardWatchdog.setOnStateChanged([&](bool state) {
         std::printf("SDCard state changed to: %d\n", state);
+       /* if (stateIndicators) {
+            stateIndicators->sdCardStateChanged(state);
+        }*/
     });
     ethernetWatchdog.startTask(sys::TaskPriority::LOW);
     sdCardWatchdog.startTask(sys::TaskPriority::LOW);
@@ -54,3 +63,18 @@ ApplicationModule::ApplicationModule()
         std::cout << "Error occurred: " << exc.what() << '\n';
     }
 }
+
+bool ApplicationModule::getEthernetState()
+{
+    return ethernetWatchdog.getState();
+}
+bool ApplicationModule::getSdCardState()
+{
+    return sdCardWatchdog.getState();
+}
+
+/*
+void ApplicationModule::setStateIndicators(controls* indicators)
+{
+    stateIndicators = indicators;
+}*/
