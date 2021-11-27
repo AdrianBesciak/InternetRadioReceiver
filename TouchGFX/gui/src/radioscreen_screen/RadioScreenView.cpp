@@ -14,3 +14,7 @@ void RadioScreenView::tearDownScreen()
 {
     RadioScreenViewBase::tearDownScreen();
 }
+
+controls &RadioScreenView::getControls() {
+    return controls1;
+}

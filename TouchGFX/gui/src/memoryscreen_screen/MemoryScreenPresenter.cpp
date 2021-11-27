@@ -1,18 +1,9 @@
 #include <gui/memoryscreen_screen/MemoryScreenView.hpp>
 #include <gui/memoryscreen_screen/MemoryScreenPresenter.hpp>
 
-MemoryScreenPresenter::MemoryScreenPresenter(MemoryScreenView& v)
-    : view(v)
-{
+MemoryScreenPresenter::MemoryScreenPresenter(MemoryScreenView& view)
+    : view(view) {}
 
-}
-
-void MemoryScreenPresenter::activate()
-{
-
-}
-
-void MemoryScreenPresenter::deactivate()
-{
-
+void MemoryScreenPresenter::update() {
+    updatePeripheralsState(view.getControls());
 }

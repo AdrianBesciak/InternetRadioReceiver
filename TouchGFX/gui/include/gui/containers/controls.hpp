@@ -3,22 +3,21 @@
 
 #include <gui_generated/containers/controlsBase.hpp>
 
-class controls : public controlsBase
-{
+class controls : public controlsBase {
 public:
     controls();
-    ~controls();
+    ~controls() override;
 
-    virtual void initialize();
+    void initialize() override;
 
-    void ethernetStateChanged(bool connected);
-    void sdCardStateChanged(bool mounted);
+    void setEthernetState(bool state);
+    void setSdCardState(bool state);
 protected:
-    void handleTickEvent();
+    void handleTickEvent() override;
 
 private:
-    bool previousEthernetState{false};
-    bool previousSdCardState{false};
+    bool ethernetStateDirty;
+    bool sdCardStateDirty;
 };
 
 #endif // CONTROLS_HPP

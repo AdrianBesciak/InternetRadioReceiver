@@ -1,18 +1,9 @@
 #include <gui/main_screen/MainView.hpp>
 #include <gui/main_screen/MainPresenter.hpp>
 
-MainPresenter::MainPresenter(MainView& v)
-    : view(v)
-{
+MainPresenter::MainPresenter(MainView& view)
+    : view(view) {}
 
-}
-
-void MainPresenter::activate()
-{
-
-}
-
-void MainPresenter::deactivate()
-{
-
+void MainPresenter::update() {
+    updatePeripheralsState(view.getControls());
 }

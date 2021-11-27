@@ -1,18 +1,10 @@
 #include <gui/radioscreen_screen/RadioScreenView.hpp>
 #include <gui/radioscreen_screen/RadioScreenPresenter.hpp>
 
-RadioScreenPresenter::RadioScreenPresenter(RadioScreenView& v)
-    : view(v)
-{
+RadioScreenPresenter::RadioScreenPresenter(RadioScreenView& view)
+    : view(view) {}
 
+void RadioScreenPresenter::update() {
+    updatePeripheralsState(view.getControls());
 }
 
-void RadioScreenPresenter::activate()
-{
-
-}
-
-void RadioScreenPresenter::deactivate()
-{
-
-}

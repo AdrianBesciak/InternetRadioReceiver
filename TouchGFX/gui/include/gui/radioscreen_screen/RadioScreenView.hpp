@@ -11,7 +11,7 @@ public:
     virtual ~RadioScreenView() {}
     virtual void setupScreen();
     virtual void tearDownScreen();
-
+    controls& getControls();
 protected:
 };
 

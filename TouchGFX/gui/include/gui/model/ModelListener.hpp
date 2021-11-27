@@ -2,23 +2,31 @@
 #define MODELLISTENER_HPP
 
 #include <gui/model/Model.hpp>
+#include <model/ApplicationModel.hpp>
+#include <gui/containers/controls.hpp>
 
-class ModelListener
-{
+class ModelListener {
 public:
-    ModelListener() : model(0) {}
+    ModelListener()
+        : applicationModel(nullptr) {}
 
-    virtual ~ModelListener() {}
+    virtual ~ModelListener() = default;
 
-    virtual void changeSdCardIndicator(bool sdState) {}
-    virtual void changeEthernetIndicator(bool ethernetState) {}
-
-    void bind(Model* m)
-    {
-        model = m;
+    void bind(Model* model) {
+        applicationModel = &model->getApplicationModel();
     }
+    virtual void update() = 0;
 protected:
-    Model* model;
+    void updatePeripheralsState(controls& controls) {
+        if (applicationModel == nullptr) {
+            return;
+        }
+        const model::PeripheralStateModel &peripheralStateModel = applicationModel->getPeripheralStateModel();
+        controls.setEthernetState(peripheralStateModel.isEthernetState());
+        controls.setSdCardState(peripheralStateModel.isSdCardState());
+    }
+
+    const model::ApplicationModel* applicationModel;
 };
 
 #endif // MODELLISTENER_HPP

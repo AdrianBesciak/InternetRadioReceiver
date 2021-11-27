@@ -3,7 +3,8 @@
 #include <ApplicationModule.h>
 
 controls::controls()
-{
+    : ethernetStateDirty(false)
+    , sdCardStateDirty(false) {
     Application::getInstance()->registerTimerWidget(this);
 }
 
@@ -11,34 +12,39 @@ controls::~controls() {
     Application::getInstance()->unregisterTimerWidget(this);
 }
 
-void controls::initialize()
-{
+void controls::initialize() {
     controlsBase::initialize();
-
-    sdMountedInd.setVisible(previousSdCardState);
-    sdUnmountedInd.setVisible(not previousSdCardState);
-    ethernetConnectedInd.setVisible(previousEthernetState);
-    ethernetDisconnectedInd.setVisible(not previousEthernetState);
+    sdMountedInd.setVisible(false);
+    sdUnmountedInd.setVisible(true);
+    ethernetConnectedInd.setVisible(false);
+    ethernetDisconnectedInd.setVisible(true);
 }
 
-void controls::handleTickEvent()
-{
-    bool invalidate{false};
-
-    if (previousSdCardState != applicationModuleInstance->getSdCardState()) {
-        sdMountedInd.setVisible(applicationModuleInstance->getSdCardState());
-        sdUnmountedInd.setVisible(not applicationModuleInstance->getSdCardState());
-        previousSdCardState = applicationModuleInstance->getSdCardState();
-        invalidate = true;
+void controls::setEthernetState(bool state) {
+    if (state != ethernetConnectedInd.isVisible()) {
+        ethernetConnectedInd.setVisible(state);
+        ethernetDisconnectedInd.setVisible(!state);
+        ethernetStateDirty = true;
     }
-    if (previousEthernetState != applicationModuleInstance->getEthernetState()) {
-        ethernetConnectedInd.setVisible(applicationModuleInstance->getEthernetState());
-        ethernetDisconnectedInd.setVisible(not applicationModuleInstance->getEthernetState());
-        previousEthernetState = applicationModuleInstance->getEthernetState();
-        invalidate = true;
-    }
+}
 
-    if (invalidate) {
-        this->invalidate();
+void controls::setSdCardState(bool state) {
+    if (state != sdMountedInd.isVisible()) {
+        sdMountedInd.setVisible(state);
+        sdUnmountedInd.setVisible(!state);
+        sdCardStateDirty = true;
+    }
+}
+
+void controls::handleTickEvent() {
+    if (ethernetStateDirty) {
+        ethernetConnectedInd.invalidate();
+        ethernetDisconnectedInd.invalidate();
+        ethernetStateDirty = false;
+    }
+    if (sdCardStateDirty) {
+        sdMountedInd.invalidate();
+        sdUnmountedInd.invalidate();
+        sdCardStateDirty = false;
     }
 }

@@ -10,7 +10,10 @@ void MainView::setupScreen()
     MainViewBase::setupScreen();
 }
 
-void MainView::tearDownScreen()
-{
+void MainView::tearDownScreen() {
     MainViewBase::tearDownScreen();
+}
+
+controls &MainView::getControls() {
+    return controls1;
 }

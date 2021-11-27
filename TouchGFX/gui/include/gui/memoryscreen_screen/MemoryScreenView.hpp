@@ -11,6 +11,7 @@ public:
     virtual ~MemoryScreenView() {}
     virtual void setupScreen();
     virtual void tearDownScreen();
+    controls& getControls();
 
 protected:
 };

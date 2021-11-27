@@ -2,25 +2,20 @@
 #define MODEL_HPP
 
 #include <ApplicationModule.h>
+#include <model/ApplicationModel.hpp>
 
 class ModelListener;
 
-class Model
-{
+class Model {
 public:
     Model();
-
-    void bind(ModelListener* listener)
-    {
-        modelListener = listener;
-    }
-
+    void bind(ModelListener* listener);
     void tick();
+
+    [[nodiscard]] const model::ApplicationModel &getApplicationModel() const;
+
 protected:
     ModelListener* modelListener;
-private:
-    bool ethernetState{false};
-    bool sdCardState{false};
 };
 
 #endif // MODEL_HPP

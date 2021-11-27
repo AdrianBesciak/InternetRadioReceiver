@@ -14,3 +14,7 @@ void MemoryScreenView::tearDownScreen()
 {
     MemoryScreenViewBase::tearDownScreen();
 }
+
+controls &MemoryScreenView::getControls() {
+    return controls1;
+}
