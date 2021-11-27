@@ -56,6 +56,27 @@ MemoryScreenViewBase::MemoryScreenViewBase() :
     radioMenu.setAction(buttonCallback);
     slideMenuLeft.add(radioMenu);
 
+    slideMenuRight.setup(touchgfx::SlideMenu::WEST,
+        touchgfx::Bitmap(BITMAP_RIGHT_SLIDE_MENU_BACKGROUND_ID),
+        touchgfx::Bitmap(BITMAP_RIGHT_SLIDE_MENU_BUTTON_ID),
+        touchgfx::Bitmap(BITMAP_RIGHT_SLIDE_MENU_BUTTON_ID),
+        18, 0, 0, 110);
+    slideMenuRight.setState(touchgfx::SlideMenu::COLLAPSED);
+    slideMenuRight.setVisiblePixelsWhenCollapsed(25);
+    slideMenuRight.setHiddenPixelsWhenExpanded(0);
+    slideMenuRight.setAnimationEasingEquation(touchgfx::EasingEquations::cubicEaseInOut);
+    slideMenuRight.setAnimationDuration(18);
+    slideMenuRight.setExpandedStateTimeout(180);
+    slideMenuRight.setXY(405, 0);
+
+    SDCardMenu_1.setXY(25, 50);
+    SDCardMenu_1.setBitmaps(touchgfx::Bitmap(BITMAP_SDCARD_BUTTON_PRESSED_ID), touchgfx::Bitmap(BITMAP_SDCARD_BUTTON_PRESSED_ID));
+    slideMenuRight.add(SDCardMenu_1);
+
+    radioMenu_1.setXY(25, 0);
+    radioMenu_1.setBitmaps(touchgfx::Bitmap(BITMAP_RADIO_BUTTON_01_ID), touchgfx::Bitmap(BITMAP_RADIO_BUTTON_PRESSED_ID));
+    slideMenuRight.add(radioMenu_1);
+
     add(__background);
     add(MemoryIcon);
     add(controls1);
@@ -63,6 +84,7 @@ MemoryScreenViewBase::MemoryScreenViewBase() :
     add(songProgressBar);
     add(filenameTextBox);
     add(slideMenuLeft);
+    add(slideMenuRight);
 }
 
 void MemoryScreenViewBase::setupScreen()

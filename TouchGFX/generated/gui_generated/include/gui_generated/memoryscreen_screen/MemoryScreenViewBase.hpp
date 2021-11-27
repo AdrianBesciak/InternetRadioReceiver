@@ -40,6 +40,9 @@ protected:
     touchgfx::SlideMenu slideMenuLeft;
     touchgfx::Button SDCardMenu;
     touchgfx::Button radioMenu;
+    touchgfx::SlideMenu slideMenuRight;
+    touchgfx::Button SDCardMenu_1;
+    touchgfx::Button radioMenu_1;
 
 private:
 

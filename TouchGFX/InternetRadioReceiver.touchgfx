@@ -205,6 +205,47 @@
                 "Released": "radio_button_pressed.png"
               }
             ]
+          },
+          {
+            "Type": "SlideMenu",
+            "Name": "slideMenuRight",
+            "X": 405,
+            "Width": 75,
+            "Height": 272,
+            "FileNameBackground": "right_slide_menu_background.png",
+            "BackgroundX": 18,
+            "UseButton": true,
+            "FileNameButtonPressed": "right_slide_menu_button.png",
+            "FileNameButtonReleased": "right_slide_menu_button.png",
+            "ButtonY": 110,
+            "State": "Collapsed",
+            "ExpandDirection": "West",
+            "Easing": "Cubic",
+            "EasingOption": "InOut",
+            "AnimationDuration": 300,
+            "VisiblePixelsWhenCollapsed": 25,
+            "ExpandedStateTimeout": 3000,
+            "Components": [
+              {
+                "Type": "Button",
+                "Name": "SDCardMenu_1",
+                "X": 25,
+                "Y": 50,
+                "Width": 50,
+                "Height": 50,
+                "Pressed": "sdcard_button_pressed.png",
+                "Released": "sdcard_button_pressed.png"
+              },
+              {
+                "Type": "Button",
+                "Name": "radioMenu_1",
+                "X": 25,
+                "Width": 50,
+                "Height": 50,
+                "Pressed": "radio_button_pressed.png",
+                "Released": "radio_button_01.png"
+              }
+            ]
           }
         ],
         "Interactions": [
@@ -316,6 +357,47 @@
               {
                 "Type": "Button",
                 "Name": "radioMenu",
+                "Width": 50,
+                "Height": 50,
+                "Pressed": "radio_button_pressed.png",
+                "Released": "radio_button_01.png"
+              }
+            ]
+          },
+          {
+            "Type": "SlideMenu",
+            "Name": "slideMenuRight",
+            "X": 405,
+            "Width": 75,
+            "Height": 272,
+            "FileNameBackground": "right_slide_menu_background.png",
+            "BackgroundX": 18,
+            "UseButton": true,
+            "FileNameButtonPressed": "right_slide_menu_button.png",
+            "FileNameButtonReleased": "right_slide_menu_button.png",
+            "ButtonY": 110,
+            "State": "Collapsed",
+            "ExpandDirection": "West",
+            "Easing": "Cubic",
+            "EasingOption": "InOut",
+            "AnimationDuration": 300,
+            "VisiblePixelsWhenCollapsed": 25,
+            "ExpandedStateTimeout": 3000,
+            "Components": [
+              {
+                "Type": "Button",
+                "Name": "SDCardMenu_1",
+                "X": 25,
+                "Y": 50,
+                "Width": 50,
+                "Height": 50,
+                "Pressed": "sdcard_button_pressed.png",
+                "Released": "sdcard_button_pressed.png"
+              },
+              {
+                "Type": "Button",
+                "Name": "radioMenu_1",
+                "X": 25,
                 "Width": 50,
                 "Height": 50,
                 "Pressed": "radio_button_pressed.png",
