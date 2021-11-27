@@ -36,6 +36,10 @@
     <ClCompile Include="..\..\generated\gui_generated\src\radioscreen_screen\RadioScreenViewBase.cpp"/>
     <ClCompile Include="..\..\gui\src\containers\controls.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\containers\controlsBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\containers\listItem_notSelected.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\listItem_notSelectedBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\containers\listItem_selected.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\listItem_selectedBase.cpp"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ApplicationRoot)\assets\texts\texts.xml"/>
@@ -201,6 +205,10 @@
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\radioscreen_screen\RadioScreenViewBase.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\containers\controls.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\controlsBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\containers\listItem_notSelected.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\listItem_notSelectedBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\containers\listItem_selected.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\listItem_selectedBase.hpp"/>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(ApplicationRoot)\generated\simulator\touchgfx.rc"/>

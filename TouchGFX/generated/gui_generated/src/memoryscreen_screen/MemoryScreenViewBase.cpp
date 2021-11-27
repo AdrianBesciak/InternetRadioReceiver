@@ -7,7 +7,8 @@
 #include <texts/TextKeysAndLanguages.hpp>
 
 MemoryScreenViewBase::MemoryScreenViewBase() :
-    buttonCallback(this, &MemoryScreenViewBase::buttonCallbackHandler)
+    buttonCallback(this, &MemoryScreenViewBase::buttonCallbackHandler),
+    updateItemCallback(this, &MemoryScreenViewBase::updateItemCallbackHandler)
 {
 
     __background.setPosition(0, 0, 480, 272);
@@ -29,7 +30,7 @@ MemoryScreenViewBase::MemoryScreenViewBase() :
     songProgressBar.setValue(60);
     songProgressBar.setAnchorAtZero(false);
 
-    filenameTextBox.setPosition(37, 124, 404, 25);
+    filenameTextBox.setPosition(29, 126, 404, 25);
     filenameTextBox.setColor(touchgfx::Color::getColorFromRGB(129, 133, 255));
     filenameTextBox.setLinespacing(0);
     filenameTextBox.setTypedText(touchgfx::TypedText(T___SINGLEUSE_085C));
@@ -61,21 +62,29 @@ MemoryScreenViewBase::MemoryScreenViewBase() :
         touchgfx::Bitmap(BITMAP_RIGHT_SLIDE_MENU_BUTTON_ID),
         touchgfx::Bitmap(BITMAP_RIGHT_SLIDE_MENU_BUTTON_ID),
         18, 0, 0, 110);
-    slideMenuRight.setState(touchgfx::SlideMenu::COLLAPSED);
+    slideMenuRight.setState(touchgfx::SlideMenu::EXPANDED);
     slideMenuRight.setVisiblePixelsWhenCollapsed(25);
     slideMenuRight.setHiddenPixelsWhenExpanded(0);
     slideMenuRight.setAnimationEasingEquation(touchgfx::EasingEquations::cubicEaseInOut);
     slideMenuRight.setAnimationDuration(18);
     slideMenuRight.setExpandedStateTimeout(180);
-    slideMenuRight.setXY(405, 0);
+    slideMenuRight.setXY(280, 0);
 
-    SDCardMenu_1.setXY(25, 50);
-    SDCardMenu_1.setBitmaps(touchgfx::Bitmap(BITMAP_SDCARD_BUTTON_PRESSED_ID), touchgfx::Bitmap(BITMAP_SDCARD_BUTTON_PRESSED_ID));
-    slideMenuRight.add(SDCardMenu_1);
-
-    radioMenu_1.setXY(25, 0);
-    radioMenu_1.setBitmaps(touchgfx::Bitmap(BITMAP_RADIO_BUTTON_01_ID), touchgfx::Bitmap(BITMAP_RADIO_BUTTON_PRESSED_ID));
-    slideMenuRight.add(radioMenu_1);
+    PlayQueue.setPosition(27, 2, 170, 272);
+    PlayQueue.setHorizontal(false);
+    PlayQueue.setCircular(true);
+    PlayQueue.setEasingEquation(touchgfx::EasingEquations::backEaseOut);
+    PlayQueue.setSwipeAcceleration(10);
+    PlayQueue.setDragAcceleration(10);
+    PlayQueue.setNumberOfItems(20);
+    PlayQueue.setSelectedItemOffset(14);
+    PlayQueue.setSelectedItemExtraSize(0, 0);
+    PlayQueue.setSelectedItemMargin(2, 2);
+    PlayQueue.setDrawableSize(30, 0);
+    PlayQueue.setDrawables(PlayQueueListItems, updateItemCallback,
+                              PlayQueueSelectedListItems, updateItemCallback);
+    PlayQueue.animateToItem(6, 0);
+    slideMenuRight.add(PlayQueue);
 
     add(__background);
     add(MemoryIcon);
@@ -91,6 +100,15 @@ void MemoryScreenViewBase::setupScreen()
 {
     controls1.initialize();
     musicControlPanel1.initialize();
+    PlayQueue.initialize();
+    for (int i = 0; i < PlayQueueListItems.getNumberOfDrawables(); i++)
+    {
+        PlayQueueListItems[i].initialize();
+    }
+    for (int i = 0; i < PlayQueueSelectedListItems.getNumberOfDrawables(); i++)
+    {
+        PlayQueueSelectedListItems[i].initialize();
+    }
 }
 
 void MemoryScreenViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
@@ -101,5 +119,21 @@ void MemoryScreenViewBase::buttonCallbackHandler(const touchgfx::AbstractButton&
         //When radioMenu clicked change screen to RadioScreen
         //Go to RadioScreen with no screen transition
         application().gotoRadioScreenScreenNoTransition();
+    }
+}
+
+void MemoryScreenViewBase::updateItemCallbackHandler(touchgfx::DrawableListItemsInterface* items, int16_t containerIndex, int16_t itemIndex)
+{
+    if (items == &PlayQueueListItems)
+    {
+        touchgfx::Drawable* d = items->getDrawable(containerIndex);
+        listItem_notSelected* cc = (listItem_notSelected*)d;
+        PlayQueueUpdateItem(*cc, itemIndex);
+    }
+    else if (items == &PlayQueueSelectedListItems)
+    {
+        touchgfx::Drawable* d = items->getDrawable(containerIndex);
+        listItem_selected* cc = (listItem_selected*)d;
+        PlayQueueUpdateCenterItem(*cc, itemIndex);
     }
 }

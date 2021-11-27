@@ -166,7 +166,8 @@
               "Red": 129,
               "Green": 133,
               "Blue": 255
-            }
+            },
+            "Wildcard1": {}
           },
           {
             "Type": "SlideMenu",
@@ -210,7 +211,7 @@
             "Type": "SlideMenu",
             "Name": "slideMenuRight",
             "X": 405,
-            "Width": 75,
+            "Width": 202,
             "Height": 272,
             "FileNameBackground": "right_slide_menu_background.png",
             "BackgroundX": 18,
@@ -314,8 +315,8 @@
           {
             "Type": "TextArea",
             "Name": "filenameTextBox",
-            "X": 37,
-            "Y": 124,
+            "X": 29,
+            "Y": 126,
             "Width": 404,
             "Height": 25,
             "TextId": "__SingleUse_085C",
@@ -324,7 +325,8 @@
               "Red": 129,
               "Green": 133,
               "Blue": 255
-            }
+            },
+            "Wildcard1": {}
           },
           {
             "Type": "SlideMenu",
@@ -367,8 +369,8 @@
           {
             "Type": "SlideMenu",
             "Name": "slideMenuRight",
-            "X": 405,
-            "Width": 75,
+            "X": 280,
+            "Width": 202,
             "Height": 272,
             "FileNameBackground": "right_slide_menu_background.png",
             "BackgroundX": 18,
@@ -376,7 +378,7 @@
             "FileNameButtonPressed": "right_slide_menu_button.png",
             "FileNameButtonReleased": "right_slide_menu_button.png",
             "ButtonY": 110,
-            "State": "Collapsed",
+            "State": "Expanded",
             "ExpandDirection": "West",
             "Easing": "Cubic",
             "EasingOption": "InOut",
@@ -385,23 +387,25 @@
             "ExpandedStateTimeout": 3000,
             "Components": [
               {
-                "Type": "Button",
-                "Name": "SDCardMenu_1",
-                "X": 25,
-                "Y": 50,
-                "Width": 50,
-                "Height": 50,
-                "Pressed": "sdcard_button_pressed.png",
-                "Released": "sdcard_button_pressed.png"
-              },
-              {
-                "Type": "Button",
-                "Name": "radioMenu_1",
-                "X": 25,
-                "Width": 50,
-                "Height": 50,
-                "Pressed": "radio_button_pressed.png",
-                "Released": "radio_button_01.png"
+                "Type": "ScrollWheel",
+                "Name": "PlayQueue",
+                "X": 27,
+                "Y": 2,
+                "Width": 170,
+                "Height": 272,
+                "SelectedItemOffset": 14,
+                "UseSelectedStyle": true,
+                "SelectedItemTemplateName": "listItem_selected",
+                "MarginBefore": 2,
+                "MarginAfter": 2,
+                "IsCircular": true,
+                "ItemTemplateName": "listItem_notSelected",
+                "NumberofItems": 20,
+                "InitialElement": 6,
+                "Easing": "Back",
+                "EasingOption": "Out",
+                "SwipeAcceleration": 1.0,
+                "DragAcceleration": 1.0
               }
             ]
           }
@@ -572,6 +576,142 @@
           }
         ],
         "Interactions": []
+      },
+      {
+        "Name": "listItem_notSelected",
+        "Width": 170,
+        "Height": 30,
+        "Includes": "",
+        "Components": [
+          {
+            "Type": "FlexButton",
+            "Name": "flexButton1",
+            "Width": 170,
+            "Height": 30,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 170,
+                "Height": 30,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 1,
+                "ColorReleased": {
+                  "Red": 46,
+                  "Green": 51,
+                  "Blue": 58
+                },
+                "ColorPressed": {
+                  "Red": 34,
+                  "Green": 37,
+                  "Blue": 43
+                },
+                "ColorBorderReleased": {
+                  "Red": 186,
+                  "Green": 193,
+                  "Blue": 204
+                },
+                "ColorBorderPressed": {
+                  "Red": 186,
+                  "Green": 193,
+                  "Blue": 204
+                }
+              }
+            ],
+            "Clickable": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "FileName",
+            "X": 5,
+            "Y": 4,
+            "Width": 160,
+            "Height": 22,
+            "TextId": "__SingleUse_H840",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 242,
+              "Green": 243,
+              "Blue": 247
+            },
+            "Wildcard1": {}
+          }
+        ],
+        "Interactions": [],
+        "CustomTriggers": [
+          {
+            "Name": "trigger1"
+          }
+        ]
+      },
+      {
+        "Name": "listItem_selected",
+        "Width": 170,
+        "Height": 30,
+        "Includes": "",
+        "Components": [
+          {
+            "Type": "FlexButton",
+            "Name": "flexButton1",
+            "Width": 170,
+            "Height": 30,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 170,
+                "Height": 30,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 2,
+                "ColorReleased": {
+                  "Red": 34,
+                  "Green": 37,
+                  "Blue": 43
+                },
+                "ColorPressed": {
+                  "Red": 34,
+                  "Green": 37,
+                  "Blue": 43
+                },
+                "ColorBorderReleased": {
+                  "Red": 186,
+                  "Green": 193,
+                  "Blue": 204
+                },
+                "ColorBorderPressed": {
+                  "Red": 186,
+                  "Green": 193,
+                  "Blue": 204
+                }
+              }
+            ]
+          },
+          {
+            "Type": "TextArea",
+            "Name": "FileName",
+            "X": 5,
+            "Y": 4,
+            "Width": 160,
+            "Height": 22,
+            "TextId": "__SingleUse_2RLI",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 242,
+              "Green": 243,
+              "Blue": 247
+            }
+          }
+        ],
+        "Interactions": [],
+        "CustomTriggers": [
+          {
+            "Name": "trigger1"
+          }
+        ]
       }
     ],
     "Name": "MyApplication",

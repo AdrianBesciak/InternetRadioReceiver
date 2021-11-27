@@ -11,7 +11,7 @@
 #include <touchgfx/widgets/Image.hpp>
 #include <gui/containers/controls.hpp>
 #include <gui/containers/radioControlPanel.hpp>
-#include <touchgfx/widgets/TextArea.hpp>
+#include <touchgfx/widgets/TextAreaWithWildcard.hpp>
 #include <touchgfx/containers/SlideMenu.hpp>
 #include <touchgfx/widgets/Button.hpp>
 
@@ -34,7 +34,7 @@ protected:
     touchgfx::Image RadioIcon;
     controls controls1;
     radioControlPanel radioControlPanel1;
-    touchgfx::TextArea radioStationNameBox;
+    touchgfx::TextAreaWithOneWildcard radioStationNameBox;
     touchgfx::SlideMenu slideMenuLeft;
     touchgfx::Button SDCardMenu;
     touchgfx::Button radioMenu;

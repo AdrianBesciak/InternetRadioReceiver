@@ -2,10 +2,16 @@
 <TextDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="texts.xsd" Version="4.18.0">
   <Texts>
     <Text Id="__SingleUse_085C" TypographyId="Default" Alignment="Left" Direction="LTR">
-      <Translation Language="GB">FilenameFilenameFilenameFilename</Translation>
+      <Translation Language="GB">&lt;value&gt;</Translation>
     </Text>
-    <Text Id="__SingleUse_QX2T" TypographyId="Default" Alignment="Left" Direction="LTR">
-      <Translation Language="GB">RadioStation</Translation>
+    <Text Id="__SingleUse_QX2T" TypographyId="Default" Alignment="Center" Direction="LTR">
+      <Translation Language="GB">&lt;value&gt;</Translation>
+    </Text>
+    <Text Id="__SingleUse_2RLI" TypographyId="Default" Alignment="Left" Direction="LTR">
+      <Translation Language="GB">FileName</Translation>
+    </Text>
+    <Text Id="__SingleUse_H840" TypographyId="Default" Alignment="Left" Direction="LTR">
+      <Translation Language="GB">&lt;value&gt;</Translation>
     </Text>
   </Texts>
   <Typographies>

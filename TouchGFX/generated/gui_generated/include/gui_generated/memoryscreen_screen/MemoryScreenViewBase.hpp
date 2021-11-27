@@ -12,9 +12,12 @@
 #include <gui/containers/controls.hpp>
 #include <gui/containers/musicControlPanel.hpp>
 #include <touchgfx/containers/progress_indicators/ImageProgress.hpp>
-#include <touchgfx/widgets/TextArea.hpp>
+#include <touchgfx/widgets/TextAreaWithWildcard.hpp>
 #include <touchgfx/containers/SlideMenu.hpp>
 #include <touchgfx/widgets/Button.hpp>
+#include <touchgfx/containers/scrollers/ScrollWheelWithSelectionStyle.hpp>
+#include <gui/containers/listItem_notSelected.hpp>
+#include <gui/containers/listItem_selected.hpp>
 
 class MemoryScreenViewBase : public touchgfx::View<MemoryScreenPresenter>
 {
@@ -22,6 +25,16 @@ public:
     MemoryScreenViewBase();
     virtual ~MemoryScreenViewBase() {}
     virtual void setupScreen();
+
+    virtual void PlayQueueUpdateItem(listItem_notSelected& item, int16_t itemIndex)
+    {
+        // Override and implement this function in MemoryScreen
+    }
+
+    virtual void PlayQueueUpdateCenterItem(listItem_selected& item, int16_t itemIndex)
+    {
+        // Override and implement this function in MemoryScreen
+    }
 
 protected:
     FrontendApplication& application() {
@@ -36,13 +49,14 @@ protected:
     controls controls1;
     musicControlPanel musicControlPanel1;
     touchgfx::ImageProgress songProgressBar;
-    touchgfx::TextArea filenameTextBox;
+    touchgfx::TextAreaWithOneWildcard filenameTextBox;
     touchgfx::SlideMenu slideMenuLeft;
     touchgfx::Button SDCardMenu;
     touchgfx::Button radioMenu;
     touchgfx::SlideMenu slideMenuRight;
-    touchgfx::Button SDCardMenu_1;
-    touchgfx::Button radioMenu_1;
+    touchgfx::ScrollWheelWithSelectionStyle PlayQueue;
+    touchgfx::DrawableListItems<listItem_notSelected, 11> PlayQueueListItems;
+    touchgfx::DrawableListItems<listItem_selected, 2> PlayQueueSelectedListItems;
 
 private:
 
@@ -50,11 +64,13 @@ private:
      * Callback Declarations
      */
     touchgfx::Callback<MemoryScreenViewBase, const touchgfx::AbstractButton&> buttonCallback;
+    touchgfx::Callback<MemoryScreenViewBase, touchgfx::DrawableListItemsInterface*, int16_t, int16_t> updateItemCallback;
 
     /*
      * Callback Handler Declarations
      */
     void buttonCallbackHandler(const touchgfx::AbstractButton& src);
+    void updateItemCallbackHandler(touchgfx::DrawableListItemsInterface* items, int16_t containerIndex, int16_t itemIndex);
 
 };
 
