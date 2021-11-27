@@ -27,9 +27,6 @@ public:
 
     virtual ~MainPresenter() {};
 
-    void changeSdCardIndicator(bool sdState);
-    void changeEthernetIndicator(bool ethernetState);
-
 private:
     MainPresenter();
 

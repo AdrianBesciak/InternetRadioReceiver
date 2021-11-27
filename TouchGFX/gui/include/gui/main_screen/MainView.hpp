@@ -12,10 +12,8 @@ public:
     virtual void setupScreen();
     virtual void tearDownScreen();
 
-    void changeSdCardIndicator(bool sdState);
-    void changeEthernetIndicator(bool ethernetState);
 protected:
-    //void handleTickEvent();
+    void handleTickEvent();
 };
 
 #endif // MAINVIEW_HPP

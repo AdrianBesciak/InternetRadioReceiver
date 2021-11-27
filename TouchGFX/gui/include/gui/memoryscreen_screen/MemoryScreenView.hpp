@@ -11,7 +11,9 @@ public:
     virtual ~MemoryScreenView() {}
     virtual void setupScreen();
     virtual void tearDownScreen();
+
 protected:
+    void handleTickEvent();
 };
 
 #endif // MEMORYSCREENVIEW_HPP
