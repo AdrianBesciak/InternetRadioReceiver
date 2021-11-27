@@ -1,5 +1,5 @@
 #include "WriteStream.hpp"
-#include <stdexcept>
+#include <io/except/write/StreamWriteException.hpp>
 
 namespace io {
     WriteStream::~WriteStream() = default;
@@ -7,7 +7,7 @@ namespace io {
     void WriteStream::writeExact(const void *buffer, std::size_t count) {
         std::size_t writeCount = write(buffer, count);
         if (writeCount != count)
-            throw std::runtime_error("Wrote " + std::to_string(writeCount) + " bytes instead of " + std::to_string(count));
+            throw StreamWriteException("Wrote " + std::to_string(writeCount) + " bytes instead of " + std::to_string(count));
     }
 
     std::size_t WriteStream::write(const std::vector<std::byte> &buffer) {

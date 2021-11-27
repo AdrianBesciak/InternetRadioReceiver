@@ -1,6 +1,6 @@
 #include "MPEGAudioReader.hpp"
-#include <stdexcept>
-#include <iostream>
+#include <audio/except/reader/InvalidAudioFormatException.hpp>
+#include <except/UnimplementedException.hpp>
 
 namespace audio {
     unsigned int mp3ReadCallback(void * pMP3CompressedData, unsigned int nMP3DataSizeInChars, void * token) {
@@ -17,7 +17,7 @@ namespace audio {
         TSpiritMP3Info frameInfo = {};
         SpiritMP3Decode(decoder.get(), dummyData.data(), 0, &frameInfo);
         if (frameInfo.nSampleRateHz == 0) {
-            throw std::runtime_error("Stream is not an mpeg audio");
+            throw InvalidAudioFormatException("Stream is not an mpeg audio");
         }
         audioMetadata = MPEGAudioMetadata(&frameInfo);
     }
@@ -28,7 +28,7 @@ namespace audio {
 
     void MPEGAudioReader::seek(std::size_t position) {
         std::ignore = position;
-        throw std::runtime_error("unimplemented yet");
+        throw except::UnimplementedException();
     }
 
     float MPEGAudioReader::getCurrentTime() const {

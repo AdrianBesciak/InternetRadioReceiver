@@ -1,9 +1,10 @@
 #include "WavAudioReader.hpp"
 #include <array>
 #include <cmath>
-#include <cstring>
-#include <stdexcept>
 #include <string>
+#include <audio/except/reader/InvalidAudioFormatException.hpp>
+#include <audio/except/reader/AudioReaderDecodeException.hpp>
+#include <except/UnimplementedException.hpp>
 
 namespace audio {
     namespace headers {
@@ -58,9 +59,9 @@ namespace audio {
         readStream->readExact(&waveHeader, sizeof(waveHeader));
 
         if (riffChunk.header != headers::RIFF)
-            throw std::runtime_error("File '" + getName() + "' is not a riff file");
+            throw InvalidAudioFormatException("File '" + getName() + "' is not a riff file");
         if (waveHeader != headers::WAVE)
-            throw std::runtime_error("File '" + getName() + "' is not a wave file");
+            throw InvalidAudioFormatException("File '" + getName() + "' is not a wave file");
     }
 
     void WavAudioReader::readFormatChunk() {
@@ -68,33 +69,33 @@ namespace audio {
         readStream->readExact(&formatSubChunk, sizeof(formatSubChunk));
 
         if (formatSubChunk.header != headers::FORMAT)
-            throw std::runtime_error("Filed to read format from '" + getName() + "'");
+            throw AudioReaderDecodeException("Filed to read format from '" + getName() + "'");
         const std::size_t MIN_CHUNK_SIZE = 16;
         if (formatSubChunk.size < MIN_CHUNK_SIZE || formatSubChunk.size > sizeof(WavAudioMetadata))
-            throw std::runtime_error("Filed to read invalid sized format from '" + getName() + "'");
+            throw AudioReaderDecodeException("Filed to read invalid sized format from '" + getName() + "'");
 
 
         readStream->readExact(&metadata.internal, formatSubChunk.size);
         if (metadata.getFormatTag() != WavFormatTag::PCM)
-            throw std::runtime_error("Non PCM file '" + getName() + "' not supported");
+            throw AudioReaderDecodeException("Non PCM file '" + getName() + "' not supported");
         if (metadata.getChannelsNumber() > 2)
-            throw std::runtime_error("Channel number greater than 2 in file '" + getName() + "' not supported");
+            throw AudioReaderDecodeException("Channel number greater than 2 in file '" + getName() + "' not supported");
         const std::uint16_t SUPPORTED_SAMPLING = 48000;
         if (metadata.getSamplingRate() > SUPPORTED_SAMPLING)
-            throw std::runtime_error("Unsupported " + std::to_string(SUPPORTED_SAMPLING) + " sampling in file '" + getName() + "'");
+            throw AudioReaderDecodeException("Unsupported " + std::to_string(SUPPORTED_SAMPLING) + " sampling in file '" + getName() + "'");
     }
 
     void WavAudioReader::readDataChunk() {
         Chunk dataSubChunk = {};
         readStream->readExact(&dataSubChunk, sizeof(Chunk));
         if (dataSubChunk.header != headers::DATA)
-            throw std::runtime_error("Failed to read data chunk from '" + getName() + "'");
+            throw AudioReaderDecodeException("Failed to read data chunk from '" + getName() + "'");
         remainingDataSize = totalDataSize = dataSubChunk.size;
     }
 
     void WavAudioReader::seek(std::size_t pos) {
         std::ignore = pos;
-        throw std::runtime_error("unimplemented yet");
+        throw except::UnimplementedException();
         /*if (pos > getTotalDataSize())
             throw std::invalid_argument("Invalid position: " + std::to_string(pos));
         std::size_t dataStartPos = readStream->pos() - getReadDataSize();

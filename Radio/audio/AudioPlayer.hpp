@@ -66,7 +66,7 @@ namespace audio {
         void handleBufferHalfWay();
         void handleBufferDone();
 
-        void validateNotEmpty();
+        void validateNotEmpty() const;
 
         State state;
         BufferState bufferState;

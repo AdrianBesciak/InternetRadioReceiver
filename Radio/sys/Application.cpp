@@ -2,6 +2,7 @@
 #include <stdexcept>
 #include <cmsis_os.h>
 #include <sys/task/Task.hpp>
+#include <sys/except/TaskCreationException.hpp>
 
 namespace sys {
     void taskEntrypoint(void *arg) {
@@ -34,7 +35,7 @@ namespace sys {
         attributes.priority = static_cast<osPriority_t>(priority);
         osThreadId_t id = osThreadNew(&taskEntrypoint, (void*)&task->getName(), &attributes);
         if (id == nullptr) {
-            throw std::runtime_error("Failed to create task '" + task->getName() + "'");
+            throw TaskCreationException("Failed to create task '" + task->getName() + "'");
         }
     }
 

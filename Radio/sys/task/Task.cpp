@@ -24,8 +24,7 @@ namespace sys {
             executeImpl();
         }
         catch (std::exception &exc) {
-            printf("%s\r\n", exc.what());
-            std::cout << "CRITICAL ERROR: " << exc.what() << '\n';
+            printf("CRITICAL ERROR - %s\r\n", exc.what());
         }
         sys::Application::getInstance().removeTask(this);
         osThreadExit();

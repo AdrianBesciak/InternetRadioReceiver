@@ -1,22 +1,25 @@
 #include "DirectoryListing.hpp"
-#include <stdexcept>
 #include <ff.h>
+#include <io/except/open/FileOpenException.hpp>
+#include <io/except/read/FileReadException.hpp>
+#include <io/PeripheralChecker.hpp>
+
 
 namespace filesystem {
     DirectoryListing::DirectoryListing(const std::string &directory)
         : fileNames()
         , filePaths() {
+        io::PeripheralChecker::checkSDCard();
         static DIR dir;
         static FILINFO fileInfo;
 
         if (f_opendir(&dir, directory.c_str()) != FR_OK)
-            throw std::runtime_error("Failed to open directory '" + directory + "'");
+            throw io::FileOpenException("Failed to open directory '" + directory + "'");
 
         for(;;) {
-            FRESULT result;
-            if ((result = f_readdir(&dir, &fileInfo)) != FR_OK) {
+            if (f_readdir(&dir, &fileInfo) != FR_OK) {
                 f_closedir(&dir);
-                throw std::runtime_error("Failed to read directory contents of '" + directory + "'");
+                throw io::FileReadException("Failed to read directory contents of '" + directory + "'");
             }
 
             if (fileInfo.fname[0] == '\0')

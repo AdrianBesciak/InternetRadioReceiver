@@ -16,6 +16,6 @@ namespace audio {
         if (mimeType == "audio/wav") {
             return std::make_unique<WavAudioReader>(readStream);
         }
-        throw std::runtime_error("Unknown mime type - " + mimeType);
+        throw std::invalid_argument("Unknown mime type - " + mimeType);
     }
 }

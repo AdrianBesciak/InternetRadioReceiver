@@ -1,15 +1,18 @@
 #include "TcpStream.hpp"
-#include <stdexcept>
 #include <vector>
 #include <lwip/api.h>
 #include <lwip/sockets.h>
+#include <io/except/open/HttpOpenException.hpp>
+#include <io/except/read/HttpReadException.hpp>
+#include <io/except/write//HttpWriteException.hpp>
+#include <io/PeripheralChecker.hpp>
 
 namespace io {
     namespace internal {
         ip4_addr_t getAddressFromHost(const std::string &host) {
             ip4_addr_t hostAddress;
             if (netconn_gethostbyname(host.c_str(), &hostAddress) != ERR_OK) {
-                throw std::runtime_error("Failed to resolve host '" + host + "'");
+                throw HttpOpenException("Failed to resolve host '" + host + "'");
             }
             return hostAddress;
         }
@@ -26,7 +29,7 @@ namespace io {
 
             int descriptor = lwip_socket(socket.sin_family, SOCK_STREAM, 0);
             if (lwip_connect(descriptor, (struct sockaddr *)&socket, sizeof(socket)) != 0) {
-                throw std::runtime_error("Error contacting remote host '" + host + "'");
+                throw HttpOpenException("Error contacting remote host '" + host + "'");
             }
             return descriptor;
         }
@@ -41,6 +44,7 @@ namespace io {
         : host(host)
         , descriptor(-1)
         , position(0) {
+        PeripheralChecker::checkEthernet();
         descriptor = internal::openSocket(host, port);
     }
 
@@ -51,7 +55,7 @@ namespace io {
     void TCPStream::writeData(const std::string &data) {
         ssize_t count = lwip_write(descriptor, data.c_str(), data.size());
         if (count < 0 || std::size_t(count) != data.size()) {
-            throw std::runtime_error("Failed to write data to '" + host + "'");
+            throw HttpWriteException("Failed to write data to '" + host + "'");
         }
     }
 
@@ -60,7 +64,7 @@ namespace io {
         while (totalRead != count) {
             ssize_t readCount = lwip_recv(descriptor, reinterpret_cast<char*>(buffer) + totalRead, count - totalRead, MSG_MORE);
             if (readCount < 0) {
-                throw std::runtime_error("Failed to read data from '" + host + "' - " + std::to_string(errno));
+                throw HttpWriteException("Failed to read data from '" + host + "' - " + std::to_string(errno));
             }
             totalRead += readCount;
         }
@@ -74,7 +78,7 @@ namespace io {
 
     void TCPStream::seek(std::size_t position) {
         if (position < this->position) {
-            throw std::runtime_error("Can't seek backwards with sockets");
+            throw std::logic_error("Can't seek backwards with sockets");
         }
         if (position == this->position) {
             return;
@@ -82,7 +86,7 @@ namespace io {
         std::vector<std::byte> data(position - this->position);
         std::size_t count = readData(data.data(), data.size());
         if (count != data.size()) {
-            throw std::runtime_error("Failed to seek to position " + std::to_string(position));
+            throw HttpReadException("Failed to seek to position " + std::to_string(position));
         }
     }
 }

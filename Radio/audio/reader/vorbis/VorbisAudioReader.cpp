@@ -3,7 +3,9 @@
 #include <iostream>
 #include <functional>
 #include <stb_vorbis.h>
-#include <sdram/sdram.hpp>
+#include <audio/except/reader/AudioReaderDecodeException.hpp>
+#include <audio/except/reader/InvalidAudioFormatException.hpp>
+#include <except/UnimplementedException.hpp>
 
 namespace audio {
     class VorbisAudioReader::VorbisInputBuffer {
@@ -97,15 +99,15 @@ namespace audio {
             inputBuffer.shiftBy(static_cast<std::size_t>(dataUsed));
 
             if (error == VORBIS_need_more_data || error == VORBIS_outofmem) {
-                throw std::runtime_error("Failed to read stream - not enough resources to process");
+                throw AudioReaderDecodeException("Failed to read stream - not enough resources to process");
             }
             else if (error != 0) {
-                throw std::runtime_error("Failed to read stream - not a vorbis stream");
+                throw InvalidAudioFormatException("Failed to read stream - not a vorbis stream");
             }
             stb_vorbis_info  info = getStreamInfo();
             // TODO make this work for single channel
             if (info.channels != 2) {
-                throw std::runtime_error("Only two channels are supported");
+                throw AudioReaderDecodeException("Only two channels are supported");
             }
         }
 
@@ -125,7 +127,7 @@ namespace audio {
                     error = stb_vorbis_get_error(decoder);
                 }
                 if (error != 0) {
-                    throw std::runtime_error("Failed to decode samples");
+                    throw AudioReaderDecodeException("Failed to decode samples");
                 }
             }
             inputBuffer.shiftBy(static_cast<std::size_t>(dataUsed));
@@ -172,17 +174,15 @@ namespace audio {
 
     void VorbisAudioReader::seek(std::size_t position) {
         std::ignore = position;
-        throw std::runtime_error("unimplemented yet");
+        throw except::UnimplementedException();
     }
 
     float VorbisAudioReader::getCurrentTime() const {
-        throw std::runtime_error("unimplemented yet");
-        return 0;
+        throw except::UnimplementedException();
     }
 
     float VorbisAudioReader::getEndTime() const {
-        throw std::runtime_error("unimplemented yet");
-        return 0;
+        throw except::UnimplementedException();
     }
 
     const VorbisAudioMetadata &VorbisAudioReader::getMetadata() const {
