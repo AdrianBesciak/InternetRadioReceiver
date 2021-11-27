@@ -14,10 +14,3 @@ void RadioScreenView::tearDownScreen()
 {
     RadioScreenViewBase::tearDownScreen();
 }
-
-void RadioScreenView::handleTickEvent()
-{
-    controls1.ethernetStateChanged(applicationModuleInstance->getEthernetState());
-    controls1.sdCardStateChanged(applicationModuleInstance->getSdCardState());
-    this->draw();
-}

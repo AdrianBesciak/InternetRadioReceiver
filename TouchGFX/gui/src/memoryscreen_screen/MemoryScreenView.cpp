@@ -14,10 +14,3 @@ void MemoryScreenView::tearDownScreen()
 {
     MemoryScreenViewBase::tearDownScreen();
 }
-
-void MemoryScreenView::handleTickEvent()
-{
-    controls1.ethernetStateChanged(applicationModuleInstance->getEthernetState());
-    controls1.sdCardStateChanged(applicationModuleInstance->getSdCardState());
-    this->draw();
-}

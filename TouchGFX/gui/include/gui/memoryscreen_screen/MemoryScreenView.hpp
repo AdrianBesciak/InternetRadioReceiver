@@ -13,7 +13,6 @@ public:
     virtual void tearDownScreen();
 
 protected:
-    void handleTickEvent();
 };
 
 #endif // MEMORYSCREENVIEW_HPP

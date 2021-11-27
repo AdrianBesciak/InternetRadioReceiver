@@ -4,26 +4,41 @@
 
 controls::controls()
 {
+    Application::getInstance()->registerTimerWidget(this);
+}
+
+controls::~controls() {
+    Application::getInstance()->unregisterTimerWidget(this);
 }
 
 void controls::initialize()
 {
     controlsBase::initialize();
 
-    sdMountedInd.setVisible(false);
-    sdUnmountedInd.setVisible(false);
-    ethernetConnectedInd.setVisible(false);
-    ethernetDisconnectedInd.setVisible(false);
+    sdMountedInd.setVisible(previousSdCardState);
+    sdUnmountedInd.setVisible(not previousSdCardState);
+    ethernetConnectedInd.setVisible(previousEthernetState);
+    ethernetDisconnectedInd.setVisible(not previousEthernetState);
 }
 
-void controls::ethernetStateChanged(bool connected)
+void controls::handleTickEvent()
 {
-    ethernetConnectedInd.setVisible(connected);
-    ethernetDisconnectedInd.setVisible(not connected);
-}
+    bool invalidate{false};
 
-void controls::sdCardStateChanged(bool mounted)
-{
-    sdMountedInd.setVisible(mounted);
-    sdUnmountedInd.setVisible(not mounted);
+    if (previousSdCardState != applicationModuleInstance->getSdCardState()) {
+        sdMountedInd.setVisible(applicationModuleInstance->getSdCardState());
+        sdUnmountedInd.setVisible(not applicationModuleInstance->getSdCardState());
+        previousSdCardState = applicationModuleInstance->getSdCardState();
+        invalidate = true;
+    }
+    if (previousEthernetState != applicationModuleInstance->getEthernetState()) {
+        ethernetConnectedInd.setVisible(applicationModuleInstance->getEthernetState());
+        ethernetDisconnectedInd.setVisible(not applicationModuleInstance->getEthernetState());
+        previousEthernetState = applicationModuleInstance->getEthernetState();
+        invalidate = true;
+    }
+
+    if (invalidate) {
+        this->invalidate();
+    }
 }

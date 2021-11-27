@@ -13,7 +13,6 @@ public:
     virtual void tearDownScreen();
 
 protected:
-    void handleTickEvent();
 };
 
 #endif // RADIOSCREENVIEW_HPP
