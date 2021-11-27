@@ -13,7 +13,8 @@ public:
 private:
     static ApplicationModule *instance;
 
-    void bindStateObservers();
+    void bindWatchdogs();
+    void bindPlayerState();
     void startTasks();
 
     io::EthernetWatchdog ethernetWatchdog;

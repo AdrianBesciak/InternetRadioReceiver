@@ -3,14 +3,17 @@
 
 #include <gui_generated/containers/radioControlPanelBase.hpp>
 
-class radioControlPanel : public radioControlPanelBase
-{
+class radioControlPanel : public radioControlPanelBase {
 public:
     radioControlPanel();
-    virtual ~radioControlPanel() {}
+    ~radioControlPanel() override;
+    void setPlayVisible(bool visible);
+    void setStopVisible(bool visible);
+    void handleTickEvent() override;
+private:
+    bool playDirty;
+    bool stopDirty;
 
-    virtual void initialize();
-protected:
 };
 
 #endif // RADIOCONTROLPANEL_HPP

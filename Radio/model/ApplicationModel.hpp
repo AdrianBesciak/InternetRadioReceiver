@@ -1,5 +1,6 @@
 #pragma once
 #include <model/PeripheralStateModel.hpp>
+#include <model/PlayerModel.h>
 
 namespace model {
     class ApplicationModel {
@@ -9,8 +10,12 @@ namespace model {
         PeripheralStateModel &getPeripheralStateModel();
         [[nodiscard]] const PeripheralStateModel &getPeripheralStateModel() const;
 
+        PlayerModel &getPlayerModel();
+        [[nodiscard]] const PlayerModel &getPlayerModel() const;
+
     private:
         PeripheralStateModel peripheralStateModel;
+        PlayerModel playerModel;
     };
 }
 

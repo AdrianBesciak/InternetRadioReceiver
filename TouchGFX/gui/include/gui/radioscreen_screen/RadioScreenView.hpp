@@ -4,15 +4,16 @@
 #include <gui_generated/radioscreen_screen/RadioScreenViewBase.hpp>
 #include <gui/radioscreen_screen/RadioScreenPresenter.hpp>
 
-class RadioScreenView : public RadioScreenViewBase
-{
+class RadioScreenView : public RadioScreenViewBase {
 public:
     RadioScreenView();
-    virtual ~RadioScreenView() {}
-    virtual void setupScreen();
-    virtual void tearDownScreen();
     controls& getControls();
-protected:
+
+    void setTitle(const std::string &title);
+    void setPlayVisible(bool visible);
+    void setStopVisible(bool visible);
+private:
+    std::string title;
 };
 
 #endif // RADIOSCREENVIEW_HPP
