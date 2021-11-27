@@ -11,4 +11,8 @@ namespace audio {
     bool AudioReader::hasNext() const noexcept {
         return readStream->pos() != readStream->size();
     }
+
+    bool AudioReader::isRandomAccess() const {
+        return readStream->isRandomAccess();
+    }
 }

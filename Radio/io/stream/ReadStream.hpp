@@ -9,6 +9,8 @@ namespace io {
         [[nodiscard]] virtual const std::string& getName() const = 0;
         [[nodiscard]] virtual std::string getMimeType() const = 0;
 
+        [[nodiscard]] virtual bool isRandomAccess() const = 0;
+
         [[nodiscard]] virtual std::size_t read(void* buffer, std::size_t count) = 0;
         void readExact(void* buffer, std::size_t count);
 

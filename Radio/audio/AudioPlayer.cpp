@@ -1,9 +1,7 @@
 #include "AudioPlayer.hpp"
 #include <cmath>
-#include <iostream>
 #include <stm32746g_discovery_audio.h>
 #include <audio/except/player/AudioPlayerException.hpp>
-#include <except/UnimplementedException.hpp>
 #include <sdram/sdram.hpp>
 #include <sys/except/SingleInstanceException.hpp>
 
@@ -130,15 +128,14 @@ namespace audio {
     }
 
     void AudioPlayer::seek(float time) {
-        std::ignore = time;
-        //throw except::UnimplementedException();
-        /*if (time > getEndTime())
+        if (time > getEndTime())
             throw AudioPlayerException("Invalid time value - greater than maximal time : (" + std::to_string(time) + "/" + std::to_string(getEndTime()) + ")");
-        float progressRatio = time / getEndTime();
-        auto position = static_cast<std::size_t>(progressRatio * reader->getTotalDataSize());
-        reader->seek(position);
+        if (!reader->isRandomAccess()) {
+            return;
+        }
+        reader->seek(time);
         if (onProgressChanged != nullptr)
-            onProgressChanged(getCurrentTime(), getEndTime());*/
+            onProgressChanged(getCurrentTime(), getEndTime());
     }
 
     unsigned AudioPlayer::getVolume() const {

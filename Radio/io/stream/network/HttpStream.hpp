@@ -29,6 +29,8 @@ namespace io {
         [[nodiscard]] const std::string& getName() const override;
         [[nodiscard]] std::string getMimeType() const override;
 
+        [[nodiscard]] bool isRandomAccess() const override;
+
         [[nodiscard]] const std::string& getUrl() const;
         [[nodiscard]] const std::unordered_map<std::string, std::string> &getHeaders() const;
 

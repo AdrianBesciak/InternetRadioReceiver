@@ -95,12 +95,22 @@ namespace audio {
 
     void WavAudioReader::seek(std::size_t pos) {
         std::ignore = pos;
-        throw except::UnimplementedException();
-        /*if (pos > getTotalDataSize())
+        if (pos > getTotalDataSize())
             throw std::invalid_argument("Invalid position: " + std::to_string(pos));
         std::size_t dataStartPos = readStream->pos() - getReadDataSize();
         readStream->seek(dataStartPos + pos);
-        remainingDataSize = totalDataSize - pos;*/
+        remainingDataSize = totalDataSize - pos;
+    }
+
+    void WavAudioReader::seek(float time) {
+        auto pos = static_cast<std::size_t>(time *
+                (static_cast<float>(getMetadata().getBitsPerSample()) / 8.0f) *
+                static_cast<float>(metadata.getSamplingRate()) *
+                static_cast<float>(metadata.getChannelsNumber())
+        );
+        pos = pos / 2;
+        pos = pos * 2;
+        seek(pos);
     }
 
 

@@ -1,6 +1,5 @@
 #include "MPEGAudioReader.hpp"
 #include <audio/except/reader/InvalidAudioFormatException.hpp>
-#include <except/UnimplementedException.hpp>
 
 namespace audio {
     unsigned int mp3ReadCallback(void * pMP3CompressedData, unsigned int nMP3DataSizeInChars, void * token) {
@@ -27,12 +26,19 @@ namespace audio {
     }
 
     void MPEGAudioReader::seek(std::size_t position) {
-        std::ignore = position;
-        throw except::UnimplementedException();
+        readStream->seek(position);
+    }
+
+    void MPEGAudioReader::seek(float time) {
+        std::uint32_t bytesPerSecond = audioMetadata.getBitrateKbps() * 125;
+        auto pos = static_cast<std::size_t>(time * static_cast<float>(bytesPerSecond));
+        pos = pos / 2;
+        pos = pos * 2;
+        seek(pos);
     }
 
     float MPEGAudioReader::getCurrentTime() const {
-        std::uint32_t bytesPerSecond = audioMetadata.getBitrateKbps() * 250;
+        std::uint32_t bytesPerSecond = audioMetadata.getBitrateKbps() * 125;
         return static_cast<float>(readStream->pos()) / static_cast<float>(bytesPerSecond);
     }
 
@@ -40,7 +46,7 @@ namespace audio {
         if (readStream->size() == static_cast<std::size_t>(-1)) {
             return getCurrentTime() + 0.01f;
         }
-        std::uint32_t bytesPerSecond = audioMetadata.getBitrateKbps() * 250;
+        std::uint32_t bytesPerSecond = audioMetadata.getBitrateKbps() * 125;
         return static_cast<float>(readStream->size()) / static_cast<float>(bytesPerSecond);
     }
 

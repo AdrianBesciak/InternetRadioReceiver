@@ -10,6 +10,7 @@ namespace audio {
         [[nodiscard]] bool hasNext() const noexcept override;
         std::size_t readNext(std::int16_t *data, std::size_t count) override;
         void seek(std::size_t pos) override;
+        void seek(float time) override;
 
         [[nodiscard]] float getCurrentTime() const override;
         [[nodiscard]] float getEndTime() const override;

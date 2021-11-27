@@ -69,6 +69,10 @@ namespace io {
         return it->second;
     }
 
+    bool HttpStream::isRandomAccess() const {
+        return false;
+    }
+
     const std::string& HttpStream::getUrl() const {
         return url.getUrl();
     }
@@ -103,6 +107,8 @@ namespace io {
             std::string key = line.substr(0, split);
             std::string value = line.substr(split + 2);
             headers.insert({key, value});
+            startOffset += line.size() + 2;
         }
+        startOffset += 2;
     }
 }

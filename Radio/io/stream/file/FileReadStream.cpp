@@ -40,6 +40,11 @@ namespace io {
         if (extension == ".ogg") {
             return "audio/ogg";
         }
+        return "application/octet-stream";
+    }
+
+    bool FileReadStream::isRandomAccess() const {
+        return true;
     }
 
     const std::string &FileReadStream::getFilePath() const {

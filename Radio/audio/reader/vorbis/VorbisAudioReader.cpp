@@ -177,6 +177,11 @@ namespace audio {
         throw except::UnimplementedException();
     }
 
+    void VorbisAudioReader::seek(float time) {
+        std::ignore = time;
+        throw except::UnimplementedException();
+    }
+
     float VorbisAudioReader::getCurrentTime() const {
         throw except::UnimplementedException();
     }
