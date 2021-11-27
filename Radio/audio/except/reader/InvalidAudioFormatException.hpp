@@ -1,5 +1,5 @@
 #pragma once
-#include <audio/except/AudioReaderException.hpp>
+#include <audio/except/reader/AudioReaderException.hpp>
 
 namespace audio {
     class InvalidAudioFormatException : public AudioReaderException {

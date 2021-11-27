@@ -1,9 +1,11 @@
 #include "AudioPlayer.hpp"
 #include <cmath>
-#include <stdexcept>
 #include <iostream>
 #include <stm32746g_discovery_audio.h>
+#include <audio/except/player/AudioPlayerException.hpp>
+#include <except/UnimplementedException.hpp>
 #include <sdram/sdram.hpp>
+#include <sys/except/SingleInstanceException.hpp>
 
 // DMA handlers
 extern "C" {
@@ -41,7 +43,6 @@ extern "C" {
 }
 
 namespace audio {
-
     std::uint32_t normalizedVolume(std::uint32_t volume) {
         return static_cast<std::uint32_t>(std::round(0.8F * static_cast<float>(volume))) + 10;
     }
@@ -54,7 +55,7 @@ namespace audio {
         , reader()
         , playingBuffer(reinterpret_cast<std::int16_t*>(sdram::addr::PLAYER_BUFFER)) {
         if (instance != nullptr)
-            throw std::runtime_error("AudioPlayer instance already exists");
+            throw sys::SingleInstanceException("AudioPlayer instance already exists");
         instance = this;
     }
 
@@ -130,9 +131,9 @@ namespace audio {
 
     void AudioPlayer::seek(float time) {
         std::ignore = time;
-        //throw std::runtime_error("unimplemented yet");
+        //throw except::UnimplementedException();
         /*if (time > getEndTime())
-            throw std::runtime_error("Invalid time value - greater than maximal time : (" + std::to_string(time) + "/" + std::to_string(getEndTime()) + ")");
+            throw AudioPlayerException("Invalid time value - greater than maximal time : (" + std::to_string(time) + "/" + std::to_string(getEndTime()) + ")");
         float progressRatio = time / getEndTime();
         auto position = static_cast<std::size_t>(progressRatio * reader->getTotalDataSize());
         reader->seek(position);
@@ -148,7 +149,7 @@ namespace audio {
         if (this->volume == volume)
             return;
         if (volume > 100)
-            throw std::invalid_argument("Volume cannot be greater than 100");
+            throw AudioPlayerException("Volume cannot be greater than 100");
 
         this->volume = volume;
         if (state == State::PLAYING)
@@ -206,7 +207,7 @@ namespace audio {
         if (!isPlaying())
             return;
         if (bufferState == BufferState::Error)
-            throw std::runtime_error("Error occurred while playing '" + reader->getName() + "'");
+            throw AudioPlayerException("Error occurred while playing '" + reader->getName() + "'");
         if (bufferState == BufferState::None) {
             return;
         }
@@ -240,33 +241,33 @@ namespace audio {
     void AudioPlayer::playerInitialize() {
         if (BSP_AUDIO_OUT_Init(OUTPUT_DEVICE_HEADPHONE, static_cast<std::uint8_t>(normalizedVolume(volume)),
                                reader->getMetadata().getSamplingRate() / 2) != AUDIO_OK)
-            throw std::runtime_error("Failed to playerInitialize audio player for '" + reader->getName() + "'");
+            throw AudioPlayerException("Failed to playerInitialize audio player for '" + reader->getName() + "'");
     }
 
     void AudioPlayer::playerDeinitialize() {
         if (BSP_AUDIO_OUT_Stop(CODEC_PDWN_HW) != AUDIO_OK)
-            throw std::runtime_error("Failed to stop audio player for '" + reader->getName() + "'");
+            throw AudioPlayerException("Failed to stop audio player for '" + reader->getName() + "'");
         bufferState = BufferState::Done;
     }
 
     void AudioPlayer::playerPlayBuffer() {
         if (BSP_AUDIO_OUT_Play(reinterpret_cast<std::uint16_t*>(playingBuffer), sdram::size::PLAYER_BUFFER_SIZE_BYTES) != AUDIO_OK)
-            throw std::runtime_error("Failed to play audio from '" + reader->getName() + "'");
+            throw AudioPlayerException("Failed to play audio from '" + reader->getName() + "'");
     }
 
     void AudioPlayer::playerSetVolume() {
         if (BSP_AUDIO_OUT_SetVolume(static_cast<std::uint8_t>(normalizedVolume(volume))) != AUDIO_OK)
-            throw std::runtime_error("Failed to play volume from '" + reader->getName() + "'");
+            throw AudioPlayerException("Failed to play volume from '" + reader->getName() + "'");
     }
 
     void AudioPlayer::playerPause() {
         if (BSP_AUDIO_OUT_Pause() != AUDIO_OK)
-            throw std::runtime_error("Failed to pause playing for '" + reader->getName() + "'");
+            throw AudioPlayerException("Failed to pause playing for '" + reader->getName() + "'");
     }
 
     void AudioPlayer::playerUnpause() {
         if (BSP_AUDIO_OUT_Resume() != AUDIO_OK)
-            throw std::runtime_error("Failed to unpause playing for '" + reader->getName() + "'");
+            throw AudioPlayerException("Failed to unpause playing for '" + reader->getName() + "'");
     }
 
     void AudioPlayer::handleError() {
@@ -281,9 +282,9 @@ namespace audio {
         bufferState = BufferState::Done;
     }
 
-    void AudioPlayer::validateNotEmpty() {
+    void AudioPlayer::validateNotEmpty() const {
         if (isEmpty())
-            throw std::runtime_error("No audio source provided");
+            throw AudioPlayerException("No audio source provided");
     }
 
     AudioPlayer *AudioPlayer::instance = nullptr;

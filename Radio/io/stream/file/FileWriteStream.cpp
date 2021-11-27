@@ -1,17 +1,19 @@
 #include "FileWriteStream.hpp"
-#include <stdexcept>
 #include <ff.h>
+#include <io/except/open/FileOpenException.hpp>
+#include <io/except/write/FileWriteException.hpp>
+#include <io/PeripheralChecker.hpp>
 
 namespace io {
     FileWriteStream::FileWriteStream(const std::string &filePath)
         : handle(nullptr)
         , filePath(filePath) {
-
+        PeripheralChecker::checkSDCard();
         handle = new FIL;
         FIL* fileHandle = reinterpret_cast<FIL*>(handle);
         unsigned char mode = FA_WRITE | FA_CREATE_ALWAYS;
         if (f_open(fileHandle, filePath.c_str(), mode) != FR_OK)
-            throw std::runtime_error("Failed to open file '" + filePath + "'");
+            throw FileOpenException("Failed to open file '" + filePath + "'");
     }
 
     FileWriteStream::~FileWriteStream() {
@@ -32,7 +34,7 @@ namespace io {
         UINT bytesWritten = 0;
         int res = f_write(fileHandle, buffer, static_cast<UINT>(count), &bytesWritten);
         if (res != FR_OK)
-            throw std::runtime_error("Failed to write to file '" + filePath + "'");
+            throw FileWriteException("Failed to write to file '" + filePath + "'");
         return static_cast<std::size_t>(bytesWritten);
     }
 
@@ -48,6 +50,6 @@ namespace io {
 
     void FileWriteStream::seek(std::size_t position) {
         if (f_lseek(reinterpret_cast<FIL*>(handle), static_cast<FSIZE_t>(position)) != FR_OK)
-            throw std::runtime_error("Failed to seek to " + std::to_string(position));
+            throw FileWriteException("Failed to seek to " + std::to_string(position));
     }
 }
