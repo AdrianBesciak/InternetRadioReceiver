@@ -62,7 +62,7 @@ MemoryScreenViewBase::MemoryScreenViewBase() :
         touchgfx::Bitmap(BITMAP_RIGHT_SLIDE_MENU_BUTTON_ID),
         touchgfx::Bitmap(BITMAP_RIGHT_SLIDE_MENU_BUTTON_ID),
         18, 0, 0, 110);
-    slideMenuRight.setState(touchgfx::SlideMenu::EXPANDED);
+    slideMenuRight.setState(touchgfx::SlideMenu::COLLAPSED);
     slideMenuRight.setVisiblePixelsWhenCollapsed(25);
     slideMenuRight.setHiddenPixelsWhenExpanded(0);
     slideMenuRight.setAnimationEasingEquation(touchgfx::EasingEquations::cubicEaseInOut);
@@ -83,7 +83,7 @@ MemoryScreenViewBase::MemoryScreenViewBase() :
     PlayQueue.setDrawableSize(30, 0);
     PlayQueue.setDrawables(PlayQueueListItems, updateItemCallback,
                               PlayQueueSelectedListItems, updateItemCallback);
-    PlayQueue.animateToItem(6, 0);
+    PlayQueue.animateToItem(10, 0);
     slideMenuRight.add(PlayQueue);
 
     add(__background);

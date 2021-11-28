@@ -378,7 +378,7 @@
             "FileNameButtonPressed": "right_slide_menu_button.png",
             "FileNameButtonReleased": "right_slide_menu_button.png",
             "ButtonY": 110,
-            "State": "Expanded",
+            "State": "Collapsed",
             "ExpandDirection": "West",
             "Easing": "Cubic",
             "EasingOption": "InOut",
@@ -401,7 +401,7 @@
                 "IsCircular": true,
                 "ItemTemplateName": "listItem_notSelected",
                 "NumberofItems": 20,
-                "InitialElement": 6,
+                "InitialElement": 10,
                 "Easing": "Back",
                 "EasingOption": "Out",
                 "SwipeAcceleration": 1.0,
@@ -703,7 +703,8 @@
               "Red": 242,
               "Green": 243,
               "Blue": 247
-            }
+            },
+            "Wildcard1": {}
           }
         ],
         "Interactions": [],

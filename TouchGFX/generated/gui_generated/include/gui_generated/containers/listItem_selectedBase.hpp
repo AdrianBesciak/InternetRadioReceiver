@@ -7,7 +7,7 @@
 #include <gui/common/FrontendApplication.hpp>
 #include <touchgfx/containers/Container.hpp>
 #include <touchgfx/containers/buttons/Buttons.hpp>
-#include <touchgfx/widgets/TextArea.hpp>
+#include <touchgfx/widgets/TextAreaWithWildcard.hpp>
 
 class listItem_selectedBase : public touchgfx::Container
 {
@@ -44,7 +44,7 @@ protected:
      * Member Declarations
      */
     touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger > flexButton1;
-    touchgfx::TextArea FileName;
+    touchgfx::TextAreaWithOneWildcard FileName;
 
 private:
 
