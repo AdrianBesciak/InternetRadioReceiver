@@ -210,7 +210,7 @@
           {
             "Type": "SlideMenu",
             "Name": "slideMenuRight",
-            "X": 405,
+            "X": 280,
             "Width": 202,
             "Height": 272,
             "FileNameBackground": "right_slide_menu_background.png",
@@ -228,23 +228,25 @@
             "ExpandedStateTimeout": 3000,
             "Components": [
               {
-                "Type": "Button",
-                "Name": "SDCardMenu_1",
-                "X": 25,
-                "Y": 50,
-                "Width": 50,
-                "Height": 50,
-                "Pressed": "sdcard_button_pressed.png",
-                "Released": "sdcard_button_pressed.png"
-              },
-              {
-                "Type": "Button",
-                "Name": "radioMenu_1",
-                "X": 25,
-                "Width": 50,
-                "Height": 50,
-                "Pressed": "radio_button_pressed.png",
-                "Released": "radio_button_01.png"
+                "Type": "ScrollWheel",
+                "Name": "RadioStations",
+                "X": 27,
+                "Y": 2,
+                "Width": 170,
+                "Height": 272,
+                "SelectedItemOffset": 14,
+                "UseSelectedStyle": true,
+                "SelectedItemTemplateName": "listItem_selected",
+                "MarginBefore": 2,
+                "MarginAfter": 2,
+                "IsCircular": true,
+                "ItemTemplateName": "listItem_notSelected",
+                "NumberofItems": 10,
+                "InitialElement": 3,
+                "Easing": "Back",
+                "EasingOption": "Out",
+                "SwipeAcceleration": 1.0,
+                "DragAcceleration": 1.0
               }
             ]
           }

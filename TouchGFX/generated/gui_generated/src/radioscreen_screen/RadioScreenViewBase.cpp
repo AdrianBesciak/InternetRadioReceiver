@@ -7,7 +7,8 @@
 #include <texts/TextKeysAndLanguages.hpp>
 
 RadioScreenViewBase::RadioScreenViewBase() :
-    buttonCallback(this, &RadioScreenViewBase::buttonCallbackHandler)
+    buttonCallback(this, &RadioScreenViewBase::buttonCallbackHandler),
+    updateItemCallback(this, &RadioScreenViewBase::updateItemCallbackHandler)
 {
 
     __background.setPosition(0, 0, 480, 272);
@@ -58,15 +59,23 @@ RadioScreenViewBase::RadioScreenViewBase() :
     slideMenuRight.setAnimationEasingEquation(touchgfx::EasingEquations::cubicEaseInOut);
     slideMenuRight.setAnimationDuration(18);
     slideMenuRight.setExpandedStateTimeout(180);
-    slideMenuRight.setXY(405, 0);
+    slideMenuRight.setXY(280, 0);
 
-    SDCardMenu_1.setXY(25, 50);
-    SDCardMenu_1.setBitmaps(touchgfx::Bitmap(BITMAP_SDCARD_BUTTON_PRESSED_ID), touchgfx::Bitmap(BITMAP_SDCARD_BUTTON_PRESSED_ID));
-    slideMenuRight.add(SDCardMenu_1);
-
-    radioMenu_1.setXY(25, 0);
-    radioMenu_1.setBitmaps(touchgfx::Bitmap(BITMAP_RADIO_BUTTON_01_ID), touchgfx::Bitmap(BITMAP_RADIO_BUTTON_PRESSED_ID));
-    slideMenuRight.add(radioMenu_1);
+    RadioStations.setPosition(27, 2, 170, 272);
+    RadioStations.setHorizontal(false);
+    RadioStations.setCircular(true);
+    RadioStations.setEasingEquation(touchgfx::EasingEquations::backEaseOut);
+    RadioStations.setSwipeAcceleration(10);
+    RadioStations.setDragAcceleration(10);
+    RadioStations.setNumberOfItems(10);
+    RadioStations.setSelectedItemOffset(14);
+    RadioStations.setSelectedItemExtraSize(0, 0);
+    RadioStations.setSelectedItemMargin(2, 2);
+    RadioStations.setDrawableSize(30, 0);
+    RadioStations.setDrawables(RadioStationsListItems, updateItemCallback,
+                              RadioStationsSelectedListItems, updateItemCallback);
+    RadioStations.animateToItem(3, 0);
+    slideMenuRight.add(RadioStations);
 
     add(__background);
     add(RadioIcon);
@@ -81,6 +90,15 @@ void RadioScreenViewBase::setupScreen()
 {
     controls1.initialize();
     radioControlPanel1.initialize();
+    RadioStations.initialize();
+    for (int i = 0; i < RadioStationsListItems.getNumberOfDrawables(); i++)
+    {
+        RadioStationsListItems[i].initialize();
+    }
+    for (int i = 0; i < RadioStationsSelectedListItems.getNumberOfDrawables(); i++)
+    {
+        RadioStationsSelectedListItems[i].initialize();
+    }
 }
 
 void RadioScreenViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
@@ -91,5 +109,21 @@ void RadioScreenViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& 
         //When SDCardMenu clicked change screen to MemoryScreen
         //Go to MemoryScreen with no screen transition
         application().gotoMemoryScreenScreenNoTransition();
+    }
+}
+
+void RadioScreenViewBase::updateItemCallbackHandler(touchgfx::DrawableListItemsInterface* items, int16_t containerIndex, int16_t itemIndex)
+{
+    if (items == &RadioStationsListItems)
+    {
+        touchgfx::Drawable* d = items->getDrawable(containerIndex);
+        listItem_notSelected* cc = (listItem_notSelected*)d;
+        RadioStationsUpdateItem(*cc, itemIndex);
+    }
+    else if (items == &RadioStationsSelectedListItems)
+    {
+        touchgfx::Drawable* d = items->getDrawable(containerIndex);
+        listItem_selected* cc = (listItem_selected*)d;
+        RadioStationsUpdateCenterItem(*cc, itemIndex);
     }
 }
