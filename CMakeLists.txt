@@ -76,6 +76,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
         Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2
         Middlewares/ST/touchgfx/3rdparty/libjpeg/include
         Middlewares/ST/touchgfx/framework/include
+        Middlewares/ST/touchgfx/framework/include/touchgfx
         Radio
         TouchGFX/App
         TouchGFX/generated/fonts/include

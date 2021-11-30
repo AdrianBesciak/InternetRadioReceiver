@@ -24,6 +24,8 @@ RadioScreenViewBase::RadioScreenViewBase() :
     radioStationNameBox.setPosition(37, 124, 404, 25);
     radioStationNameBox.setColor(touchgfx::Color::getColorFromRGB(129, 133, 255));
     radioStationNameBox.setLinespacing(0);
+    Unicode::snprintf(radioStationNameBoxBuffer, RADIOSTATIONNAMEBOX_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_ZKCH).getText());
+    radioStationNameBox.setWildcard(radioStationNameBoxBuffer);
     radioStationNameBox.setTypedText(touchgfx::TypedText(T___SINGLEUSE_QX2T));
 
     slideMenuLeft.setup(touchgfx::SlideMenu::EAST,

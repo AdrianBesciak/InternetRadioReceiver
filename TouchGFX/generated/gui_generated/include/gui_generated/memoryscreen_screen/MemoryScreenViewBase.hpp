@@ -58,6 +58,12 @@ protected:
     touchgfx::DrawableListItems<listItem_notSelected, 11> PlayQueueListItems;
     touchgfx::DrawableListItems<listItem_selected, 2> PlayQueueSelectedListItems;
 
+    /*
+     * Wildcard Buffers
+     */
+    static const uint16_t FILENAMETEXTBOX_SIZE = 45;
+    touchgfx::Unicode::UnicodeChar filenameTextBoxBuffer[FILENAMETEXTBOX_SIZE];
+
 private:
 
     /*

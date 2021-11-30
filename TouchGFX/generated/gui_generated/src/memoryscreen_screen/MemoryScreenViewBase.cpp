@@ -30,9 +30,11 @@ MemoryScreenViewBase::MemoryScreenViewBase() :
     songProgressBar.setValue(60);
     songProgressBar.setAnchorAtZero(false);
 
-    filenameTextBox.setPosition(29, 126, 404, 25);
+    filenameTextBox.setPosition(37, 133, 404, 25);
     filenameTextBox.setColor(touchgfx::Color::getColorFromRGB(129, 133, 255));
     filenameTextBox.setLinespacing(0);
+    Unicode::snprintf(filenameTextBoxBuffer, FILENAMETEXTBOX_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_XX3O).getText());
+    filenameTextBox.setWildcard(filenameTextBoxBuffer);
     filenameTextBox.setTypedText(touchgfx::TypedText(T___SINGLEUSE_085C));
 
     slideMenuLeft.setup(touchgfx::SlideMenu::EAST,

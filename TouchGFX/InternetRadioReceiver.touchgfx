@@ -167,7 +167,11 @@
               "Green": 133,
               "Blue": 255
             },
-            "Wildcard1": {}
+            "Wildcard1": {
+              "TextId": "__SingleUse_ZKCH",
+              "UseBuffer": true,
+              "BufferSize": 45
+            }
           },
           {
             "Type": "SlideMenu",
@@ -317,8 +321,8 @@
           {
             "Type": "TextArea",
             "Name": "filenameTextBox",
-            "X": 29,
-            "Y": 126,
+            "X": 37,
+            "Y": 133,
             "Width": 404,
             "Height": 25,
             "TextId": "__SingleUse_085C",
@@ -328,7 +332,11 @@
               "Green": 133,
               "Blue": 255
             },
-            "Wildcard1": {}
+            "Wildcard1": {
+              "TextId": "__SingleUse_XX3O",
+              "UseBuffer": true,
+              "BufferSize": 45
+            }
           },
           {
             "Type": "SlideMenu",
@@ -638,7 +646,11 @@
               "Green": 243,
               "Blue": 247
             },
-            "Wildcard1": {}
+            "Wildcard1": {
+              "TextId": "__SingleUse_I18A",
+              "UseBuffer": true,
+              "BufferSize": 20
+            }
           }
         ],
         "Interactions": [],
@@ -706,7 +718,11 @@
               "Green": 243,
               "Blue": 247
             },
-            "Wildcard1": {}
+            "Wildcard1": {
+              "TextId": "__SingleUse_M7VY",
+              "UseBuffer": true,
+              "BufferSize": 20
+            }
           }
         ],
         "Interactions": [],

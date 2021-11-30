@@ -18,6 +18,8 @@ listItem_notSelectedBase::listItem_notSelectedBase() :
     FileName.setPosition(5, 4, 160, 22);
     FileName.setColor(touchgfx::Color::getColorFromRGB(242, 243, 247));
     FileName.setLinespacing(0);
+    Unicode::snprintf(FileNameBuffer, FILENAME_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_I18A).getText());
+    FileName.setWildcard(FileNameBuffer);
     FileName.setTypedText(touchgfx::TypedText(T___SINGLEUSE_H840));
 
     add(flexButton1);

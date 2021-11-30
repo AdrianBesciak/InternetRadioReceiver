@@ -26,6 +26,10 @@ protected:
         controls.setSdCardState(peripheralStateModel.isSdCardState());
     }
 
+    void getRadioStationsListModel() {
+
+    }
+
     const model::ApplicationModel* applicationModel;
 };
 

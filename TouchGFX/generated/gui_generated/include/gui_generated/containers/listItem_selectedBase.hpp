@@ -46,6 +46,12 @@ protected:
     touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger > flexButton1;
     touchgfx::TextAreaWithOneWildcard FileName;
 
+    /*
+     * Wildcard Buffers
+     */
+    static const uint16_t FILENAME_SIZE = 20;
+    touchgfx::Unicode::UnicodeChar FileNameBuffer[FILENAME_SIZE];
+
 private:
 
     /*

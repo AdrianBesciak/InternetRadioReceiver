@@ -56,6 +56,12 @@ protected:
     touchgfx::DrawableListItems<listItem_notSelected, 11> RadioStationsListItems;
     touchgfx::DrawableListItems<listItem_selected, 2> RadioStationsSelectedListItems;
 
+    /*
+     * Wildcard Buffers
+     */
+    static const uint16_t RADIOSTATIONNAMEBOX_SIZE = 45;
+    touchgfx::Unicode::UnicodeChar radioStationNameBoxBuffer[RADIOSTATIONNAMEBOX_SIZE];
+
 private:
 
     /*

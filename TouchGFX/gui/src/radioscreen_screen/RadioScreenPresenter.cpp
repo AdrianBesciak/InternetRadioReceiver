@@ -6,5 +6,7 @@ RadioScreenPresenter::RadioScreenPresenter(RadioScreenView& view)
 
 void RadioScreenPresenter::update() {
     updatePeripheralsState(view.getControls());
+    view.fillRadioStationsList();
+    view.setTitle("Are you sure?");
 }
 

@@ -12,6 +12,8 @@ public:
     void setTitle(const std::string &title);
     void setPlayVisible(bool visible);
     void setStopVisible(bool visible);
+
+    void fillRadioStationsList();
 private:
     std::string title;
 };
