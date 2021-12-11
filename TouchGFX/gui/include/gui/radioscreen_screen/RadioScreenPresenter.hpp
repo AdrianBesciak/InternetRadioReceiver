@@ -14,6 +14,8 @@ public:
     void update() override;
 
 private:
+    void updateRadioStationsList();
+
     RadioScreenView& view;
 };
 

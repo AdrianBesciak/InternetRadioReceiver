@@ -13,7 +13,7 @@ public:
     void setPlayVisible(bool visible);
     void setStopVisible(bool visible);
 
-    void fillRadioStationsList();
+    void fillRadioStationsList(const std::vector<model::Entry>& stations, const uint8_t currentStation);
 private:
     std::string title;
 };

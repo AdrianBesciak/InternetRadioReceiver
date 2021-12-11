@@ -48,7 +48,7 @@ namespace audio {
         for (auto &entry : internalEntries) {
             internalEntryMap.insert({entry.getName(), entry.getResource()});
         }
-        io::FileReadStream stream(PLAYLIST_PATH, true);
+        io::FileReadStream stream(PLAYLIST_PATH, true); //ToDo check what happen when file does not exist
         while (stream.hasNext()) {
             std::string line = stream.readLine();
             auto it = internalEntryMap.find(line);

@@ -8,11 +8,11 @@ namespace model {
     RadioStationsListModel::RadioStationsListModel() {
     }
 
-    std::vector<Entry> RadioStationsListModel::getRadioStations() {
+    const std::vector<Entry>& RadioStationsListModel::getRadioStations() const {
         return radioStations.getEntries();
     }
 
-    Entry RadioStationsListModel::getCurrentStation() {
-        return radioStations.getEntries().at(currentStation);
+    uint8_t RadioStationsListModel::getCurrentStationIndex() const {
+        return currentStation;
     }
 }

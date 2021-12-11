@@ -14,9 +14,8 @@ void listItem_notSelected::initialize()
 
 void listItem_notSelected::setName(std::string name)
 {
-    char tempName[] = "RMF FM\0";
     static Unicode::UnicodeChar buff[20];
-    Unicode::strncpy(buff, tempName, 7);
-    Unicode::snprintf(FileNameBuffer, 7, "%s", buff);
+    Unicode::strncpy(buff, name.c_str(), name.size());
+    Unicode::snprintf(FileNameBuffer, 20, "%s", buff);
     FileName.invalidate();
 }

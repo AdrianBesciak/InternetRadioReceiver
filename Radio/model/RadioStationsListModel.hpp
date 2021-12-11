@@ -11,10 +11,10 @@ namespace model {
     public:
         RadioStationsListModel();
 
-        std::vector<Entry> getRadioStations();
-        Entry getCurrentStation();
+        const std::vector<Entry> &getRadioStations() const;
+        uint8_t getCurrentStationIndex() const;
     private:
-        audio::FavouritesRadioPlaylist radioStations;
-        unsigned int currentStation{0};
+        audio::InternalRadioPlaylist radioStations{};
+        uint8_t currentStation{1};
     };
 }

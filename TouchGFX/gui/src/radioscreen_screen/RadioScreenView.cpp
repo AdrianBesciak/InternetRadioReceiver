@@ -26,10 +26,14 @@ void RadioScreenView::setStopVisible(bool visible) {
     radioControlPanel1.setStopVisible(visible);
 }
 
-void RadioScreenView::fillRadioStationsList() {
-    std::string name = "NASD";
-    for (int i = 0; i < RadioStationsListItems.getNumberOfDrawables(); i++)
+void RadioScreenView::fillRadioStationsList(const std::vector<model::Entry>& stations, const uint8_t currentStation){
+    for (uint8_t i = 0; i < stations.size(); i++)
     {
-        RadioStationsListItems[i].setName(name);
+        if (currentStation != i) {
+            RadioStationsListItems[i].setName(stations[i].getName());
+        }
+    }
+    if (currentStation < stations.size()) {
+        RadioStationsSelectedListItems[currentStation].setName(stations[currentStation].getName());
     }
 }

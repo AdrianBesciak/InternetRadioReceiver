@@ -10,6 +10,8 @@ public:
     virtual ~listItem_selected() {}
 
     virtual void initialize();
+
+    void setName(std::string name);
 protected:
 };
 
