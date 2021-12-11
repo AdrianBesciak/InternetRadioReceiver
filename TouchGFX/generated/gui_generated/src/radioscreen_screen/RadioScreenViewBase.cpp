@@ -65,18 +65,15 @@ RadioScreenViewBase::RadioScreenViewBase() :
 
     RadioStations.setPosition(27, 2, 170, 272);
     RadioStations.setHorizontal(false);
-    RadioStations.setCircular(true);
-    RadioStations.setEasingEquation(touchgfx::EasingEquations::backEaseOut);
+    RadioStations.setCircular(false);
+    RadioStations.setEasingEquation(touchgfx::EasingEquations::quadEaseInOut);
     RadioStations.setSwipeAcceleration(10);
     RadioStations.setDragAcceleration(10);
     RadioStations.setNumberOfItems(10);
-    RadioStations.setSelectedItemOffset(14);
-    RadioStations.setSelectedItemExtraSize(0, 0);
-    RadioStations.setSelectedItemMargin(2, 2);
+    RadioStations.setSelectedItemOffset(0);
     RadioStations.setDrawableSize(30, 0);
-    RadioStations.setDrawables(RadioStationsListItems, updateItemCallback,
-                              RadioStationsSelectedListItems, updateItemCallback);
-    RadioStations.animateToItem(3, 0);
+    RadioStations.setDrawables(RadioStationsListItems, updateItemCallback);
+    RadioStations.animateToItem(0, 0);
     slideMenuRight.add(RadioStations);
 
     add(__background);
@@ -96,10 +93,6 @@ void RadioScreenViewBase::setupScreen()
     for (int i = 0; i < RadioStationsListItems.getNumberOfDrawables(); i++)
     {
         RadioStationsListItems[i].initialize();
-    }
-    for (int i = 0; i < RadioStationsSelectedListItems.getNumberOfDrawables(); i++)
-    {
-        RadioStationsSelectedListItems[i].initialize();
     }
 }
 
@@ -121,11 +114,5 @@ void RadioScreenViewBase::updateItemCallbackHandler(touchgfx::DrawableListItemsI
         touchgfx::Drawable* d = items->getDrawable(containerIndex);
         listItem_notSelected* cc = (listItem_notSelected*)d;
         RadioStationsUpdateItem(*cc, itemIndex);
-    }
-    else if (items == &RadioStationsSelectedListItems)
-    {
-        touchgfx::Drawable* d = items->getDrawable(containerIndex);
-        listItem_selected* cc = (listItem_selected*)d;
-        RadioStationsUpdateCenterItem(*cc, itemIndex);
     }
 }

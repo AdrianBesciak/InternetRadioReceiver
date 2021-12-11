@@ -238,17 +238,10 @@
                 "Y": 2,
                 "Width": 170,
                 "Height": 272,
-                "SelectedItemOffset": 14,
-                "UseSelectedStyle": true,
-                "SelectedItemTemplateName": "listItem_selected",
-                "MarginBefore": 2,
-                "MarginAfter": 2,
-                "IsCircular": true,
                 "ItemTemplateName": "listItem_notSelected",
                 "NumberofItems": 10,
-                "InitialElement": 3,
-                "Easing": "Back",
-                "EasingOption": "Out",
+                "Easing": "Quad",
+                "EasingOption": "InOut",
                 "SwipeAcceleration": 1.0,
                 "DragAcceleration": 1.0
               }
@@ -639,6 +632,7 @@
             "Y": 4,
             "Width": 160,
             "Height": 22,
+            "Visible": false,
             "TextId": "__SingleUse_H840",
             "TextRotation": "0",
             "Color": {
@@ -657,6 +651,11 @@
         "CustomTriggers": [
           {
             "Name": "trigger1"
+          }
+        ],
+        "CustomActions": [
+          {
+            "Name": "action1"
           }
         ]
       },
@@ -711,6 +710,7 @@
             "Y": 4,
             "Width": 160,
             "Height": 22,
+            "Visible": false,
             "TextId": "__SingleUse_2RLI",
             "TextRotation": "0",
             "Color": {

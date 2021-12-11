@@ -14,9 +14,8 @@
 #include <touchgfx/widgets/TextAreaWithWildcard.hpp>
 #include <touchgfx/containers/SlideMenu.hpp>
 #include <touchgfx/widgets/Button.hpp>
-#include <touchgfx/containers/scrollers/ScrollWheelWithSelectionStyle.hpp>
+#include <touchgfx/containers/scrollers/ScrollWheel.hpp>
 #include <gui/containers/listItem_notSelected.hpp>
-#include <gui/containers/listItem_selected.hpp>
 
 class RadioScreenViewBase : public touchgfx::View<RadioScreenPresenter>
 {
@@ -26,11 +25,6 @@ public:
     virtual void setupScreen();
 
     virtual void RadioStationsUpdateItem(listItem_notSelected& item, int16_t itemIndex)
-    {
-        // Override and implement this function in RadioScreen
-    }
-
-    virtual void RadioStationsUpdateCenterItem(listItem_selected& item, int16_t itemIndex)
     {
         // Override and implement this function in RadioScreen
     }
@@ -52,9 +46,8 @@ protected:
     touchgfx::Button SDCardMenu;
     touchgfx::Button radioMenu;
     touchgfx::SlideMenu slideMenuRight;
-    touchgfx::ScrollWheelWithSelectionStyle RadioStations;
+    touchgfx::ScrollWheel RadioStations;
     touchgfx::DrawableListItems<listItem_notSelected, 11> RadioStationsListItems;
-    touchgfx::DrawableListItems<listItem_selected, 2> RadioStationsSelectedListItems;
 
     /*
      * Wildcard Buffers

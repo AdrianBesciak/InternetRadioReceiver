@@ -29,11 +29,6 @@ void RadioScreenView::setStopVisible(bool visible) {
 void RadioScreenView::fillRadioStationsList(const std::vector<model::Entry>& stations, const uint8_t currentStation){
     for (uint8_t i = 0; i < stations.size(); i++)
     {
-        if (currentStation != i) {
-            RadioStationsListItems[i].setName(stations[i].getName());
-        }
-    }
-    if (currentStation < stations.size()) {
-        RadioStationsSelectedListItems[currentStation].setName(stations[currentStation].getName());
+        RadioStationsListItems[i].setName(stations[i].getName());
     }
 }

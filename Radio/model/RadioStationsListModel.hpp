@@ -1,7 +1,7 @@
 #pragma once
 
 #include <list>
-#include <audio/playlist/FavouritesRadioPlaylist.hpp>
+#include <audio/playlist/InternalRadioPlaylist.hpp>
 #include <audio/playlist/Playlist.hpp>
 
 namespace model {

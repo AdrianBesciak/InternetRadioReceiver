@@ -25,6 +25,11 @@ public:
         this->trigger1Callback = &callback;
     }
 
+    /*
+     * Custom Actions
+     */
+    virtual void action1();
+
 protected:
     FrontendApplication& application() {
         return *static_cast<FrontendApplication*>(touchgfx::Application::getInstance());

@@ -16,6 +16,7 @@ listItem_notSelectedBase::listItem_notSelectedBase() :
     flexButton1.setPosition(0, 0, 170, 30);
 
     FileName.setPosition(5, 4, 160, 22);
+    FileName.setVisible(false);
     FileName.setColor(touchgfx::Color::getColorFromRGB(242, 243, 247));
     FileName.setLinespacing(0);
     Unicode::snprintf(FileNameBuffer, FILENAME_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_I18A).getText());
@@ -27,6 +28,11 @@ listItem_notSelectedBase::listItem_notSelectedBase() :
 }
 
 void listItem_notSelectedBase::initialize()
+{
+
+}
+
+void listItem_notSelectedBase::action1()
 {
 
 }
