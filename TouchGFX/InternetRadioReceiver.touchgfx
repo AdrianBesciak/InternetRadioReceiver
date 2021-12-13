@@ -243,7 +243,8 @@
                 "Easing": "Quad",
                 "EasingOption": "InOut",
                 "SwipeAcceleration": 1.0,
-                "DragAcceleration": 1.0
+                "DragAcceleration": 1.0,
+                "Clickable": true
               }
             ]
           }

@@ -13,8 +13,9 @@ namespace model {
 
         const std::vector<Entry> &getRadioStations() const;
         uint8_t getCurrentStationIndex() const;
+        void updateCurrentStationIndex(uint8_t i);
     private:
         audio::InternalRadioPlaylist radioStations{};
-        uint8_t currentStation{1};
+        uint8_t currentStation{0};
     };
 }

@@ -16,6 +16,7 @@
 #include <touchgfx/widgets/Button.hpp>
 #include <touchgfx/containers/scrollers/ScrollWheel.hpp>
 #include <gui/containers/listItem_notSelected.hpp>
+#include <touchgfx/mixins/ClickListener.hpp>
 
 class RadioScreenViewBase : public touchgfx::View<RadioScreenPresenter>
 {
@@ -46,7 +47,7 @@ protected:
     touchgfx::Button SDCardMenu;
     touchgfx::Button radioMenu;
     touchgfx::SlideMenu slideMenuRight;
-    touchgfx::ScrollWheel RadioStations;
+    touchgfx::ClickListener< touchgfx::ScrollWheel > RadioStations;
     touchgfx::DrawableListItems<listItem_notSelected, 11> RadioStationsListItems;
 
     /*
