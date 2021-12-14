@@ -1,19 +1,8 @@
 #include <gui/main_screen/MainView.hpp>
 
-MainView::MainView()
-{
+MainView::MainView() = default;
 
-}
-
-void MainView::setupScreen()
-{
-    MainViewBase::setupScreen();
-}
-
-void MainView::tearDownScreen() {
-    MainViewBase::tearDownScreen();
-}
-
-controls &MainView::getControls() {
-    return controls1;
+void MainView::setPeripheralState(bool ethernetState, bool sdCardState) {
+    controls1.setEthernetState(ethernetState);
+    controls1.setSdCardState(sdCardState);
 }

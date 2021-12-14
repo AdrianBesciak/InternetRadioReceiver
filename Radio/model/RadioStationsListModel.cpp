@@ -6,10 +6,11 @@
 #include <stdexcept>
 
 namespace model {
-    RadioStationsListModel::RadioStationsListModel() {
-    }
+    RadioStationsListModel::RadioStationsListModel()
+        : radioStations()
+        , currentStation(0) {}
 
-    const std::vector<Entry>& RadioStationsListModel::getRadioStations() const {
+    const std::vector<RadioStationsListModel::Entry>& RadioStationsListModel::getRadioStations() const {
         return radioStations.getEntries();
     }
 

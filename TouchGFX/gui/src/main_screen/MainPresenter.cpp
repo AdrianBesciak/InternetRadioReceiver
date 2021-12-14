@@ -5,5 +5,5 @@ MainPresenter::MainPresenter(MainView& view)
     : view(view) {}
 
 void MainPresenter::update() {
-    updatePeripheralsState(view.getControls());
+    updatePeripheralsState([&](auto... states) {view.setPeripheralState(states...);});
 }

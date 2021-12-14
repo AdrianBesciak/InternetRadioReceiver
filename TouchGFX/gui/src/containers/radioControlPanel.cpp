@@ -1,37 +1,39 @@
 #include <gui/containers/radioControlPanel.hpp>
 
 radioControlPanel::radioControlPanel()
-    : playDirty(false)
-    , stopDirty(false) {
-    Application::getInstance()->registerTimerWidget(this);
-}
-
-radioControlPanel::~radioControlPanel() {
-    Application::getInstance()->unregisterTimerWidget(this);
-}
+    : onPlayClicked(nullptr)
+    , onStopClicked(nullptr) {}
 
 void radioControlPanel::setPlayVisible(bool visible) {
     if (play.isVisible() != visible) {
         play.setVisible(visible);
-        playDirty = true;
+        play.invalidate();
     }
 }
 
 void radioControlPanel::setStopVisible(bool visible) {
     if (stop.isVisible() != visible) {
         stop.setVisible(visible);
-        stopDirty = true;
-    }
-}
-
-void radioControlPanel::handleTickEvent() {
-    if (playDirty) {
-        play.invalidate();
-        playDirty = false;
-    }
-    if (stopDirty) {
         stop.invalidate();
-        stopDirty = false;
     }
 }
 
+void radioControlPanel::setOnPlayClicked(const std::function<void()> &onPlayClicked) {
+    radioControlPanel::onPlayClicked = onPlayClicked;
+}
+
+void radioControlPanel::setOnStopClicked(const std::function<void()> &onStopClicked) {
+    radioControlPanel::onStopClicked = onStopClicked;
+}
+
+void radioControlPanel::handlePlayClicked() {
+    if (onPlayClicked != nullptr) {
+        onPlayClicked();
+    }
+}
+
+void radioControlPanel::handleStopClicked() {
+    if (onStopClicked != nullptr) {
+        onStopClicked();
+    }
+}

@@ -1,19 +1,22 @@
-#ifndef RADIOCONTROLPANEL_HPP
-#define RADIOCONTROLPANEL_HPP
-
+#pragma once
 #include <gui_generated/containers/radioControlPanelBase.hpp>
+#include <functional>
 
 class radioControlPanel : public radioControlPanelBase {
 public:
     radioControlPanel();
-    ~radioControlPanel() override;
+
     void setPlayVisible(bool visible);
     void setStopVisible(bool visible);
-    void handleTickEvent() override;
+
+    void setOnPlayClicked(const std::function<void()> &onPlayClicked);
+    void setOnStopClicked(const std::function<void()> &onStopClicked);
+
+protected:
+    void handlePlayClicked() override;
+    void handleStopClicked() override;
+
 private:
-    bool playDirty;
-    bool stopDirty;
-
+    std::function<void()> onPlayClicked;
+    std::function<void()> onStopClicked;
 };
-
-#endif // RADIOCONTROLPANEL_HPP

@@ -5,6 +5,7 @@
 #include <touchgfx/Bitmap.hpp>
 
 extern const unsigned char image_backward_active[]; // BITMAP_BACKWARD_ACTIVE_ID = 0, Size: 50x50 pixels
+extern const unsigned char image_backward_active_extra_data[];
 extern const unsigned char image_backward_inactive[]; // BITMAP_BACKWARD_INACTIVE_ID = 1, Size: 50x50 pixels
 extern const unsigned char image_backward_inactive_extra_data[];
 extern const unsigned char image_blue_progressindicators_bg_large_progress_indicator_bg_square_0_degrees[]; // BITMAP_BLUE_PROGRESSINDICATORS_BG_LARGE_PROGRESS_INDICATOR_BG_SQUARE_0_DEGREES_ID = 2, Size: 404x34 pixels
@@ -36,11 +37,15 @@ extern const unsigned char image_pause_inactive_extra_data[];
 extern const unsigned char image_play_button_active[]; // BITMAP_PLAY_BUTTON_ACTIVE_ID = 15, Size: 50x50 pixels
 extern const unsigned char image_play_button_active_extra_data[];
 extern const unsigned char image_play_button_inactive[]; // BITMAP_PLAY_BUTTON_INACTIVE_ID = 16, Size: 50x50 pixels
+extern const unsigned char image_play_button_inactive_extra_data[];
 extern const unsigned char image_previous_song_active[]; // BITMAP_PREVIOUS_SONG_ACTIVE_ID = 17, Size: 50x50 pixels
+extern const unsigned char image_previous_song_active_extra_data[];
 extern const unsigned char image_previous_song_inactive[]; // BITMAP_PREVIOUS_SONG_INACTIVE_ID = 18, Size: 50x50 pixels
+extern const unsigned char image_previous_song_inactive_extra_data[];
 extern const unsigned char image_radio[]; // BITMAP_RADIO_ID = 19, Size: 64x64 pixels
 extern const unsigned char image_radio_extra_data[];
 extern const unsigned char image_radio_button_01[]; // BITMAP_RADIO_BUTTON_01_ID = 20, Size: 50x50 pixels
+extern const unsigned char image_radio_button_01_extra_data[];
 extern const unsigned char image_radio_button_pressed[]; // BITMAP_RADIO_BUTTON_PRESSED_ID = 21, Size: 50x50 pixels
 extern const unsigned char image_radio_button_pressed_extra_data[];
 extern const unsigned char image_radio_large[]; // BITMAP_RADIO_LARGE_ID = 22, Size: 128x128 pixels
@@ -65,7 +70,7 @@ extern const unsigned char image_stop_inactive[]; // BITMAP_STOP_INACTIVE_ID = 3
 extern const unsigned char image_stop_inactive_extra_data[];
 
 const touchgfx::Bitmap::BitmapData bitmap_database[] = {
-    { image_backward_active, 0, 50, 50, 13, 16, 34, ((uint8_t)touchgfx::Bitmap::ARGB8888) >> 3, 18, ((uint8_t)touchgfx::Bitmap::ARGB8888) & 0x7 },
+    { image_backward_active, image_backward_active_extra_data, 50, 50, 13, 16, 34, ((uint8_t)touchgfx::Bitmap::L8) >> 3, 18, ((uint8_t)touchgfx::Bitmap::L8) & 0x7 },
     { image_backward_inactive, image_backward_inactive_extra_data, 50, 50, 13, 13, 36, ((uint8_t)touchgfx::Bitmap::L8) >> 3, 24, ((uint8_t)touchgfx::Bitmap::L8) & 0x7 },
     { image_blue_progressindicators_bg_large_progress_indicator_bg_square_0_degrees, image_blue_progressindicators_bg_large_progress_indicator_bg_square_0_degrees_extra_data, 404, 34, 0, 0, 404, ((uint8_t)touchgfx::Bitmap::L8) >> 3, 34, ((uint8_t)touchgfx::Bitmap::L8) & 0x7 },
     { image_blue_progressindicators_fill_tiling_progress_indicator_fill_striped_wide_horizontal, image_blue_progressindicators_fill_tiling_progress_indicator_fill_striped_wide_horizontal_extra_data, 40, 40, 30, 20, 10, ((uint8_t)touchgfx::Bitmap::L8) >> 3, 20, ((uint8_t)touchgfx::Bitmap::L8) & 0x7 },
@@ -81,11 +86,11 @@ const touchgfx::Bitmap::BitmapData bitmap_database[] = {
     { image_pause_active, image_pause_active_extra_data, 50, 50, 29, 6, 12, ((uint8_t)touchgfx::Bitmap::L8) >> 3, 38, ((uint8_t)touchgfx::Bitmap::L8) & 0x7 },
     { image_pause_inactive, image_pause_inactive_extra_data, 50, 50, 28, 3, 14, ((uint8_t)touchgfx::Bitmap::L8) >> 3, 44, ((uint8_t)touchgfx::Bitmap::L8) & 0x7 },
     { image_play_button_active, image_play_button_active_extra_data, 50, 50, 4, 12, 25, ((uint8_t)touchgfx::Bitmap::L8) >> 3, 26, ((uint8_t)touchgfx::Bitmap::L8) & 0x7 },
-    { image_play_button_inactive, 0, 50, 50, 2, 10, 28, ((uint8_t)touchgfx::Bitmap::ARGB8888) >> 3, 30, ((uint8_t)touchgfx::Bitmap::ARGB8888) & 0x7 },
-    { image_previous_song_active, 0, 50, 50, 27, 12, 21, ((uint8_t)touchgfx::Bitmap::ARGB8888) >> 3, 26, ((uint8_t)touchgfx::Bitmap::ARGB8888) & 0x7 },
-    { image_previous_song_inactive, 0, 50, 50, 31, 6, 19, ((uint8_t)touchgfx::Bitmap::ARGB8888) >> 3, 38, ((uint8_t)touchgfx::Bitmap::ARGB8888) & 0x7 },
+    { image_play_button_inactive, image_play_button_inactive_extra_data, 50, 50, 2, 10, 28, ((uint8_t)touchgfx::Bitmap::L8) >> 3, 30, ((uint8_t)touchgfx::Bitmap::L8) & 0x7 },
+    { image_previous_song_active, image_previous_song_active_extra_data, 50, 50, 27, 12, 21, ((uint8_t)touchgfx::Bitmap::L8) >> 3, 26, ((uint8_t)touchgfx::Bitmap::L8) & 0x7 },
+    { image_previous_song_inactive, image_previous_song_inactive_extra_data, 50, 50, 31, 6, 19, ((uint8_t)touchgfx::Bitmap::L8) >> 3, 38, ((uint8_t)touchgfx::Bitmap::L8) & 0x7 },
     { image_radio, image_radio_extra_data, 64, 64, 0, 26, 64, ((uint8_t)touchgfx::Bitmap::L8) >> 3, 2, ((uint8_t)touchgfx::Bitmap::L8) & 0x7 },
-    { image_radio_button_01, 0, 50, 50, 0, 0, 50, ((uint8_t)touchgfx::Bitmap::ARGB8888) >> 3, 50, ((uint8_t)touchgfx::Bitmap::ARGB8888) & 0x7 },
+    { image_radio_button_01, image_radio_button_01_extra_data, 50, 50, 0, 0, 50, ((uint8_t)touchgfx::Bitmap::L8) >> 3, 50, ((uint8_t)touchgfx::Bitmap::L8) & 0x7 },
     { image_radio_button_pressed, image_radio_button_pressed_extra_data, 50, 50, 0, 0, 50, ((uint8_t)touchgfx::Bitmap::L8) >> 3, 50, ((uint8_t)touchgfx::Bitmap::L8) & 0x7 },
     { image_radio_large, image_radio_large_extra_data, 128, 128, 0, 51, 128, ((uint8_t)touchgfx::Bitmap::L8) >> 3, 6, ((uint8_t)touchgfx::Bitmap::L8) & 0x7 },
     { image_raw_micro_sd, image_raw_micro_sd_extra_data, 64, 64, 12, 60, 40, ((uint8_t)touchgfx::Bitmap::L8) >> 3, 1, ((uint8_t)touchgfx::Bitmap::L8) & 0x7 },

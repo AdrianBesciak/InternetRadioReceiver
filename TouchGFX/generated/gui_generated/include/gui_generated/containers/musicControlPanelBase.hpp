@@ -16,6 +16,44 @@ public:
     virtual ~musicControlPanelBase() {}
     virtual void initialize();
 
+    /*
+     * Virtual Action Handlers
+     */
+    virtual void handlePlayClicked()
+    {
+        // Override and implement this function in musicControlPanel
+    }
+
+    virtual void handleStopClicked()
+    {
+        // Override and implement this function in musicControlPanel
+    }
+
+    virtual void handlePauseClicked()
+    {
+        // Override and implement this function in musicControlPanel
+    }
+
+    virtual void handleFastForwardClicked()
+    {
+        // Override and implement this function in musicControlPanel
+    }
+
+    virtual void handleFastBackwardClicked()
+    {
+        // Override and implement this function in musicControlPanel
+    }
+
+    virtual void handlePlayNextClicked()
+    {
+        // Override and implement this function in musicControlPanel
+    }
+
+    virtual void handlePlayPreviousClicked()
+    {
+        // Override and implement this function in musicControlPanel
+    }
+
 protected:
     FrontendApplication& application() {
         return *static_cast<FrontendApplication*>(touchgfx::Application::getInstance());
@@ -33,6 +71,16 @@ protected:
     touchgfx::ClickListener< touchgfx::Button > nextSong;
 
 private:
+
+    /*
+     * Callback Declarations
+     */
+    touchgfx::Callback<musicControlPanelBase, const touchgfx::AbstractButton&> buttonCallback;
+
+    /*
+     * Callback Handler Declarations
+     */
+    void buttonCallbackHandler(const touchgfx::AbstractButton& src);
 
 };
 

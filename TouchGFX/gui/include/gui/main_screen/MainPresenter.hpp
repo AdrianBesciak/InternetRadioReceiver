@@ -1,6 +1,4 @@
-#ifndef MAINPRESENTER_HPP
-#define MAINPRESENTER_HPP
-
+#pragma once
 #include <gui/model/ModelListener.hpp>
 #include <mvp/Presenter.hpp>
 
@@ -16,5 +14,3 @@ public:
 private:
     MainView& view;
 };
-
-#endif // MAINPRESENTER_HPP

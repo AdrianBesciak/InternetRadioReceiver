@@ -5,8 +5,19 @@
 RadioScreenPresenter::RadioScreenPresenter(RadioScreenView& view)
     : view(view) {}
 
+
+void RadioScreenPresenter::activate() {
+    view.setOnPlayClicked([&] {applicationController->playRadio();});
+    view.setOnStopClicked([&] {applicationController->stop();});
+}
+
+void RadioScreenPresenter::deactivate() {
+    view.setOnPlayClicked(nullptr);
+    view.setOnStopClicked(nullptr);
+}
+
 void RadioScreenPresenter::update() {
-    updatePeripheralsState(view.getControls());
+    updatePeripheralsState([&](auto... states) {view.setPeripheralState(states...);});
     updateCurrentRadioStationName();
     updateRadioStationsList();
 }

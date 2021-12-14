@@ -2,18 +2,9 @@
 
 #include <ApplicationModule.h>
 
-controls::controls()
-    : ethernetStateDirty(false)
-    , sdCardStateDirty(false) {
-    Application::getInstance()->registerTimerWidget(this);
-}
-
-controls::~controls() {
-    Application::getInstance()->unregisterTimerWidget(this);
-}
+controls::controls() = default;
 
 void controls::initialize() {
-    controlsBase::initialize();
     sdMountedInd.setVisible(false);
     sdUnmountedInd.setVisible(true);
     ethernetConnectedInd.setVisible(false);
@@ -24,7 +15,8 @@ void controls::setEthernetState(bool state) {
     if (state != ethernetConnectedInd.isVisible()) {
         ethernetConnectedInd.setVisible(state);
         ethernetDisconnectedInd.setVisible(!state);
-        ethernetStateDirty = true;
+        ethernetConnectedInd.invalidate();
+        ethernetDisconnectedInd.invalidate();
     }
 }
 
@@ -32,19 +24,8 @@ void controls::setSdCardState(bool state) {
     if (state != sdMountedInd.isVisible()) {
         sdMountedInd.setVisible(state);
         sdUnmountedInd.setVisible(!state);
-        sdCardStateDirty = true;
+        sdMountedInd.invalidate();
+        sdUnmountedInd.invalidate();
     }
 }
 
-void controls::handleTickEvent() {
-    if (ethernetStateDirty) {
-        ethernetConnectedInd.invalidate();
-        ethernetDisconnectedInd.invalidate();
-        ethernetStateDirty = false;
-    }
-    if (sdCardStateDirty) {
-        sdMountedInd.invalidate();
-        sdUnmountedInd.invalidate();
-        sdCardStateDirty = false;
-    }
-}

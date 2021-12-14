@@ -11,7 +11,9 @@ namespace audio {
               Entry("RDN", "http://195.150.20.4/rmf_fm"),
               Entry("Radio ZET", "http://195.150.20.4/rmf_fm"),
               Entry("Radio 357", "http://195.150.20.4/rmf_fm"),
-              Entry("MINE", "http://195.150.20.4/rmf_fm")
+              Entry("MINE", "http://195.150.20.4/rmf_fm"),
+              Entry("MINE2", "http://195.150.20.4/rmf_fm"),
+              Entry("MINE3", "http://195.150.20.4/rmf_fm")
             }) {}
 
     const std::vector<Playlist::Entry> &InternalRadioPlaylist::getEntries() const {

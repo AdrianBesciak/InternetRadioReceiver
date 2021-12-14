@@ -1,24 +1,13 @@
-#ifndef FRONTENDAPPLICATION_HPP
-#define FRONTENDAPPLICATION_HPP
-
+#pragma once
 #include <gui_generated/common/FrontendApplicationBase.hpp>
 
 class FrontendHeap;
 
 using namespace touchgfx;
 
-class FrontendApplication : public FrontendApplicationBase
-{
+class FrontendApplication : public FrontendApplicationBase {
 public:
-    FrontendApplication(Model& m, FrontendHeap& heap);
-    virtual ~FrontendApplication() { }
-
-    virtual void handleTickEvent()
-    {
-        model.tick();
-        FrontendApplicationBase::handleTickEvent();
-    }
-private:
+    FrontendApplication(Model& model, FrontendHeap& heap);
+    void handleTickEvent() override;
 };
 
-#endif // FRONTENDAPPLICATION_HPP

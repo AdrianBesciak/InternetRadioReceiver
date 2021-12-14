@@ -19,7 +19,7 @@ RadioScreenViewBase::RadioScreenViewBase() :
 
     controls1.setXY(370, 10);
 
-    radioControlPanel1.setXY(190, 200);
+    radioControlPanel1.setXY(220, 200);
 
     radioStationNameBox.setPosition(37, 124, 404, 25);
     radioStationNameBox.setColor(touchgfx::Color::getColorFromRGB(129, 133, 255));
@@ -61,7 +61,7 @@ RadioScreenViewBase::RadioScreenViewBase() :
     slideMenuRight.setAnimationEasingEquation(touchgfx::EasingEquations::cubicEaseInOut);
     slideMenuRight.setAnimationDuration(18);
     slideMenuRight.setExpandedStateTimeout(180);
-    slideMenuRight.setXY(280, 0);
+    slideMenuRight.setXY(278, 0);
 
     RadioStations.setPosition(27, 2, 170, 272);
     RadioStations.setHorizontal(false);

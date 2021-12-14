@@ -16,6 +16,19 @@ public:
     virtual ~radioControlPanelBase() {}
     virtual void initialize();
 
+    /*
+     * Virtual Action Handlers
+     */
+    virtual void handlePlayClicked()
+    {
+        // Override and implement this function in radioControlPanel
+    }
+
+    virtual void handleStopClicked()
+    {
+        // Override and implement this function in radioControlPanel
+    }
+
 protected:
     FrontendApplication& application() {
         return *static_cast<FrontendApplication*>(touchgfx::Application::getInstance());
@@ -28,6 +41,16 @@ protected:
     touchgfx::ClickListener< touchgfx::Button > stop;
 
 private:
+
+    /*
+     * Callback Declarations
+     */
+    touchgfx::Callback<radioControlPanelBase, const touchgfx::AbstractButton&> buttonCallback;
+
+    /*
+     * Callback Handler Declarations
+     */
+    void buttonCallbackHandler(const touchgfx::AbstractButton& src);
 
 };
 

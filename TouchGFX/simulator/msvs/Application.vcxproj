@@ -40,6 +40,7 @@
     <ClCompile Include="..\..\generated\gui_generated\src\containers\listItem_notSelectedBase.cpp"/>
     <ClCompile Include="..\..\gui\src\containers\listItem_selected.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\containers\listItem_selectedBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\model\ModelListener.cpp"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ApplicationRoot)\assets\texts\texts.xml"/>

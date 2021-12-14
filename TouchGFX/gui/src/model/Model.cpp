@@ -3,8 +3,7 @@
 #include <ApplicationModule.h>
 
 Model::Model()
-    : modelListener(nullptr){
-}
+    : modelListener(nullptr) {}
 
 void Model::bind(ModelListener *modelListener) {
     this->modelListener = modelListener;
@@ -17,4 +16,12 @@ void Model::tick() {
 }
 const model::ApplicationModel &Model::getApplicationModel() const {
     return ApplicationModule::getInstance().getApplicationModel();
+}
+
+controller::ApplicationController &Model::getApplicationController() {
+    return ApplicationModule::getInstance().getApplicationController();
+}
+
+const controller::ApplicationController &Model::getApplicationController() const {
+    return ApplicationModule::getInstance().getApplicationController();
 }

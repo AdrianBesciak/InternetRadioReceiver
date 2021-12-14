@@ -1,6 +1,4 @@
-#ifndef MEMORYSCREENPRESENTER_HPP
-#define MEMORYSCREENPRESENTER_HPP
-
+#pragma once
 #include <gui/model/ModelListener.hpp>
 #include <mvp/Presenter.hpp>
 
@@ -11,10 +9,11 @@ class MemoryScreenView;
 class MemoryScreenPresenter : public touchgfx::Presenter, public ModelListener {
 public:
     explicit MemoryScreenPresenter(MemoryScreenView& view);
+
+    void activate() override;
+    void deactivate() override;
     void update() override;
 
 private:
     MemoryScreenView& view;
 };
-
-#endif // MEMORYSCREENPRESENTER_HPP

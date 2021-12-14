@@ -21,7 +21,8 @@ ApplicationModule::ApplicationModule()
     , sdCardWatchdog()
     , audioPlayer()
     , mainDisplay()
-    , applicationModel() {
+    , applicationModel()
+    , applicationController(audioPlayer, applicationModel) {
     if (instance != nullptr) {
         throw sys::SingleInstanceException("ApplicationModule instance already exists");
     }
@@ -34,6 +35,14 @@ ApplicationModule::ApplicationModule()
 
 const model::ApplicationModel &ApplicationModule::getApplicationModel() const {
     return applicationModel;
+}
+
+controller::ApplicationController &ApplicationModule::getApplicationController() {
+    return applicationController;
+}
+
+const controller::ApplicationController &ApplicationModule::getApplicationController() const {
+    return applicationController;
 }
 
 
@@ -52,7 +61,6 @@ void ApplicationModule::bindPlayerState() {
         playerModel.setProgressCurrent(current);
         playerModel.setProgressTotal(total);
     });
-
 }
 
 void ApplicationModule::startTasks() {
