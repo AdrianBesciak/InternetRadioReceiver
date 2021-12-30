@@ -30,7 +30,7 @@ MemoryScreenViewBase::MemoryScreenViewBase() :
     songProgressBar.setValue(60);
     songProgressBar.setAnchorAtZero(false);
 
-    filenameTextBox.setPosition(37, 133, 404, 25);
+    filenameTextBox.setPosition(37, 125, 404, 25);
     filenameTextBox.setColor(touchgfx::Color::getColorFromRGB(129, 133, 255));
     filenameTextBox.setLinespacing(0);
     Unicode::snprintf(filenameTextBoxBuffer, FILENAMETEXTBOX_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_XX3O).getText());
@@ -88,6 +88,8 @@ MemoryScreenViewBase::MemoryScreenViewBase() :
     PlayQueue.animateToItem(10, 0);
     slideMenuRight.add(PlayQueue);
 
+    volumePanel.setXY(95, 15);
+
     add(__background);
     add(MemoryIcon);
     add(controls1);
@@ -96,6 +98,7 @@ MemoryScreenViewBase::MemoryScreenViewBase() :
     add(filenameTextBox);
     add(slideMenuLeft);
     add(slideMenuRight);
+    add(volumePanel);
 }
 
 void MemoryScreenViewBase::setupScreen()
@@ -111,6 +114,7 @@ void MemoryScreenViewBase::setupScreen()
     {
         PlayQueueSelectedListItems[i].initialize();
     }
+    volumePanel.initialize();
 }
 
 void MemoryScreenViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)

@@ -39,6 +39,14 @@ namespace controller {
 
     }
 
+    void ApplicationController::increaseVolume() {
+
+    }
+
+    void ApplicationController::decreaseVolume() {
+
+    }
+
     void ApplicationController::setVolume(std::uint32_t volume) {
         audioPlayer.setVolume(volume);
     }

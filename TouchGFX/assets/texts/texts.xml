@@ -25,6 +25,12 @@
     <Text Id="__SingleUse_XX3O" TypographyId="Default" Alignment="Left" Direction="LTR">
       <Translation Language="GB">File1.wav</Translation>
     </Text>
+    <Text Id="__SingleUse_GHNH" TypographyId="Default" Alignment="Left" Direction="LTR">
+      <Translation Language="GB">&lt;value&gt;</Translation>
+    </Text>
+    <Text Id="__SingleUse_0LZ8" TypographyId="Default" Alignment="Left" Direction="LTR">
+      <Translation Language="GB">100</Translation>
+    </Text>
   </Texts>
   <Typographies>
     <Typography Id="Default" Font="verdana.ttf" Size="20" Bpp="4" FallbackCharacter="?" WildcardCharacterRanges="0-9,A-Z,a-z" />

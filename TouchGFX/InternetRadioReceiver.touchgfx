@@ -156,8 +156,8 @@
           {
             "Type": "TextArea",
             "Name": "radioStationNameBox",
-            "X": 37,
-            "Y": 124,
+            "X": 38,
+            "Y": 150,
             "Width": 404,
             "Height": 25,
             "TextId": "__SingleUse_QX2T",
@@ -247,6 +247,15 @@
                 "Clickable": true
               }
             ]
+          },
+          {
+            "Type": "CustomContainerInstance",
+            "Name": "volumePanel",
+            "X": 95,
+            "Y": 15,
+            "Width": 130,
+            "Height": 40,
+            "CustomContainerDefinitionName": "volumePanel"
           }
         ],
         "Interactions": [
@@ -316,7 +325,7 @@
             "Type": "TextArea",
             "Name": "filenameTextBox",
             "X": 37,
-            "Y": 133,
+            "Y": 125,
             "Width": 404,
             "Height": 25,
             "TextId": "__SingleUse_085C",
@@ -412,6 +421,15 @@
                 "DragAcceleration": 1.0
               }
             ]
+          },
+          {
+            "Type": "CustomContainerInstance",
+            "Name": "volumePanel",
+            "X": 95,
+            "Y": 15,
+            "Width": 130,
+            "Height": 40,
+            "CustomContainerDefinitionName": "volumePanel"
           }
         ],
         "Interactions": [
@@ -830,6 +848,75 @@
         "CustomTriggers": [
           {
             "Name": "trigger1"
+          }
+        ]
+      },
+      {
+        "Name": "volumePanel",
+        "Width": 130,
+        "Height": 40,
+        "Components": [
+          {
+            "Type": "TextArea",
+            "Name": "volumeText",
+            "X": 45,
+            "Y": 8,
+            "Width": 38,
+            "Height": 25,
+            "TextId": "__SingleUse_GHNH",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 129,
+              "Green": 133,
+              "Blue": 255
+            },
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "__SingleUse_0LZ8",
+              "UseBuffer": true,
+              "BufferSize": 3
+            }
+          },
+          {
+            "Type": "Button",
+            "Name": "volumeMinusButton",
+            "Width": 40,
+            "Height": 40,
+            "Pressed": "minus_button_pressed.png",
+            "Released": "minus_button.png"
+          },
+          {
+            "Type": "Button",
+            "Name": "volumePlusButton",
+            "X": 90,
+            "Width": 40,
+            "Height": 40,
+            "Pressed": "plus_button_pressed.png",
+            "Released": "plus_button.png"
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "volumePlusClicked",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "volumePlusButton"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "handleVolumePlusClicked"
+            }
+          },
+          {
+            "InteractionName": "volumeMinusClicked",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "volumeMinusButton"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "handleVolumeMinusClicked"
+            }
           }
         ]
       }

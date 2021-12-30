@@ -5,6 +5,15 @@ RadioScreenView::RadioScreenView()
 }
 
 
+void RadioScreenView::setOnVolumePlusClicked(const std::function<void()> &onVolumePlusClicked) {
+    volumePanel.setOnVolumePlusClicked(onVolumePlusClicked);
+}
+
+void RadioScreenView::setOnVolumeMinusClicked(const std::function<void()> &onVolumeMinusClicked) {
+    volumePanel.setOnVolumeMinusClicked(onVolumeMinusClicked);
+}
+
+
 void RadioScreenView::setOnPlayClicked(const std::function<void()> &onPlayClicked) {
     radioControlPanel1.setOnPlayClicked(onPlayClicked);
 }

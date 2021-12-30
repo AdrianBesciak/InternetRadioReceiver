@@ -5,11 +5,13 @@ class RadioScreenView : public RadioScreenViewBase {
 public:
     RadioScreenView();
 
+    void setOnVolumePlusClicked(const std::function<void()> &onVolumePlusClicked);
+    void setOnVolumeMinusClicked(const std::function<void()> &onVolumeMinusClicked);
+
     void setOnPlayClicked(const std::function<void()> &onPlayClicked);
     void setOnStopClicked(const std::function<void()> &onStopClicked);
 
     void setPeripheralState(bool ethernetState, bool sdCardState);
-
 
     void setTitle(const std::string &title);
     void setPlayVisible(bool visible);

@@ -21,7 +21,7 @@ RadioScreenViewBase::RadioScreenViewBase() :
 
     radioControlPanel1.setXY(220, 200);
 
-    radioStationNameBox.setPosition(37, 124, 404, 25);
+    radioStationNameBox.setPosition(38, 150, 404, 25);
     radioStationNameBox.setColor(touchgfx::Color::getColorFromRGB(129, 133, 255));
     radioStationNameBox.setLinespacing(0);
     Unicode::snprintf(radioStationNameBoxBuffer, RADIOSTATIONNAMEBOX_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_ZKCH).getText());
@@ -76,6 +76,8 @@ RadioScreenViewBase::RadioScreenViewBase() :
     RadioStations.animateToItem(0, 0);
     slideMenuRight.add(RadioStations);
 
+    volumePanel.setXY(95, 15);
+
     add(__background);
     add(RadioIcon);
     add(controls1);
@@ -83,6 +85,7 @@ RadioScreenViewBase::RadioScreenViewBase() :
     add(radioStationNameBox);
     add(slideMenuLeft);
     add(slideMenuRight);
+    add(volumePanel);
 }
 
 void RadioScreenViewBase::setupScreen()
@@ -94,6 +97,7 @@ void RadioScreenViewBase::setupScreen()
     {
         RadioStationsListItems[i].initialize();
     }
+    volumePanel.initialize();
 }
 
 void RadioScreenViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)

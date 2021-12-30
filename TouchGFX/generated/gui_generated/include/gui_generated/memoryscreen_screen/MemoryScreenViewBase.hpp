@@ -18,6 +18,7 @@
 #include <touchgfx/containers/scrollers/ScrollWheelWithSelectionStyle.hpp>
 #include <gui/containers/listItem_notSelected.hpp>
 #include <gui/containers/listItem_selected.hpp>
+#include <gui/containers/volumePanel.hpp>
 
 class MemoryScreenViewBase : public touchgfx::View<MemoryScreenPresenter>
 {
@@ -57,6 +58,7 @@ protected:
     touchgfx::ScrollWheelWithSelectionStyle PlayQueue;
     touchgfx::DrawableListItems<listItem_notSelected, 11> PlayQueueListItems;
     touchgfx::DrawableListItems<listItem_selected, 2> PlayQueueSelectedListItems;
+    volumePanel volumePanel;
 
     /*
      * Wildcard Buffers

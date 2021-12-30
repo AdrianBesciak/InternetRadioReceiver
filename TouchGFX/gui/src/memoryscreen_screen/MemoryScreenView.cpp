@@ -1,6 +1,15 @@
 #include <gui/memoryscreen_screen/MemoryScreenView.hpp>
 
-MemoryScreenView::MemoryScreenView() {}
+MemoryScreenView::MemoryScreenView() = default;
+
+
+void MemoryScreenView::setOnVolumePlusClicked(const std::function<void()> &onVolumePlusClicked) {
+    volumePanel.setOnVolumePlusClicked(onVolumePlusClicked);
+}
+
+void MemoryScreenView::setOnVolumeMinusClicked(const std::function<void()> &onVolumeMinusClicked) {
+    volumePanel.setOnVolumeMinusClicked(onVolumeMinusClicked);
+}
 
 
 void MemoryScreenView::setOnPlayClicked(const std::function<void()> &onPlayClicked) {

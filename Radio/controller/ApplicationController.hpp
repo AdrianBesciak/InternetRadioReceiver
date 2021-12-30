@@ -17,6 +17,8 @@ namespace controller {
         void fastForward();
         void fastBackward();
 
+        void increaseVolume();
+        void decreaseVolume();
         void setVolume(std::uint32_t volume);
 
         void playFromRadio(std::size_t idx);

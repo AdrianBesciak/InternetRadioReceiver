@@ -5,6 +5,9 @@ class MemoryScreenView : public MemoryScreenViewBase {
 public:
     MemoryScreenView();
 
+    void setOnVolumePlusClicked(const std::function<void()> &onVolumePlusClicked);
+    void setOnVolumeMinusClicked(const std::function<void()> &onVolumeMinusClicked);
+
     void setOnPlayClicked(const std::function<void()> &onPlayClicked);
     void setOnStopClicked(const std::function<void()> &onStopClicked);
     void setOnPauseClicked(const std::function<void()> &onPauseClicked);

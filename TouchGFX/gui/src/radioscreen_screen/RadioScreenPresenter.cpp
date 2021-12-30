@@ -7,11 +7,17 @@ RadioScreenPresenter::RadioScreenPresenter(RadioScreenView& view)
 
 
 void RadioScreenPresenter::activate() {
+    view.setOnVolumePlusClicked([&] { applicationController->increaseVolume();});
+    view.setOnVolumeMinusClicked([&] { applicationController->decreaseVolume();});
+
     view.setOnPlayClicked([&] {applicationController->playRadio();});
     view.setOnStopClicked([&] {applicationController->stop();});
 }
 
 void RadioScreenPresenter::deactivate() {
+    view.setOnVolumePlusClicked(nullptr);
+    view.setOnVolumeMinusClicked(nullptr);
+
     view.setOnPlayClicked(nullptr);
     view.setOnStopClicked(nullptr);
 }

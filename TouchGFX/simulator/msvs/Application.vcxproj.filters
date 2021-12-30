@@ -312,6 +312,12 @@
     <ClCompile Include="..\..\gui\src\model\ModelListener.cpp">
       <Filter>Source Files\gui\model</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\gui\src\containers\volumePanel.cpp">
+      <Filter>Source Files\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\volumePanelBase.cpp">
+      <Filter>Source Files\generated\gui_generated\containers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ApplicationRoot)\assets\texts\texts.xml">
@@ -809,6 +815,12 @@
       <Filter>Header Files\gui\containers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\listItem_selectedBase.hpp">
+      <Filter>Header Files\generated\gui_generated\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\containers\volumePanel.hpp">
+      <Filter>Header Files\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\volumePanelBase.hpp">
       <Filter>Header Files\generated\gui_generated\containers</Filter>
     </ClInclude>
   </ItemGroup>

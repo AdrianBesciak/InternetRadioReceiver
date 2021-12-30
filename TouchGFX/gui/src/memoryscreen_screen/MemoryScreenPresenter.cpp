@@ -5,6 +5,9 @@ MemoryScreenPresenter::MemoryScreenPresenter(MemoryScreenView& view)
     : view(view) {}
 
 void MemoryScreenPresenter::activate() {
+    view.setOnVolumePlusClicked([&] { applicationController->increaseVolume();});
+    view.setOnVolumeMinusClicked([&] { applicationController->decreaseVolume();});
+
     view.setOnPlayClicked([&]{applicationController->playSDCard();});
     view.setOnStopClicked([&]{applicationController->stop();});
     view.setOnPauseClicked([&]{applicationController->pause();});
@@ -15,6 +18,9 @@ void MemoryScreenPresenter::activate() {
 }
 
 void MemoryScreenPresenter::deactivate() {
+    view.setOnVolumePlusClicked(nullptr);
+    view.setOnVolumeMinusClicked(nullptr);
+
     view.setOnPlayClicked(nullptr);
     view.setOnStopClicked(nullptr);
     view.setOnPauseClicked(nullptr);
