@@ -1,12 +1,12 @@
 #pragma once
-#include <gui_generated/main_screen/MainViewBase.hpp>
+#include <gui_generated/mainscreen_screen/MainScreenViewBase.hpp>
+#include <gui/mainscreen_screen/MainScreenPresenter.hpp>
 #include <gui/containers/delegate/PeripheralStateIndicatorsDelegate.hpp>
 
-class MainView : public MainViewBase
+class MainScreenView : public MainScreenViewBase
         , public PeripheralStateIndicatorsDelegate {
 public:
-    MainView();
-
+    MainScreenView();
 protected:
     PeripheralStateIndicators &getPeripheralStateIndicators() override;
 };

@@ -45,9 +45,9 @@ void ScreenNavigatorBase::buttonCallbackHandler(const touchgfx::AbstractButton& 
     if (&src == &sdCardButton)
     {
         //sdCardButtonClicked
-        //When sdCardButton clicked change screen to MemoryScreen
-        //Go to MemoryScreen with no screen transition
-        application().gotoMemoryScreenScreenNoTransition();
+        //When sdCardButton clicked change screen to SDCardScreen
+        //Go to SDCardScreen with no screen transition
+        application().gotoSDCardScreenScreenNoTransition();
     }
     else if (&src == &radioButton)
     {

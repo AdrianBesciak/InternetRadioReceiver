@@ -1,6 +1,4 @@
-#ifndef MODEL_HPP
-#define MODEL_HPP
-
+#pragma once
 #include <ApplicationModule.h>
 #include <model/ApplicationModel.hpp>
 
@@ -19,5 +17,3 @@ public:
 protected:
     ModelListener* modelListener;
 };
-
-#endif // MODEL_HPP

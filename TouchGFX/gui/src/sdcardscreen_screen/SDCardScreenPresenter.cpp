@@ -1,10 +1,10 @@
-#include <gui/memoryscreen_screen/MemoryScreenView.hpp>
-#include <gui/memoryscreen_screen/MemoryScreenPresenter.hpp>
+#include <gui/sdcardscreen_screen/SDCardScreenPresenter.hpp>
+#include <gui/sdcardscreen_screen/SDCardScreenView.hpp>
 
-MemoryScreenPresenter::MemoryScreenPresenter(MemoryScreenView& view)
+SDCardScreenPresenter::SDCardScreenPresenter(SDCardScreenView& view)
     : view(view) {}
 
-void MemoryScreenPresenter::activate() {
+void SDCardScreenPresenter::activate() {
     view.setOnVolumePlusClicked([&] { applicationController->increaseVolume();});
     view.setOnVolumeMinusClicked([&] { applicationController->decreaseVolume();});
 
@@ -17,7 +17,7 @@ void MemoryScreenPresenter::activate() {
     view.setOnPlayPreviousClicked([&]{applicationController->playPrevious();});
 }
 
-void MemoryScreenPresenter::deactivate() {
+void SDCardScreenPresenter::deactivate() {
     view.setOnVolumePlusClicked(nullptr);
     view.setOnVolumeMinusClicked(nullptr);
 
@@ -30,6 +30,6 @@ void MemoryScreenPresenter::deactivate() {
     view.setOnPlayPreviousClicked(nullptr);
 }
 
-void MemoryScreenPresenter::update() {
+void SDCardScreenPresenter::update() {
     updatePeripheralsState([&](auto... states) {view.setPeripheralState(states...);});
 }

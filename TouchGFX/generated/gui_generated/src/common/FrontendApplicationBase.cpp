@@ -9,12 +9,12 @@
 #include <touchgfx/Texts.hpp>
 #include <touchgfx/hal/HAL.hpp>
 #include<platform/driver/lcd/LCD24bpp.hpp>
-#include <gui/main_screen/MainView.hpp>
-#include <gui/main_screen/MainPresenter.hpp>
+#include <gui/mainscreen_screen/MainScreenView.hpp>
+#include <gui/mainscreen_screen/MainScreenPresenter.hpp>
 #include <gui/radioscreen_screen/RadioScreenView.hpp>
 #include <gui/radioscreen_screen/RadioScreenPresenter.hpp>
-#include <gui/memoryscreen_screen/MemoryScreenView.hpp>
-#include <gui/memoryscreen_screen/MemoryScreenPresenter.hpp>
+#include <gui/sdcardscreen_screen/SDCardScreenView.hpp>
+#include <gui/sdcardscreen_screen/SDCardScreenPresenter.hpp>
 
 using namespace touchgfx;
 
@@ -33,17 +33,17 @@ FrontendApplicationBase::FrontendApplicationBase(Model& m, FrontendHeap& heap)
  * Screen Transition Declarations
  */
 
-// Main
+// MainScreen
 
-void FrontendApplicationBase::gotoMainScreenNoTransition()
+void FrontendApplicationBase::gotoMainScreenScreenNoTransition()
 {
-    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplication::gotoMainScreenNoTransitionImpl);
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplication::gotoMainScreenScreenNoTransitionImpl);
     pendingScreenTransitionCallback = &transitionCallback;
 }
 
-void FrontendApplicationBase::gotoMainScreenNoTransitionImpl()
+void FrontendApplicationBase::gotoMainScreenScreenNoTransitionImpl()
 {
-    touchgfx::makeTransition<MainView, MainPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+    touchgfx::makeTransition<MainScreenView, MainScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
 
 // RadioScreen
@@ -59,15 +59,15 @@ void FrontendApplicationBase::gotoRadioScreenScreenNoTransitionImpl()
     touchgfx::makeTransition<RadioScreenView, RadioScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
 
-// MemoryScreen
+// SDCardScreen
 
-void FrontendApplicationBase::gotoMemoryScreenScreenNoTransition()
+void FrontendApplicationBase::gotoSDCardScreenScreenNoTransition()
 {
-    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplication::gotoMemoryScreenScreenNoTransitionImpl);
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplication::gotoSDCardScreenScreenNoTransitionImpl);
     pendingScreenTransitionCallback = &transitionCallback;
 }
 
-void FrontendApplicationBase::gotoMemoryScreenScreenNoTransitionImpl()
+void FrontendApplicationBase::gotoSDCardScreenScreenNoTransitionImpl()
 {
-    touchgfx::makeTransition<MemoryScreenView, MemoryScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+    touchgfx::makeTransition<SDCardScreenView, SDCardScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }

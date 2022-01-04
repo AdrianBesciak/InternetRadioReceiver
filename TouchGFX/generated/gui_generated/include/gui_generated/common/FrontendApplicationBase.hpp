@@ -15,28 +15,28 @@ public:
     FrontendApplicationBase(Model& m, FrontendHeap& heap);
     virtual ~FrontendApplicationBase() { }
 
-    // Main
-    void gotoMainScreenNoTransition();
+    // MainScreen
+    void gotoMainScreenScreenNoTransition();
 
     // RadioScreen
     void gotoRadioScreenScreenNoTransition();
 
-    // MemoryScreen
-    void gotoMemoryScreenScreenNoTransition();
+    // SDCardScreen
+    void gotoSDCardScreenScreenNoTransition();
 
 protected:
     touchgfx::Callback<FrontendApplicationBase> transitionCallback;
     FrontendHeap& frontendHeap;
     Model& model;
 
-    // Main
-    void gotoMainScreenNoTransitionImpl();
+    // MainScreen
+    void gotoMainScreenScreenNoTransitionImpl();
 
     // RadioScreen
     void gotoRadioScreenScreenNoTransitionImpl();
 
-    // MemoryScreen
-    void gotoMemoryScreenScreenNoTransitionImpl();
+    // SDCardScreen
+    void gotoSDCardScreenScreenNoTransitionImpl();
 };
 
 #endif // FRONTENDAPPLICATIONBASE_HPP

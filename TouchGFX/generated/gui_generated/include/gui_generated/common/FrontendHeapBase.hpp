@@ -12,12 +12,12 @@
 #include <gui/common/FrontendApplication.hpp>
 #include <gui/model/Model.hpp>
 
-#include <gui/main_screen/MainView.hpp>
-#include <gui/main_screen/MainPresenter.hpp>
+#include <gui/mainscreen_screen/MainScreenView.hpp>
+#include <gui/mainscreen_screen/MainScreenPresenter.hpp>
 #include <gui/radioscreen_screen/RadioScreenView.hpp>
 #include <gui/radioscreen_screen/RadioScreenPresenter.hpp>
-#include <gui/memoryscreen_screen/MemoryScreenView.hpp>
-#include <gui/memoryscreen_screen/MemoryScreenPresenter.hpp>
+#include <gui/sdcardscreen_screen/SDCardScreenView.hpp>
+#include <gui/sdcardscreen_screen/SDCardScreenPresenter.hpp>
 
 
 /**
@@ -40,9 +40,9 @@ public:
      * A list of all view types. Must end with meta::Nil.
      * @note All view types used in the application MUST be added to this list!
      */
-    typedef touchgfx::meta::TypeList< MainView,
+    typedef touchgfx::meta::TypeList< MainScreenView,
             touchgfx::meta::TypeList< RadioScreenView,
-            touchgfx::meta::TypeList< MemoryScreenView,
+            touchgfx::meta::TypeList< SDCardScreenView,
             touchgfx::meta::Nil > >
             > GeneratedViewTypes;
 
@@ -55,9 +55,9 @@ public:
      * A list of all presenter types. Must end with meta::Nil.
      * @note All presenter types used in the application MUST be added to this list!
      */
-    typedef touchgfx::meta::TypeList< MainPresenter,
+    typedef touchgfx::meta::TypeList< MainScreenPresenter,
             touchgfx::meta::TypeList< RadioScreenPresenter,
-            touchgfx::meta::TypeList< MemoryScreenPresenter,
+            touchgfx::meta::TypeList< SDCardScreenPresenter,
             touchgfx::meta::Nil > >
             > GeneratedPresenterTypes;
 
@@ -81,7 +81,7 @@ public:
 
     virtual void gotoStartScreen(FrontendApplication& app)
     {
-        app.gotoMainScreenNoTransition();
+        app.gotoMainScreenScreenNoTransition();
     }
 protected:
     FrontendHeapBase(touchgfx::AbstractPartition& presenters, touchgfx::AbstractPartition& views, touchgfx::AbstractPartition& transitions, FrontendApplication& app)

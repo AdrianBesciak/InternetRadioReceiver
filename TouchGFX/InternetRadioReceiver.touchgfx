@@ -2,7 +2,7 @@
   "Application": {
     "Screens": [
       {
-        "Name": "Main",
+        "Name": "MainScreen",
         "Components": [
           {
             "Type": "Button",
@@ -63,7 +63,7 @@
             "Action": {
               "Type": "ActionGotoScreen",
               "ScreenTransitionType": "ScreenTransitionNone",
-              "ActionComponent": "MemoryScreen"
+              "ActionComponent": "SDCardScreen"
             }
           }
         ]
@@ -173,7 +173,7 @@
         "Interactions": []
       },
       {
-        "Name": "MemoryScreen",
+        "Name": "SDCardScreen",
         "Components": [
           {
             "Type": "CustomContainerInstance",
@@ -502,7 +502,7 @@
             "Action": {
               "Type": "ActionGotoScreen",
               "ScreenTransitionType": "ScreenTransitionNone",
-              "ActionComponent": "MemoryScreen"
+              "ActionComponent": "SDCardScreen"
             }
           }
         ]
@@ -951,7 +951,7 @@
       "Height": 272
     },
     "SelectedColorDepth": 24,
-    "StartupScreenName": "Main",
+    "StartupScreenName": "MainScreen",
     "SelectedStartupLanguage": "GB",
     "Skin": "Blue",
     "TouchGfxPath": "../Middlewares/ST/touchgfx",

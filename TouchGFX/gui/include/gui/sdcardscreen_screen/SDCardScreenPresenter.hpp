@@ -4,16 +4,16 @@
 
 using namespace touchgfx;
 
-class MemoryScreenView;
+class SDCardScreenView;
 
-class MemoryScreenPresenter : public touchgfx::Presenter, public ModelListener {
+class SDCardScreenPresenter : public touchgfx::Presenter, public ModelListener {
 public:
-    explicit MemoryScreenPresenter(MemoryScreenView& view);
+    explicit SDCardScreenPresenter(SDCardScreenView& view);
 
     void activate() override;
     void deactivate() override;
     void update() override;
 
 private:
-    MemoryScreenView& view;
+    SDCardScreenView& view;
 };

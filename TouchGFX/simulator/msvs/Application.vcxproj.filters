@@ -264,19 +264,19 @@
     <ClCompile Include="..\..\generated\simulator\src\video\SoftwareMJPEGDecoder.cpp">
       <Filter>Source Files\generated\simulator\video</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\gui\src\main_screen\MainPresenter.cpp">
+    <ClCompile Include="..\..\gui\src\main_screen\MainScreenPresenter.cpp">
       <Filter>Source Files\gui\main_screen</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\gui\src\main_screen\MainView.cpp">
+    <ClCompile Include="..\..\gui\src\main_screen\MainScreenView.cpp">
       <Filter>Source Files\gui\main_screen</Filter>
     </ClCompile>
     <ClCompile Include="..\..\generated\gui_generated\src\main_screen\MainViewBase.cpp">
       <Filter>Source Files\generated\gui_generated\main_screen</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\gui\src\memoryscreen_screen\MemoryScreenPresenter.cpp">
+    <ClCompile Include="..\..\gui\src\memoryscreen_screen\SDCardScreenPresenter.cpp">
       <Filter>Source Files\gui\memoryscreen_screen</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\gui\src\memoryscreen_screen\MemoryScreenView.cpp">
+    <ClCompile Include="..\..\gui\src\memoryscreen_screen\SDCardScreenView.cpp">
       <Filter>Source Files\gui\memoryscreen_screen</Filter>
     </ClCompile>
     <ClCompile Include="..\..\generated\gui_generated\src\memoryscreen_screen\MemoryScreenViewBase.cpp">
@@ -817,19 +817,19 @@
     <ClInclude Include="..\..\generated\simulator\include\simulator\video\SoftwareMJPEGDecoder.hpp">
       <Filter>Header Files\generated\simulator\include\simulator\video</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\gui\include\gui\main_screen\MainPresenter.hpp">
+    <ClInclude Include="..\..\gui\include\gui\main_screen\MainScreenPresenter.hpp">
       <Filter>Header Files\gui\main_screen</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\gui\include\gui\main_screen\MainView.hpp">
+    <ClInclude Include="..\..\gui\include\gui\main_screen\MainScreenView.hpp">
       <Filter>Header Files\gui\main_screen</Filter>
     </ClInclude>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\main_screen\MainViewBase.hpp">
       <Filter>Header Files\generated\gui_generated\main_screen</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\gui\include\gui\memoryscreen_screen\MemoryScreenPresenter.hpp">
+    <ClInclude Include="..\..\gui\include\gui\memoryscreen_screen\SDCardScreenPresenter.hpp">
       <Filter>Header Files\gui\memoryscreen_screen</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\gui\include\gui\memoryscreen_screen\MemoryScreenView.hpp">
+    <ClInclude Include="..\..\gui\include\gui\memoryscreen_screen\SDCardScreenView.hpp">
       <Filter>Header Files\gui\memoryscreen_screen</Filter>
     </ClInclude>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\memoryscreen_screen\MemoryScreenViewBase.hpp">
