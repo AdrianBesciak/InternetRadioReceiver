@@ -5,31 +5,28 @@ SDCardScreenPresenter::SDCardScreenPresenter(SDCardScreenView& view)
     : view(view) {}
 
 void SDCardScreenPresenter::activate() {
-    view.setOnVolumePlusClicked([&] { applicationController->increaseVolume();});
-    view.setOnVolumeMinusClicked([&] { applicationController->decreaseVolume();});
-
-    view.setOnPlayClicked([&]{applicationController->playSDCard();});
-    view.setOnStopClicked([&]{applicationController->stop();});
-    view.setOnPauseClicked([&]{applicationController->pause();});
-    view.setOnFastForwardClicked([&]{applicationController->fastForward();});
-    view.setOnFastBackwardClicked([&]{applicationController->fastBackward();});
-    view.setOnPlayNextClicked([&]{applicationController->playNext();});
-    view.setOnPlayPreviousClicked([&]{applicationController->playPrevious();});
+    controller::VolumeController &volumeController = applicationController->getVolumeController();
+    view.setOnVolumePlusClicked([&] { volumeController.increaseVolume();});
+    view.setOnVolumeMinusClicked([&] { volumeController.decreaseVolume();});
 }
 
 void SDCardScreenPresenter::deactivate() {
     view.setOnVolumePlusClicked(nullptr);
     view.setOnVolumeMinusClicked(nullptr);
-
-    view.setOnPlayClicked(nullptr);
-    view.setOnStopClicked(nullptr);
-    view.setOnPauseClicked(nullptr);
-    view.setOnFastForwardClicked(nullptr);
-    view.setOnFastBackwardClicked(nullptr);
-    view.setOnPlayNextClicked(nullptr);
-    view.setOnPlayPreviousClicked(nullptr);
 }
 
 void SDCardScreenPresenter::update() {
-    updatePeripheralsState([&](auto... states) {view.setPeripheralState(states...);});
+    updatePeripheralsState();
+    updateVolume();
+}
+
+void SDCardScreenPresenter::updatePeripheralsState() {
+    const model::PeripheralStateModel &peripheralStateModel = applicationModel->getPeripheralStateModel();
+    view.setEthernetState(peripheralStateModel.isEthernetState());
+    view.setSdCardState(peripheralStateModel.isSdCardState());
+}
+
+void SDCardScreenPresenter::updateVolume() {
+    const model::PlayerModel &playerModel = applicationModel->getPlayerModel();
+    view.setVolume(playerModel.getVolume());
 }

@@ -21,10 +21,6 @@
     <ClCompile Include="..\..\generated\gui_generated\src\common\FrontendApplicationBase.cpp"/>
     <ClCompile Include="..\..\gui\src\model\Model.cpp"/>
     <ClCompile Include="..\..\generated\simulator\src\video\SoftwareMJPEGDecoder.cpp"/>
-    <ClCompile Include="..\..\gui\src\main_screen\MainScreenPresenter.cpp"/>
-    <ClCompile Include="..\..\gui\src\main_screen\MainScreenView.cpp"/>
-    <ClCompile Include="..\..\gui\src\memoryscreen_screen\SDCardScreenPresenter.cpp"/>
-    <ClCompile Include="..\..\gui\src\memoryscreen_screen\SDCardScreenView.cpp"/>
     <ClCompile Include="..\..\gui\src\containers\ControlPanelSD.cpp"/>
     <ClCompile Include="..\..\gui\src\containers\ControlPanelRadio.cpp"/>
     <ClCompile Include="..\..\gui\src\radioscreen_screen\RadioScreenPresenter.cpp"/>
@@ -214,10 +210,6 @@
     <ClInclude Include="..\..\gui\include\gui\model\ModelListener.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\common\SimConstants.hpp"/>
     <ClInclude Include="..\..\generated\simulator\include\simulator\video\SoftwareMJPEGDecoder.hpp"/>
-    <ClInclude Include="..\..\gui\include\gui\main_screen\MainScreenPresenter.hpp"/>
-    <ClInclude Include="..\..\gui\include\gui\main_screen\MainScreenView.hpp"/>
-    <ClInclude Include="..\..\gui\include\gui\memoryscreen_screen\SDCardScreenPresenter.hpp"/>
-    <ClInclude Include="..\..\gui\include\gui\memoryscreen_screen\SDCardScreenView.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\containers\ControlPanelSD.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\containers\ControlPanelRadio.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\radioscreen_screen\RadioScreenPresenter.hpp"/>

@@ -1,11 +1,14 @@
 #pragma once
 #include <audio/AudioPlayer.hpp>
 #include <model/ApplicationModel.hpp>
+#include <controller/VolumeController.hpp>
 
 namespace controller {
     class ApplicationController {
     public:
         ApplicationController(audio::AudioPlayer &audioPlayer, model::ApplicationModel &applicationModel);
+        VolumeController &getVolumeController();
+
         void playRadio();
         void playSDCard();
         void stop();
@@ -17,13 +20,11 @@ namespace controller {
         void fastForward();
         void fastBackward();
 
-        void increaseVolume();
-        void decreaseVolume();
-        void setVolume(std::uint32_t volume);
-
         void playFromRadio(std::size_t idx);
         void playFromSDCard(std::size_t idx);
     private:
+        VolumeController volumeController;
+
         audio::AudioPlayer &audioPlayer;
         model::ApplicationModel &applicationModel;
     };

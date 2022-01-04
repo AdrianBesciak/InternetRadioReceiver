@@ -4,7 +4,6 @@
 class PeripheralStateIndicators : public PeripheralStateIndicatorsBase {
 public:
     PeripheralStateIndicators();
-    void initialize() override;
 
     void setEthernetState(bool state);
     void setSdCardState(bool state);

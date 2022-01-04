@@ -7,11 +7,11 @@ VolumePanel::VolumePanel()
 
 
 void VolumePanel::setOnVolumePlusClicked(const std::function<void()> &onVolumePlusClicked) {
-    VolumePanel::onVolumePlusClicked = onVolumePlusClicked;
+    this->onVolumePlusClicked = onVolumePlusClicked;
 }
 
 void VolumePanel::setOnVolumeMinusClicked(const std::function<void()> &onVolumeMinusClicked) {
-    VolumePanel::onVolumeMinusClicked = onVolumeMinusClicked;
+    this->onVolumeMinusClicked = onVolumeMinusClicked;
 }
 
 

@@ -15,5 +15,8 @@ public:
     void update() override;
 
 private:
+    void updatePeripheralsState();
+    void updateVolume();
+
     SDCardScreenView& view;
 };

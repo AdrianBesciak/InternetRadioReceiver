@@ -10,8 +10,6 @@ public:
     void bind(Model* model);
     virtual void update() = 0;
 protected:
-    void updatePeripheralsState(const std::function<void(bool, bool)>& peripheralStateUpdater);
-
     const model::ApplicationModel* applicationModel;
     controller::ApplicationController* applicationController;
 };

@@ -7,35 +7,28 @@ RadioScreenPresenter::RadioScreenPresenter(RadioScreenView& view)
 
 
 void RadioScreenPresenter::activate() {
-    view.setOnVolumePlusClicked([&] { applicationController->increaseVolume();});
-    view.setOnVolumeMinusClicked([&] { applicationController->decreaseVolume();});
-
-    view.setOnPlayClicked([&] {applicationController->playRadio();});
-    view.setOnStopClicked([&] {applicationController->stop();});
+    controller::VolumeController &volumeController = applicationController->getVolumeController();
+    view.setOnVolumePlusClicked([&] { volumeController.increaseVolume();});
+    view.setOnVolumeMinusClicked([&] { volumeController.decreaseVolume();});
 }
 
 void RadioScreenPresenter::deactivate() {
     view.setOnVolumePlusClicked(nullptr);
     view.setOnVolumeMinusClicked(nullptr);
-
-    view.setOnPlayClicked(nullptr);
-    view.setOnStopClicked(nullptr);
 }
 
 void RadioScreenPresenter::update() {
-    updatePeripheralsState([&](auto... states) {view.setPeripheralState(states...);});
-    updateCurrentRadioStationName();
-    updateRadioStationsList();
+    updatePeripheralsState();
+    updateVolume();
 }
 
-void RadioScreenPresenter::updateCurrentRadioStationName() {
-    const auto& stations = applicationModel->getRadioStationsListModel().getRadioStations();
-    auto current_index = applicationModel->getRadioStationsListModel().getCurrentStationIndex();
-    view.setTitle(stations.at(current_index).getName());
+void RadioScreenPresenter::updatePeripheralsState() {
+    const model::PeripheralStateModel &peripheralStateModel = applicationModel->getPeripheralStateModel();
+    view.setEthernetState(peripheralStateModel.isEthernetState());
+    view.setSdCardState(peripheralStateModel.isSdCardState());
 }
 
-void RadioScreenPresenter::updateRadioStationsList() {
-    const auto& stations = applicationModel->getRadioStationsListModel().getRadioStations();
-    auto current_index = applicationModel->getRadioStationsListModel().getCurrentStationIndex();
-    view.fillRadioStationsList(stations, current_index);
+void RadioScreenPresenter::updateVolume() {
+    const model::PlayerModel &playerModel = applicationModel->getPlayerModel();
+    view.setVolume(playerModel.getVolume());
 }

@@ -571,25 +571,29 @@
             "Wildcard1": {
               "TextId": "__SingleUse_0LZ8",
               "UseBuffer": true,
-              "BufferSize": 3
+              "BufferSize": 4
             }
           },
           {
-            "Type": "Button",
+            "Type": "RepeatButton",
             "Name": "volumeMinusButton",
             "Width": 40,
             "Height": 40,
             "Pressed": "minus_button_pressed.png",
-            "Released": "minus_button.png"
+            "Released": "minus_button.png",
+            "Delay": 500,
+            "Interval": 200
           },
           {
-            "Type": "Button",
+            "Type": "RepeatButton",
             "Name": "volumePlusButton",
             "X": 90,
             "Width": 40,
             "Height": 40,
             "Pressed": "plus_button_pressed.png",
-            "Released": "plus_button.png"
+            "Released": "plus_button.png",
+            "Delay": 500,
+            "Interval": 200
           }
         ],
         "Interactions": [

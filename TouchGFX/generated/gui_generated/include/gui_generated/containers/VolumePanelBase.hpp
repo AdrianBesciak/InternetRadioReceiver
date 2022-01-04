@@ -7,7 +7,7 @@
 #include <gui/common/FrontendApplication.hpp>
 #include <touchgfx/containers/Container.hpp>
 #include <touchgfx/widgets/TextAreaWithWildcard.hpp>
-#include <touchgfx/widgets/Button.hpp>
+#include <touchgfx/widgets/RepeatButton.hpp>
 
 class VolumePanelBase : public touchgfx::Container
 {
@@ -38,13 +38,13 @@ protected:
      * Member Declarations
      */
     touchgfx::TextAreaWithOneWildcard volumeText;
-    touchgfx::Button volumeMinusButton;
-    touchgfx::Button volumePlusButton;
+    touchgfx::RepeatButton volumeMinusButton;
+    touchgfx::RepeatButton volumePlusButton;
 
     /*
      * Wildcard Buffers
      */
-    static const uint16_t VOLUMETEXT_SIZE = 3;
+    static const uint16_t VOLUMETEXT_SIZE = 4;
     touchgfx::Unicode::UnicodeChar volumeTextBuffer[VOLUMETEXT_SIZE];
 
 private:

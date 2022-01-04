@@ -20,10 +20,14 @@ VolumePanelBase::VolumePanelBase() :
 
     volumeMinusButton.setXY(0, 0);
     volumeMinusButton.setBitmaps(touchgfx::Bitmap(BITMAP_MINUS_BUTTON_ID), touchgfx::Bitmap(BITMAP_MINUS_BUTTON_PRESSED_ID));
+    volumeMinusButton.setDelay(30);
+    volumeMinusButton.setInterval(12);
     volumeMinusButton.setAction(buttonCallback);
 
     volumePlusButton.setXY(90, 0);
     volumePlusButton.setBitmaps(touchgfx::Bitmap(BITMAP_PLUS_BUTTON_ID), touchgfx::Bitmap(BITMAP_PLUS_BUTTON_PRESSED_ID));
+    volumePlusButton.setDelay(30);
+    volumePlusButton.setInterval(12);
     volumePlusButton.setAction(buttonCallback);
 
     add(volumeText);

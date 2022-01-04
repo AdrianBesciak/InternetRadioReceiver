@@ -2,7 +2,10 @@
 
 PeripheralStateIndicatorsDelegate::~PeripheralStateIndicatorsDelegate() = default;
 
-void PeripheralStateIndicatorsDelegate::setPeripheralState(bool ethernetState, bool sdCardState) {
-    getPeripheralStateIndicators().setEthernetState(ethernetState);
-    getPeripheralStateIndicators().setSdCardState(sdCardState);
+void PeripheralStateIndicatorsDelegate::setEthernetState(bool state) {
+    getPeripheralStateIndicators().setEthernetState(state);
+}
+
+void PeripheralStateIndicatorsDelegate::setSdCardState(bool state) {
+    getPeripheralStateIndicators().setSdCardState(state);
 }

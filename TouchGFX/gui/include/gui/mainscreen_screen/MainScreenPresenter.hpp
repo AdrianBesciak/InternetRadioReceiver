@@ -12,5 +12,7 @@ public:
     void update() override;
 
 private:
+    void updatePeripheralsState();
+
     MainScreenView& view;
 };

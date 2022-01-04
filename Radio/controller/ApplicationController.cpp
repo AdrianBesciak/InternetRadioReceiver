@@ -4,8 +4,14 @@ namespace controller {
 
     ApplicationController::ApplicationController(audio::AudioPlayer &audioPlayer,
                                                  model::ApplicationModel &applicationModel)
-        : audioPlayer(audioPlayer)
+        : volumeController(audioPlayer)
+        , audioPlayer(audioPlayer)
         , applicationModel(applicationModel) {}
+
+    VolumeController &ApplicationController::getVolumeController() {
+        return volumeController;
+    }
+
 
     void ApplicationController::playRadio() {
 
@@ -37,18 +43,6 @@ namespace controller {
 
     void ApplicationController::fastBackward() {
 
-    }
-
-    void ApplicationController::increaseVolume() {
-
-    }
-
-    void ApplicationController::decreaseVolume() {
-
-    }
-
-    void ApplicationController::setVolume(std::uint32_t volume) {
-        audioPlayer.setVolume(volume);
     }
 
     void ApplicationController::playFromRadio(std::size_t idx) {

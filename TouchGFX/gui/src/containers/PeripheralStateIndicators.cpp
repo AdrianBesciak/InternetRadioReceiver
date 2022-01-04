@@ -4,13 +4,6 @@
 
 PeripheralStateIndicators::PeripheralStateIndicators() = default;
 
-void PeripheralStateIndicators::initialize() {
-    sdMountedInd.setVisible(false);
-    sdUnmountedInd.setVisible(true);
-    ethernetConnectedInd.setVisible(false);
-    ethernetDisconnectedInd.setVisible(true);
-}
-
 void PeripheralStateIndicators::setEthernetState(bool state) {
     if (state != ethernetConnectedInd.isVisible()) {
         ethernetConnectedInd.setVisible(state);
