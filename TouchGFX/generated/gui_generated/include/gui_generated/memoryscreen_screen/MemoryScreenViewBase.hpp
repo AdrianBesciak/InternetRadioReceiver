@@ -8,17 +8,17 @@
 #include <mvp/View.hpp>
 #include <gui/memoryscreen_screen/MemoryScreenPresenter.hpp>
 #include <touchgfx/widgets/Box.hpp>
+#include <gui/containers/ControlPanelSD.hpp>
+#include <gui/containers/TimePanelSD.hpp>
+#include <gui/containers/TitleView.hpp>
+#include <gui/containers/VolumePanel.hpp>
+#include <gui/containers/PeripheralStateIndicators.hpp>
 #include <touchgfx/widgets/Image.hpp>
-#include <gui/containers/controls.hpp>
-#include <gui/containers/musicControlPanel.hpp>
-#include <touchgfx/containers/progress_indicators/ImageProgress.hpp>
-#include <touchgfx/widgets/TextAreaWithWildcard.hpp>
 #include <touchgfx/containers/SlideMenu.hpp>
-#include <touchgfx/widgets/Button.hpp>
 #include <touchgfx/containers/scrollers/ScrollWheelWithSelectionStyle.hpp>
 #include <gui/containers/listItem_notSelected.hpp>
 #include <gui/containers/listItem_selected.hpp>
-#include <gui/containers/volumePanel.hpp>
+#include <gui/containers/ScreenNavigator.hpp>
 
 class MemoryScreenViewBase : public touchgfx::View<MemoryScreenPresenter>
 {
@@ -46,38 +46,20 @@ protected:
      * Member Declarations
      */
     touchgfx::Box __background;
-    touchgfx::Image MemoryIcon;
-    controls controls1;
-    musicControlPanel musicControlPanel1;
-    touchgfx::ImageProgress songProgressBar;
-    touchgfx::TextAreaWithOneWildcard filenameTextBox;
-    touchgfx::SlideMenu slideMenuLeft;
-    touchgfx::Button SDCardMenu;
-    touchgfx::Button radioMenu;
+    ControlPanelSD controlPanel;
+    TimePanelSD timePanel;
+    TitleView titleView;
+    VolumePanel volumePanel;
+    PeripheralStateIndicators peripheralStateIndicators;
+    touchgfx::Image sdCardIcon;
     touchgfx::SlideMenu slideMenuRight;
     touchgfx::ScrollWheelWithSelectionStyle PlayQueue;
     touchgfx::DrawableListItems<listItem_notSelected, 11> PlayQueueListItems;
     touchgfx::DrawableListItems<listItem_selected, 2> PlayQueueSelectedListItems;
-    volumePanel volumePanel;
-
-    /*
-     * Wildcard Buffers
-     */
-    static const uint16_t FILENAMETEXTBOX_SIZE = 45;
-    touchgfx::Unicode::UnicodeChar filenameTextBoxBuffer[FILENAMETEXTBOX_SIZE];
+    ScreenNavigator screenNavigator;
 
 private:
-
-    /*
-     * Callback Declarations
-     */
-    touchgfx::Callback<MemoryScreenViewBase, const touchgfx::AbstractButton&> buttonCallback;
     touchgfx::Callback<MemoryScreenViewBase, touchgfx::DrawableListItemsInterface*, int16_t, int16_t> updateItemCallback;
-
-    /*
-     * Callback Handler Declarations
-     */
-    void buttonCallbackHandler(const touchgfx::AbstractButton& src);
     void updateItemCallbackHandler(touchgfx::DrawableListItemsInterface* items, int16_t containerIndex, int16_t itemIndex);
 
 };

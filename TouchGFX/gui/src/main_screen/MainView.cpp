@@ -2,7 +2,6 @@
 
 MainView::MainView() = default;
 
-void MainView::setPeripheralState(bool ethernetState, bool sdCardState) {
-    controls1.setEthernetState(ethernetState);
-    controls1.setSdCardState(sdCardState);
+PeripheralStateIndicators& MainView::getPeripheralStateIndicators() {
+    return peripheralStateIndicators;
 }

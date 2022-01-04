@@ -1,20 +1,24 @@
 #pragma once
 #include <gui_generated/memoryscreen_screen/MemoryScreenViewBase.hpp>
+#include <gui/containers/delegate/VolumePanelDelegate.hpp>
+#include <gui/containers/delegate/PeripheralStateIndicatorsDelegate.hpp>
+#include <gui/containers/delegate/TitleViewDelegate.hpp>
+#include <gui/containers/delegate/TimePanelDelegate.hpp>
+#include <gui/containers/delegate/ControlPanelSDDelegate.hpp>
 
-class MemoryScreenView : public MemoryScreenViewBase {
+class MemoryScreenView : public MemoryScreenViewBase
+        , public PeripheralStateIndicatorsDelegate
+        , public VolumePanelDelegate
+        , public TitleViewDelegate
+        , public TimePanelDelegate
+        , public ControlPanelSDDelegate {
 public:
     MemoryScreenView();
 
-    void setOnVolumePlusClicked(const std::function<void()> &onVolumePlusClicked);
-    void setOnVolumeMinusClicked(const std::function<void()> &onVolumeMinusClicked);
-
-    void setOnPlayClicked(const std::function<void()> &onPlayClicked);
-    void setOnStopClicked(const std::function<void()> &onStopClicked);
-    void setOnPauseClicked(const std::function<void()> &onPauseClicked);
-    void setOnFastForwardClicked(const std::function<void()> &onFastForwardClicked);
-    void setOnFastBackwardClicked(const std::function<void()> &onFastBackwardClicked);
-    void setOnPlayNextClicked(const std::function<void()> &onPlayNextClicked);
-    void setOnPlayPreviousClicked(const std::function<void()> &onPlayPreviousClicked);
-
-    void setPeripheralState(bool ethernetState, bool sdCardState);
+protected:
+    PeripheralStateIndicators &getPeripheralStateIndicators() override;
+    VolumePanel &getVolumePanel() override;
+    TitleView &getTitleView() override;
+    TimePanelInterface &getTimePanel() override;
+    ControlPanelSD &getControlPanel() override;
 };

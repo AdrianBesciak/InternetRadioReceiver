@@ -2,46 +2,22 @@
 
 MemoryScreenView::MemoryScreenView() = default;
 
-
-void MemoryScreenView::setOnVolumePlusClicked(const std::function<void()> &onVolumePlusClicked) {
-    volumePanel.setOnVolumePlusClicked(onVolumePlusClicked);
+PeripheralStateIndicators& MemoryScreenView::getPeripheralStateIndicators() {
+    return peripheralStateIndicators;
 }
 
-void MemoryScreenView::setOnVolumeMinusClicked(const std::function<void()> &onVolumeMinusClicked) {
-    volumePanel.setOnVolumeMinusClicked(onVolumeMinusClicked);
+VolumePanel& MemoryScreenView::getVolumePanel() {
+    return volumePanel;
 }
 
-
-void MemoryScreenView::setOnPlayClicked(const std::function<void()> &onPlayClicked) {
-    musicControlPanel1.setOnPlayClicked(onPlayClicked);
+TitleView& MemoryScreenView::getTitleView() {
+    return titleView;
 }
 
-void MemoryScreenView::setOnStopClicked(const std::function<void()> &onStopClicked) {
-    musicControlPanel1.setOnStopClicked(onStopClicked);
+TimePanelInterface& MemoryScreenView::getTimePanel() {
+    return timePanel;
 }
 
-void MemoryScreenView::setOnPauseClicked(const std::function<void()> &onPauseClicked) {
-    musicControlPanel1.setOnPauseClicked(onPauseClicked);
-}
-
-void MemoryScreenView::setOnFastForwardClicked(const std::function<void()> &onFastForwardClicked) {
-    musicControlPanel1.setOnFastForwardClicked(onFastForwardClicked);
-}
-
-void MemoryScreenView::setOnFastBackwardClicked(const std::function<void()> &onFastBackwardClicked) {
-    musicControlPanel1.setOnFastBackwardClicked(onFastBackwardClicked);
-}
-
-void MemoryScreenView::setOnPlayNextClicked(const std::function<void()> &onPlayNextClicked) {
-    musicControlPanel1.setOnPlayNextClicked(onPlayNextClicked);
-}
-
-void MemoryScreenView::setOnPlayPreviousClicked(const std::function<void()> &onPlayPreviousClicked) {
-    musicControlPanel1.setOnPlayPreviousClicked(onPlayPreviousClicked);
-}
-
-
-void MemoryScreenView::setPeripheralState(bool ethernetState, bool sdCardState) {
-    controls1.setEthernetState(ethernetState);
-    controls1.setSdCardState(sdCardState);
+ControlPanelSD& MemoryScreenView::getControlPanel() {
+    return controlPanel;
 }

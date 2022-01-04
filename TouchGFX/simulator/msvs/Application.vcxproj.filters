@@ -220,6 +220,18 @@
     <Filter Include="Header Files\generated\gui_generated\memoryscreen_screen">
       <UniqueIdentifier>823FD22D-5009-98D3-A8B0-5AF7E901A375</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\gui\containers\delegate">
+      <UniqueIdentifier>12196ACE-7C32-7136-3121-1FF5829CC493</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gui\containers\delegate">
+      <UniqueIdentifier>41718F0A-399C-18B6-ED35-80A0506C9171</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gui\containers\interface">
+      <UniqueIdentifier>8F87A047-4294-5FB4-7F06-AE49F1283474</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gui\containers\interface">
+      <UniqueIdentifier>EF197B15-DE1B-B834-EE5C-2AF0963BA5D8</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(TouchGFXReleasePath)\framework\source\platform\driver\touch\SDL2TouchController.cpp">
@@ -270,17 +282,11 @@
     <ClCompile Include="..\..\generated\gui_generated\src\memoryscreen_screen\MemoryScreenViewBase.cpp">
       <Filter>Source Files\generated\gui_generated\memoryscreen_screen</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\gui\src\containers\musicControlPanel.cpp">
+    <ClCompile Include="..\..\gui\src\containers\ControlPanelSD.cpp">
       <Filter>Source Files\gui\containers</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\generated\gui_generated\src\containers\musicControlPanelBase.cpp">
-      <Filter>Source Files\generated\gui_generated\containers</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\gui\src\containers\radioControlPanel.cpp">
+    <ClCompile Include="..\..\gui\src\containers\ControlPanelRadio.cpp">
       <Filter>Source Files\gui\containers</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\generated\gui_generated\src\containers\radioControlPanelBase.cpp">
-      <Filter>Source Files\generated\gui_generated\containers</Filter>
     </ClCompile>
     <ClCompile Include="..\..\gui\src\radioscreen_screen\RadioScreenPresenter.cpp">
       <Filter>Source Files\gui\radioscreen_screen</Filter>
@@ -290,12 +296,6 @@
     </ClCompile>
     <ClCompile Include="..\..\generated\gui_generated\src\radioscreen_screen\RadioScreenViewBase.cpp">
       <Filter>Source Files\generated\gui_generated\radioscreen_screen</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\gui\src\containers\controls.cpp">
-      <Filter>Source Files\gui\containers</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\generated\gui_generated\src\containers\controlsBase.cpp">
-      <Filter>Source Files\generated\gui_generated\containers</Filter>
     </ClCompile>
     <ClCompile Include="..\..\gui\src\containers\listItem_notSelected.cpp">
       <Filter>Source Files\gui\containers</Filter>
@@ -312,10 +312,67 @@
     <ClCompile Include="..\..\gui\src\model\ModelListener.cpp">
       <Filter>Source Files\gui\model</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\gui\src\containers\volumePanel.cpp">
+    <ClCompile Include="..\..\gui\src\containers\VolumePanel.cpp">
       <Filter>Source Files\gui\containers</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\generated\gui_generated\src\containers\volumePanelBase.cpp">
+    <ClCompile Include="..\..\gui\src\containers\TimePanelSD.cpp">
+      <Filter>Source Files\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\TimePanelSDBase.cpp">
+      <Filter>Source Files\generated\gui_generated\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\containers\TimePanelRadio.cpp">
+      <Filter>Source Files\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\TimePanelRadioBase.cpp">
+      <Filter>Source Files\generated\gui_generated\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\VolumePanelBase.cpp">
+      <Filter>Source Files\generated\gui_generated\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\containers\PeripheralStateIndicators.cpp">
+      <Filter>Source Files\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\PeripheralStateIndicatorsBase.cpp">
+      <Filter>Source Files\generated\gui_generated\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\containers\delegate\PeripheralStateIndicatorsDelegate.cpp">
+      <Filter>Source Files\gui\containers\delegate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\containers\TitleView.cpp">
+      <Filter>Source Files\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\TitleViewBase.cpp">
+      <Filter>Source Files\generated\gui_generated\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\containers\delegate\VolumePanelDelegate.cpp">
+      <Filter>Source Files\gui\containers\delegate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\containers\delegate\TitleViewDelegate.cpp">
+      <Filter>Source Files\gui\containers\delegate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\containers\delegate\TimePanelDelegate.cpp">
+      <Filter>Source Files\gui\containers\delegate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\containers\interface\TimePanelInterface.cpp">
+      <Filter>Source Files\gui\containers\interface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\containers\ControlPanelRadio.cpp">
+      <Filter>Source Files\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\ControlPanelRadioBase.cpp">
+      <Filter>Source Files\generated\gui_generated\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\containers\ControlPanelSD.cpp">
+      <Filter>Source Files\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\ControlPanelSDBase.cpp">
+      <Filter>Source Files\generated\gui_generated\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\containers\ScreenNavigator.cpp">
+      <Filter>Source Files\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\ScreenNavigatorBase.cpp">
       <Filter>Source Files\generated\gui_generated\containers</Filter>
     </ClCompile>
   </ItemGroup>
@@ -778,17 +835,11 @@
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\memoryscreen_screen\MemoryScreenViewBase.hpp">
       <Filter>Header Files\generated\gui_generated\memoryscreen_screen</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\gui\include\gui\containers\musicControlPanel.hpp">
+    <ClInclude Include="..\..\gui\include\gui\containers\ControlPanelSD.hpp">
       <Filter>Header Files\gui\containers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\musicControlPanelBase.hpp">
-      <Filter>Header Files\generated\gui_generated\containers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\gui\include\gui\containers\radioControlPanel.hpp">
+    <ClInclude Include="..\..\gui\include\gui\containers\ControlPanelRadio.hpp">
       <Filter>Header Files\gui\containers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\radioControlPanelBase.hpp">
-      <Filter>Header Files\generated\gui_generated\containers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\gui\include\gui\radioscreen_screen\RadioScreenPresenter.hpp">
       <Filter>Header Files\gui\radioscreen_screen</Filter>
@@ -798,12 +849,6 @@
     </ClInclude>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\radioscreen_screen\RadioScreenViewBase.hpp">
       <Filter>Header Files\generated\gui_generated\radioscreen_screen</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\gui\include\gui\containers\controls.hpp">
-      <Filter>Header Files\gui\containers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\controlsBase.hpp">
-      <Filter>Header Files\generated\gui_generated\containers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\gui\include\gui\containers\listItem_notSelected.hpp">
       <Filter>Header Files\gui\containers</Filter>
@@ -817,10 +862,67 @@
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\listItem_selectedBase.hpp">
       <Filter>Header Files\generated\gui_generated\containers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\gui\include\gui\containers\volumePanel.hpp">
+    <ClInclude Include="..\..\gui\include\gui\containers\VolumePanel.hpp">
       <Filter>Header Files\gui\containers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\volumePanelBase.hpp">
+    <ClInclude Include="..\..\gui\include\gui\containers\TimePanelSD.hpp">
+      <Filter>Header Files\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\TimePanelSDBase.hpp">
+      <Filter>Header Files\generated\gui_generated\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\containers\TimePanelRadio.hpp">
+      <Filter>Header Files\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\TimePanelRadioBase.hpp">
+      <Filter>Header Files\generated\gui_generated\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\VolumePanelBase.hpp">
+      <Filter>Header Files\generated\gui_generated\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\containers\PeripheralStateIndicators.hpp">
+      <Filter>Header Files\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\PeripheralStateIndicatorsBase.hpp">
+      <Filter>Header Files\generated\gui_generated\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\containers\TitleView.hpp">
+      <Filter>Header Files\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\TitleViewBase.hpp">
+      <Filter>Header Files\generated\gui_generated\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\containers\delegate\PeripheralStateIndicatorsDelegate.hpp">
+      <Filter>Header Files\gui\containers\delegate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\containers\delegate\TitleViewDelegate.hpp">
+      <Filter>Header Files\gui\containers\delegate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\containers\delegate\VolumePanelDelegate.hpp">
+      <Filter>Header Files\gui\containers\delegate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\containers\delegate\TimePanelDelegate.hpp">
+      <Filter>Header Files\gui\containers\delegate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\containers\interface\TimePanelInterface.hpp">
+      <Filter>Header Files\gui\containers\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\containers\ControlPanelRadio.hpp">
+      <Filter>Header Files\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\ControlPanelRadioBase.hpp">
+      <Filter>Header Files\generated\gui_generated\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\containers\ControlPanelSD.hpp">
+      <Filter>Header Files\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\ControlPanelSDBase.hpp">
+      <Filter>Header Files\generated\gui_generated\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\containers\ScreenNavigator.hpp">
+      <Filter>Header Files\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\ScreenNavigatorBase.hpp">
       <Filter>Header Files\generated\gui_generated\containers</Filter>
     </ClInclude>
   </ItemGroup>

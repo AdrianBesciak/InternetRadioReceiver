@@ -4,60 +4,26 @@
 #include <gui_generated/memoryscreen_screen/MemoryScreenViewBase.hpp>
 #include <touchgfx/Color.hpp>
 #include <BitmapDatabase.hpp>
-#include <texts/TextKeysAndLanguages.hpp>
 
 MemoryScreenViewBase::MemoryScreenViewBase() :
-    buttonCallback(this, &MemoryScreenViewBase::buttonCallbackHandler),
     updateItemCallback(this, &MemoryScreenViewBase::updateItemCallbackHandler)
 {
 
     __background.setPosition(0, 0, 480, 272);
     __background.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
 
-    MemoryIcon.setXY(20, 20);
-    MemoryIcon.setBitmap(touchgfx::Bitmap(BITMAP_RAW_MICRO_SD_ID));
+    controlPanel.setXY(65, 200);
 
-    controls1.setXY(370, 10);
+    timePanel.setXY(28, 160);
 
-    musicControlPanel1.setXY(65, 200);
+    titleView.setXY(40, 125);
 
-    songProgressBar.setXY(37, 158);
-    songProgressBar.setProgressIndicatorPosition(2, 2, 400, 30);
-    songProgressBar.setRange(0, 100);
-    songProgressBar.setDirection(touchgfx::AbstractDirectionProgress::RIGHT);
-    songProgressBar.setBackground(touchgfx::Bitmap(BITMAP_BLUE_PROGRESSINDICATORS_BG_LARGE_PROGRESS_INDICATOR_BG_SQUARE_0_DEGREES_ID));
-    songProgressBar.setBitmap(BITMAP_BLUE_PROGRESSINDICATORS_FILL_TILING_PROGRESS_INDICATOR_FILL_STRIPED_WIDE_HORIZONTAL_ID);
-    songProgressBar.setValue(60);
-    songProgressBar.setAnchorAtZero(false);
+    volumePanel.setXY(95, 15);
 
-    filenameTextBox.setPosition(37, 125, 404, 25);
-    filenameTextBox.setColor(touchgfx::Color::getColorFromRGB(129, 133, 255));
-    filenameTextBox.setLinespacing(0);
-    Unicode::snprintf(filenameTextBoxBuffer, FILENAMETEXTBOX_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_XX3O).getText());
-    filenameTextBox.setWildcard(filenameTextBoxBuffer);
-    filenameTextBox.setTypedText(touchgfx::TypedText(T___SINGLEUSE_085C));
+    peripheralStateIndicators.setXY(370, 10);
 
-    slideMenuLeft.setup(touchgfx::SlideMenu::EAST,
-        touchgfx::Bitmap(BITMAP_LEFT_SLIDE_MENU_BACKGROUND_ID),
-        touchgfx::Bitmap(BITMAP_LEFT_SLIDE_MENU_BUTTON_ID),
-        touchgfx::Bitmap(BITMAP_LEFT_SLIDE_MENU_BUTTON_ID),
-        0, 0, 50, 110);
-    slideMenuLeft.setState(touchgfx::SlideMenu::COLLAPSED);
-    slideMenuLeft.setVisiblePixelsWhenCollapsed(25);
-    slideMenuLeft.setHiddenPixelsWhenExpanded(0);
-    slideMenuLeft.setAnimationEasingEquation(touchgfx::EasingEquations::cubicEaseInOut);
-    slideMenuLeft.setAnimationDuration(18);
-    slideMenuLeft.setExpandedStateTimeout(180);
-    slideMenuLeft.setXY(0, 0);
-
-    SDCardMenu.setXY(0, 50);
-    SDCardMenu.setBitmaps(touchgfx::Bitmap(BITMAP_SDCARD_BUTTON_PRESSED_ID), touchgfx::Bitmap(BITMAP_SDCARD_BUTTON_PRESSED_ID));
-    slideMenuLeft.add(SDCardMenu);
-
-    radioMenu.setXY(0, 0);
-    radioMenu.setBitmaps(touchgfx::Bitmap(BITMAP_RADIO_BUTTON_01_ID), touchgfx::Bitmap(BITMAP_RADIO_BUTTON_PRESSED_ID));
-    radioMenu.setAction(buttonCallback);
-    slideMenuLeft.add(radioMenu);
+    sdCardIcon.setXY(20, 20);
+    sdCardIcon.setBitmap(touchgfx::Bitmap(BITMAP_RAW_MICRO_SD_ID));
 
     slideMenuRight.setup(touchgfx::SlideMenu::WEST,
         touchgfx::Bitmap(BITMAP_RIGHT_SLIDE_MENU_BACKGROUND_ID),
@@ -70,7 +36,7 @@ MemoryScreenViewBase::MemoryScreenViewBase() :
     slideMenuRight.setAnimationEasingEquation(touchgfx::EasingEquations::cubicEaseInOut);
     slideMenuRight.setAnimationDuration(18);
     slideMenuRight.setExpandedStateTimeout(180);
-    slideMenuRight.setXY(280, 0);
+    slideMenuRight.setXY(278, 0);
 
     PlayQueue.setPosition(27, 2, 170, 272);
     PlayQueue.setHorizontal(false);
@@ -88,23 +54,26 @@ MemoryScreenViewBase::MemoryScreenViewBase() :
     PlayQueue.animateToItem(10, 0);
     slideMenuRight.add(PlayQueue);
 
-    volumePanel.setXY(95, 15);
+    screenNavigator.setXY(0, 0);
 
     add(__background);
-    add(MemoryIcon);
-    add(controls1);
-    add(musicControlPanel1);
-    add(songProgressBar);
-    add(filenameTextBox);
-    add(slideMenuLeft);
-    add(slideMenuRight);
+    add(controlPanel);
+    add(timePanel);
+    add(titleView);
     add(volumePanel);
+    add(peripheralStateIndicators);
+    add(sdCardIcon);
+    add(slideMenuRight);
+    add(screenNavigator);
 }
 
 void MemoryScreenViewBase::setupScreen()
 {
-    controls1.initialize();
-    musicControlPanel1.initialize();
+    controlPanel.initialize();
+    timePanel.initialize();
+    titleView.initialize();
+    volumePanel.initialize();
+    peripheralStateIndicators.initialize();
     PlayQueue.initialize();
     for (int i = 0; i < PlayQueueListItems.getNumberOfDrawables(); i++)
     {
@@ -114,18 +83,7 @@ void MemoryScreenViewBase::setupScreen()
     {
         PlayQueueSelectedListItems[i].initialize();
     }
-    volumePanel.initialize();
-}
-
-void MemoryScreenViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
-{
-    if (&src == &radioMenu)
-    {
-        //radioScreenOnClick
-        //When radioMenu clicked change screen to RadioScreen
-        //Go to RadioScreen with no screen transition
-        application().gotoRadioScreenScreenNoTransition();
-    }
+    screenNavigator.initialize();
 }
 
 void MemoryScreenViewBase::updateItemCallbackHandler(touchgfx::DrawableListItemsInterface* items, int16_t containerIndex, int16_t itemIndex)

@@ -1,23 +1,26 @@
 #pragma once
 #include <gui_generated/radioscreen_screen/RadioScreenViewBase.hpp>
+#include <gui/containers/delegate/VolumePanelDelegate.hpp>
+#include <gui/containers/delegate/PeripheralStateIndicatorsDelegate.hpp>
+#include <gui/containers/delegate/TitleViewDelegate.hpp>
+#include <gui/containers/delegate/TimePanelDelegate.hpp>
+#include <gui/containers/delegate/ControlPanelRadioDelegate.hpp>
 
-class RadioScreenView : public RadioScreenViewBase {
+class RadioScreenView : public RadioScreenViewBase
+        , public PeripheralStateIndicatorsDelegate
+        , public VolumePanelDelegate
+        , public TitleViewDelegate
+        , public TimePanelDelegate
+        , public ControlPanelRadioDelegate {
 public:
     RadioScreenView();
 
-    void setOnVolumePlusClicked(const std::function<void()> &onVolumePlusClicked);
-    void setOnVolumeMinusClicked(const std::function<void()> &onVolumeMinusClicked);
+    void fillRadioStationsList(const std::vector<model::RadioStationsListModel::Entry>& stations, std::uint8_t currentStation);
 
-    void setOnPlayClicked(const std::function<void()> &onPlayClicked);
-    void setOnStopClicked(const std::function<void()> &onStopClicked);
-
-    void setPeripheralState(bool ethernetState, bool sdCardState);
-
-    void setTitle(const std::string &title);
-    void setPlayVisible(bool visible);
-    void setStopVisible(bool visible);
-
-    void fillRadioStationsList(const std::vector<model::RadioStationsListModel::Entry>& stations, const uint8_t currentStation);
-private:
-    std::string title;
+protected:
+    PeripheralStateIndicators &getPeripheralStateIndicators() override;
+    VolumePanel &getVolumePanel() override;
+    TitleView &getTitleView() override;
+    TimePanelInterface &getTimePanel() override;
+    ControlPanelRadio &getControlPanel() override;
 };

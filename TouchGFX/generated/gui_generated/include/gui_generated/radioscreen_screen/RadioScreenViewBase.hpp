@@ -8,15 +8,16 @@
 #include <mvp/View.hpp>
 #include <gui/radioscreen_screen/RadioScreenPresenter.hpp>
 #include <touchgfx/widgets/Box.hpp>
+#include <gui/containers/ControlPanelRadio.hpp>
+#include <gui/containers/TimePanelRadio.hpp>
+#include <gui/containers/TitleView.hpp>
+#include <gui/containers/VolumePanel.hpp>
+#include <gui/containers/PeripheralStateIndicators.hpp>
 #include <touchgfx/widgets/Image.hpp>
-#include <gui/containers/controls.hpp>
-#include <gui/containers/radioControlPanel.hpp>
-#include <touchgfx/widgets/TextAreaWithWildcard.hpp>
 #include <touchgfx/containers/SlideMenu.hpp>
-#include <touchgfx/widgets/Button.hpp>
 #include <touchgfx/containers/scrollers/ScrollWheel.hpp>
 #include <gui/containers/listItem_notSelected.hpp>
-#include <gui/containers/volumePanel.hpp>
+#include <gui/containers/ScreenNavigator.hpp>
 #include <touchgfx/mixins/ClickListener.hpp>
 
 class RadioScreenViewBase : public touchgfx::View<RadioScreenPresenter>
@@ -40,36 +41,19 @@ protected:
      * Member Declarations
      */
     touchgfx::Box __background;
-    touchgfx::Image RadioIcon;
-    controls controls1;
-    radioControlPanel radioControlPanel1;
-    touchgfx::TextAreaWithOneWildcard radioStationNameBox;
-    touchgfx::SlideMenu slideMenuLeft;
-    touchgfx::Button SDCardMenu;
-    touchgfx::Button radioMenu;
+    ControlPanelRadio controlPanel;
+    TimePanelRadio timePanel;
+    TitleView titleView;
+    VolumePanel volumePanel;
+    PeripheralStateIndicators peripheralStateIndicators;
+    touchgfx::Image radioIcon;
     touchgfx::SlideMenu slideMenuRight;
     touchgfx::ClickListener< touchgfx::ScrollWheel > RadioStations;
     touchgfx::DrawableListItems<listItem_notSelected, 11> RadioStationsListItems;
-    volumePanel volumePanel;
-
-    /*
-     * Wildcard Buffers
-     */
-    static const uint16_t RADIOSTATIONNAMEBOX_SIZE = 45;
-    touchgfx::Unicode::UnicodeChar radioStationNameBoxBuffer[RADIOSTATIONNAMEBOX_SIZE];
+    ScreenNavigator screenNavigator;
 
 private:
-
-    /*
-     * Callback Declarations
-     */
-    touchgfx::Callback<RadioScreenViewBase, const touchgfx::AbstractButton&> buttonCallback;
     touchgfx::Callback<RadioScreenViewBase, touchgfx::DrawableListItemsInterface*, int16_t, int16_t> updateItemCallback;
-
-    /*
-     * Callback Handler Declarations
-     */
-    void buttonCallbackHandler(const touchgfx::AbstractButton& src);
     void updateItemCallbackHandler(touchgfx::DrawableListItemsInterface* items, int16_t containerIndex, int16_t itemIndex);
 
 };

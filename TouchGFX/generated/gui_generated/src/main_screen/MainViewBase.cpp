@@ -12,78 +12,44 @@ MainViewBase::MainViewBase() :
     __background.setPosition(0, 0, 480, 272);
     __background.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
 
-    controls1.setXY(370, 10);
+    sdCardIcon.setXY(252, 72);
+    sdCardIcon.setBitmaps(touchgfx::Bitmap(BITMAP_MICRO_SD_LARGE_ID), touchgfx::Bitmap(BITMAP_MICRO_SD_LARGE_ID));
+    sdCardIcon.setAction(buttonCallback);
 
     radioIcon.setXY(100, 72);
     radioIcon.setBitmaps(touchgfx::Bitmap(BITMAP_RADIO_LARGE_ID), touchgfx::Bitmap(BITMAP_RADIO_LARGE_ID));
     radioIcon.setAction(buttonCallback);
 
-    SDIcon.setXY(252, 72);
-    SDIcon.setBitmaps(touchgfx::Bitmap(BITMAP_MICRO_SD_LARGE_ID), touchgfx::Bitmap(BITMAP_MICRO_SD_LARGE_ID));
-    SDIcon.setAction(buttonCallback);
+    peripheralStateIndicators.setXY(370, 10);
 
-    slideMenuLeft.setup(touchgfx::SlideMenu::EAST,
-        touchgfx::Bitmap(BITMAP_LEFT_SLIDE_MENU_BACKGROUND_ID),
-        touchgfx::Bitmap(BITMAP_LEFT_SLIDE_MENU_BUTTON_ID),
-        touchgfx::Bitmap(BITMAP_LEFT_SLIDE_MENU_BUTTON_ID),
-        0, 0, 50, 110);
-    slideMenuLeft.setState(touchgfx::SlideMenu::COLLAPSED);
-    slideMenuLeft.setVisiblePixelsWhenCollapsed(25);
-    slideMenuLeft.setHiddenPixelsWhenExpanded(0);
-    slideMenuLeft.setAnimationEasingEquation(touchgfx::EasingEquations::cubicEaseInOut);
-    slideMenuLeft.setAnimationDuration(18);
-    slideMenuLeft.setExpandedStateTimeout(180);
-    slideMenuLeft.setXY(0, 0);
-
-    SDCardMenu.setXY(0, 50);
-    SDCardMenu.setBitmaps(touchgfx::Bitmap(BITMAP_SDCARD_BUTTON_ID), touchgfx::Bitmap(BITMAP_SDCARD_BUTTON_PRESSED_ID));
-    SDCardMenu.setAction(buttonCallback);
-    slideMenuLeft.add(SDCardMenu);
-
-    radioMenu.setXY(0, 0);
-    radioMenu.setBitmaps(touchgfx::Bitmap(BITMAP_RADIO_BUTTON_01_ID), touchgfx::Bitmap(BITMAP_RADIO_BUTTON_PRESSED_ID));
-    radioMenu.setAction(buttonCallback);
-    slideMenuLeft.add(radioMenu);
+    screenNavigator.setXY(0, 0);
 
     add(__background);
-    add(controls1);
+    add(sdCardIcon);
     add(radioIcon);
-    add(SDIcon);
-    add(slideMenuLeft);
+    add(peripheralStateIndicators);
+    add(screenNavigator);
 }
 
 void MainViewBase::setupScreen()
 {
-    controls1.initialize();
+    peripheralStateIndicators.initialize();
+    screenNavigator.initialize();
 }
 
 void MainViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
 {
-    if (&src == &radioIcon)
+    if (&src == &sdCardIcon)
+    {
+        //sdIconOnClick
+        //When sdCardIcon clicked change screen to MemoryScreen
+        //Go to MemoryScreen with no screen transition
+        application().gotoMemoryScreenScreenNoTransition();
+    }
+    else if (&src == &radioIcon)
     {
         //radioIconOnClick
         //When radioIcon clicked change screen to RadioScreen
-        //Go to RadioScreen with no screen transition
-        application().gotoRadioScreenScreenNoTransition();
-    }
-    else if (&src == &SDIcon)
-    {
-        //sdIconOnClick
-        //When SDIcon clicked change screen to MemoryScreen
-        //Go to MemoryScreen with no screen transition
-        application().gotoMemoryScreenScreenNoTransition();
-    }
-    else if (&src == &SDCardMenu)
-    {
-        //sdCardMenuOnClick
-        //When SDCardMenu clicked change screen to MemoryScreen
-        //Go to MemoryScreen with no screen transition
-        application().gotoMemoryScreenScreenNoTransition();
-    }
-    else if (&src == &radioMenu)
-    {
-        //radioMenuOnClick
-        //When radioMenu clicked change screen to RadioScreen
         //Go to RadioScreen with no screen transition
         application().gotoRadioScreenScreenNoTransition();
     }

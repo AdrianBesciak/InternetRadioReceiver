@@ -8,9 +8,9 @@
 #include <mvp/View.hpp>
 #include <gui/main_screen/MainPresenter.hpp>
 #include <touchgfx/widgets/Box.hpp>
-#include <gui/containers/controls.hpp>
 #include <touchgfx/widgets/Button.hpp>
-#include <touchgfx/containers/SlideMenu.hpp>
+#include <gui/containers/PeripheralStateIndicators.hpp>
+#include <gui/containers/ScreenNavigator.hpp>
 
 class MainViewBase : public touchgfx::View<MainPresenter>
 {
@@ -28,12 +28,10 @@ protected:
      * Member Declarations
      */
     touchgfx::Box __background;
-    controls controls1;
+    touchgfx::Button sdCardIcon;
     touchgfx::Button radioIcon;
-    touchgfx::Button SDIcon;
-    touchgfx::SlideMenu slideMenuLeft;
-    touchgfx::Button SDCardMenu;
-    touchgfx::Button radioMenu;
+    PeripheralStateIndicators peripheralStateIndicators;
+    ScreenNavigator screenNavigator;
 
 private:
 

@@ -5,13 +5,14 @@
         "Name": "Main",
         "Components": [
           {
-            "Type": "CustomContainerInstance",
-            "Name": "controls1",
-            "X": 370,
-            "Y": 10,
-            "Width": 100,
-            "Height": 50,
-            "CustomContainerDefinitionName": "controls"
+            "Type": "Button",
+            "Name": "sdCardIcon",
+            "X": 252,
+            "Y": 72,
+            "Width": 128,
+            "Height": 128,
+            "Pressed": "micro-sd_large.png",
+            "Released": "micro-sd_large.png"
           },
           {
             "Type": "Button",
@@ -24,52 +25,20 @@
             "Released": "radio_large.png"
           },
           {
-            "Type": "Button",
-            "Name": "SDIcon",
-            "X": 252,
-            "Y": 72,
-            "Width": 128,
-            "Height": 128,
-            "Pressed": "micro-sd_large.png",
-            "Released": "micro-sd_large.png"
+            "Type": "CustomContainerInstance",
+            "Name": "peripheralStateIndicators",
+            "X": 370,
+            "Y": 10,
+            "Width": 100,
+            "Height": 50,
+            "CustomContainerDefinitionName": "PeripheralStateIndicators"
           },
           {
-            "Type": "SlideMenu",
-            "Name": "slideMenuLeft",
+            "Type": "CustomContainerInstance",
+            "Name": "screenNavigator",
             "Width": 74,
             "Height": 272,
-            "FileNameBackground": "left_slide_menu_background.png",
-            "UseButton": true,
-            "FileNameButtonPressed": "left_slide_menu_button.png",
-            "FileNameButtonReleased": "left_slide_menu_button.png",
-            "ButtonX": 50,
-            "ButtonY": 110,
-            "State": "Collapsed",
-            "ExpandDirection": "East",
-            "Easing": "Cubic",
-            "EasingOption": "InOut",
-            "AnimationDuration": 300,
-            "VisiblePixelsWhenCollapsed": 25,
-            "ExpandedStateTimeout": 3000,
-            "Components": [
-              {
-                "Type": "Button",
-                "Name": "SDCardMenu",
-                "Y": 50,
-                "Width": 50,
-                "Height": 50,
-                "Pressed": "sdcard_button_pressed.png",
-                "Released": "sdcard_button.png"
-              },
-              {
-                "Type": "Button",
-                "Name": "radioMenu",
-                "Width": 50,
-                "Height": 50,
-                "Pressed": "radio_button_pressed.png",
-                "Released": "radio_button_01.png"
-              }
-            ]
+            "CustomContainerDefinitionName": "ScreenNavigator"
           }
         ],
         "Interactions": [
@@ -89,31 +58,7 @@
             "InteractionName": "sdIconOnClick",
             "Trigger": {
               "Type": "TriggerClicked",
-              "TriggerComponent": "SDIcon"
-            },
-            "Action": {
-              "Type": "ActionGotoScreen",
-              "ScreenTransitionType": "ScreenTransitionNone",
-              "ActionComponent": "MemoryScreen"
-            }
-          },
-          {
-            "InteractionName": "radioMenuOnClick",
-            "Trigger": {
-              "Type": "TriggerClicked",
-              "TriggerComponent": "radioMenu"
-            },
-            "Action": {
-              "Type": "ActionGotoScreen",
-              "ScreenTransitionType": "ScreenTransitionNone",
-              "ActionComponent": "RadioScreen"
-            }
-          },
-          {
-            "InteractionName": "sdCardMenuOnClick",
-            "Trigger": {
-              "Type": "TriggerClicked",
-              "TriggerComponent": "SDCardMenu"
+              "TriggerComponent": "sdCardIcon"
             },
             "Action": {
               "Type": "ActionGotoScreen",
@@ -127,89 +72,58 @@
         "Name": "RadioScreen",
         "Components": [
           {
+            "Type": "CustomContainerInstance",
+            "Name": "controlPanel",
+            "X": 215,
+            "Y": 200,
+            "Width": 50,
+            "Height": 50,
+            "CustomContainerDefinitionName": "ControlPanelRadio"
+          },
+          {
+            "Type": "CustomContainerInstance",
+            "Name": "timePanel",
+            "X": 210,
+            "Y": 160,
+            "Width": 60,
+            "Height": 25,
+            "CustomContainerDefinitionName": "TimePanelRadio"
+          },
+          {
+            "Type": "CustomContainerInstance",
+            "Name": "titleView",
+            "X": 40,
+            "Y": 125,
+            "Width": 400,
+            "Height": 25,
+            "CustomContainerDefinitionName": "TitleView"
+          },
+          {
+            "Type": "CustomContainerInstance",
+            "Name": "volumePanel",
+            "X": 95,
+            "Y": 15,
+            "Width": 130,
+            "Height": 40,
+            "CustomContainerDefinitionName": "VolumePanel"
+          },
+          {
+            "Type": "CustomContainerInstance",
+            "Name": "peripheralStateIndicators",
+            "X": 370,
+            "Y": 10,
+            "Width": 100,
+            "Height": 50,
+            "CustomContainerDefinitionName": "PeripheralStateIndicators"
+          },
+          {
             "Type": "Image",
-            "Name": "RadioIcon",
+            "Name": "radioIcon",
             "X": 20,
             "Y": 20,
             "Width": 64,
             "Height": 64,
             "RelativeFilename": "radio.png"
-          },
-          {
-            "Type": "CustomContainerInstance",
-            "Name": "controls1",
-            "X": 370,
-            "Y": 10,
-            "Width": 100,
-            "Height": 50,
-            "CustomContainerDefinitionName": "controls"
-          },
-          {
-            "Type": "CustomContainerInstance",
-            "Name": "radioControlPanel1",
-            "X": 220,
-            "Y": 200,
-            "Width": 50,
-            "Height": 50,
-            "CustomContainerDefinitionName": "radioControlPanel"
-          },
-          {
-            "Type": "TextArea",
-            "Name": "radioStationNameBox",
-            "X": 38,
-            "Y": 150,
-            "Width": 404,
-            "Height": 25,
-            "TextId": "__SingleUse_QX2T",
-            "TextRotation": "0",
-            "Color": {
-              "Red": 129,
-              "Green": 133,
-              "Blue": 255
-            },
-            "Wildcard1": {
-              "TextId": "__SingleUse_ZKCH",
-              "UseBuffer": true,
-              "BufferSize": 45
-            }
-          },
-          {
-            "Type": "SlideMenu",
-            "Name": "slideMenuLeft",
-            "Width": 74,
-            "Height": 272,
-            "FileNameBackground": "left_slide_menu_background.png",
-            "UseButton": true,
-            "FileNameButtonPressed": "left_slide_menu_button.png",
-            "FileNameButtonReleased": "left_slide_menu_button.png",
-            "ButtonX": 50,
-            "ButtonY": 110,
-            "State": "Collapsed",
-            "ExpandDirection": "East",
-            "Easing": "Cubic",
-            "EasingOption": "InOut",
-            "AnimationDuration": 300,
-            "VisiblePixelsWhenCollapsed": 25,
-            "ExpandedStateTimeout": 3000,
-            "Components": [
-              {
-                "Type": "Button",
-                "Name": "SDCardMenu",
-                "Y": 50,
-                "Width": 50,
-                "Height": 50,
-                "Pressed": "sdcard_button_pressed.png",
-                "Released": "sdcard_button.png"
-              },
-              {
-                "Type": "Button",
-                "Name": "radioMenu",
-                "Width": 50,
-                "Height": 50,
-                "Pressed": "radio_button_pressed.png",
-                "Released": "radio_button_pressed.png"
-              }
-            ]
           },
           {
             "Type": "SlideMenu",
@@ -250,35 +164,65 @@
           },
           {
             "Type": "CustomContainerInstance",
-            "Name": "volumePanel",
-            "X": 95,
-            "Y": 15,
-            "Width": 130,
-            "Height": 40,
-            "CustomContainerDefinitionName": "volumePanel"
+            "Name": "screenNavigator",
+            "Width": 74,
+            "Height": 272,
+            "CustomContainerDefinitionName": "ScreenNavigator"
           }
         ],
-        "Interactions": [
-          {
-            "InteractionName": "sdCardMenuOnClick",
-            "Trigger": {
-              "Type": "TriggerClicked",
-              "TriggerComponent": "SDCardMenu"
-            },
-            "Action": {
-              "Type": "ActionGotoScreen",
-              "ScreenTransitionType": "ScreenTransitionNone",
-              "ActionComponent": "MemoryScreen"
-            }
-          }
-        ]
+        "Interactions": []
       },
       {
         "Name": "MemoryScreen",
         "Components": [
           {
+            "Type": "CustomContainerInstance",
+            "Name": "controlPanel",
+            "X": 65,
+            "Y": 200,
+            "Width": 350,
+            "Height": 50,
+            "CustomContainerDefinitionName": "ControlPanelSD"
+          },
+          {
+            "Type": "CustomContainerInstance",
+            "Name": "timePanel",
+            "X": 28,
+            "Y": 160,
+            "Width": 430,
+            "Height": 30,
+            "CustomContainerDefinitionName": "TimePanelSD"
+          },
+          {
+            "Type": "CustomContainerInstance",
+            "Name": "titleView",
+            "X": 40,
+            "Y": 125,
+            "Width": 400,
+            "Height": 25,
+            "CustomContainerDefinitionName": "TitleView"
+          },
+          {
+            "Type": "CustomContainerInstance",
+            "Name": "volumePanel",
+            "X": 95,
+            "Y": 15,
+            "Width": 130,
+            "Height": 40,
+            "CustomContainerDefinitionName": "VolumePanel"
+          },
+          {
+            "Type": "CustomContainerInstance",
+            "Name": "peripheralStateIndicators",
+            "X": 370,
+            "Y": 10,
+            "Width": 100,
+            "Height": 50,
+            "CustomContainerDefinitionName": "PeripheralStateIndicators"
+          },
+          {
             "Type": "Image",
-            "Name": "MemoryIcon",
+            "Name": "sdCardIcon",
             "X": 20,
             "Y": 20,
             "Width": 64,
@@ -286,103 +230,9 @@
             "RelativeFilename": "raw_micro-sd.png"
           },
           {
-            "Type": "CustomContainerInstance",
-            "Name": "controls1",
-            "X": 370,
-            "Y": 10,
-            "Width": 100,
-            "Height": 50,
-            "CustomContainerDefinitionName": "controls"
-          },
-          {
-            "Type": "CustomContainerInstance",
-            "Name": "musicControlPanel1",
-            "X": 65,
-            "Y": 200,
-            "Width": 350,
-            "Height": 50,
-            "CustomContainerDefinitionName": "musicControlPanel"
-          },
-          {
-            "Type": "ImageProgress",
-            "Name": "songProgressBar",
-            "X": 37,
-            "Y": 158,
-            "Width": 404,
-            "Height": 34,
-            "FileNameProgress": "__designer\\Blue_ProgressIndicators_fill_tiling_progress_indicator_fill_striped_wide_horizontal.png",
-            "Direction": "Right",
-            "Style": "Style5",
-            "FileNameBackground": "__designer\\Blue_ProgressIndicators_bg_large_progress_indicator_bg_square_0_degrees.png",
-            "IndicatorPositionX": 2,
-            "IndicatorPositionY": 2,
-            "IndicatorPositionWidth": 400,
-            "IndicatorPositionHeight": 30,
-            "ProgressRangeMax": 100,
-            "ProgressInitialValue": 60
-          },
-          {
-            "Type": "TextArea",
-            "Name": "filenameTextBox",
-            "X": 37,
-            "Y": 125,
-            "Width": 404,
-            "Height": 25,
-            "TextId": "__SingleUse_085C",
-            "TextRotation": "0",
-            "Color": {
-              "Red": 129,
-              "Green": 133,
-              "Blue": 255
-            },
-            "Wildcard1": {
-              "TextId": "__SingleUse_XX3O",
-              "UseBuffer": true,
-              "BufferSize": 45
-            }
-          },
-          {
-            "Type": "SlideMenu",
-            "Name": "slideMenuLeft",
-            "Width": 74,
-            "Height": 272,
-            "FileNameBackground": "left_slide_menu_background.png",
-            "UseButton": true,
-            "FileNameButtonPressed": "left_slide_menu_button.png",
-            "FileNameButtonReleased": "left_slide_menu_button.png",
-            "ButtonX": 50,
-            "ButtonY": 110,
-            "State": "Collapsed",
-            "ExpandDirection": "East",
-            "Easing": "Cubic",
-            "EasingOption": "InOut",
-            "AnimationDuration": 300,
-            "VisiblePixelsWhenCollapsed": 25,
-            "ExpandedStateTimeout": 3000,
-            "Components": [
-              {
-                "Type": "Button",
-                "Name": "SDCardMenu",
-                "Y": 50,
-                "Width": 50,
-                "Height": 50,
-                "Pressed": "sdcard_button_pressed.png",
-                "Released": "sdcard_button_pressed.png"
-              },
-              {
-                "Type": "Button",
-                "Name": "radioMenu",
-                "Width": 50,
-                "Height": 50,
-                "Pressed": "radio_button_pressed.png",
-                "Released": "radio_button_01.png"
-              }
-            ]
-          },
-          {
             "Type": "SlideMenu",
             "Name": "slideMenuRight",
-            "X": 280,
+            "X": 278,
             "Width": 202,
             "Height": 272,
             "FileNameBackground": "right_slide_menu_background.png",
@@ -424,281 +274,16 @@
           },
           {
             "Type": "CustomContainerInstance",
-            "Name": "volumePanel",
-            "X": 95,
-            "Y": 15,
-            "Width": 130,
-            "Height": 40,
-            "CustomContainerDefinitionName": "volumePanel"
-          }
-        ],
-        "Interactions": [
-          {
-            "InteractionName": "radioScreenOnClick",
-            "Trigger": {
-              "Type": "TriggerClicked",
-              "TriggerComponent": "radioMenu"
-            },
-            "Action": {
-              "Type": "ActionGotoScreen",
-              "ScreenTransitionType": "ScreenTransitionNone",
-              "ActionComponent": "RadioScreen"
-            }
-          }
-        ]
-      }
-    ],
-    "CustomContainerDefinitions": [
-      {
-        "Name": "radioControlPanel",
-        "X": 220,
-        "Y": 200,
-        "Width": 50,
-        "Height": 50,
-        "Components": [
-          {
-            "Type": "Button",
-            "Name": "play",
-            "Width": 50,
-            "Height": 50,
-            "Pressed": "play-button_inactive.png",
-            "Released": "play-button_active.png",
-            "Clickable": true
-          },
-          {
-            "Type": "Button",
-            "Name": "stop",
-            "Width": 50,
-            "Height": 50,
-            "Pressed": "stop_inactive.png",
-            "Released": "stop_active.png",
-            "Clickable": true
-          }
-        ],
-        "Interactions": [
-          {
-            "InteractionName": "playClicked",
-            "Trigger": {
-              "Type": "TriggerClicked",
-              "TriggerComponent": "play"
-            },
-            "Action": {
-              "Type": "ActionCustom",
-              "FunctionName": "handlePlayClicked"
-            }
-          },
-          {
-            "InteractionName": "stopClicked",
-            "Trigger": {
-              "Type": "TriggerClicked",
-              "TriggerComponent": "stop"
-            },
-            "Action": {
-              "Type": "ActionCustom",
-              "FunctionName": "handleStopClicked"
-            }
-          }
-        ]
-      },
-      {
-        "Name": "musicControlPanel",
-        "X": 65,
-        "Y": 200,
-        "Width": 350,
-        "Height": 50,
-        "Components": [
-          {
-            "Type": "Button",
-            "Name": "play",
-            "X": 120,
-            "Width": 50,
-            "Height": 50,
-            "Pressed": "play-button_inactive.png",
-            "Released": "play-button_active.png",
-            "Clickable": true
-          },
-          {
-            "Type": "Button",
-            "Name": "stop",
-            "X": 175,
-            "Width": 50,
-            "Height": 50,
-            "Pressed": "stop_inactive.png",
-            "Released": "stop_active.png",
-            "Clickable": true
-          },
-          {
-            "Type": "Button",
-            "Name": "pause",
-            "X": 120,
-            "Width": 50,
-            "Height": 50,
-            "Pressed": "pause_inactive.png",
-            "Released": "pause_active.png",
-            "Clickable": true
-          },
-          {
-            "Type": "Button",
-            "Name": "backward",
-            "X": 60,
-            "Width": 50,
-            "Height": 50,
-            "Pressed": "backward_inactive.png",
-            "Released": "backward_active.png",
-            "Clickable": true
-          },
-          {
-            "Type": "Button",
-            "Name": "previousSong",
-            "Width": 50,
-            "Height": 50,
-            "Pressed": "previous_song_inactive.png",
-            "Released": "previous_song_active.png",
-            "Clickable": true
-          },
-          {
-            "Type": "Button",
-            "Name": "forward",
-            "X": 240,
-            "Width": 50,
-            "Height": 50,
-            "Pressed": "forward-button_inactive.png",
-            "Released": "forward-button_active.png",
-            "Clickable": true
-          },
-          {
-            "Type": "Button",
-            "Name": "nextSong",
-            "X": 300,
-            "Width": 50,
-            "Height": 50,
-            "Pressed": "next_song_inactive.png",
-            "Released": "next_song_active.png",
-            "Clickable": true
-          }
-        ],
-        "Interactions": [
-          {
-            "InteractionName": "playClicked",
-            "Trigger": {
-              "Type": "TriggerClicked",
-              "TriggerComponent": "play"
-            },
-            "Action": {
-              "Type": "ActionCustom",
-              "FunctionName": "handlePlayClicked"
-            }
-          },
-          {
-            "InteractionName": "stopClicked",
-            "Trigger": {
-              "Type": "TriggerClicked",
-              "TriggerComponent": "stop"
-            },
-            "Action": {
-              "Type": "ActionCustom",
-              "FunctionName": "handleStopClicked"
-            }
-          },
-          {
-            "InteractionName": "pauseClicked",
-            "Trigger": {
-              "Type": "TriggerClicked",
-              "TriggerComponent": "pause"
-            },
-            "Action": {
-              "Type": "ActionCustom",
-              "FunctionName": "handlePauseClicked"
-            }
-          },
-          {
-            "InteractionName": "fastForwardClicked",
-            "Trigger": {
-              "Type": "TriggerClicked",
-              "TriggerComponent": "forward"
-            },
-            "Action": {
-              "Type": "ActionCustom",
-              "FunctionName": "handleFastForwardClicked"
-            }
-          },
-          {
-            "InteractionName": "fastBackwardClicked",
-            "Trigger": {
-              "Type": "TriggerClicked",
-              "TriggerComponent": "backward"
-            },
-            "Action": {
-              "Type": "ActionCustom",
-              "FunctionName": "handleFastBackwardClicked"
-            }
-          },
-          {
-            "InteractionName": "playNextClicked",
-            "Trigger": {
-              "Type": "TriggerClicked",
-              "TriggerComponent": "nextSong"
-            },
-            "Action": {
-              "Type": "ActionCustom",
-              "FunctionName": "handlePlayNextClicked"
-            }
-          },
-          {
-            "InteractionName": "playPreviousClicked",
-            "Trigger": {
-              "Type": "TriggerClicked",
-              "TriggerComponent": "previousSong"
-            },
-            "Action": {
-              "Type": "ActionCustom",
-              "FunctionName": "handlePlayPreviousClicked"
-            }
-          }
-        ]
-      },
-      {
-        "Name": "controls",
-        "X": 370,
-        "Y": 10,
-        "Width": 100,
-        "Height": 50,
-        "Components": [
-          {
-            "Type": "Image",
-            "Name": "sdUnmountedInd",
-            "Width": 50,
-            "Height": 50,
-            "RelativeFilename": "sdcardUnmountedInd.png"
-          },
-          {
-            "Type": "Image",
-            "Name": "sdMountedInd",
-            "Width": 50,
-            "Height": 50,
-            "Visible": false,
-            "RelativeFilename": "sdcardMountedInd.png"
-          },
-          {
-            "Type": "Image",
-            "Name": "ethernetConnectedInd",
-            "X": 50,
-            "Width": 50,
-            "Height": 50,
-            "Visible": false,
-            "RelativeFilename": "lan_on_ind.png"
-          },
-          {
-            "Type": "Image",
-            "Name": "ethernetDisconnectedInd",
-            "X": 50,
-            "Width": 50,
-            "Height": 50,
-            "RelativeFilename": "lan_off_ind.png"
+            "Name": "screenNavigator",
+            "Width": 74,
+            "Height": 272,
+            "CustomContainerDefinitionName": "ScreenNavigator"
           }
         ],
         "Interactions": []
-      },
+      }
+    ],
+    "CustomContainerDefinitions": [
       {
         "Name": "listItem_notSelected",
         "Width": 170,
@@ -852,7 +437,120 @@
         ]
       },
       {
-        "Name": "volumePanel",
+        "Name": "ScreenNavigator",
+        "Width": 74,
+        "Height": 272,
+        "Components": [
+          {
+            "Type": "SlideMenu",
+            "Name": "slideMenuLeft",
+            "Width": 74,
+            "Height": 272,
+            "FileNameBackground": "left_slide_menu_background.png",
+            "UseButton": true,
+            "FileNameButtonPressed": "left_slide_menu_button.png",
+            "FileNameButtonReleased": "left_slide_menu_button.png",
+            "ButtonX": 50,
+            "ButtonY": 110,
+            "State": "Collapsed",
+            "ExpandDirection": "East",
+            "Easing": "Cubic",
+            "EasingOption": "InOut",
+            "AnimationDuration": 300,
+            "VisiblePixelsWhenCollapsed": 25,
+            "ExpandedStateTimeout": 3000,
+            "Components": [
+              {
+                "Type": "Button",
+                "Name": "sdCardButton",
+                "Y": 50,
+                "Width": 50,
+                "Height": 50,
+                "Pressed": "sdcard_button_pressed.png",
+                "Released": "sdcard_button.png"
+              },
+              {
+                "Type": "Button",
+                "Name": "radioButton",
+                "Width": 50,
+                "Height": 50,
+                "Pressed": "radio_button_pressed.png",
+                "Released": "radio_button_01.png"
+              }
+            ]
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "radioButtonClicked",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "radioButton"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "RadioScreen"
+            }
+          },
+          {
+            "InteractionName": "sdCardButtonClicked",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "sdCardButton"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "MemoryScreen"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "PeripheralStateIndicators",
+        "X": 370,
+        "Y": 10,
+        "Width": 100,
+        "Height": 50,
+        "Components": [
+          {
+            "Type": "Image",
+            "Name": "sdUnmountedInd",
+            "Width": 50,
+            "Height": 50,
+            "RelativeFilename": "sdcardUnmountedInd.png"
+          },
+          {
+            "Type": "Image",
+            "Name": "sdMountedInd",
+            "Width": 50,
+            "Height": 50,
+            "Visible": false,
+            "RelativeFilename": "sdcardMountedInd.png"
+          },
+          {
+            "Type": "Image",
+            "Name": "ethernetConnectedInd",
+            "X": 50,
+            "Width": 50,
+            "Height": 50,
+            "Visible": false,
+            "RelativeFilename": "lan_on_ind.png"
+          },
+          {
+            "Type": "Image",
+            "Name": "ethernetDisconnectedInd",
+            "X": 50,
+            "Width": 50,
+            "Height": 50,
+            "RelativeFilename": "lan_off_ind.png"
+          }
+        ],
+        "Interactions": []
+      },
+      {
+        "Name": "VolumePanel",
         "Width": 130,
         "Height": 40,
         "Components": [
@@ -861,7 +559,7 @@
             "Name": "volumeText",
             "X": 45,
             "Y": 8,
-            "Width": 38,
+            "Width": 40,
             "Height": 25,
             "TextId": "__SingleUse_GHNH",
             "TextRotation": "0",
@@ -870,7 +568,6 @@
               "Green": 133,
               "Blue": 255
             },
-            "AutoSize": true,
             "Wildcard1": {
               "TextId": "__SingleUse_0LZ8",
               "UseBuffer": true,
@@ -916,6 +613,333 @@
             "Action": {
               "Type": "ActionCustom",
               "FunctionName": "handleVolumeMinusClicked"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "TitleView",
+        "Width": 400,
+        "Height": 25,
+        "Components": [
+          {
+            "Type": "TextArea",
+            "Name": "titleText",
+            "Width": 400,
+            "Height": 25,
+            "TextId": "__SingleUse_Y2Q5",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 129,
+              "Green": 133,
+              "Blue": 255
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_H6GT",
+              "UseBuffer": true,
+              "BufferSize": 45
+            }
+          }
+        ],
+        "Interactions": []
+      },
+      {
+        "Name": "TimePanelRadio",
+        "Width": 60,
+        "Height": 25,
+        "Components": [
+          {
+            "Type": "TextArea",
+            "Name": "timeCurrentText",
+            "Width": 60,
+            "Height": 25,
+            "TextId": "__SingleUse_PAK3",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "__SingleUse_RZ5K",
+              "UseBuffer": true,
+              "BufferSize": 10
+            }
+          }
+        ],
+        "Interactions": []
+      },
+      {
+        "Name": "TimePanelSD",
+        "Width": 430,
+        "Height": 30,
+        "Components": [
+          {
+            "Type": "ImageProgress",
+            "Name": "progressBar",
+            "X": 56,
+            "Width": 320,
+            "Height": 30,
+            "FileNameProgress": "__designer\\Blue_ProgressIndicators_fill_tiling_progress_indicator_fill_gradient_normal_vertical.png",
+            "Direction": "Right",
+            "FileNameBackground": "progress-background.png",
+            "IndicatorPositionX": 2,
+            "IndicatorPositionY": 2,
+            "IndicatorPositionWidth": 316,
+            "IndicatorPositionHeight": 26,
+            "ProgressRangeMax": 100,
+            "ProgressInitialValue": 100
+          },
+          {
+            "Type": "TextArea",
+            "Name": "timeTotalText",
+            "X": 382,
+            "Y": 5,
+            "Width": 48,
+            "Height": 20,
+            "TextId": "__SingleUse_AESQ",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "__SingleUse_XG05",
+              "UseBuffer": true,
+              "BufferSize": 10
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "timeCurrentText",
+            "X": 4,
+            "Y": 5,
+            "Width": 48,
+            "Height": 20,
+            "TextId": "__SingleUse_21QX",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "__SingleUse_71WN",
+              "UseBuffer": true,
+              "BufferSize": 10
+            }
+          }
+        ],
+        "Interactions": []
+      },
+      {
+        "Name": "ControlPanelSD",
+        "X": 65,
+        "Y": 200,
+        "Width": 350,
+        "Height": 50,
+        "Components": [
+          {
+            "Type": "Button",
+            "Name": "playNextButton",
+            "X": 300,
+            "Width": 50,
+            "Height": 50,
+            "Pressed": "next_song_inactive.png",
+            "Released": "next_song_active.png",
+            "Clickable": true
+          },
+          {
+            "Type": "Button",
+            "Name": "fastForwardButton",
+            "X": 240,
+            "Width": 50,
+            "Height": 50,
+            "Pressed": "forward-button_inactive.png",
+            "Released": "forward-button_active.png",
+            "Clickable": true
+          },
+          {
+            "Type": "Button",
+            "Name": "stopButton",
+            "X": 175,
+            "Width": 50,
+            "Height": 50,
+            "Pressed": "stop_inactive.png",
+            "Released": "stop_active.png",
+            "Clickable": true
+          },
+          {
+            "Type": "Button",
+            "Name": "pauseButton",
+            "X": 120,
+            "Width": 50,
+            "Height": 50,
+            "Pressed": "pause_inactive.png",
+            "Released": "pause_active.png",
+            "Clickable": true
+          },
+          {
+            "Type": "Button",
+            "Name": "playButton",
+            "X": 120,
+            "Width": 50,
+            "Height": 50,
+            "Pressed": "play-button_inactive.png",
+            "Released": "play-button_active.png",
+            "Clickable": true
+          },
+          {
+            "Type": "Button",
+            "Name": "fastBackwardButton",
+            "X": 60,
+            "Width": 50,
+            "Height": 50,
+            "Pressed": "backward_inactive.png",
+            "Released": "backward_active.png",
+            "Clickable": true
+          },
+          {
+            "Type": "Button",
+            "Name": "playPreviousButton",
+            "Width": 50,
+            "Height": 50,
+            "Pressed": "previous_song_inactive.png",
+            "Released": "previous_song_active.png",
+            "Clickable": true
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "playClicked",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "playButton"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "handlePlayClicked"
+            }
+          },
+          {
+            "InteractionName": "stopClicked",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "stopButton"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "handleStopClicked"
+            }
+          },
+          {
+            "InteractionName": "pauseClicked",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "pauseButton"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "handlePauseClicked"
+            }
+          },
+          {
+            "InteractionName": "fastForwardClicked",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "fastForwardButton"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "handleFastForwardClicked"
+            }
+          },
+          {
+            "InteractionName": "fastBackwardClicked",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "fastBackwardButton"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "handleFastBackwardClicked"
+            }
+          },
+          {
+            "InteractionName": "playNextClicked",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "playNextButton"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "handlePlayNextClicked"
+            }
+          },
+          {
+            "InteractionName": "playPreviousClicked",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "playPreviousButton"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "handlePlayPreviousClicked"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "ControlPanelRadio",
+        "X": 220,
+        "Y": 200,
+        "Width": 50,
+        "Height": 50,
+        "Components": [
+          {
+            "Type": "Button",
+            "Name": "stopButton",
+            "Width": 50,
+            "Height": 50,
+            "Pressed": "stop_inactive.png",
+            "Released": "stop_active.png",
+            "Clickable": true
+          },
+          {
+            "Type": "Button",
+            "Name": "playButton",
+            "Width": 50,
+            "Height": 50,
+            "Pressed": "play-button_inactive.png",
+            "Released": "play-button_active.png",
+            "Clickable": true
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "playClicked",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "playButton"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "handlePlayClicked"
+            }
+          },
+          {
+            "InteractionName": "stopClicked",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "stopButton"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "handleStopClicked"
             }
           }
         ]

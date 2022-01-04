@@ -1,8 +1,12 @@
 #pragma once
 #include <gui_generated/main_screen/MainViewBase.hpp>
+#include <gui/containers/delegate/PeripheralStateIndicatorsDelegate.hpp>
 
-class MainView : public MainViewBase {
+class MainView : public MainViewBase
+        , public PeripheralStateIndicatorsDelegate {
 public:
     MainView();
-    void setPeripheralState(bool ethernetState, bool sdCardState);
+
+protected:
+    PeripheralStateIndicators &getPeripheralStateIndicators() override;
 };
