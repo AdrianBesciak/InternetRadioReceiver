@@ -51,6 +51,7 @@ namespace io {
         , startOffset(0) {
         stream.writeData("GET " + this->url.getPath() + " HTTP/1.1\r\n");
         stream.writeData("Accept: audio/*\r\n");
+        stream.writeData("Host: " + this->url.getHost() + "\r\n");
         stream.writeData("\r\n");
         readHeader();
     }
