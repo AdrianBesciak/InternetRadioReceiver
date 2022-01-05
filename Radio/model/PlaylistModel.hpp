@@ -9,7 +9,13 @@ namespace model {
     public:
         explicit PlaylistModel(const std::shared_ptr<audio::Playlist> &playlist);
 
-        [[nodiscard]] const std::vector<std::string> &getEntries() const;
+        [[nodiscard]] const std::vector<std::string> &getTitles() const;
+        [[nodiscard]] const std::string& getCurrentTitle() const;
+
+        [[nodiscard]] const std::vector<audio::Playlist::Entry>& getEntries();
+        [[nodiscard]] const audio::Playlist::Entry& getCurrentEntry() const;
+
+        [[nodiscard]] std::size_t getEntryCount() const;
 
         [[nodiscard]] bool hasCurrentEntryIndex() const;
         [[nodiscard]] int getCurrentEntryIndex() const;
@@ -17,7 +23,7 @@ namespace model {
 
     private:
         std::shared_ptr<audio::Playlist> playlist;
-        std::vector<std::string> entries;
+        std::vector<std::string> titles;
         int currentEntryIndex;
     };
 }

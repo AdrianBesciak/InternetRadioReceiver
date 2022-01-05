@@ -12,7 +12,6 @@ public:
 
     [[nodiscard]] const model::ApplicationModel &getApplicationModel() const;
     controller::ApplicationController &getApplicationController();
-    [[nodiscard]] const controller::ApplicationController &getApplicationController() const;
 
 protected:
     ModelListener* modelListener;

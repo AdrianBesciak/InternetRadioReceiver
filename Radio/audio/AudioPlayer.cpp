@@ -42,7 +42,7 @@ extern "C" {
 
 namespace audio {
     std::uint32_t normalizedVolume(std::uint32_t volume) {
-        return static_cast<std::uint32_t>(std::round(0.8F * static_cast<float>(volume))) + 10;
+        return static_cast<std::uint32_t>(std::round(0.7F * static_cast<float>(volume)));
     }
 
     AudioPlayer::AudioPlayer()

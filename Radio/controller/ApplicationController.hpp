@@ -11,8 +11,6 @@ namespace controller {
         VolumeController &getVolumeController();
         ErrorController &getErrorController();
 
-        void playRadio();
-        void playSDCard();
         void stop();
         void pause();
 
@@ -24,6 +22,8 @@ namespace controller {
 
         void playFromRadio(std::size_t idx);
         void playFromSDCard(std::size_t idx);
+        void playFromRadio();
+        void playFromSDCard();
     private:
         VolumeController volumeController;
         ErrorController errorController;

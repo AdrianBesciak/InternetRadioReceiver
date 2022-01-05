@@ -15,6 +15,9 @@ void RadioScreenPresenter::activate() {
     controller::ErrorController &errorController = applicationController->getErrorController();
     ErrorDialog &errorDialog = view.getErrorDialog();
     errorDialog.setOnErrorDismissRequested([&] { errorController.clearError(); });
+
+    Playlist& playlist = view.getPlaylist();
+    playlist.setOnItemClicked([&](auto idx) { applicationController->playFromRadio(static_cast<std::size_t>(idx));});
 }
 
 void RadioScreenPresenter::deactivate() {
@@ -24,6 +27,9 @@ void RadioScreenPresenter::deactivate() {
 
     ErrorDialog &errorDialog = view.getErrorDialog();
     errorDialog.setOnErrorDismissRequested(nullptr);
+
+    Playlist& playlist = view.getPlaylist();
+    playlist.setOnItemClicked(nullptr);
 }
 
 void RadioScreenPresenter::update() {
@@ -56,7 +62,7 @@ void RadioScreenPresenter::updateTitle() {
 void RadioScreenPresenter::updatePlaylist() {
     const model::PlaylistModel &playlistModel = applicationModel->getPlayerModel().getRadioPlaylist();
     Playlist& playlist = view.getPlaylist();
-    playlist.setEntries(playlistModel.getEntries());
+    playlist.setEntries(playlistModel.getTitles());
     playlist.setSelectedIdx(static_cast<std::int16_t>(playlistModel.getCurrentEntryIndex()));
 }
 

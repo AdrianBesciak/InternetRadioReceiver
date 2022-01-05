@@ -54,7 +54,7 @@ void SDCardScreenPresenter::updateTitle() {
 void SDCardScreenPresenter::updatePlaylist() {
     const model::PlaylistModel &playlistModel = applicationModel->getPlayerModel().getSdCardPlaylist();
     Playlist& playlist = view.getPlaylist();
-    playlist.setEntries(playlistModel.getEntries());
+    playlist.setEntries(playlistModel.getTitles());
     playlist.setSelectedIdx(static_cast<std::int16_t>(playlistModel.getCurrentEntryIndex()));
 }
 

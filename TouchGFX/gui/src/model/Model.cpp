@@ -21,7 +21,3 @@ const model::ApplicationModel &Model::getApplicationModel() const {
 controller::ApplicationController &Model::getApplicationController() {
     return ApplicationModule::getInstance().getApplicationController();
 }
-
-const controller::ApplicationController &Model::getApplicationController() const {
-    return ApplicationModule::getInstance().getApplicationController();
-}
