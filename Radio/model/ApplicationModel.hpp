@@ -2,6 +2,7 @@
 #include <model/PeripheralStateModel.hpp>
 #include <model/PlayerModel.h>
 #include <model/PlaylistModel.hpp>
+#include <model/ErrorModel.hpp>
 
 namespace model {
     class ApplicationModel {
@@ -13,9 +14,14 @@ namespace model {
 
         PlayerModel &getPlayerModel();
         [[nodiscard]] const PlayerModel &getPlayerModel() const;
+
+        ErrorModel &getErrorModel();
+        [[nodiscard]] const ErrorModel &getErrorModel() const;
+
     private:
         PeripheralStateModel peripheralStateModel;
         PlayerModel playerModel;
+        ErrorModel errorModel;
     };
 }
 

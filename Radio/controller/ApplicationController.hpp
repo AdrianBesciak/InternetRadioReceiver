@@ -2,12 +2,14 @@
 #include <audio/AudioPlayer.hpp>
 #include <model/ApplicationModel.hpp>
 #include <controller/VolumeController.hpp>
+#include <controller/ErrorController.hpp>
 
 namespace controller {
     class ApplicationController {
     public:
         ApplicationController(audio::AudioPlayer &audioPlayer, model::ApplicationModel &applicationModel);
         VolumeController &getVolumeController();
+        ErrorController &getErrorController();
 
         void playRadio();
         void playSDCard();
@@ -24,6 +26,7 @@ namespace controller {
         void playFromSDCard(std::size_t idx);
     private:
         VolumeController volumeController;
+        ErrorController errorController;
 
         audio::AudioPlayer &audioPlayer;
         model::ApplicationModel &applicationModel;

@@ -37,12 +37,24 @@
     <Text Id="__SingleUse_TFDW" TypographyId="Default" Alignment="Left" Direction="LTR">
       <Translation Language="GB">List Item</Translation>
     </Text>
+    <Text Id="__SingleUse_F3DJ" TypographyId="Large" Alignment="Center" Direction="LTR">
+      <Translation Language="GB">Error Occurred</Translation>
+    </Text>
+    <Text Id="__SingleUse_J9NG" TypographyId="Bigger" Alignment="Left" Direction="LTR">
+      <Translation Language="GB">&lt;value&gt;</Translation>
+    </Text>
+    <Text Id="__SingleUse_0XSM" TypographyId="Bigger" Alignment="Left" Direction="LTR">
+      <Translation Language="GB">Descriptive error message.</Translation>
+    </Text>
+    <Text Id="__SingleUse_T1MO" TypographyId="Bigger" Alignment="Center" Direction="LTR">
+      <Translation Language="GB">Dismiss</Translation>
+    </Text>
   </Texts>
   <Typographies>
     <Typography Id="Default" Font="verdana.ttf" Size="20" Bpp="4" FallbackCharacter="?" WildcardCharacterRanges="0-9,A-Z,a-z" />
-    <Typography Id="Large" Font="verdana.ttf" Size="40" Bpp="4" FallbackCharacter="?" />
-    <Typography Id="Small" Font="verdana.ttf" Size="10" Bpp="4" FallbackCharacter="?" />
-    <Typography Id="Smaller" Font="verdana.ttf" Size="16" Bpp="4" FallbackCharacter="?" />
-    <Typography Id="Typography_01" Font="verdana.ttf" Size="24" Bpp="4" FallbackCharacter="?" />
+    <Typography Id="Small" Font="verdana.ttf" Size="10" Bpp="4" FallbackCharacter="?" WildcardCharacterRanges="0-9,A-Z,a-z" />
+    <Typography Id="Smaller" Font="verdana.ttf" Size="16" Bpp="4" FallbackCharacter="?" WildcardCharacterRanges="0-9,A-Z,a-z" />
+    <Typography Id="Bigger" Font="verdana.ttf" Size="24" Bpp="4" FallbackCharacter="?" WildcardCharacterRanges="0-9,A-Z,a-z" />
+    <Typography Id="Large" Font="verdana.ttf" Size="30" Bpp="4" FallbackCharacter="?" WildcardCharacterRanges="0-9,A-Z,a-z" />
   </Typographies>
 </TextDatabase>

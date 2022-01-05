@@ -3,7 +3,8 @@
 namespace model {
     ApplicationModel::ApplicationModel()
         : peripheralStateModel()
-        , playerModel() {}
+        , playerModel()
+        , errorModel() {}
 
 
     PeripheralStateModel &ApplicationModel::getPeripheralStateModel() {
@@ -21,5 +22,14 @@ namespace model {
 
     const PlayerModel &ApplicationModel::getPlayerModel() const {
         return playerModel;
+    }
+
+
+    ErrorModel &ApplicationModel::getErrorModel() {
+        return errorModel;
+    }
+
+    const ErrorModel &ApplicationModel::getErrorModel() const {
+        return errorModel;
     }
 }

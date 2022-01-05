@@ -4,10 +4,11 @@
 class RadioScreenView : public RadioScreenViewBase {
 public:
     RadioScreenView();
-    PeripheralStateIndicators &getPeripheralStateIndicators();
-    VolumePanel &getVolumePanel();
-    TitleView &getTitleView();
-    TimePanelRadio &getTimePanel();
-    ControlPanelRadio &getControlPanel();
-    Playlist &getPlaylist();
+    PeripheralStateIndicators& getPeripheralStateIndicators();
+    VolumePanel& getVolumePanel();
+    TitleView& getTitleView();
+    TimePanelRadio& getTimePanel();
+    ControlPanelRadio& getControlPanel();
+    Playlist& getPlaylist();
+    ErrorDialog& getErrorDialog();
 };

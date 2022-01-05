@@ -9,12 +9,19 @@ void SDCardScreenPresenter::activate() {
     VolumePanel &volumePanel = view.getVolumePanel();
     volumePanel.setOnVolumePlusClicked([&] { volumeController.increaseVolume();});
     volumePanel.setOnVolumeMinusClicked([&] { volumeController.decreaseVolume();});
+
+    controller::ErrorController &errorController = applicationController->getErrorController();
+    ErrorDialog &errorDialog = view.getErrorDialog();
+    errorDialog.setOnErrorDismissRequested([&] { errorController.clearError(); });
 }
 
 void SDCardScreenPresenter::deactivate() {
     VolumePanel &volumePanel = view.getVolumePanel();
     volumePanel.setOnVolumePlusClicked(nullptr);
     volumePanel.setOnVolumeMinusClicked(nullptr);
+
+    ErrorDialog &errorDialog = view.getErrorDialog();
+    errorDialog.setOnErrorDismissRequested(nullptr);
 }
 
 void SDCardScreenPresenter::update() {
@@ -22,6 +29,7 @@ void SDCardScreenPresenter::update() {
     updateVolume();
     updateTitle();
     updatePlaylist();
+    updateError();
 }
 
 void SDCardScreenPresenter::updatePeripheralsState() {
@@ -48,4 +56,10 @@ void SDCardScreenPresenter::updatePlaylist() {
     Playlist& playlist = view.getPlaylist();
     playlist.setEntries(playlistModel.getEntries());
     playlist.setSelectedIdx(static_cast<std::int16_t>(playlistModel.getCurrentEntryIndex()));
+}
+
+void SDCardScreenPresenter::updateError() {
+    const model::ErrorModel &errorModel = applicationModel->getErrorModel();
+    ErrorDialog &errorDialog = view.getErrorDialog();
+    errorDialog.setErrorMessage(errorModel.getErrorMessage());
 }

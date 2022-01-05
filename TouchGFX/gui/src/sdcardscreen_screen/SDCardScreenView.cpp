@@ -25,3 +25,7 @@ ControlPanelSD& SDCardScreenView::getControlPanel() {
 Playlist& SDCardScreenView::getPlaylist() {
     return playlist;
 }
+
+ErrorDialog& SDCardScreenView::getErrorDialog() {
+    return errorDialog;
+}

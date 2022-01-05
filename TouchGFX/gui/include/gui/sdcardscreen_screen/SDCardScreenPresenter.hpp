@@ -19,6 +19,7 @@ private:
     void updateVolume();
     void updateTitle();
     void updatePlaylist();
+    void updateError();
 
     SDCardScreenView& view;
 };

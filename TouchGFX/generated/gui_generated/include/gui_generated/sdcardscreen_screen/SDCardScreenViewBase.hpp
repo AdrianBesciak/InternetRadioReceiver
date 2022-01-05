@@ -16,6 +16,7 @@
 #include <touchgfx/widgets/Image.hpp>
 #include <gui/containers/Playlist.hpp>
 #include <gui/containers/ScreenNavigator.hpp>
+#include <gui/containers/ErrorDialog.hpp>
 
 class SDCardScreenViewBase : public touchgfx::View<SDCardScreenPresenter>
 {
@@ -41,6 +42,7 @@ protected:
     touchgfx::Image sdCardIcon;
     Playlist playlist;
     ScreenNavigator screenNavigator;
+    ErrorDialog errorDialog;
 
 private:
 

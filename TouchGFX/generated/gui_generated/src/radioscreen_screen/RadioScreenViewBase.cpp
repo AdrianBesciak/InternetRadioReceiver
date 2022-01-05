@@ -28,6 +28,9 @@ RadioScreenViewBase::RadioScreenViewBase()
 
     screenNavigator.setXY(0, 0);
 
+    errorDialog.setXY(65, 15);
+    errorDialog.setVisible(false);
+
     add(__background);
     add(controlPanel);
     add(timePanel);
@@ -37,6 +40,7 @@ RadioScreenViewBase::RadioScreenViewBase()
     add(radioIcon);
     add(playlist);
     add(screenNavigator);
+    add(errorDialog);
 }
 
 void RadioScreenViewBase::setupScreen()
@@ -48,4 +52,5 @@ void RadioScreenViewBase::setupScreen()
     peripheralStateIndicators.initialize();
     playlist.initialize();
     screenNavigator.initialize();
+    errorDialog.initialize();
 }

@@ -11,4 +11,5 @@ public:
     TimePanelSD &getTimePanel();
     ControlPanelSD &getControlPanel();
     Playlist& getPlaylist();
+    ErrorDialog& getErrorDialog();
 };

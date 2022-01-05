@@ -12,13 +12,18 @@ void RadioScreenPresenter::activate() {
     volumePanel.setOnVolumePlusClicked([&] { volumeController.increaseVolume();});
     volumePanel.setOnVolumeMinusClicked([&] { volumeController.decreaseVolume();});
 
-
+    controller::ErrorController &errorController = applicationController->getErrorController();
+    ErrorDialog &errorDialog = view.getErrorDialog();
+    errorDialog.setOnErrorDismissRequested([&] { errorController.clearError(); });
 }
 
 void RadioScreenPresenter::deactivate() {
     VolumePanel &volumePanel = view.getVolumePanel();
     volumePanel.setOnVolumePlusClicked(nullptr);
     volumePanel.setOnVolumeMinusClicked(nullptr);
+
+    ErrorDialog &errorDialog = view.getErrorDialog();
+    errorDialog.setOnErrorDismissRequested(nullptr);
 }
 
 void RadioScreenPresenter::update() {
@@ -26,6 +31,7 @@ void RadioScreenPresenter::update() {
     updateVolume();
     updateTitle();
     updatePlaylist();
+    updateError();
 }
 
 void RadioScreenPresenter::updatePeripheralsState() {
@@ -44,7 +50,7 @@ void RadioScreenPresenter::updateVolume() {
 void RadioScreenPresenter::updateTitle() {
     const model::PlayerModel &playerModel = applicationModel->getPlayerModel();
     TitleView &titleView = view.getTitleView();
-    titleView.setTitle(playerModel.getSDCardTitle());
+    titleView.setTitle(playerModel.getRadioTitle());
 }
 
 void RadioScreenPresenter::updatePlaylist() {
@@ -52,4 +58,10 @@ void RadioScreenPresenter::updatePlaylist() {
     Playlist& playlist = view.getPlaylist();
     playlist.setEntries(playlistModel.getEntries());
     playlist.setSelectedIdx(static_cast<std::int16_t>(playlistModel.getCurrentEntryIndex()));
+}
+
+void RadioScreenPresenter::updateError() {
+    const model::ErrorModel &errorModel = applicationModel->getErrorModel();
+    ErrorDialog &errorDialog = view.getErrorDialog();
+    errorDialog.setErrorMessage(errorModel.getErrorMessage());
 }

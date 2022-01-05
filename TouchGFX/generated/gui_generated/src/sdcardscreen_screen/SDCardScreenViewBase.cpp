@@ -28,6 +28,9 @@ SDCardScreenViewBase::SDCardScreenViewBase()
 
     screenNavigator.setXY(0, 0);
 
+    errorDialog.setXY(65, 15);
+    errorDialog.setVisible(false);
+
     add(__background);
     add(controlPanel);
     add(timePanel);
@@ -37,6 +40,7 @@ SDCardScreenViewBase::SDCardScreenViewBase()
     add(sdCardIcon);
     add(playlist);
     add(screenNavigator);
+    add(errorDialog);
 }
 
 void SDCardScreenViewBase::setupScreen()
@@ -48,4 +52,5 @@ void SDCardScreenViewBase::setupScreen()
     peripheralStateIndicators.initialize();
     playlist.initialize();
     screenNavigator.initialize();
+    errorDialog.initialize();
 }

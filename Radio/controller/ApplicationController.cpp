@@ -5,11 +5,16 @@ namespace controller {
     ApplicationController::ApplicationController(audio::AudioPlayer &audioPlayer,
                                                  model::ApplicationModel &applicationModel)
         : volumeController(audioPlayer)
+        , errorController(applicationModel.getErrorModel())
         , audioPlayer(audioPlayer)
         , applicationModel(applicationModel) {}
 
     VolumeController &ApplicationController::getVolumeController() {
         return volumeController;
+    }
+
+    ErrorController &ApplicationController::getErrorController() {
+        return errorController;
     }
 
 

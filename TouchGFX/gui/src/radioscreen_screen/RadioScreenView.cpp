@@ -25,3 +25,7 @@ ControlPanelRadio& RadioScreenView::getControlPanel() {
 Playlist& RadioScreenView::getPlaylist() {
     return playlist;
 }
+
+ErrorDialog& RadioScreenView::getErrorDialog() {
+    return errorDialog;
+}
