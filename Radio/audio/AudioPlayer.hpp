@@ -26,6 +26,8 @@ namespace audio {
         void stop();
         void seek(float time);
 
+        std::string getSource() const;
+
         [[nodiscard]] unsigned getVolume() const;
         void setVolume(unsigned volume);
 

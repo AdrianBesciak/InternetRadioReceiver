@@ -7,17 +7,21 @@ RadioScreenPresenter::RadioScreenPresenter(RadioScreenView& view)
 
 
 void RadioScreenPresenter::activate() {
-    controller::VolumeController &volumeController = applicationController->getVolumeController();
+    controller::PlayerVolumeController &playerVolumeController = applicationController->getPlayerVolumeController();
     VolumePanel &volumePanel = view.getVolumePanel();
-    volumePanel.setOnVolumePlusClicked([&] { volumeController.increaseVolume();});
-    volumePanel.setOnVolumeMinusClicked([&] { volumeController.decreaseVolume();});
+    volumePanel.setOnVolumePlusClicked([&] { playerVolumeController.increaseVolume();});
+    volumePanel.setOnVolumeMinusClicked([&] { playerVolumeController.decreaseVolume();});
 
     controller::ErrorController &errorController = applicationController->getErrorController();
     ErrorDialog &errorDialog = view.getErrorDialog();
     errorDialog.setOnErrorDismissRequested([&] { errorController.clearError(); });
 
+    controller::PlayerRadioController &playerRadioController = applicationController->getPlayerRadioController();
     Playlist& playlist = view.getPlaylist();
-    playlist.setOnItemClicked([&](auto idx) { applicationController->playFromRadio(static_cast<std::size_t>(idx));});
+    ControlPanelRadio &controlPanel = view.getControlPanel();
+    playlist.setOnItemClicked([&](auto idx) { playerRadioController.playFromPlaylist(static_cast<std::size_t>(idx));});
+    controlPanel.setOnPlayClicked([&] { playerRadioController.play(); });
+    controlPanel.setOnStopClicked([&] { playerRadioController.stop(); });
 }
 
 void RadioScreenPresenter::deactivate() {
@@ -30,6 +34,10 @@ void RadioScreenPresenter::deactivate() {
 
     Playlist& playlist = view.getPlaylist();
     playlist.setOnItemClicked(nullptr);
+
+    ControlPanelRadio &controlPanel = view.getControlPanel();
+    controlPanel.setOnPlayClicked(nullptr);
+    controlPanel.setOnStopClicked(nullptr);
 }
 
 void RadioScreenPresenter::update() {
@@ -37,6 +45,7 @@ void RadioScreenPresenter::update() {
     updateVolume();
     updateTitle();
     updateTime();
+    updatePlayerControls();
     updatePlaylist();
     updateError();
 }
@@ -64,6 +73,16 @@ void RadioScreenPresenter::updateTime() {
     const model::PlayerModel &playerModel = applicationModel->getPlayerModel();
     TimePanelRadio &timePanel = view.getTimePanel();
     timePanel.setTime(playerModel.getRadioProgressCurrent(), playerModel.getRadioProgressTotal());
+}
+
+void RadioScreenPresenter::updatePlayerControls() {
+    const model::PlayerModel &playerModel = applicationModel->getPlayerModel();
+    ControlPanelRadio &controlPanel = view.getControlPanel();
+    bool stopVisible = playerModel.getMode() == model::PlayerModel::Mode::RADIO &&
+            playerModel.getState() == audio::AudioPlayer::State::PLAYING;
+    bool playVisible = !stopVisible;
+    controlPanel.setPlayVisible(playVisible);
+    controlPanel.setStopVisible(stopVisible);
 }
 
 void RadioScreenPresenter::updatePlaylist() {

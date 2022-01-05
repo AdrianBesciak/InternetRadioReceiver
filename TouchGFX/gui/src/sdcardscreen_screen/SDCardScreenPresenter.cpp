@@ -5,10 +5,10 @@ SDCardScreenPresenter::SDCardScreenPresenter(SDCardScreenView& view)
     : view(view) {}
 
 void SDCardScreenPresenter::activate() {
-    controller::VolumeController &volumeController = applicationController->getVolumeController();
+    controller::PlayerVolumeController &playerVolumeController = applicationController->getPlayerVolumeController();
     VolumePanel &volumePanel = view.getVolumePanel();
-    volumePanel.setOnVolumePlusClicked([&] { volumeController.increaseVolume();});
-    volumePanel.setOnVolumeMinusClicked([&] { volumeController.decreaseVolume();});
+    volumePanel.setOnVolumePlusClicked([&] { playerVolumeController.increaseVolume();});
+    volumePanel.setOnVolumeMinusClicked([&] { playerVolumeController.decreaseVolume();});
 
     controller::ErrorController &errorController = applicationController->getErrorController();
     ErrorDialog &errorDialog = view.getErrorDialog();

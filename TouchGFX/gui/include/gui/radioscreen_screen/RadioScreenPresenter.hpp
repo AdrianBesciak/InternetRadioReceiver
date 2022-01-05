@@ -19,6 +19,7 @@ private:
     void updateVolume();
     void updateTitle();
     void updateTime();
+    void updatePlayerControls();
     void updatePlaylist();
     void updateError();
 

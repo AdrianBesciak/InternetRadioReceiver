@@ -1,10 +1,10 @@
-#include "VolumeController.hpp"
+#include "PlayerVolumeController.hpp"
 
 namespace controller {
-    VolumeController::VolumeController(audio::AudioPlayer &audioPlayer)
+    PlayerVolumeController::PlayerVolumeController(audio::AudioPlayer &audioPlayer)
         : audioPlayer(audioPlayer) {}
 
-    void VolumeController::increaseVolume() {
+    void PlayerVolumeController::increaseVolume() {
         auto volume = audioPlayer.getVolume();
         if (audioPlayer.getVolume() > 95) {
             setVolume(100);
@@ -14,7 +14,7 @@ namespace controller {
         }
     }
 
-    void VolumeController::decreaseVolume() {
+    void PlayerVolumeController::decreaseVolume() {
         auto volume = audioPlayer.getVolume();
         if (audioPlayer.getVolume() > 5) {
             setVolume(volume - 5);
@@ -24,7 +24,7 @@ namespace controller {
         }
     }
 
-    void VolumeController::setVolume(std::uint32_t volume) {
+    void PlayerVolumeController::setVolume(std::uint32_t volume) {
         audioPlayer.setVolume(volume);
     }
 }

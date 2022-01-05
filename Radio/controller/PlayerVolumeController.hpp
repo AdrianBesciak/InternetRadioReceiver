@@ -3,9 +3,9 @@
 
 
 namespace controller {
-    class VolumeController {
+    class PlayerVolumeController {
     public:
-        explicit VolumeController(audio::AudioPlayer &audioPlayer);
+        explicit PlayerVolumeController(audio::AudioPlayer &audioPlayer);
 
         void increaseVolume();
         void decreaseVolume();

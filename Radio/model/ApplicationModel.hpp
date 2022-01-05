@@ -1,6 +1,6 @@
 #pragma once
 #include <model/PeripheralStateModel.hpp>
-#include <model/PlayerModel.h>
+#include <model/PlayerModel.hpp>
 #include <model/PlaylistModel.hpp>
 #include <model/ErrorModel.hpp>
 

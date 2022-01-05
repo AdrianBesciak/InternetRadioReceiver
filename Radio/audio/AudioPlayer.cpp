@@ -87,6 +87,10 @@ namespace audio {
         updateState(State::NO_SOURCE);
         if (onMediumChanged != nullptr)
             onMediumChanged(reader->getName());
+        reader = nullptr;
+        if (onProgressChanged != nullptr) {
+            onProgressChanged(0.0f, 0.0f);
+        }
     }
 
     void AudioPlayer::play() {
@@ -136,6 +140,13 @@ namespace audio {
         reader->seek(time);
         if (onProgressChanged != nullptr)
             onProgressChanged(getCurrentTime(), getEndTime());
+    }
+
+    std::string AudioPlayer::getSource() const {
+        if (reader != nullptr) {
+            return reader->getName();
+        }
+        return std::string();
     }
 
     unsigned AudioPlayer::getVolume() const {
@@ -231,7 +242,7 @@ namespace audio {
         }
         if (count == 0) {
             bufferState = BufferState::None;
-            stop();
+            unloadSource();
         }
     }
 
