@@ -14,11 +14,8 @@
 #include <gui/containers/VolumePanel.hpp>
 #include <gui/containers/PeripheralStateIndicators.hpp>
 #include <touchgfx/widgets/Image.hpp>
-#include <touchgfx/containers/SlideMenu.hpp>
-#include <touchgfx/containers/scrollers/ScrollWheel.hpp>
-#include <gui/containers/listItem_notSelected.hpp>
+#include <gui/containers/Playlist.hpp>
 #include <gui/containers/ScreenNavigator.hpp>
-#include <touchgfx/mixins/ClickListener.hpp>
 
 class RadioScreenViewBase : public touchgfx::View<RadioScreenPresenter>
 {
@@ -26,11 +23,6 @@ public:
     RadioScreenViewBase();
     virtual ~RadioScreenViewBase() {}
     virtual void setupScreen();
-
-    virtual void RadioStationsUpdateItem(listItem_notSelected& item, int16_t itemIndex)
-    {
-        // Override and implement this function in RadioScreen
-    }
 
 protected:
     FrontendApplication& application() {
@@ -47,14 +39,10 @@ protected:
     VolumePanel volumePanel;
     PeripheralStateIndicators peripheralStateIndicators;
     touchgfx::Image radioIcon;
-    touchgfx::SlideMenu slideMenuRight;
-    touchgfx::ClickListener< touchgfx::ScrollWheel > RadioStations;
-    touchgfx::DrawableListItems<listItem_notSelected, 11> RadioStationsListItems;
+    Playlist playlist;
     ScreenNavigator screenNavigator;
 
 private:
-    touchgfx::Callback<RadioScreenViewBase, touchgfx::DrawableListItemsInterface*, int16_t, int16_t> updateItemCallback;
-    void updateItemCallbackHandler(touchgfx::DrawableListItemsInterface* items, int16_t containerIndex, int16_t itemIndex);
 
 };
 

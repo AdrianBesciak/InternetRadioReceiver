@@ -26,10 +26,6 @@
     <ClCompile Include="..\..\gui\src\radioscreen_screen\RadioScreenPresenter.cpp"/>
     <ClCompile Include="..\..\gui\src\radioscreen_screen\RadioScreenView.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\radioscreen_screen\RadioScreenViewBase.cpp"/>
-    <ClCompile Include="..\..\gui\src\containers\listItem_notSelected.cpp"/>
-    <ClCompile Include="..\..\generated\gui_generated\src\containers\listItem_notSelectedBase.cpp"/>
-    <ClCompile Include="..\..\gui\src\containers\listItem_selected.cpp"/>
-    <ClCompile Include="..\..\generated\gui_generated\src\containers\listItem_selectedBase.cpp"/>
     <ClCompile Include="..\..\gui\src\model\ModelListener.cpp"/>
     <ClCompile Include="..\..\gui\src\containers\VolumePanel.cpp"/>
     <ClCompile Include="..\..\gui\src\containers\TimePanelSD.cpp"/>
@@ -60,6 +56,10 @@
     <ClCompile Include="..\..\gui\src\sdcardscreen_screen\SDCardScreenPresenter.cpp"/>
     <ClCompile Include="..\..\gui\src\sdcardscreen_screen\SDCardScreenView.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\sdcardscreen_screen\SDCardScreenViewBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\containers\ListItem.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\ListItemBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\containers\Playlist.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\PlaylistBase.cpp"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ApplicationRoot)\assets\texts\texts.xml"/>
@@ -215,10 +215,6 @@
     <ClInclude Include="..\..\gui\include\gui\radioscreen_screen\RadioScreenPresenter.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\radioscreen_screen\RadioScreenView.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\radioscreen_screen\RadioScreenViewBase.hpp"/>
-    <ClInclude Include="..\..\gui\include\gui\containers\listItem_notSelected.hpp"/>
-    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\listItem_notSelectedBase.hpp"/>
-    <ClInclude Include="..\..\gui\include\gui\containers\listItem_selected.hpp"/>
-    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\listItem_selectedBase.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\containers\VolumePanel.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\containers\TimePanelSD.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\TimePanelSDBase.hpp"/>
@@ -248,6 +244,10 @@
     <ClInclude Include="..\..\gui\include\gui\sdcardscreen_screen\SDCardScreenPresenter.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\sdcardscreen_screen\SDCardScreenView.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\sdcardscreen_screen\SDCardScreenViewBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\containers\ListItem.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\ListItemBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\containers\Playlist.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\PlaylistBase.hpp"/>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(ApplicationRoot)\generated\simulator\touchgfx.rc"/>

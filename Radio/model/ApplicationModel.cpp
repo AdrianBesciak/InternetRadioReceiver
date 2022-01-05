@@ -2,7 +2,8 @@
 
 namespace model {
     ApplicationModel::ApplicationModel()
-        : peripheralStateModel() {}
+        : peripheralStateModel()
+        , playerModel() {}
 
 
     PeripheralStateModel &ApplicationModel::getPeripheralStateModel() {
@@ -20,13 +21,5 @@ namespace model {
 
     const PlayerModel &ApplicationModel::getPlayerModel() const {
         return playerModel;
-    }
-
-    RadioStationsListModel &ApplicationModel::getRadioStationsListModel() {
-        return radioStationsListModel;
-    }
-
-    const RadioStationsListModel &ApplicationModel::getRadioStationsListModel() const {
-        return radioStationsListModel;
     }
 }

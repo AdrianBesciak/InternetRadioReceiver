@@ -14,10 +14,14 @@ TitleView& SDCardScreenView::getTitleView() {
     return titleView;
 }
 
-TimePanelInterface& SDCardScreenView::getTimePanel() {
+TimePanelSD& SDCardScreenView::getTimePanel() {
     return timePanel;
 }
 
 ControlPanelSD& SDCardScreenView::getControlPanel() {
     return controlPanel;
+}
+
+Playlist& SDCardScreenView::getPlaylist() {
+    return playlist;
 }

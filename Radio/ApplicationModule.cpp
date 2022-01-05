@@ -55,7 +55,6 @@ void ApplicationModule::bindWatchdogs() {
 void ApplicationModule::bindPlayerState() {
     model::PlayerModel &playerModel = applicationModel.getPlayerModel();
     audioPlayer.setOnStateChanged([&](audio::AudioPlayer::State state) { playerModel.setState(state);});
-    audioPlayer.setOnMediumChanged([&](const std::string &medium) { playerModel.setMedium(medium);});
     audioPlayer.setOnVolumeChanged([&](unsigned volume) { playerModel.setVolume(volume);});
     audioPlayer.setOnProgressChanged([&](float current, float total) {
         playerModel.setProgressCurrent(current);

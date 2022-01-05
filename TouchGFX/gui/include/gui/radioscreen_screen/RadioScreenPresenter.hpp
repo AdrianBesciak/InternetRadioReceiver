@@ -17,6 +17,8 @@ public:
 private:
     void updatePeripheralsState();
     void updateVolume();
+    void updateTitle();
+    void updatePlaylist();
 
     RadioScreenView& view;
 };

@@ -5,8 +5,7 @@
 #include <touchgfx/Color.hpp>
 #include <BitmapDatabase.hpp>
 
-RadioScreenViewBase::RadioScreenViewBase() :
-    updateItemCallback(this, &RadioScreenViewBase::updateItemCallbackHandler)
+RadioScreenViewBase::RadioScreenViewBase()
 {
 
     __background.setPosition(0, 0, 480, 272);
@@ -25,31 +24,7 @@ RadioScreenViewBase::RadioScreenViewBase() :
     radioIcon.setXY(20, 20);
     radioIcon.setBitmap(touchgfx::Bitmap(BITMAP_RADIO_ID));
 
-    slideMenuRight.setup(touchgfx::SlideMenu::WEST,
-        touchgfx::Bitmap(BITMAP_RIGHT_SLIDE_MENU_BACKGROUND_ID),
-        touchgfx::Bitmap(BITMAP_RIGHT_SLIDE_MENU_BUTTON_ID),
-        touchgfx::Bitmap(BITMAP_RIGHT_SLIDE_MENU_BUTTON_ID),
-        18, 0, 0, 110);
-    slideMenuRight.setState(touchgfx::SlideMenu::COLLAPSED);
-    slideMenuRight.setVisiblePixelsWhenCollapsed(25);
-    slideMenuRight.setHiddenPixelsWhenExpanded(0);
-    slideMenuRight.setAnimationEasingEquation(touchgfx::EasingEquations::cubicEaseInOut);
-    slideMenuRight.setAnimationDuration(18);
-    slideMenuRight.setExpandedStateTimeout(180);
-    slideMenuRight.setXY(278, 0);
-
-    RadioStations.setPosition(27, 2, 170, 272);
-    RadioStations.setHorizontal(false);
-    RadioStations.setCircular(false);
-    RadioStations.setEasingEquation(touchgfx::EasingEquations::quadEaseInOut);
-    RadioStations.setSwipeAcceleration(10);
-    RadioStations.setDragAcceleration(10);
-    RadioStations.setNumberOfItems(10);
-    RadioStations.setSelectedItemOffset(0);
-    RadioStations.setDrawableSize(30, 0);
-    RadioStations.setDrawables(RadioStationsListItems, updateItemCallback);
-    RadioStations.animateToItem(0, 0);
-    slideMenuRight.add(RadioStations);
+    playlist.setXY(278, 0);
 
     screenNavigator.setXY(0, 0);
 
@@ -60,7 +35,7 @@ RadioScreenViewBase::RadioScreenViewBase() :
     add(volumePanel);
     add(peripheralStateIndicators);
     add(radioIcon);
-    add(slideMenuRight);
+    add(playlist);
     add(screenNavigator);
 }
 
@@ -71,20 +46,6 @@ void RadioScreenViewBase::setupScreen()
     titleView.initialize();
     volumePanel.initialize();
     peripheralStateIndicators.initialize();
-    RadioStations.initialize();
-    for (int i = 0; i < RadioStationsListItems.getNumberOfDrawables(); i++)
-    {
-        RadioStationsListItems[i].initialize();
-    }
+    playlist.initialize();
     screenNavigator.initialize();
-}
-
-void RadioScreenViewBase::updateItemCallbackHandler(touchgfx::DrawableListItemsInterface* items, int16_t containerIndex, int16_t itemIndex)
-{
-    if (items == &RadioStationsListItems)
-    {
-        touchgfx::Drawable* d = items->getDrawable(containerIndex);
-        listItem_notSelected* cc = (listItem_notSelected*)d;
-        RadioStationsUpdateItem(*cc, itemIndex);
-    }
 }

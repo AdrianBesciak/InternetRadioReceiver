@@ -4,7 +4,6 @@
 class TitleView : public TitleViewBase {
 public:
     TitleView();
-    void initialize() override;
 
     void setTitle(const std::string &title);
 

@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <audio/AudioPlayer.hpp>
+#include <model/PlaylistModel.hpp>
 
 namespace model {
     class PlayerModel {
@@ -10,30 +11,38 @@ namespace model {
             RADIO,
             SD
         };
-
         PlayerModel();
+
+        PlaylistModel& getRadioPlaylist();
+        [[nodiscard]] const PlaylistModel &getRadioPlaylist() const;
+        PlaylistModel& getSdCardPlaylist();
+        [[nodiscard]] const PlaylistModel &getSdCardPlaylist() const;
 
         [[nodiscard]] Mode getMode() const;
         void setMode(Mode mode);
 
-        [[nodiscard]] const std::string &getMedium() const;
-        void setMedium(const std::string &media);
-
         [[nodiscard]] audio::AudioPlayer::State getState() const;
         void setState(audio::AudioPlayer::State state);
 
-        [[nodiscard]] float getProgressCurrent() const;
         void setProgressCurrent(float progressCurrent);
-
-        [[nodiscard]] float getProgressTotal() const;
         void setProgressTotal(float progressTotal);
+
+        [[nodiscard]] float getRadioProgressCurrent() const;
+        [[nodiscard]] float getRadioProgressTotal() const;
+        [[nodiscard]] float getSDCardProgressCurrent() const;
+        [[nodiscard]] float getSDCardProgressTotal() const;
 
         [[nodiscard]] unsigned getVolume() const;
         void setVolume(unsigned volume);
 
+        [[nodiscard]] const std::string& getRadioTitle() const;
+        [[nodiscard]] const std::string& getSDCardTitle() const;
+
     private:
+        PlaylistModel radioPlaylist;
+        PlaylistModel sdCardPlaylist;
+
         Mode mode;
-        std::string medium;
         audio::AudioPlayer::State state;
         float progressCurrent;
         float progressTotal;

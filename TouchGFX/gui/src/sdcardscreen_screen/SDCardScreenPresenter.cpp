@@ -6,27 +6,46 @@ SDCardScreenPresenter::SDCardScreenPresenter(SDCardScreenView& view)
 
 void SDCardScreenPresenter::activate() {
     controller::VolumeController &volumeController = applicationController->getVolumeController();
-    view.setOnVolumePlusClicked([&] { volumeController.increaseVolume();});
-    view.setOnVolumeMinusClicked([&] { volumeController.decreaseVolume();});
+    VolumePanel &volumePanel = view.getVolumePanel();
+    volumePanel.setOnVolumePlusClicked([&] { volumeController.increaseVolume();});
+    volumePanel.setOnVolumeMinusClicked([&] { volumeController.decreaseVolume();});
 }
 
 void SDCardScreenPresenter::deactivate() {
-    view.setOnVolumePlusClicked(nullptr);
-    view.setOnVolumeMinusClicked(nullptr);
+    VolumePanel &volumePanel = view.getVolumePanel();
+    volumePanel.setOnVolumePlusClicked(nullptr);
+    volumePanel.setOnVolumeMinusClicked(nullptr);
 }
 
 void SDCardScreenPresenter::update() {
     updatePeripheralsState();
     updateVolume();
+    updateTitle();
+    updatePlaylist();
 }
 
 void SDCardScreenPresenter::updatePeripheralsState() {
     const model::PeripheralStateModel &peripheralStateModel = applicationModel->getPeripheralStateModel();
-    view.setEthernetState(peripheralStateModel.isEthernetState());
-    view.setSdCardState(peripheralStateModel.isSdCardState());
+    PeripheralStateIndicators &peripheralStateIndicators = view.getPeripheralStateIndicators();
+    peripheralStateIndicators.setEthernetState(peripheralStateModel.isEthernetState());
+    peripheralStateIndicators.setSdCardState(peripheralStateModel.isSdCardState());
 }
 
 void SDCardScreenPresenter::updateVolume() {
     const model::PlayerModel &playerModel = applicationModel->getPlayerModel();
-    view.setVolume(playerModel.getVolume());
+    VolumePanel &volumePanel = view.getVolumePanel();
+    volumePanel.setVolume(playerModel.getVolume());
+}
+
+void SDCardScreenPresenter::updateTitle() {
+    const model::PlayerModel &playerModel = applicationModel->getPlayerModel();
+    TitleView &titleView = view.getTitleView();
+    titleView.setTitle(playerModel.getSDCardTitle());
+}
+
+void SDCardScreenPresenter::updatePlaylist() {
+    const model::PlaylistModel &playlistModel = applicationModel->getPlayerModel().getSdCardPlaylist();
+    Playlist& playlist = view.getPlaylist();
+    playlist.setEntries(playlistModel.getEntries());
+    playlist.setSelectedIdx(static_cast<std::int16_t>(playlistModel.getCurrentEntryIndex()));
 }

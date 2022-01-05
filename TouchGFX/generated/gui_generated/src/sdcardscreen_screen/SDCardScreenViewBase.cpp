@@ -5,8 +5,7 @@
 #include <touchgfx/Color.hpp>
 #include <BitmapDatabase.hpp>
 
-SDCardScreenViewBase::SDCardScreenViewBase() :
-    updateItemCallback(this, &SDCardScreenViewBase::updateItemCallbackHandler)
+SDCardScreenViewBase::SDCardScreenViewBase()
 {
 
     __background.setPosition(0, 0, 480, 272);
@@ -25,34 +24,7 @@ SDCardScreenViewBase::SDCardScreenViewBase() :
     sdCardIcon.setXY(20, 20);
     sdCardIcon.setBitmap(touchgfx::Bitmap(BITMAP_RAW_MICRO_SD_ID));
 
-    slideMenuRight.setup(touchgfx::SlideMenu::WEST,
-        touchgfx::Bitmap(BITMAP_RIGHT_SLIDE_MENU_BACKGROUND_ID),
-        touchgfx::Bitmap(BITMAP_RIGHT_SLIDE_MENU_BUTTON_ID),
-        touchgfx::Bitmap(BITMAP_RIGHT_SLIDE_MENU_BUTTON_ID),
-        18, 0, 0, 110);
-    slideMenuRight.setState(touchgfx::SlideMenu::COLLAPSED);
-    slideMenuRight.setVisiblePixelsWhenCollapsed(25);
-    slideMenuRight.setHiddenPixelsWhenExpanded(0);
-    slideMenuRight.setAnimationEasingEquation(touchgfx::EasingEquations::cubicEaseInOut);
-    slideMenuRight.setAnimationDuration(18);
-    slideMenuRight.setExpandedStateTimeout(180);
-    slideMenuRight.setXY(278, 0);
-
-    PlayQueue.setPosition(27, 2, 170, 272);
-    PlayQueue.setHorizontal(false);
-    PlayQueue.setCircular(true);
-    PlayQueue.setEasingEquation(touchgfx::EasingEquations::backEaseOut);
-    PlayQueue.setSwipeAcceleration(10);
-    PlayQueue.setDragAcceleration(10);
-    PlayQueue.setNumberOfItems(20);
-    PlayQueue.setSelectedItemOffset(14);
-    PlayQueue.setSelectedItemExtraSize(0, 0);
-    PlayQueue.setSelectedItemMargin(2, 2);
-    PlayQueue.setDrawableSize(30, 0);
-    PlayQueue.setDrawables(PlayQueueListItems, updateItemCallback,
-                              PlayQueueSelectedListItems, updateItemCallback);
-    PlayQueue.animateToItem(10, 0);
-    slideMenuRight.add(PlayQueue);
+    playlist.setXY(278, 0);
 
     screenNavigator.setXY(0, 0);
 
@@ -63,7 +35,7 @@ SDCardScreenViewBase::SDCardScreenViewBase() :
     add(volumePanel);
     add(peripheralStateIndicators);
     add(sdCardIcon);
-    add(slideMenuRight);
+    add(playlist);
     add(screenNavigator);
 }
 
@@ -74,30 +46,6 @@ void SDCardScreenViewBase::setupScreen()
     titleView.initialize();
     volumePanel.initialize();
     peripheralStateIndicators.initialize();
-    PlayQueue.initialize();
-    for (int i = 0; i < PlayQueueListItems.getNumberOfDrawables(); i++)
-    {
-        PlayQueueListItems[i].initialize();
-    }
-    for (int i = 0; i < PlayQueueSelectedListItems.getNumberOfDrawables(); i++)
-    {
-        PlayQueueSelectedListItems[i].initialize();
-    }
+    playlist.initialize();
     screenNavigator.initialize();
-}
-
-void SDCardScreenViewBase::updateItemCallbackHandler(touchgfx::DrawableListItemsInterface* items, int16_t containerIndex, int16_t itemIndex)
-{
-    if (items == &PlayQueueListItems)
-    {
-        touchgfx::Drawable* d = items->getDrawable(containerIndex);
-        listItem_notSelected* cc = (listItem_notSelected*)d;
-        PlayQueueUpdateItem(*cc, itemIndex);
-    }
-    else if (items == &PlayQueueSelectedListItems)
-    {
-        touchgfx::Drawable* d = items->getDrawable(containerIndex);
-        listItem_selected* cc = (listItem_selected*)d;
-        PlayQueueUpdateCenterItem(*cc, itemIndex);
-    }
 }

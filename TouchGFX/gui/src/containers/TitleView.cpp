@@ -3,11 +3,6 @@
 TitleView::TitleView()
     : storedTitle() {}
 
-void TitleView::initialize() {
-    setTitle("No media");
-}
-
-
 void TitleView::setTitle(const std::string &title) {
     static Unicode::UnicodeChar buff[TITLETEXT_SIZE];
     if (title != storedTitle) {

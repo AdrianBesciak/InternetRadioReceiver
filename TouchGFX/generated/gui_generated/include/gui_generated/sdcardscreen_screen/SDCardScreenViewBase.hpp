@@ -14,10 +14,7 @@
 #include <gui/containers/VolumePanel.hpp>
 #include <gui/containers/PeripheralStateIndicators.hpp>
 #include <touchgfx/widgets/Image.hpp>
-#include <touchgfx/containers/SlideMenu.hpp>
-#include <touchgfx/containers/scrollers/ScrollWheelWithSelectionStyle.hpp>
-#include <gui/containers/listItem_notSelected.hpp>
-#include <gui/containers/listItem_selected.hpp>
+#include <gui/containers/Playlist.hpp>
 #include <gui/containers/ScreenNavigator.hpp>
 
 class SDCardScreenViewBase : public touchgfx::View<SDCardScreenPresenter>
@@ -26,16 +23,6 @@ public:
     SDCardScreenViewBase();
     virtual ~SDCardScreenViewBase() {}
     virtual void setupScreen();
-
-    virtual void PlayQueueUpdateItem(listItem_notSelected& item, int16_t itemIndex)
-    {
-        // Override and implement this function in SDCardScreen
-    }
-
-    virtual void PlayQueueUpdateCenterItem(listItem_selected& item, int16_t itemIndex)
-    {
-        // Override and implement this function in SDCardScreen
-    }
 
 protected:
     FrontendApplication& application() {
@@ -52,15 +39,10 @@ protected:
     VolumePanel volumePanel;
     PeripheralStateIndicators peripheralStateIndicators;
     touchgfx::Image sdCardIcon;
-    touchgfx::SlideMenu slideMenuRight;
-    touchgfx::ScrollWheelWithSelectionStyle PlayQueue;
-    touchgfx::DrawableListItems<listItem_notSelected, 11> PlayQueueListItems;
-    touchgfx::DrawableListItems<listItem_selected, 2> PlayQueueSelectedListItems;
+    Playlist playlist;
     ScreenNavigator screenNavigator;
 
 private:
-    touchgfx::Callback<SDCardScreenViewBase, touchgfx::DrawableListItemsInterface*, int16_t, int16_t> updateItemCallback;
-    void updateItemCallbackHandler(touchgfx::DrawableListItemsInterface* items, int16_t containerIndex, int16_t itemIndex);
 
 };
 

@@ -2,13 +2,6 @@
 
 RadioScreenView::RadioScreenView() = default;
 
-void RadioScreenView::fillRadioStationsList(const std::vector<model::RadioStationsListModel::Entry>& stations, std::uint8_t currentStation){
-    for (std::size_t i = 0; i < stations.size(); i++) {
-        RadioStationsListItems[static_cast<int>(i)].setName(stations[i].getName());
-    }
-}
-
-
 PeripheralStateIndicators& RadioScreenView::getPeripheralStateIndicators() {
     return peripheralStateIndicators;
 }
@@ -21,10 +14,14 @@ TitleView& RadioScreenView::getTitleView() {
     return titleView;
 }
 
-TimePanelInterface& RadioScreenView::getTimePanel() {
+TimePanelRadio& RadioScreenView::getTimePanel() {
     return timePanel;
 }
 
 ControlPanelRadio& RadioScreenView::getControlPanel() {
     return controlPanel;
+}
+
+Playlist& RadioScreenView::getPlaylist() {
+    return playlist;
 }

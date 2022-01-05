@@ -19,7 +19,7 @@ ScreenNavigatorBase::ScreenNavigatorBase() :
     slideMenuLeft.setHiddenPixelsWhenExpanded(0);
     slideMenuLeft.setAnimationEasingEquation(touchgfx::EasingEquations::cubicEaseInOut);
     slideMenuLeft.setAnimationDuration(18);
-    slideMenuLeft.setExpandedStateTimeout(180);
+    slideMenuLeft.setExpandedStateTimeout(0);
     slideMenuLeft.setXY(0, 0);
 
     sdCardButton.setXY(0, 50);

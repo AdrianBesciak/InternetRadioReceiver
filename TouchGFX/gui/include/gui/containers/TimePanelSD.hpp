@@ -1,12 +1,10 @@
 #pragma once
 #include <gui_generated/containers/TimePanelSDBase.hpp>
-#include <gui/containers/interface/TimePanelInterface.hpp>
 
-class TimePanelSD : public TimePanelSDBase
-        , public TimePanelInterface {
+class TimePanelSD : public TimePanelSDBase {
 public:
     TimePanelSD();
-    void setTime(float currentTime, float totalTime) override;
+    void setTime(float currentTime, float totalTime);
 private:
     float storedCurrentTime;
     float storedTotalTime;

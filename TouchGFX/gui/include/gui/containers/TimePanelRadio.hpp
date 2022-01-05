@@ -1,12 +1,10 @@
 #pragma once
 #include <gui_generated/containers/TimePanelRadioBase.hpp>
-#include <gui/containers/interface/TimePanelInterface.hpp>
 
-class TimePanelRadio : public TimePanelRadioBase
-        , public TimePanelInterface {
+class TimePanelRadio : public TimePanelRadioBase {
 public:
     TimePanelRadio();
-    void setTime(float currentTime, float totalTime) override;
+    void setTime(float currentTime, float totalTime);
 
 private:
     float storedCurrentTime;

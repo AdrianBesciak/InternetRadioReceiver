@@ -10,6 +10,7 @@ void MainScreenPresenter::update() {
 
 void MainScreenPresenter::updatePeripheralsState() {
     const model::PeripheralStateModel &peripheralStateModel = applicationModel->getPeripheralStateModel();
-    view.setEthernetState(peripheralStateModel.isEthernetState());
-    view.setSdCardState(peripheralStateModel.isSdCardState());
+    PeripheralStateIndicators &peripheralStateIndicators = view.getPeripheralStateIndicators();
+    peripheralStateIndicators.setEthernetState(peripheralStateModel.isEthernetState());
+    peripheralStateIndicators.setSdCardState(peripheralStateModel.isSdCardState());
 }
