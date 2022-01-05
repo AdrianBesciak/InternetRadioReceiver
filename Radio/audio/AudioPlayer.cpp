@@ -146,7 +146,7 @@ namespace audio {
         if (reader != nullptr) {
             return reader->getName();
         }
-        return std::string();
+        return {};
     }
 
     unsigned AudioPlayer::getVolume() const {

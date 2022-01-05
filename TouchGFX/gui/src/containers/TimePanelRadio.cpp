@@ -5,7 +5,7 @@ TimePanelRadio::TimePanelRadio()
 
 void TimePanelRadio::setTime(float currentTime, float totalTime) {
     std::ignore = totalTime;
-    if (std::abs(currentTime - storedCurrentTime) >= 0.9f) {
+    if (std::abs(currentTime - storedCurrentTime) >= 0.51f) {
         storedCurrentTime = currentTime;
         auto timeInteger = static_cast<std::uint32_t>(currentTime);
         auto seconds = timeInteger % 60;

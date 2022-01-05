@@ -50,7 +50,7 @@ namespace controller {
 
     void PlayerSDCardController::stop() {
         if (playerModel.getMode() == model::PlayerModel::Mode::SD) {
-            audioPlayer.unloadSource();
+            audioPlayer.stop();
         }
     }
 

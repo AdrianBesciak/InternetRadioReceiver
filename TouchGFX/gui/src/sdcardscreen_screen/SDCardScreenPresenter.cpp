@@ -13,6 +13,18 @@ void SDCardScreenPresenter::activate() {
     controller::ErrorController &errorController = applicationController->getErrorController();
     ErrorDialog &errorDialog = view.getErrorDialog();
     errorDialog.setOnErrorDismissRequested([&] { errorController.clearError(); });
+
+    controller::PlayerSDCardController &playerSdCardController = applicationController->getPlayerSdCardController();
+    Playlist& playlist = view.getPlaylist();
+    ControlPanelSD &controlPanel = view.getControlPanel();
+    playlist.setOnItemClicked([&](auto idx) { playerSdCardController.playFromPlaylist(static_cast<std::size_t>(idx));});
+    controlPanel.setOnPlayClicked([&] { playerSdCardController.play(); });
+    controlPanel.setOnStopClicked([&] { playerSdCardController.stop(); });
+    controlPanel.setOnPauseClicked([&] { playerSdCardController.pause(); });
+    controlPanel.setOnFastForwardClicked([&] { playerSdCardController.fastForward(); });
+    controlPanel.setOnFastBackwardClicked([&] { playerSdCardController.fastBackward(); });
+    controlPanel.setOnPlayNextClicked([&] { playerSdCardController.playNext(); });
+    controlPanel.setOnPlayPreviousClicked([&] { playerSdCardController.playPrevious(); });
 }
 
 void SDCardScreenPresenter::deactivate() {
@@ -22,6 +34,18 @@ void SDCardScreenPresenter::deactivate() {
 
     ErrorDialog &errorDialog = view.getErrorDialog();
     errorDialog.setOnErrorDismissRequested(nullptr);
+
+    Playlist& playlist = view.getPlaylist();
+    playlist.setOnItemClicked(nullptr);
+
+    ControlPanelSD &controlPanel = view.getControlPanel();
+    controlPanel.setOnPlayClicked(nullptr);
+    controlPanel.setOnStopClicked(nullptr);
+    controlPanel.setOnPauseClicked(nullptr);
+    controlPanel.setOnFastForwardClicked(nullptr);
+    controlPanel.setOnFastBackwardClicked(nullptr);
+    controlPanel.setOnPlayNextClicked(nullptr);
+    controlPanel.setOnPlayPreviousClicked(nullptr);
 }
 
 void SDCardScreenPresenter::update() {
@@ -29,6 +53,7 @@ void SDCardScreenPresenter::update() {
     updateVolume();
     updateTitle();
     updateTime();
+    updatePlayerControls();
     updatePlaylist();
     updateError();
 }
@@ -56,6 +81,16 @@ void SDCardScreenPresenter::updateTime() {
     const model::PlayerModel &playerModel = applicationModel->getPlayerModel();
     TimePanelSD &timePanel = view.getTimePanel();
     timePanel.setTime(playerModel.getSDCardProgressCurrent(), playerModel.getSDCardProgressTotal());
+}
+
+void SDCardScreenPresenter::updatePlayerControls() {
+    const model::PlayerModel &playerModel = applicationModel->getPlayerModel();
+    ControlPanelSD &controlPanel = view.getControlPanel();
+    bool pauseVisible = playerModel.getMode() == model::PlayerModel::Mode::SD &&
+                        playerModel.getState() == audio::AudioPlayer::State::PLAYING;
+    bool playVisible = !pauseVisible;
+    controlPanel.setPlayVisible(playVisible);
+    controlPanel.setPauseVisible(pauseVisible);
 }
 
 void SDCardScreenPresenter::updatePlaylist() {
