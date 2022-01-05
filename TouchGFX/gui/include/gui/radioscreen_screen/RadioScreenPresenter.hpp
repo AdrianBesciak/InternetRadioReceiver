@@ -18,6 +18,7 @@ private:
     void updatePeripheralsState();
     void updateVolume();
     void updateTitle();
+    void updateTime();
     void updatePlaylist();
     void updateError();
 

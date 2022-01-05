@@ -36,6 +36,7 @@ void RadioScreenPresenter::update() {
     updatePeripheralsState();
     updateVolume();
     updateTitle();
+    updateTime();
     updatePlaylist();
     updateError();
 }
@@ -57,6 +58,12 @@ void RadioScreenPresenter::updateTitle() {
     const model::PlayerModel &playerModel = applicationModel->getPlayerModel();
     TitleView &titleView = view.getTitleView();
     titleView.setTitle(playerModel.getRadioTitle());
+}
+
+void RadioScreenPresenter::updateTime() {
+    const model::PlayerModel &playerModel = applicationModel->getPlayerModel();
+    TimePanelRadio &timePanel = view.getTimePanel();
+    timePanel.setTime(playerModel.getRadioProgressCurrent(), playerModel.getRadioProgressTotal());
 }
 
 void RadioScreenPresenter::updatePlaylist() {

@@ -28,6 +28,7 @@ void SDCardScreenPresenter::update() {
     updatePeripheralsState();
     updateVolume();
     updateTitle();
+    updateTime();
     updatePlaylist();
     updateError();
 }
@@ -49,6 +50,12 @@ void SDCardScreenPresenter::updateTitle() {
     const model::PlayerModel &playerModel = applicationModel->getPlayerModel();
     TitleView &titleView = view.getTitleView();
     titleView.setTitle(playerModel.getSDCardTitle());
+}
+
+void SDCardScreenPresenter::updateTime() {
+    const model::PlayerModel &playerModel = applicationModel->getPlayerModel();
+    TimePanelSD &timePanel = view.getTimePanel();
+    timePanel.setTime(playerModel.getSDCardProgressCurrent(), playerModel.getSDCardProgressTotal());
 }
 
 void SDCardScreenPresenter::updatePlaylist() {
