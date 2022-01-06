@@ -64,7 +64,7 @@ namespace io {
         while (totalRead != count) {
             ssize_t readCount = lwip_recv(descriptor, reinterpret_cast<char*>(buffer) + totalRead, count - totalRead, MSG_MORE);
             if (readCount < 0) {
-                throw HttpWriteException("Failed to read data from '" + host + "' - " + std::to_string(errno));
+                throw HttpReadException("Failed to read data from '" + host + "' - " + std::to_string(errno));
             }
             totalRead += readCount;
         }

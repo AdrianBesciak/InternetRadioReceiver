@@ -2,10 +2,15 @@
 #include <audio/except/reader/InvalidAudioFormatException.hpp>
 
 namespace audio {
+    static std::exception_ptr storedException;
     unsigned int mp3ReadCallback(void * pMP3CompressedData, unsigned int nMP3DataSizeInChars, void * token) {
         auto *stream = (io::ReadStream*)(token);
-        auto count = stream->read(pMP3CompressedData, nMP3DataSizeInChars);
-        return count;
+        try {
+            return stream->read(pMP3CompressedData, nMP3DataSizeInChars);
+        }
+        catch (...) {
+            storedException = std::current_exception();
+        }
     }
 
     MPEGAudioReader::MPEGAudioReader(const std::shared_ptr<io::ReadStream> &readStream)
@@ -22,7 +27,11 @@ namespace audio {
     }
 
     std::size_t MPEGAudioReader::readNext(std::int16_t *data, std::size_t count) {
-        return 2 * SpiritMP3Decode(decoder.get(), data, count / 2, nullptr);
+        auto size = 2 * SpiritMP3Decode(decoder.get(), data, count / 2, nullptr);
+        if (storedException != nullptr) {
+            std::rethrow_exception(storedException);
+        }
+        return size;
     }
 
     void MPEGAudioReader::seek(std::size_t position) {

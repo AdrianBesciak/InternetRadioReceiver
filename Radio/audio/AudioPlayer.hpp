@@ -10,7 +10,6 @@ namespace audio {
         friend class Handlers;
     public:
         enum class State {
-            //TODO: move state to new file
             NO_SOURCE,
             STOPPED,
             PLAYING,
@@ -71,12 +70,13 @@ namespace audio {
         void handleBufferDone();
 
         void validateNotEmpty() const;
+        void clearBuffer();
 
         State state;
         BufferState bufferState;
         unsigned volume;
         std::shared_ptr<AudioReader> reader;
-        std::int16_t* playingBuffer;
+        std::vector<std::int16_t> playingBuffer;
 
         std::function<void(State)> onStateChanged;
         std::function<void(float,float)> onProgressChanged;

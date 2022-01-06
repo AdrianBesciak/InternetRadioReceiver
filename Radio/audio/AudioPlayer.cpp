@@ -4,6 +4,7 @@
 #include <audio/except/player/AudioPlayerException.hpp>
 #include <sdram/sdram.hpp>
 #include <sys/except/SingleInstanceException.hpp>
+#include <cstring>
 
 // DMA handlers
 extern "C" {
@@ -41,20 +42,23 @@ extern "C" {
 }
 
 namespace audio {
+    constexpr std::size_t PLAYER_BUFFER_SIZE = 8192;
+
     std::uint32_t normalizedVolume(std::uint32_t volume) {
         return static_cast<std::uint32_t>(std::round(0.7F * static_cast<float>(volume)));
     }
 
     AudioPlayer::AudioPlayer()
-        : DelayTask("IRR_AudioPlayer", 2)
+        : DelayTask("IRR_AudioPlayer", 1)
         , state(State::NO_SOURCE)
         , bufferState(BufferState::None)
         , volume(100)
         , reader()
-        , playingBuffer(reinterpret_cast<std::int16_t*>(sdram::addr::PLAYER_BUFFER)) {
+        , playingBuffer(PLAYER_BUFFER_SIZE) {
         if (instance != nullptr)
             throw sys::SingleInstanceException("AudioPlayer instance already exists");
         instance = this;
+        clearBuffer();
     }
 
     AudioPlayer::~AudioPlayer() {
@@ -71,7 +75,7 @@ namespace audio {
             playerDeinitialize();
         this->reader = reader;
         updateState(State::STOPPED);
-
+        clearBuffer();
         if (onMediumChanged != nullptr)
             onMediumChanged(this->reader->getName());
         if (onProgressChanged != nullptr)
@@ -227,27 +231,28 @@ namespace audio {
         try {
             if (!isPlaying())
                 return;
-            if (bufferState == BufferState::Error)
-                throw AudioPlayerException("Error occurred while playing '" + reader->getName() + "'");
+            if (bufferState == BufferState::Error) {
+                playerInitialize();
+            }
             if (bufferState == BufferState::None) {
                 return;
             }
 
             std::size_t count = 0;
             if (bufferState == BufferState::Started) {
-                count = reader->readNext(playingBuffer, sdram::size::PLAYER_BUFFER_SIZE);
+                count = reader->readNext(playingBuffer.data(), PLAYER_BUFFER_SIZE);
                 playerPlayBuffer();
                 if (onProgressChanged != nullptr)
                     onProgressChanged(getCurrentTime(), getEndTime());
                 bufferState = BufferState::None;
             } else if (bufferState == BufferState::HalfWayThrough) {
-                count = reader->readNext(playingBuffer, sdram::size::PLAYER_BUFFER_SIZE / 2);
+                count = reader->readNext(playingBuffer.data(), PLAYER_BUFFER_SIZE / 2);
                 if (onProgressChanged != nullptr)
                     onProgressChanged(getCurrentTime(), getEndTime());
                 bufferState = BufferState::None;
             } else if (bufferState == BufferState::Done) {
-                count = reader->readNext(playingBuffer + sdram::size::PLAYER_BUFFER_SIZE / 2,
-                                         sdram::size::PLAYER_BUFFER_SIZE / 2);
+                count = reader->readNext(playingBuffer.data() + PLAYER_BUFFER_SIZE / 2,
+                                         PLAYER_BUFFER_SIZE / 2);
                 if (onProgressChanged != nullptr)
                     onProgressChanged(getCurrentTime(), getEndTime());
                 bufferState = BufferState::None;
@@ -281,7 +286,7 @@ namespace audio {
     }
 
     void AudioPlayer::playerPlayBuffer() {
-        if (BSP_AUDIO_OUT_Play(reinterpret_cast<std::uint16_t*>(playingBuffer), sdram::size::PLAYER_BUFFER_SIZE_BYTES) != AUDIO_OK)
+        if (BSP_AUDIO_OUT_Play(reinterpret_cast<std::uint16_t*>(playingBuffer.data()), PLAYER_BUFFER_SIZE * 2) != AUDIO_OK)
             throw AudioPlayerException("Failed to play audio from '" + reader->getName() + "'");
     }
 
@@ -302,6 +307,7 @@ namespace audio {
 
     void AudioPlayer::handleError() {
         bufferState = BufferState::Error;
+        std::printf("[AudioPlayer] Buffer error occurred\n");
     }
 
     void AudioPlayer::handleBufferHalfWay() {
@@ -314,7 +320,7 @@ namespace audio {
 
     void AudioPlayer::validateNotEmpty() const {
         if (isEmpty())
-            throw AudioPlayerException("No audio source provided");
+            throw std::logic_error("No audio source provided");
     }
 
     AudioPlayer *AudioPlayer::instance = nullptr;
@@ -325,5 +331,9 @@ namespace audio {
         this->state = state;
         if (onStateChanged != nullptr)
             onStateChanged(this->state);
+    }
+
+    void AudioPlayer::clearBuffer() {
+        std::memset(playingBuffer.data(), 0, PLAYER_BUFFER_SIZE * 2);
     }
 }
