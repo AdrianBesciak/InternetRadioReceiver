@@ -1,9 +1,9 @@
 #include "PlayerModel.hpp"
 
 namespace model {
-    model::PlayerModel::PlayerModel()
-            : radioPlaylist(std::make_shared<audio::InternalRadioPlaylist>())
-            , sdCardPlaylist(std::make_shared<audio::InternalRadioPlaylist>())
+    model::PlayerModel::PlayerModel(audio::RadioPlaylist &radioPlaylist, audio::SDCardPlaylist &sdCardPlaylist)
+            : radioPlaylist(radioPlaylist)
+            , sdCardPlaylist(sdCardPlaylist)
             , mode(Mode::NONE)
             , state(audio::AudioPlayer::State::NO_SOURCE)
             , progressCurrent(0.0f)
@@ -46,11 +46,8 @@ namespace model {
     }
 
 
-    void PlayerModel::setProgressCurrent(float progressCurrent) {
+    void PlayerModel::setProgress(float progressCurrent, float progressTotal) {
         this->progressCurrent = progressCurrent;
-    }
-
-    void PlayerModel::setProgressTotal(float progressTotal) {
         this->progressTotal = progressTotal;
     }
 

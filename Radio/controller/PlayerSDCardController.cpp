@@ -35,11 +35,28 @@ namespace controller {
     }
 
     void PlayerSDCardController::playPrevious() {
-
+        if (playerModel.getMode() == model::PlayerModel::Mode::SD) {
+            model::PlaylistModel &playlistModel = playerModel.getSdCardPlaylist();
+            if (playlistModel.hasCurrentEntryIndex()) {
+                if (playlistModel.getCurrentEntryIndex() > 0) {
+                    playlistModel.setCurrentEntryIndex(playlistModel.getCurrentEntryIndex() - 1);
+                }
+                else {
+                    audioPlayer.seek(0.0f);
+                }
+                play();
+            }
+        }
     }
 
     void PlayerSDCardController::playNext() {
-
+        if (playerModel.getMode() == model::PlayerModel::Mode::SD) {
+            model::PlaylistModel &playlistModel = playerModel.getSdCardPlaylist();
+            if (playlistModel.hasCurrentEntryIndex() && playlistModel.getCurrentEntryIndex() < static_cast<int>(playlistModel.getEntryCount()) - 1) {
+                playlistModel.setCurrentEntryIndex(playlistModel.getCurrentEntryIndex() + 1);
+                play();
+            }
+        }
     }
 
     void PlayerSDCardController::pause() {
@@ -50,15 +67,21 @@ namespace controller {
 
     void PlayerSDCardController::stop() {
         if (playerModel.getMode() == model::PlayerModel::Mode::SD) {
-            audioPlayer.stop();
+            audioPlayer.unloadSource();
         }
     }
 
     void PlayerSDCardController::fastForward() {
-
+        if (playerModel.getMode() == model::PlayerModel::Mode::SD) {
+            float seekTime = std::min(audioPlayer.getEndTime(), audioPlayer.getCurrentTime() + 5.0f);
+            audioPlayer.seek(seekTime);
+        }
     }
 
     void PlayerSDCardController::fastBackward() {
-
+        if (playerModel.getMode() == model::PlayerModel::Mode::SD) {
+            float seekTime = std::max(0.0f, audioPlayer.getCurrentTime() - 5.0f);
+            audioPlayer.seek(seekTime);
+        }
     }
 }

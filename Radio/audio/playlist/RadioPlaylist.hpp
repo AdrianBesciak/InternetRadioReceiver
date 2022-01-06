@@ -2,11 +2,12 @@
 #include <audio/playlist/Playlist.hpp>
 
 namespace audio {
-    class InternalRadioPlaylist : public Playlist {
+    class RadioPlaylist : public Playlist {
     public:
-        InternalRadioPlaylist();
+        RadioPlaylist();
         [[nodiscard]] const std::vector<Entry> &getEntries() const override;
-        
+        void update() final;
+
     private:
         std::vector<Entry> internalEntries;
     };

@@ -1,7 +1,7 @@
-#include "InternalRadioPlaylist.hpp"
+#include "RadioPlaylist.hpp"
 
 namespace audio {
-    audio::InternalRadioPlaylist::InternalRadioPlaylist()
+    audio::RadioPlaylist::RadioPlaylist()
             : internalEntries({
               Entry("RMF FM", "http://195.150.20.4/rmf_fm"),
               Entry("RMF MAXX", "http://217.74.72.12/rmf_maxxx"),
@@ -14,7 +14,9 @@ namespace audio {
               Entry("Radio Plus Lublin", "http://waw01-02.ic.smcdn.pl:8000/4130-1.mp3")
       }) {}
 
-    const std::vector<Playlist::Entry> &InternalRadioPlaylist::getEntries() const {
+    const std::vector<Playlist::Entry> &RadioPlaylist::getEntries() const {
         return internalEntries;
     }
+
+    void RadioPlaylist::update() {}
 }

@@ -3,11 +3,12 @@
 #include <algorithm>
 
 namespace model {
-    PlaylistModel::PlaylistModel(const std::shared_ptr<audio::Playlist> &playlist)
+    PlaylistModel::PlaylistModel(audio::Playlist& playlist)
         : playlist(playlist)
-        , titles(playlist->getEntries().size())
+        , titles()
         , currentEntryIndex(-1) {
-        std::transform(playlist->getEntries().begin(), playlist->getEntries().end(), titles.begin(), [](auto &entry) {return entry.getName();});
+        playlist.setOnUpdated([&] { updateTitles(); });
+        updateTitles();
     }
 
 
@@ -24,14 +25,14 @@ namespace model {
 
 
     const std::vector<audio::Playlist::Entry>& PlaylistModel::getEntries() {
-        return playlist->getEntries();
+        return playlist.getEntries();
     }
 
     const audio::Playlist::Entry &PlaylistModel::getCurrentEntry() const {
         if (!hasCurrentEntryIndex()) {
             throw std::logic_error("Current entry not selected");
         }
-        return playlist->getEntries()[currentEntryIndex];
+        return playlist.getEntries()[currentEntryIndex];
     }
 
 
@@ -53,5 +54,11 @@ namespace model {
             throw std::out_of_range("Current entry index invalid (" + std::to_string(currentEntryIndex) + "/" + std::to_string(getTitles().size()) + ")");
         }
         this->currentEntryIndex = currentEntryIndex;
+    }
+
+    void PlaylistModel::updateTitles() {
+        titles.resize(playlist.getEntries().size());
+        std::transform(playlist.getEntries().begin(), playlist.getEntries().end(), titles.begin(), [](auto &entry) {return entry.getName();});
+        currentEntryIndex = -1;
     }
 }

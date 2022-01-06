@@ -1,9 +1,9 @@
 #include "ApplicationModel.hpp"
 
 namespace model {
-    ApplicationModel::ApplicationModel()
+    ApplicationModel::ApplicationModel(audio::RadioPlaylist &radioPlaylist, audio::SDCardPlaylist &sdCardPlaylist)
         : peripheralStateModel()
-        , playerModel()
+        , playerModel(radioPlaylist, sdCardPlaylist)
         , errorModel() {}
 
 

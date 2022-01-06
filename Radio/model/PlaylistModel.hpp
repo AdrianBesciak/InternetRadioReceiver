@@ -1,13 +1,12 @@
 #pragma once
 #include <list>
 #include <memory>
-#include <audio/playlist/InternalRadioPlaylist.hpp>
 #include <audio/playlist/Playlist.hpp>
 
 namespace model {
     class PlaylistModel {
     public:
-        explicit PlaylistModel(const std::shared_ptr<audio::Playlist> &playlist);
+        explicit PlaylistModel(audio::Playlist& playlist);
 
         [[nodiscard]] const std::vector<std::string> &getTitles() const;
         [[nodiscard]] const std::string& getCurrentTitle() const;
@@ -22,7 +21,9 @@ namespace model {
         void setCurrentEntryIndex(int currentEntryIndex);
 
     private:
-        std::shared_ptr<audio::Playlist> playlist;
+        void updateTitles();
+
+        audio::Playlist& playlist;
         std::vector<std::string> titles;
         int currentEntryIndex;
     };

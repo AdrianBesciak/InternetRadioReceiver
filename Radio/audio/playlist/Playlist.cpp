@@ -13,6 +13,24 @@ namespace audio {
     const std::string &Playlist::Entry::getResource() const {
         return resource;
     }
+
+
+    Playlist::Playlist()
+            : onUpdated(nullptr) {}
     
     Playlist::~Playlist() = default;
+
+    void Playlist::notifyUpdated() {
+        if (onUpdated != nullptr) {
+            onUpdated();
+        }
+    }
+
+    const std::function<void()> &Playlist::getOnUpdated() const {
+        return onUpdated;
+    }
+
+    void Playlist::setOnUpdated(const std::function<void()> &onUpdated) {
+        this->onUpdated = onUpdated;
+    }
 }

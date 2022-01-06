@@ -20,8 +20,10 @@ ApplicationModule::ApplicationModule()
     : ethernetWatchdog()
     , sdCardWatchdog()
     , audioPlayer()
+    , radioPlaylist()
+    , sdCardPlaylist()
     , mainDisplay()
-    , applicationModel()
+    , applicationModel(radioPlaylist, sdCardPlaylist)
     , applicationController(audioPlayer, applicationModel) {
     if (instance != nullptr) {
         throw sys::SingleInstanceException("ApplicationModule instance already exists");
@@ -48,8 +50,14 @@ const controller::ApplicationController &ApplicationModule::getApplicationContro
 
 void ApplicationModule::bindWatchdogs() {
     model::PeripheralStateModel &model = applicationModel.getPeripheralStateModel();
-    ethernetWatchdog.setOnStateChanged([&](bool state) {model.setEthernetState(state);});
-    sdCardWatchdog.setOnStateChanged([&](bool state) {model.setSdCardState(state);});
+    ethernetWatchdog.setOnStateChanged([&](bool state) {
+        model.setEthernetState(state);
+        radioPlaylist.update();
+    });
+    sdCardWatchdog.setOnStateChanged([&](bool state) {
+        model.setSdCardState(state);
+        sdCardPlaylist.update();
+    });
 }
 
 void ApplicationModule::bindPlayerState() {
@@ -57,8 +65,10 @@ void ApplicationModule::bindPlayerState() {
     audioPlayer.setOnStateChanged([&](audio::AudioPlayer::State state) { playerModel.setState(state);});
     audioPlayer.setOnVolumeChanged([&](unsigned volume) { playerModel.setVolume(volume);});
     audioPlayer.setOnProgressChanged([&](float current, float total) {
-        playerModel.setProgressCurrent(current);
-        playerModel.setProgressTotal(total);
+        playerModel.setProgress(current, total);
+        if (std::abs(current - total) <= 0.001 && total != 0.0f) {
+            applicationController.getPlayerSdCardController().playNext();
+        }
     });
 }
 

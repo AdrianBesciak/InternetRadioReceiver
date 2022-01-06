@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include <audio/AudioPlayer.hpp>
+#include <audio/playlist/RadioPlaylist.hpp>
+#include <audio/playlist/SDCardPlaylist.hpp>
 #include <model/PlaylistModel.hpp>
 
 namespace model {
@@ -11,7 +13,7 @@ namespace model {
             RADIO,
             SD
         };
-        PlayerModel();
+        PlayerModel(audio::RadioPlaylist &radioPlaylist, audio::SDCardPlaylist &sdCardPlaylist);
 
         PlaylistModel& getRadioPlaylist();
         [[nodiscard]] const PlaylistModel &getRadioPlaylist() const;
@@ -24,8 +26,7 @@ namespace model {
         [[nodiscard]] audio::AudioPlayer::State getState() const;
         void setState(audio::AudioPlayer::State state);
 
-        void setProgressCurrent(float progressCurrent);
-        void setProgressTotal(float progressTotal);
+        void setProgress(float progressCurrent, float progressTotal);
 
         [[nodiscard]] float getRadioProgressCurrent() const;
         [[nodiscard]] float getRadioProgressTotal() const;

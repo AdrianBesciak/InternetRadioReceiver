@@ -25,7 +25,11 @@ private:
 
     io::EthernetWatchdog ethernetWatchdog;
     io::SDCardWatchdog sdCardWatchdog;
+
     audio::AudioPlayer audioPlayer;
+    audio::RadioPlaylist radioPlaylist;
+    audio::SDCardPlaylist sdCardPlaylist;
+
     view::MainDisplay mainDisplay;
 
     model::ApplicationModel applicationModel;

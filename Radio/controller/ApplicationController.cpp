@@ -2,8 +2,7 @@
 
 namespace controller {
 
-    ApplicationController::ApplicationController(audio::AudioPlayer &audioPlayer,
-                                                 model::ApplicationModel &applicationModel)
+    ApplicationController::ApplicationController(audio::AudioPlayer &audioPlayer, model::ApplicationModel &applicationModel)
         : playerRadioController(audioPlayer, applicationModel.getPlayerModel())
         , playerSdCardController(audioPlayer, applicationModel.getPlayerModel())
         , playerVolumeController(audioPlayer)

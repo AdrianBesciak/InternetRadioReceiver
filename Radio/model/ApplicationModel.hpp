@@ -7,7 +7,7 @@
 namespace model {
     class ApplicationModel {
     public:
-        ApplicationModel();
+        ApplicationModel(audio::RadioPlaylist &radioPlaylist, audio::SDCardPlaylist &sdCardPlaylist);
 
         PeripheralStateModel &getPeripheralStateModel();
         [[nodiscard]] const PeripheralStateModel &getPeripheralStateModel() const;

@@ -132,6 +132,9 @@ namespace audio {
     }
 
     void AudioPlayer::seek(float time) {
+        if (isEmpty()) {
+            return;
+        }
         if (time > getEndTime())
             throw AudioPlayerException("Invalid time value - greater than maximal time : (" + std::to_string(time) + "/" + std::to_string(getEndTime()) + ")");
         if (!reader->isRandomAccess()) {
