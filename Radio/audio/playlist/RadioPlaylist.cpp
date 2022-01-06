@@ -5,13 +5,13 @@ namespace audio {
             : internalEntries({
               Entry("RMF FM", "http://195.150.20.4/rmf_fm"),
               Entry("RMF MAXX", "http://217.74.72.12/rmf_maxxx"),
-              Entry("Eska Bialystok", "http://waw01-02.ic.smcdn.pl:8000/2020-1.mp3"),
-              Entry("Eska Krakow", "http://waw01-01.ic.smcdn.pl:8000/2070-1.mp3"),
+              Entry("Eska Białystok", "http://waw01-02.ic.smcdn.pl:8000/2020-1.mp3"),
+              Entry("Eska Kraków", "http://waw01-01.ic.smcdn.pl:8000/2070-1.mp3"),
               Entry("Eska Lublin", "http://waw01-01.ic.smcdn.pl:8000/2130-1.mp3"),
               Entry("Eska Radom", "http://waw01-01.ic.smcdn.pl:8000/2210-1.mp3"),
               Entry("Eska Warszawa", "http://waw01-01.ic.smcdn.pl:8000/2380-1.mp3"),
               Entry("Eska Rock", "http://waw01-01.ic.smcdn.pl:8000/5380-1.mp3"),
-              Entry("Radio Poznan", "http://stream4.nadaje.com:8578/poznan"),
+              Entry("Radio Poznań", "http://stream4.nadaje.com:8578/poznan"),
               Entry("Radio Warszawa", "http://stream2.technologicznie.net:80/radio_warszawa.mp3"),
               Entry("RDN", "http://stream1.dabcom.pl:8000/rdn_mpl"),
               Entry("Antyradio", "http://n-22-14.dcs.redcdn.pl/sc/o2/Eurozet/live/antyradio.livx?audio=5"),
@@ -21,7 +21,7 @@ namespace audio {
               Entry("Radio Insomnia", "http://radioinsomnia.ru:8000/radio.mp3"),
               Entry("LightRadio", "http://lightradio.radiostream.pro/mp3"),
               Entry("France Info", "http://icecast.radiofrance.fr/franceinfo-midfi.mp3"), //Fixme działa po przejściu z działających ruskich stacji i tnie po chwili
-              Entry("Radio Zlote Przeboje", "http://pl2-play.adtonos.com/zote-przeboje"), //Fixme nie działa i zawiesza GUI
+              Entry("Radio Złote Przeboje", "http://pl2-play.adtonos.com/zote-przeboje"), //Fixme nie działa i zawiesza GUI
               Entry("Ruskij Rock", "http://rock.amgradio.ru/RusRock"), //Fixme wybór zawiesza GUI
               Entry("Pioneer FM Moskwa", "http://radio-node-2.dline-media.com/ppr128.mp3")   // http://onlineradiobox.com/ru/pioner/?cs=ru.pioner Fixme po chwili zaczyna ciąć
       }) {}

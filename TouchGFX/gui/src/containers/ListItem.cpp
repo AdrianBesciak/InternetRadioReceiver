@@ -8,7 +8,7 @@ void ListItem::setText(const std::string &text) {
     static Unicode::UnicodeChar buff[ITEMTEXT_SIZE];
     if (text != storedText) {
         storedText = text;
-        Unicode::strncpy(buff, storedText.c_str(), ITEMTEXT_SIZE);
+        Unicode::fromUTF8(reinterpret_cast<const std::uint8_t*>(storedText.c_str()), buff, ITEMTEXT_SIZE);
         Unicode::snprintf(itemTextBuffer, ITEMTEXT_SIZE, "%s", buff);
         itemText.invalidate();
     }

@@ -15,7 +15,7 @@ void ErrorDialog::setErrorMessage(const std::string &errorMessage) {
 
     if (errorMessage != storedErrorMessage) {
         storedErrorMessage = errorMessage;
-        Unicode::strncpy(buff, storedErrorMessage.c_str(), ERRORMESSAGETEXT_SIZE);
+        Unicode::fromUTF8(reinterpret_cast<const std::uint8_t*>(storedErrorMessage.c_str()), buff, ERRORMESSAGETEXT_SIZE);
         Unicode::snprintf(errorMessageTextBuffer, ERRORMESSAGETEXT_SIZE, "%s", buff);
         errorMessageText.invalidate();
 

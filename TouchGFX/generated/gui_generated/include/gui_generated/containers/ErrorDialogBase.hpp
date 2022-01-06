@@ -45,7 +45,7 @@ protected:
     /*
      * Wildcard Buffers
      */
-    static const uint16_t ERRORMESSAGETEXT_SIZE = 140;
+    static const uint16_t ERRORMESSAGETEXT_SIZE = 160;
     touchgfx::Unicode::UnicodeChar errorMessageTextBuffer[ERRORMESSAGETEXT_SIZE];
 
 private:

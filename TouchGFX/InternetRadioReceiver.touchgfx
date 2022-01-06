@@ -881,7 +881,7 @@
                 "Wildcard1": {
                   "TextId": "__SingleUse_0XSM",
                   "UseBuffer": true,
-                  "BufferSize": 140
+                  "BufferSize": 160
                 }
               },
               {
