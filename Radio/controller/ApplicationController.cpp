@@ -2,9 +2,11 @@
 
 namespace controller {
 
-    ApplicationController::ApplicationController(audio::AudioPlayer &audioPlayer, model::ApplicationModel &applicationModel)
-        : playerRadioController(audioPlayer, applicationModel.getPlayerModel())
-        , playerSdCardController(audioPlayer, applicationModel.getPlayerModel())
+    ApplicationController::ApplicationController(except::ExceptionTranslator &exceptionTranslator,
+                                                 audio::AudioPlayer &audioPlayer,
+                                                 model::ApplicationModel &applicationModel)
+        : playerRadioController(exceptionTranslator, audioPlayer, applicationModel.getPlayerModel())
+        , playerSdCardController(exceptionTranslator, audioPlayer, applicationModel.getPlayerModel())
         , playerVolumeController(audioPlayer)
         , errorController(applicationModel.getErrorModel()) {}
 

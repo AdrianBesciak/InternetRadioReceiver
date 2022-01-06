@@ -1,5 +1,6 @@
 #include "HttpStream.hpp"
 #include <regex>
+#include <io/except/read/HttpReadException.hpp>
 
 namespace io {
     namespace internal {
@@ -111,5 +112,9 @@ namespace io {
             startOffset += line.size() + 2;
         }
         startOffset += 2;
+    }
+
+    void HttpStream::throwReadException(const std::string &message) {
+        throw HttpReadException(message);
     }
 }

@@ -1,8 +1,4 @@
 #include "ApplicationModule.h"
-#include <io/stream/network/HttpStream.hpp>
-#include <io/stream/file/FileReadStream.hpp>
-#include <audio/reader/AudioReaderFactory.hpp>
-#include <filesystem/DirectoryListing.hpp>
 #include <sys/except/SingleInstanceException.hpp>
 
 
@@ -17,18 +13,20 @@ ApplicationModule &ApplicationModule::getInstance() {
 
 
 ApplicationModule::ApplicationModule()
-    : ethernetWatchdog()
+    : exceptionTranslator()
+    , ethernetWatchdog()
     , sdCardWatchdog()
     , audioPlayer()
     , radioPlaylist()
     , sdCardPlaylist()
     , mainDisplay()
     , applicationModel(radioPlaylist, sdCardPlaylist)
-    , applicationController(audioPlayer, applicationModel) {
+    , applicationController(exceptionTranslator, audioPlayer, applicationModel) {
     if (instance != nullptr) {
         throw sys::SingleInstanceException("ApplicationModule instance already exists");
     }
     instance = this;
+    bindErrors();
     bindWatchdogs();
     bindPlayerState();
     startTasks();
@@ -48,6 +46,10 @@ const controller::ApplicationController &ApplicationModule::getApplicationContro
 }
 
 
+void ApplicationModule::bindErrors() {
+    exceptionTranslator.setOnErrorMessage([&](auto &message) { applicationModel.getErrorModel().setErrorMessage(message); });
+}
+
 void ApplicationModule::bindWatchdogs() {
     model::PeripheralStateModel &model = applicationModel.getPeripheralStateModel();
     ethernetWatchdog.setOnStateChanged([&](bool state) {
@@ -63,13 +65,10 @@ void ApplicationModule::bindWatchdogs() {
 void ApplicationModule::bindPlayerState() {
     model::PlayerModel &playerModel = applicationModel.getPlayerModel();
     audioPlayer.setOnStateChanged([&](audio::AudioPlayer::State state) { playerModel.setState(state);});
+    audioPlayer.setOnProgressChanged([&](float current, float total) {playerModel.setProgress(current, total);});
     audioPlayer.setOnVolumeChanged([&](unsigned volume) { playerModel.setVolume(volume);});
-    audioPlayer.setOnProgressChanged([&](float current, float total) {
-        playerModel.setProgress(current, total);
-        if (std::abs(current - total) <= 0.001 && total != 0.0f) {
-            applicationController.getPlayerSdCardController().playNext();
-        }
-    });
+    audioPlayer.setOnFinished([&] { applicationController.getPlayerSdCardController().playNext(); });
+    audioPlayer.setOnError([&](auto &exc) { exceptionTranslator.translate(exc); });
 }
 
 void ApplicationModule::startTasks() {

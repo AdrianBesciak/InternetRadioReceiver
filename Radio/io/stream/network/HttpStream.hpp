@@ -40,6 +40,9 @@ namespace io {
 
         void seek(std::size_t position) override;
 
+    protected:
+        void throwReadException(const std::string &message) override;
+
     private:
         void readHeader();
         std::unordered_map<std::string, std::string> headers;

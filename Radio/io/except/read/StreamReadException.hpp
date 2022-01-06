@@ -3,7 +3,7 @@
 
 namespace io {
     class StreamReadException : public IOException{
-    public:
+    protected:
         explicit StreamReadException(const std::string &arg);
     };
 }

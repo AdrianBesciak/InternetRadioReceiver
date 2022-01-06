@@ -75,4 +75,8 @@ namespace io {
         if (f_lseek(reinterpret_cast<FIL*>(handle), static_cast<FSIZE_t>(position)) != FR_OK)
             throw FileReadException("Failed to seek to " + std::to_string(position));
     }
+
+    void FileReadStream::throwReadException(const std::string &message) {
+        throw FileReadException(message);
+    }
 }

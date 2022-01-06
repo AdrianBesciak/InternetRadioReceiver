@@ -26,7 +26,7 @@ namespace audio {
         void stop();
         void seek(float time);
 
-        std::string getSource() const;
+        [[nodiscard]] std::string getSource() const;
 
         [[nodiscard]] unsigned getVolume() const;
         void setVolume(unsigned volume);
@@ -44,6 +44,8 @@ namespace audio {
         void setOnProgressChanged(const std::function<void(float,float)>& onProgressChanged);
         void setOnMediumChanged(const std::function<void(const std::string&)>& onMediumChanged);
         void setOnVolumeChanged(const std::function<void(unsigned)>& onVolumeChanged);
+        void setOnFinished(const std::function<void()> &onFinished);
+        void setOnError(const std::function<void(const std::exception &)> &onError);
 
     private:
         enum class BufferState {
@@ -80,6 +82,8 @@ namespace audio {
         std::function<void(float,float)> onProgressChanged;
         std::function<void(const std::string&)> onMediumChanged;
         std::function<void(unsigned)> onVolumeChanged;
+        std::function<void()> onFinished;
+        std::function<void(const std::exception&)> onError;
 
         static AudioPlayer* instance;
     };

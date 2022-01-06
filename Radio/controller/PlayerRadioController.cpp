@@ -3,8 +3,11 @@
 #include "PlayerRadioController.hpp"
 
 namespace controller {
-    PlayerRadioController::PlayerRadioController(audio::AudioPlayer &audioPlayer, model::PlayerModel &playerModel)
-            : audioPlayer(audioPlayer)
+    PlayerRadioController::PlayerRadioController(except::ExceptionTranslator &exceptionTranslator,
+                                                 audio::AudioPlayer &audioPlayer,
+                                                 model::PlayerModel &playerModel)
+            : exceptionTranslator(exceptionTranslator)
+            , audioPlayer(audioPlayer)
             , playerModel(playerModel) {}
 
 
@@ -19,11 +22,16 @@ namespace controller {
             return;
         }
 
-        std::shared_ptr<io::ReadStream> readStream = std::make_shared<io::HttpStream>(resource);
-        std::shared_ptr<audio::AudioReader> decoder = audio::AudioReaderFactory::createReader(readStream);
-        audioPlayer.setSource(decoder);
-        audioPlayer.play();
-        playerModel.setMode(model::PlayerModel::Mode::RADIO);
+        try {
+            std::shared_ptr<io::ReadStream> readStream = std::make_shared<io::HttpStream>(resource);
+            std::shared_ptr<audio::AudioReader> decoder = audio::AudioReaderFactory::createReader(readStream);
+            audioPlayer.setSource(decoder);
+            audioPlayer.play();
+            playerModel.setMode(model::PlayerModel::Mode::RADIO);
+        }
+        catch (std::exception &exception) {
+            exceptionTranslator.translate(exception);
+        }
     }
 
     void PlayerRadioController::playFromPlaylist(std::size_t idx) {

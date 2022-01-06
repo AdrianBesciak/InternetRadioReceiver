@@ -24,5 +24,8 @@ namespace io {
         [[nodiscard]] bool hasEnded() const;
 
         virtual void seek(std::size_t position) = 0;
+
+    protected:
+        virtual void throwReadException(const std::string &message) = 0;
     };
 }

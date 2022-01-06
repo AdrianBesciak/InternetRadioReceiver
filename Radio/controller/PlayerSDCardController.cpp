@@ -3,8 +3,11 @@
 #include <audio/reader/AudioReaderFactory.hpp>
 
 namespace controller {
-    PlayerSDCardController::PlayerSDCardController(audio::AudioPlayer &audioPlayer, model::PlayerModel &playerModel)
-            : audioPlayer(audioPlayer)
+    PlayerSDCardController::PlayerSDCardController(except::ExceptionTranslator &exceptionTranslator,
+                                                   audio::AudioPlayer &audioPlayer,
+                                                   model::PlayerModel &playerModel)
+            : exceptionTranslator(exceptionTranslator)
+            , audioPlayer(audioPlayer)
             , playerModel(playerModel) {}
 
 
@@ -19,11 +22,16 @@ namespace controller {
             return;
         }
 
-        std::shared_ptr<io::ReadStream> readStream = std::make_shared<io::FileReadStream>(resource);
-        std::shared_ptr<audio::AudioReader> decoder = audio::AudioReaderFactory::createReader(readStream);
-        audioPlayer.setSource(decoder);
-        audioPlayer.play();
-        playerModel.setMode(model::PlayerModel::Mode::SD);
+        try {
+            std::shared_ptr<io::ReadStream> readStream = std::make_shared<io::FileReadStream>(resource);
+            std::shared_ptr<audio::AudioReader> decoder = audio::AudioReaderFactory::createReader(readStream);
+            audioPlayer.setSource(decoder);
+            audioPlayer.play();
+            playerModel.setMode(model::PlayerModel::Mode::SD);
+        }
+        catch (std::exception &exception) {
+            exceptionTranslator.translate(exception);
+        }
     }
 
     void PlayerSDCardController::playFromPlaylist(std::size_t idx) {

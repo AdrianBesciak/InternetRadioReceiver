@@ -9,7 +9,7 @@
 namespace controller {
     class ApplicationController {
     public:
-        ApplicationController(audio::AudioPlayer &audioPlayer, model::ApplicationModel &applicationModel);
+        ApplicationController(except::ExceptionTranslator &exceptionTranslator, audio::AudioPlayer &audioPlayer, model::ApplicationModel &applicationModel);
         PlayerRadioController &getPlayerRadioController();
         PlayerSDCardController &getPlayerSdCardController();
         PlayerVolumeController &getPlayerVolumeController();

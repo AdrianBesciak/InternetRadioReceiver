@@ -214,37 +214,56 @@ namespace audio {
         this->onVolumeChanged = onVolumeChanged;
     }
 
-    void AudioPlayer::executeIteration() {
-        if (!isPlaying())
-            return;
-        if (bufferState == BufferState::Error)
-            throw AudioPlayerException("Error occurred while playing '" + reader->getName() + "'");
-        if (bufferState == BufferState::None) {
-            return;
-        }
+    void AudioPlayer::setOnFinished(const std::function<void()> &onFinished) {
+        this->onFinished = onFinished;
+    }
 
-        std::size_t count = 0;
-        if (bufferState == BufferState::Started) {
-            count = reader->readNext(playingBuffer, sdram::size::PLAYER_BUFFER_SIZE);
-            playerPlayBuffer();
-            if (onProgressChanged != nullptr)
-                onProgressChanged(getCurrentTime(), getEndTime());
-            bufferState = BufferState::None;
+    void AudioPlayer::setOnError(const std::function<void(const std::exception &)> &onError) {
+        this->onError = onError;
+    }
+
+
+    void AudioPlayer::executeIteration() {
+        try {
+            if (!isPlaying())
+                return;
+            if (bufferState == BufferState::Error)
+                throw AudioPlayerException("Error occurred while playing '" + reader->getName() + "'");
+            if (bufferState == BufferState::None) {
+                return;
+            }
+
+            std::size_t count = 0;
+            if (bufferState == BufferState::Started) {
+                count = reader->readNext(playingBuffer, sdram::size::PLAYER_BUFFER_SIZE);
+                playerPlayBuffer();
+                if (onProgressChanged != nullptr)
+                    onProgressChanged(getCurrentTime(), getEndTime());
+                bufferState = BufferState::None;
+            } else if (bufferState == BufferState::HalfWayThrough) {
+                count = reader->readNext(playingBuffer, sdram::size::PLAYER_BUFFER_SIZE / 2);
+                if (onProgressChanged != nullptr)
+                    onProgressChanged(getCurrentTime(), getEndTime());
+                bufferState = BufferState::None;
+            } else if (bufferState == BufferState::Done) {
+                count = reader->readNext(playingBuffer + sdram::size::PLAYER_BUFFER_SIZE / 2,
+                                         sdram::size::PLAYER_BUFFER_SIZE / 2);
+                if (onProgressChanged != nullptr)
+                    onProgressChanged(getCurrentTime(), getEndTime());
+                bufferState = BufferState::None;
+            }
+            if (count == 0) {
+                bufferState = BufferState::None;
+                unloadSource();
+                if (onFinished != nullptr) {
+                    onFinished();
+                }
+            }
         }
-        else if (bufferState == BufferState::HalfWayThrough) {
-            count = reader->readNext(playingBuffer, sdram::size::PLAYER_BUFFER_SIZE / 2);
-            if (onProgressChanged != nullptr)
-                onProgressChanged(getCurrentTime(), getEndTime());
-            bufferState = BufferState::None;
-        }
-        else if (bufferState == BufferState::Done) {
-            count = reader->readNext(playingBuffer + sdram::size::PLAYER_BUFFER_SIZE / 2, sdram::size::PLAYER_BUFFER_SIZE / 2);
-            if (onProgressChanged != nullptr)
-                onProgressChanged(getCurrentTime(), getEndTime());
-            bufferState = BufferState::None;
-        }
-        if (count == 0) {
-            bufferState = BufferState::None;
+        catch (std::exception &exc) {
+            if (onError != nullptr) {
+                onError(exc);
+            }
             unloadSource();
         }
     }

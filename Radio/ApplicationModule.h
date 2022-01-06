@@ -1,7 +1,7 @@
 #pragma once
+#include <except/ExceptionTranslator.hpp>
 #include <io/watchdog/EthernetWatchdog.hpp>
 #include <io/watchdog/SDCardWatchdog.hpp>
-#include <audio/AudioPlayer.hpp>
 #include <view/MainDisplay.h>
 
 #include <controller/ApplicationController.hpp>
@@ -19,9 +19,12 @@ public:
 private:
     static ApplicationModule *instance;
 
+    void bindErrors();
     void bindWatchdogs();
     void bindPlayerState();
     void startTasks();
+
+    except::ExceptionTranslator exceptionTranslator;
 
     io::EthernetWatchdog ethernetWatchdog;
     io::SDCardWatchdog sdCardWatchdog;

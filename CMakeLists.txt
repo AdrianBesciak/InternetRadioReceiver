@@ -11,12 +11,14 @@ file(GLOB_RECURSE PROJECT_SOURCES CONFIGURE_DEPENDS
         Core/*.s
         Drivers/*.c
         Middlewares/*.c
-        Middlewares/ST/touchgfx/framework/source/touchgfx/*.cpp
         FATFS/*.c
         LWIP/*.c
         Radio/*.cpp
         InternetConnection/*.c
         InternetConnection/*.cpp
+        )
+file(GLOB_RECURSE TOUCHGFX_SOURCES CONFIGURE_DEPENDS
+        Middlewares/ST/touchgfx/framework/source/touchgfx/*.cpp
         TouchGFX/App/*.c
         TouchGFX/App/*.cpp
         TouchGFX/generated/fonts/*.c
@@ -32,20 +34,21 @@ file(GLOB_RECURSE PROJECT_SOURCES CONFIGURE_DEPENDS
         TouchGFX/gui/*.c
         TouchGFX/gui/*.cpp
         TouchGFX/target/*.c
-        TouchGFX/target/*.cpp
-        )
+        TouchGFX/target/*.cpp)
+
 file(GLOB_RECURSE PROJECT_HEADERS CONFIGURE_DEPENDS
         Core/*.h
         Drivers/*.h
         Middlewares/*.h
         FATFS/*.h
         LWIP/*.h
-        Radio/*.hpp
+        Radio/*.hpp)
+file(GLOB_RECURSE TOUCHGFX_HEADERS CONFIGURE_DEPENDS
         TouchGFX/*.h
-        TouchGFX/*.hpp
-        )
+        TouchGFX/*.hpp)
+
 set(PROJECT_LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F746NGHX_FLASH.ld)
-add_executable(${PROJECT_NAME} ${PROJECT_SOURCES} ${PROJECT_HEADERS} ${PROJECT_LINKER_SCRIPT})
+add_executable(${PROJECT_NAME} ${PROJECT_SOURCES} ${TOUCHGFX_SOURCES} ${PROJECT_HEADERS} ${TOUCHGFX_HEADERS} ${PROJECT_LINKER_SCRIPT})
 set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME "${PROJECT_NAME}.elf")
 
 # Include directories
@@ -112,10 +115,10 @@ target_compile_options(${PROJECT_NAME} PRIVATE
         -Wextra
         -Wno-unused-parameter
         $<$<COMPILE_LANGUAGE:CXX>:-pedantic>
-        $<$<COMPILE_LANGUAGE:CXX>:-fno-rtti>
         $<$<COMPILE_LANGUAGE:C>:-Wno-unused-variable>
         $<$<COMPILE_LANGUAGE:C>:-Wno-int-conversion>
         )
+set_source_files_properties(${TOUCHGFX_SOURCES} ${TOUCHGFX_HEADERS} PROPERTIES COMPILE_FLAGS $<$<COMPILE_LANGUAGE:CXX>:-fno-rtti>)
 
 # Link options
 target_link_libraries(${PROJECT_NAME} PUBLIC
