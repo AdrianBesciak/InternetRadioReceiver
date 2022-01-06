@@ -495,8 +495,7 @@
             "IndicatorPositionY": 2,
             "IndicatorPositionWidth": 316,
             "IndicatorPositionHeight": 26,
-            "ProgressRangeMax": 100,
-            "ProgressInitialValue": 100
+            "ProgressRangeMax": 100
           },
           {
             "Type": "TextArea",

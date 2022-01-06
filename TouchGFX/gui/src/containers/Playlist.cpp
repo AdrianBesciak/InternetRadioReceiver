@@ -21,6 +21,7 @@ void Playlist::setEntries(const std::vector<std::string>& entries) {
         for (std::size_t idx = 0; idx < storedEntries.size(); ++idx) {
             list.itemChanged(static_cast<std::int16_t>(idx));
         }
+        list.invalidate();
     }
 }
 

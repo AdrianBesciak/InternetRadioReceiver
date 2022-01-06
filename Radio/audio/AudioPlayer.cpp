@@ -87,11 +87,11 @@ namespace audio {
     void AudioPlayer::unloadSource() {
         if (isEmpty())
             return;
-        stop();
+        playerDeinitialize();
         updateState(State::NO_SOURCE);
-        if (onMediumChanged != nullptr)
-            onMediumChanged(reader->getName());
         reader = nullptr;
+        if (onMediumChanged != nullptr)
+            onMediumChanged({});
         if (onProgressChanged != nullptr) {
             onProgressChanged(0.0f, 0.0f);
         }

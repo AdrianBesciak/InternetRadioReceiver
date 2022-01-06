@@ -16,7 +16,7 @@ TimePanelSDBase::TimePanelSDBase()
     progressBar.setDirection(touchgfx::AbstractDirectionProgress::RIGHT);
     progressBar.setBackground(touchgfx::Bitmap(BITMAP_PROGRESS_BACKGROUND_ID));
     progressBar.setBitmap(BITMAP_BLUE_PROGRESSINDICATORS_FILL_TILING_PROGRESS_INDICATOR_FILL_GRADIENT_NORMAL_VERTICAL_ID);
-    progressBar.setValue(100);
+    progressBar.setValue(0);
     progressBar.setAnchorAtZero(false);
 
     timeTotalText.setXY(382, 5);

@@ -52,7 +52,6 @@
   </Texts>
   <Typographies>
     <Typography Id="Default" Font="verdana.ttf" Size="20" Bpp="4" FallbackCharacter="?" WildcardCharacters="-.," WildcardCharacterRanges="0-9,A-Z,a-z" />
-    <Typography Id="Small" Font="verdana.ttf" Size="10" Bpp="4" FallbackCharacter="?" WildcardCharacters="-.," WildcardCharacterRanges="0-9,A-Z,a-z" />
     <Typography Id="Smaller" Font="verdana.ttf" Size="16" Bpp="4" FallbackCharacter="?" WildcardCharacters="-.," WildcardCharacterRanges="0-9,A-Z,a-z" />
     <Typography Id="Bigger" Font="verdana.ttf" Size="24" Bpp="4" FallbackCharacter="?" WildcardCharacters="-.," WildcardCharacterRanges="0-9,A-Z,a-z" />
     <Typography Id="Large" Font="verdana.ttf" Size="30" Bpp="4" FallbackCharacter="?" WildcardCharacters="-.," WildcardCharacterRanges="0-9,A-Z,a-z" />

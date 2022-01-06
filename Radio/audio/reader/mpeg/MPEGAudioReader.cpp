@@ -30,7 +30,7 @@ namespace audio {
     std::size_t MPEGAudioReader::readNext(std::int16_t *data, std::size_t count) {
         auto size = 2 * SpiritMP3Decode(decoder.get(), data, count / 2, nullptr);
         if (storedException != nullptr) {
-            std::rethrow_exception(storedException);
+            std::rethrow_exception(std::exchange(storedException, nullptr));
         }
         return size;
     }
