@@ -8,6 +8,8 @@ namespace audio {
     class AudioReader {
     public:
         explicit AudioReader(const std::shared_ptr<io::ReadStream> &readStream);
+        virtual ~AudioReader();
+
         [[nodiscard]] const std::string& getName() const;
         [[nodiscard]] virtual bool hasNext() const noexcept;
 

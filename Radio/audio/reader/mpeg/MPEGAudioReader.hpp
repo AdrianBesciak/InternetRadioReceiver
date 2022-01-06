@@ -16,7 +16,7 @@ namespace audio {
         [[nodiscard]] const MPEGAudioMetadata &getMetadata() const override;
 
     private:
-        std::shared_ptr<TSpiritMP3Decoder> decoder;
+        std::unique_ptr<TSpiritMP3Decoder> decoder;
         MPEGAudioMetadata audioMetadata;
     };
 }

@@ -10,12 +10,13 @@ namespace audio {
         }
         catch (...) {
             storedException = std::current_exception();
+            return 0;
         }
     }
 
     MPEGAudioReader::MPEGAudioReader(const std::shared_ptr<io::ReadStream> &readStream)
     : AudioReader(readStream)
-    , decoder(std::make_shared<TSpiritMP3Decoder>()){
+    , decoder(std::make_unique<TSpiritMP3Decoder>()) {
         SpiritMP3DecoderInit(decoder.get(), &mp3ReadCallback, nullptr, readStream.get());
         std::vector<std::int16_t> dummyData(1);
         TSpiritMP3Info frameInfo = {};
