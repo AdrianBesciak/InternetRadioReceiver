@@ -257,15 +257,14 @@ namespace audio {
                 if (onProgressChanged != nullptr)
                     onProgressChanged(getCurrentTime(), getEndTime());
             } else if (bufferState == BufferState::HalfWayThrough) {
-                bufferState = BufferState::None;
                 count = reader->readNext(playingBuffer.data(), PLAYER_BUFFER_SIZE / 2);
                 if (onProgressChanged != nullptr)
                     onProgressChanged(getCurrentTime(), getEndTime());
                 if (bufferState != BufferState::HalfWayThrough) {
                     std::printf("[AudioPlayer] Can't keep up\n");
                 }
-            } else if (bufferState == BufferState::Done) {
                 bufferState = BufferState::None;
+            } else if (bufferState == BufferState::Done) {
                 count = reader->readNext(playingBuffer.data() + PLAYER_BUFFER_SIZE / 2,
                                          PLAYER_BUFFER_SIZE / 2);
                 if (onProgressChanged != nullptr)
@@ -273,6 +272,7 @@ namespace audio {
                 if (bufferState != BufferState::Done) {
                     std::printf("[AudioPlayer] Can't keep up\n");
                 }
+                bufferState = BufferState::None;
             }
             if (count == 0) {
                 bufferState = BufferState::None;
