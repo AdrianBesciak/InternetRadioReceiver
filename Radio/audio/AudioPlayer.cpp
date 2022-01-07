@@ -249,12 +249,18 @@ namespace audio {
                 count = reader->readNext(playingBuffer.data(), PLAYER_BUFFER_SIZE / 2);
                 if (onProgressChanged != nullptr)
                     onProgressChanged(getCurrentTime(), getEndTime());
+                if (bufferState != BufferState::HalfWayThrough) {
+                    std::printf("[AudioPlayer] Can't keep up\n");
+                }
                 bufferState = BufferState::None;
             } else if (bufferState == BufferState::Done) {
                 count = reader->readNext(playingBuffer.data() + PLAYER_BUFFER_SIZE / 2,
                                          PLAYER_BUFFER_SIZE / 2);
                 if (onProgressChanged != nullptr)
                     onProgressChanged(getCurrentTime(), getEndTime());
+                if (bufferState != BufferState::Done) {
+                    std::printf("[AudioPlayer] Can't keep up\n");
+                }
                 bufferState = BufferState::None;
             }
             if (count == 0) {

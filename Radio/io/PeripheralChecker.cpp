@@ -8,9 +8,7 @@
 extern Disk_drvTypeDef  disk;
 extern struct netif gnetif;
 
-
 namespace io {
-
     void PeripheralChecker::checkSDCard() {
         if (!disk.is_initialized[0]) {
             throw SDCardNotReadyException();
@@ -19,7 +17,7 @@ namespace io {
 
     void PeripheralChecker::checkEthernet() {
         struct dhcp *dhcp = netif_dhcp_data(&gnetif);
-        if (dhcp == nullptr || dhcp->state != DHCP_STATE_BOUND) {
+        if (!netif_is_link_up(&gnetif) || !netif_is_up(&gnetif) || dhcp == nullptr || dhcp->state != DHCP_STATE_BOUND) {
             throw EthernetNotReadyException();
         }
     }

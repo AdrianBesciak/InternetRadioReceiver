@@ -17,7 +17,7 @@ namespace io {
             else {
                 FRESULT result = f_mount(&SDFatFS, SDPath, 1);
                 if (result != FR_OK) {
-                    std::printf("Failed to mount SDCard - %d\n", result);
+                    std::printf("[SDCardWatchdog] Failed to mount SDCard - %d\n", result);
                 }
                 else {
                     newState = true;

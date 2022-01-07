@@ -3,6 +3,7 @@
 #include <lwip/api.h>
 #include <lwip/sockets.h>
 #include <io/except/open/HttpOpenException.hpp>
+#include <io/except/peripheral/EthernetNotReadyException.hpp>
 #include <io/except/read/HttpReadException.hpp>
 #include <io/except/write//HttpWriteException.hpp>
 #include <io/PeripheralChecker.hpp>
@@ -31,6 +32,9 @@ namespace io {
             if (lwip_connect(descriptor, (struct sockaddr *)&socket, sizeof(socket)) != 0) {
                 throw HttpOpenException("Error contacting remote host '" + host + "'");
             }
+            timeval timeval = { 1, 0 };
+            lwip_setsockopt(descriptor, SOL_SOCKET, SO_RCVTIMEO, &timeval, sizeof(timeval));
+
             return descriptor;
         }
 
@@ -53,6 +57,12 @@ namespace io {
     }
 
     void TCPStream::writeData(const std::string &data) {
+        try {
+            PeripheralChecker::checkEthernet();
+        }
+        catch (EthernetNotReadyException &exc) {
+            throw HttpWriteException("Ethernet disconnected with connection open");
+        }
         ssize_t count = lwip_write(descriptor, data.c_str(), data.size());
         if (count < 0 || std::size_t(count) != data.size()) {
             throw HttpWriteException("Failed to write data to '" + host + "'");
@@ -60,16 +70,18 @@ namespace io {
     }
 
     std::size_t TCPStream::readData(void *buffer, std::size_t count) {
-        std::size_t totalRead = 0;
-        while (totalRead != count) {
-            ssize_t readCount = lwip_recv(descriptor, reinterpret_cast<char*>(buffer) + totalRead, count - totalRead, MSG_MORE);
-            if (readCount < 0) {
-                throw HttpReadException("Failed to read data from '" + host + "' - " + std::to_string(errno));
-            }
-            totalRead += readCount;
+        try {
+            PeripheralChecker::checkEthernet();
         }
-        position += totalRead;
-        return totalRead;
+        catch (EthernetNotReadyException &exc) {
+            throw HttpReadException("Ethernet disconnected with connection open");
+        }
+        ssize_t readCount = lwip_recv(descriptor, reinterpret_cast<char*>(buffer), count, 0);
+        if (readCount < 0) {
+            throw HttpReadException("Failed to read data from '" + host + "' - " + std::to_string(errno));
+        }
+        position += readCount;
+        return readCount;
     }
 
     std::size_t TCPStream::pos() const {
