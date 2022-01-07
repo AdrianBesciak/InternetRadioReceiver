@@ -32,8 +32,11 @@ namespace io {
             if (lwip_connect(descriptor, (struct sockaddr *)&socket, sizeof(socket)) != 0) {
                 throw HttpOpenException("Error contacting remote host '" + host + "'");
             }
-            timeval timeval = { 1, 0 };
-            lwip_setsockopt(descriptor, SOL_SOCKET, SO_RCVTIMEO, &timeval, sizeof(timeval));
+
+            timeval sendTimeout = { 2, 0 };
+            timeval receiveTimeout = { 1, 0 };
+            lwip_setsockopt(descriptor, SOL_SOCKET, SO_SNDTIMEO, &sendTimeout, sizeof(receiveTimeout));
+            lwip_setsockopt(descriptor, SOL_SOCKET, SO_RCVTIMEO, &receiveTimeout, sizeof(sendTimeout));
 
             return descriptor;
         }
