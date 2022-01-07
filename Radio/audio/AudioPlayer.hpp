@@ -70,6 +70,9 @@ namespace audio {
         void handleBufferDone();
 
         void validateNotEmpty() const;
+
+        void clearLeftPartBuffer();
+        void clearRightPartBuffer();
         void clearBuffer();
 
         State state;

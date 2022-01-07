@@ -317,10 +317,12 @@ namespace audio {
     }
 
     void AudioPlayer::handleBufferHalfWay() {
+        clearLeftPartBuffer();
         bufferState = BufferState::HalfWayThrough;
     }
 
     void AudioPlayer::handleBufferDone() {
+        clearRightPartBuffer();
         bufferState = BufferState::Done;
     }
 
@@ -339,7 +341,16 @@ namespace audio {
             onStateChanged(this->state);
     }
 
+
+    void AudioPlayer::clearLeftPartBuffer() {
+        std::memset(playingBuffer.data(), 0, playingBuffer.size() * sizeof(*playingBuffer.data()) / 2);
+    }
+
+    void AudioPlayer::clearRightPartBuffer() {
+        std::memset(playingBuffer.data() + playingBuffer.size() / 2, 0, playingBuffer.size() * sizeof(*playingBuffer.data()) / 2);
+    }
+
     void AudioPlayer::clearBuffer() {
-        std::memset(playingBuffer.data(), 0, PLAYER_BUFFER_SIZE * 2);
+        std::memset(playingBuffer.data(), 0, playingBuffer.size() * sizeof(*playingBuffer.data()));
     }
 }
