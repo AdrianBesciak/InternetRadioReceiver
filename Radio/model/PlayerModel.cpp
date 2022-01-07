@@ -92,7 +92,7 @@ namespace model {
 
     const std::string& PlayerModel::getRadioTitle() const {
         static std::string EMPTY = "No station selected";
-        if (mode == Mode::RADIO && radioPlaylist.hasCurrentEntryIndex()) {
+        if (radioPlaylist.hasCurrentEntryIndex()) {
             return radioPlaylist.getTitles()[radioPlaylist.getCurrentEntryIndex()];
         }
         return EMPTY;
@@ -100,7 +100,7 @@ namespace model {
 
     const std::string &PlayerModel::getSDCardTitle() const {
         static std::string EMPTY = "No file selected";
-        if (mode == Mode::SD && sdCardPlaylist.hasCurrentEntryIndex()) {
+        if (sdCardPlaylist.hasCurrentEntryIndex()) {
             return sdCardPlaylist.getTitles()[sdCardPlaylist.getCurrentEntryIndex()];
         }
         return EMPTY;
