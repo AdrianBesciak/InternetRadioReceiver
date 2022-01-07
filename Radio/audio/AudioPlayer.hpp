@@ -4,6 +4,7 @@
 #include <string>
 #include <audio/reader/AudioReader.hpp>
 #include <sys/task/DelayTask.hpp>
+#include <sys/Mutex.h>
 
 namespace audio {
     class AudioPlayer : public sys::DelayTask {
@@ -59,7 +60,8 @@ namespace audio {
         void updateState(State state);
 
         void playerInitialize();
-        void playerDeinitialize();
+        void playerSetFrequency();
+        void playerStop();
         void playerPlayBuffer();
         void playerSetVolume();
         void playerPause();
@@ -87,6 +89,8 @@ namespace audio {
         std::function<void(unsigned)> onVolumeChanged;
         std::function<void()> onFinished;
         std::function<void(const std::exception&)> onError;
+
+        sys::Mutex readerMutex;
 
         static AudioPlayer* instance;
     };

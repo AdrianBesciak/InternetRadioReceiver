@@ -1,10 +1,11 @@
 #include "AudioPlayer.hpp"
 #include <cmath>
+#include <cstring>
+#include <mutex>
 #include <stm32746g_discovery_audio.h>
 #include <audio/except/player/AudioPlayerException.hpp>
 #include <sdram/sdram.hpp>
 #include <sys/except/SingleInstanceException.hpp>
-#include <cstring>
 
 // DMA handlers
 extern "C" {
@@ -59,6 +60,7 @@ namespace audio {
             throw sys::SingleInstanceException("AudioPlayer instance already exists");
         instance = this;
         clearBuffer();
+        playerInitialize();
     }
 
     AudioPlayer::~AudioPlayer() {
@@ -72,7 +74,8 @@ namespace audio {
             return;
         bool wasPlaying = isPlaying();
         if (isPlaying() || isPaused())
-            playerDeinitialize();
+            playerStop();
+        std::lock_guard<sys::Mutex> guard(readerMutex);
         this->reader = reader;
         updateState(State::STOPPED);
         clearBuffer();
@@ -87,7 +90,7 @@ namespace audio {
     void AudioPlayer::unloadSource() {
         if (isEmpty())
             return;
-        playerDeinitialize();
+        playerStop();
         updateState(State::NO_SOURCE);
         reader = nullptr;
         if (onMediumChanged != nullptr)
@@ -107,7 +110,6 @@ namespace audio {
         }
         if (isPlaying())
             return;
-        playerInitialize();
         updateState(State::PLAYING);
         bufferState = BufferState::Started;
     }
@@ -130,7 +132,7 @@ namespace audio {
         validateNotEmpty();
         if (isStopped())
             return;
-        playerDeinitialize();
+        playerStop();
         updateState(State::STOPPED);
         seek(0.0F);
     }
@@ -195,10 +197,16 @@ namespace audio {
     }
 
     float AudioPlayer::getCurrentTime() const {
+        if (reader == nullptr) {
+            return 0.0f;
+        }
         return reader->getCurrentTime();
     }
 
     float AudioPlayer::getEndTime() const {
+        if (reader == nullptr) {
+            return 0.0f;
+        }
         return reader->getEndTime();
     }
 
@@ -231,6 +239,7 @@ namespace audio {
         try {
             if (!isPlaying())
                 return;
+            std::lock_guard<sys::Mutex> guard(readerMutex);
             if (bufferState == BufferState::Error) {
                 playerInitialize();
             }
@@ -240,20 +249,23 @@ namespace audio {
 
             std::size_t count = 0;
             if (bufferState == BufferState::Started) {
+                bufferState = BufferState::None;
                 count = reader->readNext(playingBuffer.data(), PLAYER_BUFFER_SIZE);
+                playerSetFrequency();
+                playerSetVolume();
                 playerPlayBuffer();
                 if (onProgressChanged != nullptr)
                     onProgressChanged(getCurrentTime(), getEndTime());
-                bufferState = BufferState::None;
             } else if (bufferState == BufferState::HalfWayThrough) {
+                bufferState = BufferState::None;
                 count = reader->readNext(playingBuffer.data(), PLAYER_BUFFER_SIZE / 2);
                 if (onProgressChanged != nullptr)
                     onProgressChanged(getCurrentTime(), getEndTime());
                 if (bufferState != BufferState::HalfWayThrough) {
                     std::printf("[AudioPlayer] Can't keep up\n");
                 }
-                bufferState = BufferState::None;
             } else if (bufferState == BufferState::Done) {
+                bufferState = BufferState::None;
                 count = reader->readNext(playingBuffer.data() + PLAYER_BUFFER_SIZE / 2,
                                          PLAYER_BUFFER_SIZE / 2);
                 if (onProgressChanged != nullptr)
@@ -261,7 +273,6 @@ namespace audio {
                 if (bufferState != BufferState::Done) {
                     std::printf("[AudioPlayer] Can't keep up\n");
                 }
-                bufferState = BufferState::None;
             }
             if (count == 0) {
                 bufferState = BufferState::None;
@@ -279,14 +290,26 @@ namespace audio {
         }
     }
 
-    void AudioPlayer::playerInitialize() {
-        if (BSP_AUDIO_OUT_Init(OUTPUT_DEVICE_HEADPHONE, static_cast<std::uint8_t>(normalizedVolume(volume)),
-                               reader->getMetadata().getSamplingRate() / 2) != AUDIO_OK)
-            throw AudioPlayerException("Failed to playerInitialize audio player for '" + reader->getName() + "'");
+
+    void AudioPlayer::updateState(AudioPlayer::State state) {
+        if (state == this->state)
+            return;
+        this->state = state;
+        if (onStateChanged != nullptr)
+            onStateChanged(this->state);
     }
 
-    void AudioPlayer::playerDeinitialize() {
-        if (BSP_AUDIO_OUT_Stop(CODEC_PDWN_HW) != AUDIO_OK)
+    void AudioPlayer::playerInitialize() {
+        if (BSP_AUDIO_OUT_Init(OUTPUT_DEVICE_HEADPHONE, normalizedVolume(volume),22050) != AUDIO_OK)
+            throw AudioPlayerException("Failed to initialize audio player for '" + reader->getName() + "'");
+    }
+
+    void AudioPlayer::playerSetFrequency() {
+        BSP_AUDIO_OUT_SetFrequency(reader->getMetadata().getSamplingRate() / 2);
+    }
+
+    void AudioPlayer::playerStop() {
+        if (BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW) != AUDIO_OK)
             throw AudioPlayerException("Failed to stop audio player for '" + reader->getName() + "'");
         bufferState = BufferState::Done;
     }
@@ -331,16 +354,6 @@ namespace audio {
             throw std::logic_error("No audio source provided");
     }
 
-    AudioPlayer *AudioPlayer::instance = nullptr;
-
-    void AudioPlayer::updateState(AudioPlayer::State state) {
-        if (state == this->state)
-            return;
-        this->state = state;
-        if (onStateChanged != nullptr)
-            onStateChanged(this->state);
-    }
-
 
     void AudioPlayer::clearLeftPartBuffer() {
         std::memset(playingBuffer.data(), 0, playingBuffer.size() * sizeof(*playingBuffer.data()) / 2);
@@ -353,4 +366,7 @@ namespace audio {
     void AudioPlayer::clearBuffer() {
         std::memset(playingBuffer.data(), 0, playingBuffer.size() * sizeof(*playingBuffer.data()));
     }
+
+
+    AudioPlayer *AudioPlayer::instance = nullptr;
 }

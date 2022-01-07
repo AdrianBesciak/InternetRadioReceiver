@@ -11,6 +11,9 @@
 #include <io/except/read/HttpReadException.hpp>
 #include <io/except/write/FileWriteException.hpp>
 #include <io/except/write/HttpWriteException.hpp>
+#include <sys/except/MutexException.hpp>
+#include <sys/except/SingleInstanceException.hpp>
+#include <sys/except/TaskCreationException.hpp>
 #include <cstdio>
 #include <memory>
 #include <cxxabi.h>
@@ -30,7 +33,7 @@ namespace except {
         : onErrorMessage() {}
 
     void ExceptionTranslator::translate(const std::exception &exception) {
-        std::string message = "Unknown error occurred.";
+        std::string message;
         std::printf("[ExceptionTranslator]: %s(%s)\n", demangle(typeid(exception).name()).c_str(), exception.what());
 
         if (typeid(exception) == typeid(except::UnimplementedException)) {
@@ -52,7 +55,7 @@ namespace except {
             message = "Failed to open HTTP stream.";
         }
         else if (typeid(exception) == typeid(io::EthernetNotReadyException)) {
-            message = "Ethernet is not connected or network connection not established.";
+            message = "Ethernet is not connected or network connection not active.";
         }
         else if (typeid(exception) == typeid(io::SDCardNotReadyException)) {
             message = "SD card is not connected or mount failed.";
@@ -69,10 +72,16 @@ namespace except {
         else if (typeid(exception) == typeid(io::HttpWriteException)) {
             message = "Failed to write data to HTTP stream.";
         }
-        else if (typeid(exception) == typeid(std::logic_error)) {
-            message = "Program error occurred.";
+        else if (typeid(exception) == typeid(sys::MutexException)) {
+            message = "Synchronisation error occurred.";
         }
-        else if (typeid(exception) == typeid(std::exception)) {
+        else if (typeid(exception) == typeid(sys::SingleInstanceException)) {
+            message = "Single instance error occurred.";
+        }
+        else if (typeid(exception) == typeid(sys::TaskCreationException)) {
+            message = "Failed to create background task.";
+        }
+        else {
             message = "Unknown error occurred.";
         }
 
