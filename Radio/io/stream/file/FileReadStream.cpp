@@ -37,9 +37,6 @@ namespace io {
         if (extension == ".mp3") {
             return "audio/mpeg";
         }
-        if (extension == ".ogg") {
-            return "audio/ogg";
-        }
         return "application/octet-stream";
     }
 

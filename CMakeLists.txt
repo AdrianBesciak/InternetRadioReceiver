@@ -3,7 +3,6 @@ include(cmake/CrossCompile.cmake)
 project(InternetRadioReceiver C CXX ASM)
 
 add_subdirectory(SpiritMP3Dec)
-add_subdirectory(StdVorbisDec)
 
 # Executable
 file(GLOB_RECURSE PROJECT_SOURCES CONFIGURE_DEPENDS
@@ -123,7 +122,6 @@ set_source_files_properties(${TOUCHGFX_SOURCES} ${TOUCHGFX_HEADERS} PROPERTIES C
 # Link options
 target_link_libraries(${PROJECT_NAME} PUBLIC
         SpiritMP3Dec
-        StdVorbisDec
         ${PROJECT_SOURCE_DIR}/TouchGFX/libtouchgfx.a)
 target_link_options(${PROJECT_NAME} PRIVATE -Wl,-Map=${PROJECT_BINARY_DIR}/${PROJECT_NAME}.map)
 target_link_options(${PROJECT_NAME} PRIVATE -T ${PROJECT_LINKER_SCRIPT})
