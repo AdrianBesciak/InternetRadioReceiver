@@ -19,7 +19,7 @@ namespace audio {
     std::vector<Playlist::Entry> SDCardPlaylist::readEntries() {
         try {
             std::vector<Entry> entries;
-            filesystem::DirectoryListing listing("0:/audio");
+            filesystem::DirectoryListing listing("0:/");
             for (std::size_t i = 0; i < listing.getFileCount(); ++i) {
                 const std::string& name = listing.getFileNameAt(i);
                 const std::string& path = listing.getFilePathAt(i);
