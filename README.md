@@ -32,7 +32,7 @@ cmake ..
 cmake --build . --config Release
 ```
 
-When the build finishes, in the current working directory there should be `InternetRadioReceiver.bin` file.
+When the build finishes, in the current working directory there should be `InternetRadioReceiver.elf` file.
 
 
 ### With CLion
